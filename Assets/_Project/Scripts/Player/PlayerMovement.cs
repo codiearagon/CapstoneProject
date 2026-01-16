@@ -6,10 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private InputActionAsset playerActions;
 
-    // movement parameters
-    [SerializeField]
-    private float speed;
-
+    private CharacterStats stats;
     private Rigidbody2D rb;
     private InputAction moveAction;
 
@@ -18,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        stats = GetComponent<CharacterStats>();
         moveAction = playerActions.FindAction("Move");
     }
 
@@ -40,6 +38,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // move player
-        rb.MovePosition(rb.position + moveValue * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveValue * stats.movementSpeed * Time.fixedDeltaTime);
     }
 }
