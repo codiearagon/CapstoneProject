@@ -6,10 +6,10 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField]
-    private TMP_Text statsText;
+    private TMP_Text _statsText;
 
     [SerializeField]
-    private CharacterStats stats;
+    private CharacterStats _stats;
 
     private void Awake()
     {
@@ -31,11 +31,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        statsText.text = System.String.Format("Stats:\n" +
+        _statsText.text = System.String.Format("Stats:\n" +
                                                "Max Hp: {0}\n" +
                                                "Movement Speed: {1}\n" +
                                                "Attack: {2}\n" +
                                                "Attack Speed: {3}\n" +
-                                               "Defense: {4}", stats.maxHp, stats.movementSpeed, stats.attack, stats.attackSpeed, stats.defense);
+                                               "Defense: {4}", _stats.MaxHp, _stats.MovementSpeed, _stats.Attack, _stats.AttackSpeed, _stats.Defense);
     }
 }

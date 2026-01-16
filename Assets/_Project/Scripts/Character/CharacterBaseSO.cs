@@ -4,12 +4,12 @@ using UnityEngine;
 public class CharacterBaseSO : ScriptableObject
 {
     [Header("Details")]
-    public string characterName;
+    public string CharacterName;
 
     [Header("Base Stats")]
-    public int hp;
-    public int movementSpeed;
-    public int attack;
-    public int attackSpeed;
-    public int defense;
+    public int Hp;
+    public int MovementSpeed;
+    public int Attack;
+    public int AttackSpeed;
+    public int Defense;
 }

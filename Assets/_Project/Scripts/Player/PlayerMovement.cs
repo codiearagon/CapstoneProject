@@ -4,40 +4,40 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private InputActionAsset playerActions;
+    private InputActionAsset _playerActions;
 
-    private CharacterStats stats;
-    private Rigidbody2D rb;
-    private InputAction moveAction;
+    private CharacterStats _stats;
+    private Rigidbody2D _rb;
+    private InputAction _moveAction;
 
-    private Vector2 moveValue;
+    private Vector2 _moveValue;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        stats = GetComponent<CharacterStats>();
-        moveAction = playerActions.FindAction("Move");
+        _rb = GetComponent<Rigidbody2D>();
+        _stats = GetComponent<CharacterStats>();
+        _moveAction = _playerActions.FindAction("Move");
     }
 
     private void OnEnable()
     {
-        moveAction.Enable();
+        _moveAction.Enable();
     }
 
     private void OnDisable()
     {
-        moveAction.Disable();
+        _moveAction.Disable();
     }
 
     private void Update()
     {
         // read input value
-        moveValue = moveAction.ReadValue<Vector2>();
+        _moveValue = _moveAction.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
         // move player
-        rb.MovePosition(rb.position + moveValue * stats.movementSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + _moveValue * _stats.MovementSpeed * Time.fixedDeltaTime);
     }
 }

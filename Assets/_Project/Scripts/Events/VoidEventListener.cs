@@ -4,23 +4,23 @@ using UnityEngine.Events;
 public class VoidEventListener : MonoBehaviour
 {
     [SerializeField]
-    private VoidEventSO voidEvent;
+    private VoidEventSO _voidEvent;
 
     [SerializeField]
-    private UnityEvent response;
+    private UnityEvent _response;
 
     private void OnEnable()
     {
-        voidEvent.RegisterListener(this);
+        _voidEvent.RegisterListener(this);
     }
 
     private void OnDisable()
     {
-        voidEvent?.UnregisterListener(this);
+        _voidEvent?.UnregisterListener(this);
     }
 
     public void OnEventRaised()
     {
-        response.Invoke();
+        _response.Invoke();
     }
 }

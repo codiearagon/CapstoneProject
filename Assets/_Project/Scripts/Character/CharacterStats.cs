@@ -2,27 +2,25 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-
-
     [field: SerializeField]
-    public CharacterBaseSO baseData { get; private set; }
+    public CharacterBaseSO BaseData { get; private set; }
 
     // realtime stats
-    public int maxHp { get; private set; }
-    public int currentHp { get; private set; }
-    public int movementSpeed { get; private set; }
-    public int attack { get; private set; }
-    public int attackSpeed { get; private set; }
-    public int defense { get; private set; }
+    public int MaxHp { get; private set; }
+    public int CurrentHp { get; private set; }
+    public int MovementSpeed { get; private set; }
+    public int Attack { get; private set; }
+    public int AttackSpeed { get; private set; }
+    public int Defense { get; private set; }
 
     private void Start()
     {
-        maxHp = baseData.hp;
-        currentHp = baseData.hp;
-        movementSpeed = baseData.movementSpeed;
-        attack = baseData.attack;
-        attackSpeed = baseData.attackSpeed;
-        defense = baseData.defense;
+        MaxHp = BaseData.Hp;
+        CurrentHp = BaseData.Hp;
+        MovementSpeed = BaseData.MovementSpeed;
+        Attack = BaseData.Attack;
+        AttackSpeed = BaseData.AttackSpeed;
+        Defense = BaseData.Defense;
     }
 
     private void Update()
