@@ -8,9 +8,6 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TMP_Text _statsText;
 
-    [SerializeField]
-    private CharacterStats _stats;
-
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -29,13 +26,23 @@ public class UIManager : MonoBehaviour
             Instance = null;
     }
 
-    public void UpdateUI()
+    private void OnEnable()
+    {
+        Character.OnStatsChanged += UpdateUI;
+    }
+
+    private void OnDisable()
+    {
+        Character.OnStatsChanged -= UpdateUI;
+    }
+
+    public void UpdateUI(CharacterStats stats)
     {
         _statsText.text = System.String.Format("Stats:\n" +
                                                "Max Hp: {0}\n" +
                                                "Movement Speed: {1}\n" +
                                                "Attack: {2}\n" +
                                                "Attack Speed: {3}\n" +
-                                               "Defense: {4}", _stats.MaxHp, _stats.MovementSpeed, _stats.Attack, _stats.AttackSpeed, _stats.Defense);
+                                               "Defense: {4}", stats.MaxHp, stats.MovementSpeed, stats.Attack, stats.AttackSpeed, stats.Defense);
     }
 }

@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _stats = GetComponent<CharacterStats>();
+        _stats = GetComponent<Character>().Stats;
         _moveAction = _playerActions.FindAction("Move");
     }
 
