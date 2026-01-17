@@ -4,12 +4,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private InputActionAsset _playerActions;
+    private InputActionReference _move;
 
     private Character _character;
     private Rigidbody2D _rb;
     private CharacterStats _stats;
-    private InputAction _moveAction;
 
     private Vector2 _moveValue;
 
@@ -17,28 +16,28 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _character = GetComponent<Character>();
-        _moveAction = _playerActions.FindAction("Move");
     }
 
     private void Start()
     {
         _stats = _character.Stats;
+        Logger.Log("Movement Initialized");
     }
 
     private void OnEnable()
     {
-        _moveAction.Enable();
+        _move.action.Enable();
     }
 
     private void OnDisable()
     {
-        _moveAction.Disable();
+        _move.action.Disable();
     }
 
     private void Update()
     {
         // read input value
-        _moveValue = _moveAction.ReadValue<Vector2>();
+        _moveValue = _move.action.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()

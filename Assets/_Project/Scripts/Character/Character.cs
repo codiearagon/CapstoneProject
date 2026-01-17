@@ -19,6 +19,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         OnStatsChanged?.Invoke(Stats);
+        Logger.Log("Character Initialized");
     }
 
     private void Update()

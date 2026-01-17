@@ -3,7 +3,7 @@
     "name": "PlayerActions",
     "maps": [
         {
-            "name": "Character",
+            "name": "Player",
             "id": "1f544f2c-f725-4cc7-9c97-2e277c12e4f6",
             "actions": [
                 {
@@ -80,6 +80,54 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "e449e232-b065-4b70-a871-a293d0dc0964",
+            "actions": [
+                {
+                    "name": "Console",
+                    "type": "Button",
+                    "id": "95050c8a-058f-480e-a8c4-dc1cd9eabcc9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "056a9d99-ddec-4306-bc43-252ad4ae1cf2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5fc7eac9-18f7-413d-b907-f21d0c0d09e3",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Console",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5afbb39-8676-4398-96c3-da632f2d2797",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
