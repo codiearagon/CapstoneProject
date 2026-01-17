@@ -1,21 +1,14 @@
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
-public class UiController : MonoBehaviour
+public class StatsUIController : MonoBehaviour
 {
-    private UIDocument _uiDoc;
     private VisualElement _root;
     private Label _statsText;
 
     private void Awake()
     {
-        _uiDoc = GetComponent<UIDocument>();
-    }
-
-    private void Start()
-    {
-        _root = _uiDoc.rootVisualElement;
+        _root = GetComponent<UIDocument>().rootVisualElement;
         _statsText = _root.Q<Label>("StatsText");
     }
 

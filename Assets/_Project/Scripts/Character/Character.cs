@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public static Action<CharacterStats> OnStatsChanged;
+    public static event Action<CharacterStats> OnStatsChanged;
 
     [field: SerializeField]
     public CharacterBaseSO BaseData { get; private set; }
@@ -13,12 +13,12 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        InitializeStats();   
+        InitializeStats();
     }
 
     private void Start()
     {
-        OnStatsChanged.Invoke(Stats);
+        OnStatsChanged?.Invoke(Stats);
     }
 
     private void Update()
