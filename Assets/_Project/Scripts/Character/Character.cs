@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-
+        
     }
 
     private void InitializeStats()

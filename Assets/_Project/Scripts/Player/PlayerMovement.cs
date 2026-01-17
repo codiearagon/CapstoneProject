@@ -6,8 +6,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private InputActionAsset _playerActions;
 
-    private CharacterStats _stats;
+    private Character _character;
     private Rigidbody2D _rb;
+    private CharacterStats _stats;
     private InputAction _moveAction;
 
     private Vector2 _moveValue;
@@ -15,8 +16,13 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _stats = GetComponent<Character>().Stats;
+        _character = GetComponent<Character>();
         _moveAction = _playerActions.FindAction("Move");
+    }
+
+    private void Start()
+    {
+        _stats = _character.Stats;
     }
 
     private void OnEnable()
