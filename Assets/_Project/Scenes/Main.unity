@@ -119,20 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &157267901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: UI/Console
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
-  m_ActionId: 95050c8a-058f-480e-a8c4-dc1cd9eabcc9
 --- !u!1 &238691798
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +530,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &684033244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: UI/Submit
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
+  m_ActionId: 056a9d99-ddec-4306-bc43-252ad4ae1cf2
 --- !u!1 &833247981
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +620,91 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
   m_ActionId: 581aa675-f947-4b8e-ad01-51b4fcfe4b84
+--- !u!1 &1044069760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1044069763}
+  - component: {fileID: 1044069762}
+  - component: {fileID: 1044069761}
+  m_Layer: 0
+  m_Name: ConsoleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1044069761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044069760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b4c09a6e1078c47bae0d83a75e8d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConsoleUIController
+  _playerActions: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
+  _console: {fileID: 1090505961}
+  _submit: {fileID: 684033244}
+--- !u!114 &1044069762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044069760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: efec8a23db72aef47b8fbf4df05e597e, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 7a997282313af2646b50c98b149bab81, type: 3}
+  m_SortingOrder: 100
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &1044069763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044069760}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1090505961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: UI/Console
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
+  m_ActionId: 95050c8a-058f-480e-a8c4-dc1cd9eabcc9
 --- !u!1 &1142841924
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,20 +912,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
   <BaseData>k__BackingField: {fileID: 11400000, guid: 900bd5c30cfaffa4f9b5ad9a35efed9e, type: 2}
---- !u!114 &1148740305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: UI/Submit
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
-  m_ActionId: 056a9d99-ddec-4306-bc43-252ad4ae1cf2
 --- !u!1 &1322851100
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +985,6 @@ GameObject:
   - component: {fileID: 2084003106}
   - component: {fileID: 2084003105}
   - component: {fileID: 2084003107}
-  - component: {fileID: 2084003109}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -972,27 +1042,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff7bab0b6b210c4981617a80633623f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
---- !u!114 &2084003109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084003104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92b4c09a6e1078c47bae0d83a75e8d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ConsoleUIController
-  _playerActions: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
-  _console: {fileID: 157267901}
-  _submit: {fileID: 1148740305}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 833247982}
   - {fileID: 848260002}
+  - {fileID: 1044069763}
   - {fileID: 483569114}
   - {fileID: 519420032}
   - {fileID: 267576141}

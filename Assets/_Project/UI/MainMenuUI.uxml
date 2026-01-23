@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/MainMenuUI.uss?fileID=7433441132597879392&amp;guid=14935e5896171d74aa20be19791128a0&amp;type=3#MainMenuUI"/>
+    <ui:VisualElement name="MainMenu" enabled="true" picking-mode="Ignore" class="fullscreen-element" style="align-items: center; justify-content: flex-start; align-self: auto; align-content: flex-start;">
+        <ui:VisualElement name="TitleElement" picking-mode="Ignore" style="flex-grow: 1; align-items: center; justify-content: center; flex-shrink: 1;">
+            <ui:Label text="Title" name="TitleLabel" style="font-size: 100px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="ButtonsElement" picking-mode="Ignore" style="flex-grow: 0.5; justify-content: flex-start; align-items: stretch; align-self: auto; width: 500px;">
+            <ui:Button text="Start&#10;" name="StartButton" class="button-menu"/>
+            <ui:Button text="Settings" name="SettingsButton" class="button-menu"/>
+            <ui:Button text="Quit" name="QuitButton" class="button-menu"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="CharSelect" enabled="false" picking-mode="Ignore" class="fullscreen-element"/>
+</ui:UXML>
