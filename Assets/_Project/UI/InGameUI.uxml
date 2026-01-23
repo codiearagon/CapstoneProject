@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/HUDStyle.uss?fileID=7433441132597879392&amp;guid=d39aa722a6ccd4a438c1cf8a76209459&amp;type=3#HUDStyle"/>
+    <ui:VisualElement name="StatsElement" style="flex-grow: 0; opacity: 1; width: 20%; height: 50%; position: absolute; margin-left: 20px; margin-top: 20px; display: flex; top: auto; left: auto; right: 0; bottom: auto; flex-direction: column; flex-wrap: nowrap; align-items: stretch; align-self: auto; justify-content: flex-start; align-content: flex-start;">
+        <ui:Label text="Stats:&#10;Max HP:&#10;Current HP:&#10;Move Speed:&#10;Attack:&#10;Attack Speed:&#10;Defense: " name="StatsText" style="text-overflow: clip; white-space: normal; font-size: 30px; -unity-text-outline-color: rgb(0, 0, 0); color: rgb(255, 255, 255);"/>
+    </ui:VisualElement>
+</ui:UXML>

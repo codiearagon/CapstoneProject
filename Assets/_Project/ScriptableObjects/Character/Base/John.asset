@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: John
   m_EditorClassIdentifier: Assembly-CSharp::CharacterBase
   CharacterName: John
+  affinity: {fileID: 11400000, guid: 509152f4c73832c438be0475050b7ccc, type: 2}
   Hp: 10
   MovementSpeed: 10
   Attack: 5

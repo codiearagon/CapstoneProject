@@ -4,6 +4,8 @@ using UnityEngine.UIElements;
 
 public class ConsoleUIController : MonoBehaviour
 {
+    public static ConsoleUIController Instance;
+
     [SerializeField]
     private InputActionAsset _playerActions;
 
@@ -22,6 +24,17 @@ public class ConsoleUIController : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton setup
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // Class setup
         _root = GetComponent<UIDocument>().rootVisualElement;
         _consoleElement = _root.Q<VisualElement>("ConsoleElement");
         _logView = _consoleElement.Q<ListView>("LogView");

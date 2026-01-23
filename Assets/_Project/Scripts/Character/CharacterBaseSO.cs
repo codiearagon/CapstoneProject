@@ -5,6 +5,7 @@ public class CharacterBaseSO : ScriptableObject
 {
     [Header("Details")]
     public string CharacterName;
+    public AffinitySO affinity;
 
     [Header("Base Stats")]
     public int Hp;
