@@ -51,8 +51,8 @@ public class ConsoleUIController : MonoBehaviour
     {
         Logger.OnLogAdded += UpdateLoggerUI;
 
-        _logView.bindItem += BindItem;
-        _logView.makeItem += MakeItem;
+        _logView.bindItem += BindLogLabel;
+        _logView.makeItem += MakeLogLabel;
 
         _console.action.Enable();
         _submit.action.Enable();
@@ -65,8 +65,8 @@ public class ConsoleUIController : MonoBehaviour
     {
         Logger.OnLogAdded -= UpdateLoggerUI;
 
-        _logView.bindItem -= BindItem;
-        _logView.makeItem -= MakeItem;
+        _logView.bindItem -= BindLogLabel;
+        _logView.makeItem -= MakeLogLabel;
 
         _console.action.Disable();
         _submit.action.Disable();
@@ -84,12 +84,12 @@ public class ConsoleUIController : MonoBehaviour
         }
     }
 
-    private VisualElement MakeItem()
+    private VisualElement MakeLogLabel()
     {
         return new Label();
     }
 
-    private void BindItem(VisualElement element, int index)
+    private void BindLogLabel(VisualElement element, int index)
     {
         LogEntry entry = Logger.Entries[index];
         Label label = element as Label;

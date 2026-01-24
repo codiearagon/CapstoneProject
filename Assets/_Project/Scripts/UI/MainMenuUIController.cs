@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -5,7 +6,6 @@ public class MainMenuUIController : MonoBehaviour
 {
     private VisualElement _root;
     private VisualElement _mainMenuElement;
-    private VisualElement _charSelectElement;
 
     private Button _startButton;
     private Button _settingsButton;
@@ -14,6 +14,7 @@ public class MainMenuUIController : MonoBehaviour
     private void Awake()
     {
         ResolveReferences();
+
         _startButton.RegisterCallback<ClickEvent>(OnClickStart);
         _settingsButton.RegisterCallback<ClickEvent>(OnClickSettings);
         _quitButton.RegisterCallback<ClickEvent>(OnClickQuit);
@@ -37,8 +38,7 @@ public class MainMenuUIController : MonoBehaviour
     private void ResolveReferences()
     {
         _root = GetComponent<UIDocument>().rootVisualElement;
-        _mainMenuElement = _root.Q<VisualElement>("MainMenu");
-        _charSelectElement = _root.Q<VisualElement>("CharSelect");
+        _mainMenuElement = _root.Q<VisualElement>("MainMenuElement");
 
         _startButton = _mainMenuElement.Q<Button>("StartButton");
         _settingsButton = _mainMenuElement.Q<Button>("SettingsButton");

@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 1020214877}
   - component: {fileID: 1020214879}
   - component: {fileID: 1020214878}
+  - component: {fileID: 1020214880}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -334,6 +335,22 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &1020214880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020214876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8436f57dbcbe60443b071c7ded8de8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharSelectUIController
+  playableCharacters:
+  - {fileID: 11400000, guid: ebe481648df033d45be22271d3647e42, type: 2}
+  - {fileID: 11400000, guid: 900bd5c30cfaffa4f9b5ad9a35efed9e, type: 2}
+  _charListStyle: {fileID: 7433441132597879392, guid: ad0f0450feb167441b55fd4367c27ea8, type: 3}
 --- !u!114 &1271290125
 MonoBehaviour:
   m_ObjectHideFlags: 0
