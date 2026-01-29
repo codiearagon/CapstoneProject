@@ -20,9 +20,21 @@ public class MainMenuUIController : MonoBehaviour
         _quitButton.RegisterCallback<ClickEvent>(OnClickQuit);
     }
 
+    public void OpenMainMenu()
+    {
+        _mainMenuElement.style.display = DisplayStyle.Flex;
+    }
+
+    public void CloseMainMenu()
+    {
+        _mainMenuElement.style.display = DisplayStyle.None;
+    }
+
     private void OnClickStart(ClickEvent evt)
     {
         Logger.Log("Clicked Start");
+        GetComponent<CharSelectUIController>().OpenCharSelect();
+        CloseMainMenu();
     }
 
     private void OnClickSettings(ClickEvent evt)

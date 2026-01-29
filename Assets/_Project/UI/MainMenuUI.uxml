@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UI/MainMenuUI.uss?fileID=7433441132597879392&amp;guid=14935e5896171d74aa20be19791128a0&amp;type=3#MainMenuUI"/>
-    <ui:VisualElement name="MainMenuElement" enabled="true" picking-mode="Ignore" class="fullscreen-element" style="align-items: center; justify-content: flex-start; align-self: auto; align-content: flex-start; display: none;">
+    <ui:VisualElement name="MainMenuElement" enabled="true" picking-mode="Ignore" class="fullscreen-element" style="align-items: center; justify-content: flex-start; align-self: auto; align-content: flex-start; display: flex;">
         <ui:VisualElement name="TitleElement" picking-mode="Ignore" style="flex-grow: 1; align-items: center; justify-content: center; flex-shrink: 1;">
             <ui:Label text="Title" name="TitleLabel" style="font-size: 100px;"/>
         </ui:VisualElement>
@@ -10,7 +10,7 @@
             <ui:Button text="Quit" name="QuitButton" class="button-menu"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="CharSelectElement" enabled="true" picking-mode="Ignore" class="fullscreen-element">
+    <ui:VisualElement name="CharSelectElement" enabled="true" picking-mode="Ignore" class="fullscreen-element" style="display: none;">
         <ui:VisualElement name="CharSelectedElement" picking-mode="Ignore" style="flex-grow: 1; flex-direction: row;">
             <ui:VisualElement name="CharSplashArtElement" style="flex-grow: 1.5; padding-top: 100px; padding-right: 100px; padding-bottom: 100px; padding-left: 100px; flex-shrink: 0;">
                 <ui:Image name="CharSplashArtImage" style="width: 100%; height: 100%;"/>

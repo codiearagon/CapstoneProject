@@ -29,6 +29,16 @@ public class CharSelectUIController : MonoBehaviour
         UpdateSelectedCharacterUI();
     }
 
+    public void OpenCharSelect()
+    {
+        _charSelectElement.style.display = DisplayStyle.Flex;
+    }
+
+    public void CloseCharSelect()
+    {
+        _charSelectElement.style.display = DisplayStyle.None;
+    }
+
     private void ResolveReferences()
     {
         _root = GetComponent<UIDocument>().rootVisualElement;
