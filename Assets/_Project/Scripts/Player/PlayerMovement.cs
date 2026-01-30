@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Character _character;
     private Rigidbody2D _rb;
-    private CharacterStats _stats;
+    private Stats _stats;
 
     private Vector2 _moveValue;
 
@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // move player
-        _rb.MovePosition(_rb.position + _moveValue * _stats.MovementSpeed * Time.fixedDeltaTime);
+        if(_stats != null)
+            _rb.MovePosition(_rb.position + _moveValue * _stats.MovementSpeed * Time.fixedDeltaTime);
     }
 }

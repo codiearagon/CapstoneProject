@@ -13,11 +13,21 @@ public class MainMenuUIController : MonoBehaviour
 
     private void Awake()
     {
-        ResolveReferences();
+        ResolveReferences(); 
+    }
 
+    private void OnEnable()
+    {
         _startButton.RegisterCallback<ClickEvent>(OnClickStart);
         _settingsButton.RegisterCallback<ClickEvent>(OnClickSettings);
         _quitButton.RegisterCallback<ClickEvent>(OnClickQuit);
+    }
+
+    private void OnDisable()
+    {
+        _startButton.UnregisterCallback<ClickEvent>(OnClickStart);
+        _settingsButton.UnregisterCallback<ClickEvent>(OnClickSettings);
+        _quitButton.UnregisterCallback<ClickEvent>(OnClickQuit);
     }
 
     public void OpenMainMenu()

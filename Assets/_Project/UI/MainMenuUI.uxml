@@ -20,6 +20,7 @@
                 <ui:Label text="Base Stats:" name="CharStatsTitle" style="font-size: 50px; color: rgb(255, 255, 255); -unity-font-style: normal;"/>
                 <ui:Label text="Label" name="CharStatsLabel" style="font-size: 30px; color: rgb(255, 255, 255);"/>
             </ui:VisualElement>
+            <ui:Button text="Select Character" name="CharSelectButton" style="flex-shrink: 0; align-self: flex-end; align-items: stretch; justify-content: flex-start; margin-right: 50px; font-size: 20px; -unity-font-style: bold;"/>
         </ui:VisualElement>
         <ui:VisualElement name="CharListElement" picking-mode="Ignore" style="flex-grow: 0; flex-shrink: 1; margin-bottom: 50px; margin-right: 30px; margin-left: 30px; margin-top: 20px;">
             <ui:ScrollView name="CharScrollView" mode="Horizontal" vertical-scroller-visibility="Hidden" style="flex-grow: 1; align-items: center; flex-direction: column; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-content: center; justify-content: flex-start; align-self: auto;"/>

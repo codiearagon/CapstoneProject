@@ -1,16 +1,16 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
 public class CharSelectUIController : MonoBehaviour
 {
     [SerializeField]
-    private List<CharacterBaseSO> playableCharacters;
+    private List<CharacterBaseSO> _playableCharacters;
 
-    private CharacterBaseSO selectedCharacter;
+    private CharacterBaseSO _selectedCharacter;
 
     private VisualElement _root;
     private VisualElement _charSelectElement;
@@ -19,14 +19,31 @@ public class CharSelectUIController : MonoBehaviour
     private Image _charSplashArtImage;
     private Label _charNameLabel;
     private Label _charStatsLabel;
+    private Button _charSelectButton;
 
     private void Awake()
     {
         ResolveReferences();
         SetupScrollView();
 
-        selectedCharacter = playableCharacters[0];
+        _selectedCharacter = _playableCharacters[0];
         UpdateSelectedCharacterUI();
+    }
+
+    private void OnEnable()
+    {
+        _charSelectButton.RegisterCallback<ClickEvent>(SelectCharacter);
+    }
+
+    private void OnDisable()
+    {
+        _charSelectButton.UnregisterCallback<ClickEvent>(SelectCharacter);
+    }
+
+    public void SelectCharacter(ClickEvent evt)
+    {
+        PlayerManager.Instance.SetCharacter(_selectedCharacter);
+        SceneManager.LoadScene("Main");
     }
 
     public void OpenCharSelect()
@@ -48,11 +65,12 @@ public class CharSelectUIController : MonoBehaviour
         _charSplashArtImage = _charSelectElement.Q<Image>("CharSplashArtImage");
         _charNameLabel = _charSelectElement.Q<Label>("CharNameLabel");
         _charStatsLabel = _charSelectElement.Q<Label>("CharStatsLabel");
+        _charSelectButton = _charSelectElement.Q<Button>("CharSelectButton");
     }
 
     private void SetupScrollView()
     {
-        foreach(CharacterBaseSO character in playableCharacters)
+        foreach(CharacterBaseSO character in _playableCharacters)
         {
             Button iconButton = new Button();
             Image iconImage = new Image();
@@ -74,21 +92,21 @@ public class CharSelectUIController : MonoBehaviour
     {
         Button iconButton = evt.currentTarget as Button;
         CharacterBaseSO character = iconButton.dataSource as CharacterBaseSO;
-        selectedCharacter = character;
-        Logger.Log("Selected: " + selectedCharacter.name);
+        _selectedCharacter = character;
+        Logger.Log("Selected: " + _selectedCharacter.name);
 
         UpdateSelectedCharacterUI();
     }
 
     private void UpdateSelectedCharacterUI()
     {
-        _charNameLabel.text = selectedCharacter.name;
-        _charSplashArtImage.sprite = selectedCharacter.splashArt;
+        _charNameLabel.text = _selectedCharacter.name;
+        _charSplashArtImage.sprite = _selectedCharacter.splashArt;
         _charStatsLabel.text = System.String.Format("HP: {0}\n" +
                                                "Movement Speed: {1}\n" +
                                                "Attack: {2}\n" +
                                                "Attack Speed: {3}\n" +
-                                               "Defense: {4}", selectedCharacter.Hp, selectedCharacter.MovementSpeed, 
-                                               selectedCharacter.Attack, selectedCharacter.AttackSpeed, selectedCharacter.Defense);
+                                               "Defense: {4}", _selectedCharacter.Hp, _selectedCharacter.MovementSpeed, 
+                                               _selectedCharacter.Attack, _selectedCharacter.AttackSpeed, _selectedCharacter.Defense);
     }
 }

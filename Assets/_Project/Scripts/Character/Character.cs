@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public static event Action<CharacterStats> OnStatsChanged;
+    public static event Action<Stats> OnStatsChanged;
 
     [field: SerializeField]
     public CharacterBaseSO BaseData { get; private set; }
 
     [field: SerializeField]
-    public CharacterStats Stats { get; private set; }
+    public Stats Stats { get; private set; }
 
     private void Awake()
     {
-        InitializeStats();
+        BaseData = PlayerManager.Instance.Character;
+        Stats.InitializeStats(BaseData);
     }
 
     private void Start()
@@ -25,16 +26,5 @@ public class Character : MonoBehaviour
     private void Update()
     {
         
-    }
-
-    private void InitializeStats()
-    {
-        Stats = new CharacterStats();
-        Stats.MaxHp = BaseData.Hp;
-        Stats.CurrentHp = BaseData.Hp;
-        Stats.MovementSpeed = BaseData.MovementSpeed;
-        Stats.Attack = BaseData.Attack;
-        Stats.AttackSpeed = BaseData.AttackSpeed;
-        Stats.Defense = BaseData.Defense;
     }
 }
