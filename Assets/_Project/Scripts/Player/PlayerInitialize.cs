@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class PlayerInitialize : MonoBehaviour
 {
+    private GameObject _charPrefab;
+
     private void Awake()
     {
-        // Disable player first
-        gameObject.SetActive(false);
+        // Get Prefab from selected character
+        _charPrefab = PlayerManager.Instance.Character.prefab;
+        _charPrefab.SetActive(false);
 
-        GetComponent<Character>().Initialize();
+        _charPrefab.GetComponent<Character>().Initialize();
         Logger.Log("Character Initialized.");
 
         GetComponent<PlayerMovement>().Initialize();
         Logger.Log("Movement Initialized.");
 
-        // Enable player after everything has initialized
-        gameObject.SetActive(true);
         Logger.Log("Player is now enabled.");
     }
 }

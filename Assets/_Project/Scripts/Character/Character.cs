@@ -15,7 +15,6 @@ public class Character : MonoBehaviour
     public void Initialize()
     {
         Stats = new Stats();
-        BaseData = PlayerManager.Instance.Character;
         Stats.InitializeStats(BaseData);
     }
 
@@ -26,6 +25,11 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        
+        Logger.Log("Ran Update");
+    }
+
+    private void FixedUpdate()
+    {
+        Logger.Log("Ran FixedUpdate");
     }
 }

@@ -12,4 +12,7 @@ public class BaseSO : ScriptableObject
     public int Attack;
     public int AttackSpeed;
     public int Defense;
+
+    [Header("Objects")]
+    public GameObject prefab;
 }
