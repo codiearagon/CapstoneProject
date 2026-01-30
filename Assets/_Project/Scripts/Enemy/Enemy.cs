@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+        Stats = new Stats();
         Stats.InitializeStats(BaseStats);
     }
 

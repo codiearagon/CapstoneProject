@@ -5,23 +5,19 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private InputActionReference _move;
-
+    
     private Character _character;
     private Rigidbody2D _rb;
     private Stats _stats;
 
     private Vector2 _moveValue;
 
-    private void Awake()
+    // Gets ran by PlayerInitialize
+    public void Initialize()
     {
         _rb = GetComponent<Rigidbody2D>();
         _character = GetComponent<Character>();
-    }
-
-    private void Start()
-    {
         _stats = _character.Stats;
-        Logger.Log("Movement Initialized");
     }
 
     private void OnEnable()
@@ -42,8 +38,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // move player
-        if(_stats != null)
-            _rb.MovePosition(_rb.position + _moveValue * _stats.MovementSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + _moveValue * _stats.MovementSpeed * Time.fixedDeltaTime);
     }
 }

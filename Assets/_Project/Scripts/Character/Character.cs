@@ -11,8 +11,10 @@ public class Character : MonoBehaviour
     [field: SerializeField]
     public Stats Stats { get; private set; }
 
-    private void Awake()
+    // Gets ran by PlayerInitialize
+    public void Initialize()
     {
+        Stats = new Stats();
         BaseData = PlayerManager.Instance.Character;
         Stats.InitializeStats(BaseData);
     }
@@ -20,7 +22,6 @@ public class Character : MonoBehaviour
     private void Start()
     {
         OnStatsChanged?.Invoke(Stats);
-        Logger.Log("Character Initialized");
     }
 
     private void Update()
