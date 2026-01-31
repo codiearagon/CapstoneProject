@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class BaseSO : ScriptableObject
+public class ActorBaseSO : ScriptableObject
 {
+    [Header("Instantiated Prefab")]
+    public GameObject prefab;
+
     [Header("Details")]
-    public string BaseName;
+    public string ActorName;
     public AffinitySO Affinity;
 
     [Header("Base Stats")]
@@ -12,7 +15,4 @@ public class BaseSO : ScriptableObject
     public int Attack;
     public int AttackSpeed;
     public int Defense;
-
-    [Header("Objects")]
-    public GameObject prefab;
 }

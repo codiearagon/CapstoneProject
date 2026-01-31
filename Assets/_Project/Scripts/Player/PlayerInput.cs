@@ -8,14 +8,14 @@ public class PlayerInput : MonoBehaviour
 
     [SerializeField]
     private InputActionReference _look;
-  
-    private Vector2 _moveValue;
-    private Vector2 _lookValue;
 
     private Character _character;
 
+    private ActorInputData inputData;
+
     public void Initialize(GameObject charObject)
     {
+        inputData = new ActorInputData();
         _character = charObject.GetComponent<Character>();
     }
 
@@ -34,13 +34,9 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         // read input value
-        _moveValue = _move.action.ReadValue<Vector2>();
-        _lookValue = _look.action.ReadValue<Vector2>();
-    }
+        inputData.MoveValue = _move.action.ReadValue<Vector2>();
+        inputData.LookValue = _look.action.ReadValue<Vector2>();
 
-    private void FixedUpdate()
-    {
-        _character.Move(_moveValue);
-        _character.Look(_lookValue);
+        _character.UpdateInputData(inputData);
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu (fileName = "New Character Base", menuName = "Base/New Character Base")]
-public class CharacterBaseSO : BaseSO
+public class CharacterBaseSO : ActorBaseSO
 {
     [Header("Sprites")]
     public Sprite icon;

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b8e168bb39b064aa543f5e2f9096ba, type: 3}
   m_Name: Goblin
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBaseSO
-  Name: Goblin
+  prefab: {fileID: 2614719710841126021, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
+  ActorName: Goblin
   Affinity: {fileID: 11400000, guid: a90db1be22949c6449a77fcf5ccd393d, type: 2}
   Hp: 5
   MovementSpeed: 3

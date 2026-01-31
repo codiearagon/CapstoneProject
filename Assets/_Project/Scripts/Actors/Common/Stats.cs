@@ -8,7 +8,7 @@ public class Stats
     public int AttackSpeed;
     public int Defense;
 
-    public void InitializeStats(BaseSO baseSO)
+    public void InitializeStats(ActorBaseSO baseSO)
     {
         if (baseSO == null)
             Logger.Log("BaseData is null");

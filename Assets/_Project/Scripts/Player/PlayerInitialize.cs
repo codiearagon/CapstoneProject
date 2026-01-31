@@ -21,17 +21,16 @@ public class PlayerInitialize : MonoBehaviour
 
     public void Initialize(CharacterBaseSO baseData)
     {
-        Logger.Log("Player Initialization started.");
+        Logger.Log("----Player Initialization started----");
         
-
         // Get Prefab from selected character
         _charPrefab = baseData.prefab;
 
         // Instantiate from prefab
         _instancedCharacter = Instantiate(_charPrefab, Vector2.zero, Quaternion.identity);
 
-        Logger.Log("Initializing character: " + baseData.BaseName);
-        _instancedCharacter.GetComponent<Character>().Initialize(baseData);
+        Logger.Log("Initializing character: " + baseData.ActorName);
+        _instancedCharacter.GetComponent<Character>().InitializeActor(baseData);
         Logger.Log("Character Initialized.");
 
         GetComponent<PlayerInput>().Initialize(_instancedCharacter);
@@ -40,9 +39,9 @@ public class PlayerInitialize : MonoBehaviour
         GetComponent<PlayerCamera>().Initialize(_instancedCharacter);
         Logger.Log("Player Camera Initialized.");
 
-        Logger.Log("Player Initialization finished.");
-
         gameObject.SetActive(true);
         Logger.Log("Player is now enabled.");
+
+        Logger.Log("----Player Initialization finished----");
     }
 }
