@@ -1,43 +1,46 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     [SerializeField]
     private InputActionReference _move;
-    
-    private Character _character;
-    private Rigidbody2D _rb;
-    private Stats _stats;
 
+    [SerializeField]
+    private InputActionReference _look;
+  
     private Vector2 _moveValue;
+    private Vector2 _lookValue;
 
-    // Gets ran by PlayerInitialize
-    public void Initialize()
+    private Character _character;
+
+    public void Initialize(GameObject charObject)
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _character = GetComponent<Character>();
-        _stats = _character.Stats;
+        _character = charObject.GetComponent<Character>();
     }
 
     private void OnEnable()
     {
         _move.action.Enable();
+        _look.action.Enable();
     }
 
     private void OnDisable()
     {
         _move.action.Disable();
+        _look.action.Disable();
     }
 
     private void Update()
     {
         // read input value
         _moveValue = _move.action.ReadValue<Vector2>();
+        _lookValue = _look.action.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _moveValue * _stats.MovementSpeed * Time.fixedDeltaTime);
+        _character.Move(_moveValue);
+        _character.Look(_lookValue);
     }
 }

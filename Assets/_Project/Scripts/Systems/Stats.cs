@@ -10,6 +10,9 @@ public class Stats
 
     public void InitializeStats(BaseSO baseSO)
     {
+        if (baseSO == null)
+            Logger.Log("BaseData is null");
+
         MaxHp = baseSO.Hp;
         CurrentHp = baseSO.Hp;
         MovementSpeed = baseSO.MovementSpeed;

@@ -5,17 +5,20 @@ public class Character : MonoBehaviour
 {
     public static event Action<Stats> OnStatsChanged;
 
-    [field: SerializeField]
     public CharacterBaseSO BaseData { get; private set; }
-
-    [field: SerializeField]
     public Stats Stats { get; private set; }
 
+    private Rigidbody2D _rb;
+
     // Gets ran by PlayerInitialize
-    public void Initialize()
+    public void Initialize(CharacterBaseSO baseData)
     {
         Stats = new Stats();
+        BaseData = baseData;
         Stats.InitializeStats(BaseData);
+
+        // component initialization
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -25,11 +28,21 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        Logger.Log("Ran Update");
+        
     }
 
     private void FixedUpdate()
     {
-        Logger.Log("Ran FixedUpdate");
+        
+    }
+
+    public void Move(Vector2 moveDir)
+    {
+        _rb.MovePosition(_rb.position + moveDir * Stats.MovementSpeed * Time.fixedDeltaTime);
+    }
+
+    public void Look(Vector2 lookDir)
+    {
+
     }
 }

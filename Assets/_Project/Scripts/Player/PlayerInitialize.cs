@@ -1,23 +1,48 @@
-// The purpose of this class is to avoid any timing issues with
-// Unity's Awake and Start methods when initializing the player.
+using System;
 using UnityEngine;
 
 public class PlayerInitialize : MonoBehaviour
 {
     private GameObject _charPrefab;
+    private GameObject _instancedCharacter;
 
     private void Awake()
     {
-        // Get Prefab from selected character
-        _charPrefab = PlayerManager.Instance.Character.prefab;
-        _charPrefab.SetActive(false);
+        gameObject.SetActive(false);
 
-        _charPrefab.GetComponent<Character>().Initialize();
+        if(PlayerPersistentState.Instance == null || PlayerPersistentState.Instance.Character == null)
+        {
+            Logger.Log("No character selected.");
+            return;
+        }
+
+        Initialize(PlayerPersistentState.Instance.Character);
+    }
+
+    public void Initialize(CharacterBaseSO baseData)
+    {
+        Logger.Log("Player Initialization started.");
+        
+
+        // Get Prefab from selected character
+        _charPrefab = baseData.prefab;
+
+        // Instantiate from prefab
+        _instancedCharacter = Instantiate(_charPrefab, Vector2.zero, Quaternion.identity);
+
+        Logger.Log("Initializing character: " + baseData.BaseName);
+        _instancedCharacter.GetComponent<Character>().Initialize(baseData);
         Logger.Log("Character Initialized.");
 
-        GetComponent<PlayerMovement>().Initialize();
-        Logger.Log("Movement Initialized.");
+        GetComponent<PlayerInput>().Initialize(_instancedCharacter);
+        Logger.Log("Player Input Initialized.");
 
+        GetComponent<PlayerCamera>().Initialize(_instancedCharacter);
+        Logger.Log("Player Camera Initialized.");
+
+        Logger.Log("Player Initialization finished.");
+
+        gameObject.SetActive(true);
         Logger.Log("Player is now enabled.");
     }
 }

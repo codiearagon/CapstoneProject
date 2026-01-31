@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6a15c1455152a4cbac94654d4dbf59, type: 3}
   m_Name: Layla
   m_EditorClassIdentifier: Assembly-CSharp::CharacterBase
-  BaseName: 
+  BaseName: Layla
   Affinity: {fileID: 11400000, guid: 509152f4c73832c438be0475050b7ccc, type: 2}
   Hp: 10
   MovementSpeed: 10
   Attack: 10
   AttackSpeed: 1
   Defense: 5
-  icon: {fileID: -5120843930320053621, guid: 66332b79b246a9e4caaaa3cfaa755da7, type: 3}
+  prefab: {fileID: 2606402699127159773, guid: a85ad4f526930644dacb25a32dbc388b, type: 3}
+  icon: {fileID: -1379070432964768802, guid: 66332b79b246a9e4caaaa3cfaa755da7, type: 3}
   splashArt: {fileID: 7042882249736441147, guid: 733a6c1c036e3904b8f6435d63eac844, type: 3}

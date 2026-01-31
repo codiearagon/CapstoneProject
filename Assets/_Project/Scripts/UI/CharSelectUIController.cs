@@ -42,7 +42,7 @@ public class CharSelectUIController : MonoBehaviour
 
     public void SelectCharacter(ClickEvent evt)
     {
-        PlayerManager.Instance.SetCharacter(_selectedCharacter);
+        PlayerPersistentState.Instance.SetCharacter(_selectedCharacter);
         SceneManager.LoadScene("Main");
     }
 
@@ -92,6 +92,7 @@ public class CharSelectUIController : MonoBehaviour
     {
         Button iconButton = evt.currentTarget as Button;
         CharacterBaseSO character = iconButton.dataSource as CharacterBaseSO;
+
         _selectedCharacter = character;
         Logger.Log("Selected: " + _selectedCharacter.name);
 

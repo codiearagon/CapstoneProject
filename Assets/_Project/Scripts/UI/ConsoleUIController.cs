@@ -49,6 +49,8 @@ public class ConsoleUIController : MonoBehaviour
 
     private void OnEnable()
     {
+        if (Instance != this) return;
+
         Logger.OnLogAdded += UpdateLoggerUI;
 
         _logView.bindItem += BindLogLabel;
@@ -63,6 +65,8 @@ public class ConsoleUIController : MonoBehaviour
 
     private void OnDisable()
     {
+        if (Instance != this) return;
+
         Logger.OnLogAdded -= UpdateLoggerUI;
 
         _logView.bindItem -= BindLogLabel;

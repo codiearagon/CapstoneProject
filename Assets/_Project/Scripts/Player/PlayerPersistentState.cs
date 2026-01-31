@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerPersistentState : MonoBehaviour
 {
-    public static PlayerManager Instance;
+    public static PlayerPersistentState Instance;
 
     public CharacterBaseSO Character { get; private set; }
 

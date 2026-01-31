@@ -1,14 +1,13 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    private void Start()
-    {
-        
-    }
+    [SerializeField]
+    private CinemachineCamera _playerCam;
 
-    private void Update()
+    public void Initialize(GameObject playerObj)
     {
-        
+        _playerCam.Follow = playerObj.transform;
     }
 }
