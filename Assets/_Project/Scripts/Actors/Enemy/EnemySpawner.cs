@@ -9,6 +9,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private float _spawnInterval;
 
+    [SerializeField]
+    private bool _isSpawning;
+
     private void Start()
     {
         StartCoroutine(SpawningCoroutine());
@@ -16,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawningCoroutine()
     {
-        while(true)
+        while(_isSpawning)
         {
             GameObject enemy = Instantiate(enemyData.prefab, transform.position, Quaternion.identity);
             enemy.GetComponent<Enemy>().SetBaseData(enemyData);

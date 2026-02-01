@@ -11,11 +11,9 @@ public class PlayerInput : MonoBehaviour
 
     private Character _character;
 
-    private ActorInputData inputData;
 
     public void Initialize(GameObject charObject)
     {
-        inputData = new ActorInputData();
         _character = charObject.GetComponent<Character>();
     }
 
@@ -34,9 +32,9 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         // read input value
-        inputData.MoveValue = _move.action.ReadValue<Vector2>();
-        inputData.LookValue = _look.action.ReadValue<Vector2>();
+        Vector2 moveValue = _move.action.ReadValue<Vector2>();
+        Vector2 lookValue = _look.action.ReadValue<Vector2>();
 
-        _character.UpdateInputData(inputData);
+        _character.UpdateInputData(moveValue, lookValue);
     }
 }

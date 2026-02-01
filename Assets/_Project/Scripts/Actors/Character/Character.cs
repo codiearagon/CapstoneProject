@@ -12,6 +12,7 @@ public class Character : Actor
     public override void InitializeActor(ActorBaseSO baseData)
     {
         Stats = new Stats();
+        InputData = new ActorInputData();
         BaseData = baseData as CharacterBaseSO;
         Stats.InitializeStats(BaseData);
     }
@@ -26,9 +27,10 @@ public class Character : Actor
 
     }
 
-    public override void UpdateInputData(ActorInputData inputData)
+    public override void UpdateInputData(Vector2 moveValue, Vector2 lookValue)
     {
-        InputData = inputData;
+        InputData.MoveValue = moveValue;
+        InputData.LookValue = lookValue;
     }
 
     public override void TakeDamage(int amount)

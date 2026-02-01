@@ -15,6 +15,12 @@ public class ActorMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_actor.InputData == null)
+            Logger.Log(gameObject.name + " InputData MoveValue null");
+
+        if (_actor.Stats == null)
+            Logger.Log(gameObject.name + " Stats is null");
+
         _rb.MovePosition(_rb.position + _actor.InputData.MoveValue * _actor.Stats.MovementSpeed * Time.fixedDeltaTime);
     }
 }

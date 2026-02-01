@@ -20,3 +20,5 @@ MonoBehaviour:
   Attack: 2
   AttackSpeed: 2
   Defense: 5
+  AggroRadius: 4
+  AttackRange: 2

@@ -5,20 +5,18 @@ public class Enemy : Actor
 {
     [field: SerializeField]
     public EnemyBaseSO BaseData { get; private set; }
-
+    
+    // Enemy specific stats
+    public float AggroRadius { get; private set; }
+    public float AttackRange { get; private set; }
 
     private void Awake()
     {
         InputData = new ActorInputData();
         InitializeActor(BaseData);
-    }
 
-    // testing purposes
-    private void Update()
-    {
-        InputData.MoveValue = GameObject.FindGameObjectWithTag("Character").transform.position.normalized;
-        InputData.LookValue = Vector2.zero;
-        UpdateInputData(InputData);
+        AggroRadius = BaseData.AggroRadius;
+        AttackRange = BaseData.AttackRange;
     }
 
     public override void InitializeActor(ActorBaseSO baseData)
@@ -27,9 +25,10 @@ public class Enemy : Actor
         Stats.InitializeStats(BaseData);
     }
 
-    public override void UpdateInputData(ActorInputData inputData)
+    public override void UpdateInputData(Vector2 moveValue, Vector2 lookValue)
     {
-        InputData = inputData;
+        InputData.MoveValue = moveValue;
+        InputData.LookValue = lookValue;
     }
 
     public override void TakeDamage(int amount)
