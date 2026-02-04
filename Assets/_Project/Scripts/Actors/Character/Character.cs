@@ -1,40 +1,62 @@
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(ActorMovement))]
-public class Character : Actor
+
+public class Character : MonoBehaviour
 {
-    public static event Action<Stats> OnStatsChanged;
+    public static event Action<CharacterStats> OnStatsChanged;
 
-    public CharacterBaseSO BaseData { get; private set; }
+    public CharacterStats Stats => _stats;
 
-    // Gets ran by PlayerInitialize
-    public override void InitializeActor(ActorBaseSO baseData)
+    [Header("References")]
+    [SerializeField]
+    private InputActionReference _moveRef;
+
+    [Header("Properties")]
+    [SerializeField]
+    private CharacterStats _stats;
+
+    private Rigidbody2D _rb;
+
+    private Vector2 _moveValue;
+
+    private void OnEnable()
     {
-        Stats = new Stats();
-        InputData = new ActorInputData();
-        BaseData = baseData as CharacterBaseSO;
-        Stats.InitializeStats(BaseData);
+        _moveRef.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _moveRef.action.Disable();
+    }
+
+    private void Awake()
+    {
+        _stats = new CharacterStats();
+        _rb = GetComponent<Rigidbody2D>();
+
+        _stats.CurrentHp = _stats.MaxHp;
     }
 
     private void Start()
     {
-        OnStatsChanged?.Invoke(Stats);
+        OnStatsChanged?.Invoke(_stats);
     }
 
-    public void Look(Vector2 lookDir)
+    private void Update()
     {
-
+        _moveValue = _moveRef.action.ReadValue<Vector2>();
     }
 
-    public override void UpdateInputData(Vector2 moveValue, Vector2 lookValue)
+    private void FixedUpdate()
     {
-        InputData.MoveValue = moveValue;
-        InputData.LookValue = lookValue;
+        _rb.MovePosition(_rb.position + _moveValue * _stats.MovementSpeed * Time.deltaTime);
     }
 
-    public override void TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
-        Stats.CurrentHp = Mathf.Clamp(Stats.CurrentHp - amount, 0, Stats.MaxHp);
+        _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - amount, 0, _stats.MaxHp);
     }
 }

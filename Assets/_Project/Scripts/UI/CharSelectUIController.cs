@@ -8,9 +8,9 @@ using UnityEngine.UIElements;
 public class CharSelectUIController : MonoBehaviour
 {
     [SerializeField]
-    private List<CharacterBaseSO> _playableCharacters;
+    private List<GameObject> _playableCharacters;
 
-    private CharacterBaseSO _selectedCharacter;
+    private GameObject _selectedCharacter;
 
     private VisualElement _root;
     private VisualElement _charSelectElement;
@@ -42,7 +42,7 @@ public class CharSelectUIController : MonoBehaviour
 
     public void SelectCharacter(ClickEvent evt)
     {
-        PlayerPersistentState.Instance.SetCharacter(_selectedCharacter);
+        PlayerPersistentState.Instance.SetCharacter(_selectedCharacter.GetComponent<Character>());
         SceneManager.LoadScene("Main");
     }
 
@@ -70,11 +70,11 @@ public class CharSelectUIController : MonoBehaviour
 
     private void SetupScrollView()
     {
-        foreach(CharacterBaseSO character in _playableCharacters)
+        foreach(GameObject character in _playableCharacters)
         {
             Button iconButton = new Button();
             Image iconImage = new Image();
-            iconImage.sprite = character.icon;
+            iconImage.sprite = character.GetComponent<CharacterMetadata>().Icon;
             iconImage.style.width = Length.Percent(100);
             iconImage.style.height = Length.Percent(100);
 
@@ -91,7 +91,7 @@ public class CharSelectUIController : MonoBehaviour
     private void OnClickIcon(ClickEvent evt)
     {
         Button iconButton = evt.currentTarget as Button;
-        CharacterBaseSO character = iconButton.dataSource as CharacterBaseSO;
+        GameObject character = iconButton.dataSource as GameObject;
 
         _selectedCharacter = character;
         Logger.Log("Selected: " + _selectedCharacter.name);
@@ -101,13 +101,15 @@ public class CharSelectUIController : MonoBehaviour
 
     private void UpdateSelectedCharacterUI()
     {
+        CharacterMetadata _charMeta = _selectedCharacter.GetComponent<CharacterMetadata>();
+
         _charNameLabel.text = _selectedCharacter.name;
-        _charSplashArtImage.sprite = _selectedCharacter.splashArt;
+        _charSplashArtImage.sprite = _charMeta.Icon;
         _charStatsLabel.text = System.String.Format("HP: {0}\n" +
                                                "Movement Speed: {1}\n" +
                                                "Attack: {2}\n" +
                                                "Attack Speed: {3}\n" +
-                                               "Defense: {4}", _selectedCharacter.Hp, _selectedCharacter.MovementSpeed, 
-                                               _selectedCharacter.Attack, _selectedCharacter.AttackSpeed, _selectedCharacter.Defense);
+                                               "Defense: {4}", _charMeta.Stats.MaxHp, _charMeta.Stats.MovementSpeed,
+                                               _charMeta.Stats.Attack, _charMeta.Stats.AttackSpeed, _charMeta.Stats.Defense);
     }
 }

@@ -22,7 +22,7 @@ public class StatsUIController : MonoBehaviour
         Character.OnStatsChanged -= UpdateStatsUI;
     }
 
-    private void UpdateStatsUI(Stats stats)
+    private void UpdateStatsUI(CharacterStats stats)
     {
         _statsText.text = System.String.Format("Stats:\n" +
                                                "Max HP: {0}\n" +

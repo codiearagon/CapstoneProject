@@ -1,43 +1,20 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ActorMovement))]
-public class Enemy : Actor
-{
-    [field: SerializeField]
-    public EnemyBaseSO BaseData { get; private set; }
-    
-    // Enemy specific stats
-    public float AggroRadius { get; private set; }
-    public float AttackRange { get; private set; }
 
+public class Enemy : MonoBehaviour
+{
+    [SerializeField]
+    private EnemyStats _stats;
+    
     private void Awake()
     {
-        InputData = new ActorInputData();
-        InitializeActor(BaseData);
+        _stats = new EnemyStats();
 
-        AggroRadius = BaseData.AggroRadius;
-        AttackRange = BaseData.AttackRange;
+        _stats.CurrentHp = _stats.MaxHp;
     }
 
-    public override void InitializeActor(ActorBaseSO baseData)
+    public void TakeDamage(int amount)
     {
-        Stats = new Stats();
-        Stats.InitializeStats(BaseData);
-    }
-
-    public override void UpdateInputData(Vector2 moveValue, Vector2 lookValue)
-    {
-        InputData.MoveValue = moveValue;
-        InputData.LookValue = lookValue;
-    }
-
-    public override void TakeDamage(int amount)
-    {
-        Stats.CurrentHp = Mathf.Clamp(Stats.CurrentHp - amount, 0, Stats.MaxHp);
-    }
-
-    public void SetBaseData(EnemyBaseSO baseData)
-    {
-        BaseData = baseData;
+        _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - amount, 0, _stats.MaxHp);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private EnemyBaseSO enemyData;
+    private GameObject _enemyToSpawn;
 
     [SerializeField]
     private float _spawnInterval;
@@ -21,8 +21,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while(_isSpawning)
         {
-            GameObject enemy = Instantiate(enemyData.prefab, transform.position, Quaternion.identity);
-            enemy.GetComponent<Enemy>().SetBaseData(enemyData);
+            GameObject enemy = Instantiate(_enemyToSpawn, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(_spawnInterval);
         }
     }

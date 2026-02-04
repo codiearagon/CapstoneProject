@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField]
-    private CinemachineCamera _playerCam;
+    //[SerializeField]
+    //private CinemachineCamera _playerCam;
 
-    public void Initialize(GameObject playerObj)
+    private void Awake()
     {
-        _playerCam.Follow = playerObj.transform;
+        //_playerCam.Follow = gameObject.transform;
     }
 }
