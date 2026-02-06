@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4983793589966103754}
   - component: {fileID: 8395579049703637350}
   - component: {fileID: 691234132994313955}
-  - component: {fileID: 8792691625519951028}
   m_Layer: 6
   m_Name: Layla
   m_TagString: Character
@@ -35,7 +34,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1124460282309086897}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &616503055482325404
@@ -153,10 +153,10 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0625, y: 0.984375}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5714286, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.875, y: 1.96875}
     newSize: {x: 0.875, y: 1.96875}
     adaptiveTilingThreshold: 0.5
@@ -220,7 +220,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Character
   _moveRef: {fileID: -8183824956638160338, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
   _lookRef: {fileID: 4523440419757146692, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
-  _attackRef: {fileID: 7161650873401729932, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
   _stats:
     CharacterName: Layla
     Affinity: 0
@@ -230,17 +229,49 @@ MonoBehaviour:
     Attack: 20
     AttackSpeed: 1.5
     Defense: 20
---- !u!114 &8792691625519951028
+--- !u!1 &4878263640123240559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1124460282309086897}
+  - component: {fileID: 6247328271366084028}
+  m_Layer: 6
+  m_Name: RangedWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1124460282309086897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4878263640123240559}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8270816902481461562}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6247328271366084028
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2606402699127159773}
+  m_GameObject: {fileID: 4878263640123240559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b446e4da3ecc9f043b3922dde0614726, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d04fd3a5c88bae4eb96590c8e1fd2f5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RangedCombat
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterRangedAttack
   _projectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
-  _projectileSpeed: 20
+  _attackRef: {fileID: 7161650873401729932, guid: c502fded2be96714d8f74d82c61d9967, type: 3}

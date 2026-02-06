@@ -1,29 +1,24 @@
 using System.Collections;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-[RequireComponent(typeof(IAttackBehaviour))]
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private EnemyStats _stats;
 
-    private CircleCollider2D _rangeCollider;
     private Rigidbody2D _rb;
-    private IAttackBehaviour _attackBehaviour;
 
     private GameObject _targetObj;
     private Rigidbody2D _targetRb;
 
-    private bool _playerInRange;
+    private Vector2 _lookValue;
     
     private void Awake()
     {
-        _rangeCollider = GetComponentInChildren<CircleCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
-        _attackBehaviour = GetComponent<IAttackBehaviour>();
 
-        _rangeCollider.radius = _stats.AttackRange;
         _stats.CurrentHp = _stats.MaxHp;
 
         Logger.Log("Enemy Initialized");
@@ -40,31 +35,10 @@ public class Enemy : MonoBehaviour, IDamageable
         if(_targetObj != null)
         {
             _rb.MovePosition(Vector2.MoveTowards(_rb.position, _targetRb.position, (_stats.MovementSpeed / 10) * Time.fixedDeltaTime));
+            _lookValue = (_targetRb.position - _rb.position).normalized;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        _playerInRange = true;
-        StartCoroutine(Attack());
-        Logger.Log("Attacking player");
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        _playerInRange = false;
-        Logger.Log("Player out of range");
-    }
-
-    private IEnumerator Attack()
-    {
-        Logger.Log("Attack coroutine started");
-        while(_playerInRange)
-        {
-            _targetObj?.GetComponent<Character>().TakeDamage(2f, _stats.Affinity);
-            yield return new WaitForSeconds(1 / _stats.AttackSpeed);
-        }
-    }
 
     public void TakeDamage(float amount, Affinity damageAffinity)
     {
@@ -78,11 +52,6 @@ public class Enemy : MonoBehaviour, IDamageable
             Destroy(gameObject);
     }
 
-
-    // Editor stuff
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _stats.AttackRange);
-    }
+    public EnemyStats Stats => _stats;
+    public Vector2 LookValue => _lookValue;
 }

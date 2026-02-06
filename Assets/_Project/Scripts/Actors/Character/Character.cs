@@ -3,12 +3,9 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(IAttackBehaviour))]
 public class Character : MonoBehaviour, IDamageable
 {
     public static event Action<CharacterStats> OnStatsChanged;
-
-    public CharacterStats Stats => _stats;
 
     [Header("References")]
     [SerializeField]
@@ -17,15 +14,11 @@ public class Character : MonoBehaviour, IDamageable
     [SerializeField]
     private InputActionReference _lookRef;
 
-    [SerializeField]
-    private InputActionReference _attackRef;
-
     [Header("Properties")]
     [SerializeField]
     private CharacterStats _stats;
 
     private Rigidbody2D _rb;
-    private IAttackBehaviour _attackBehaviour;
 
     private Vector2 _moveValue;
     private Vector2 _lookValue;
@@ -34,24 +27,17 @@ public class Character : MonoBehaviour, IDamageable
     {
         _moveRef.action.Enable();
         _lookRef.action.Enable();
-        _attackRef.action.Enable();
-
-        _attackRef.action.performed += Attack;
     }
 
     private void OnDisable()
     {
         _moveRef.action.Disable();
         _lookRef.action.Disable();
-        _attackRef.action.Disable();
-
-        _attackRef.action.performed -= Attack;
     }
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _attackBehaviour = GetComponent<IAttackBehaviour>();
 
         _stats.CurrentHp = _stats.MaxHp;
 
@@ -74,17 +60,6 @@ public class Character : MonoBehaviour, IDamageable
         _rb.MovePosition(_rb.position + _moveValue * (_stats.MovementSpeed / 10) * Time.deltaTime);
     }
 
-    private void Attack(InputAction.CallbackContext context)
-    {
-        Logger.Log("Player triggered attack");
-
-        Vector2 direction = (Vector2)Camera.main.ScreenToWorldPoint(_lookValue) - _rb.position;
-
-        Logger.Log("Projectile dir " + direction);
-
-        _attackBehaviour.Attack(_stats.Attack, direction, _stats.Affinity);
-    }
-
     public void TakeDamage(float amount, Affinity damageAffinity)
     {
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
@@ -98,6 +73,9 @@ public class Character : MonoBehaviour, IDamageable
 
         GetComponent<SpriteRenderer>().color = objCol;
 
-        OnStatsChanged?.Invoke(Stats);
+        OnStatsChanged?.Invoke(_stats);
     }
+
+    public CharacterStats Stats => _stats;
+    public Vector2 LookValue => _lookValue;
 }
