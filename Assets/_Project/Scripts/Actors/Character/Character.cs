@@ -34,10 +34,11 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        _stats = new CharacterStats();
         _rb = GetComponent<Rigidbody2D>();
 
         _stats.CurrentHp = _stats.MaxHp;
+
+        Logger.Log("Character Initialized");
     }
 
     private void Start()
@@ -52,11 +53,17 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _moveValue * _stats.MovementSpeed * Time.deltaTime);
+        _rb.MovePosition(_rb.position + _moveValue * (_stats.MovementSpeed / 10) * Time.deltaTime);
     }
 
     public void TakeDamage(int amount)
     {
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - amount, 0, _stats.MaxHp);
+        Color objCol = GetComponent<SpriteRenderer>().color;
+        objCol.a = (_stats.CurrentHp) / (_stats.MaxHp);
+
+        GetComponent<SpriteRenderer>().color = objCol;
+
+        OnStatsChanged?.Invoke(Stats);
     }
 }

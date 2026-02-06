@@ -8478,10 +8478,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1865891063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79ba172323bc85243acaabe00f950857, type: 3}
+  m_Script: {fileID: 11500000, guid: 60c7b6ce95bd15a4693b836cc190d7e3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
-  _playerCam: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawner
+  _playerCam: {fileID: 267576140}
 --- !u!1 &1871046704
 GameObject:
   m_ObjectHideFlags: 0

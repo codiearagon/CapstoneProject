@@ -176,8 +176,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
+  m_Mass: 500
+  m_LinearDamping: 2
   m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -220,9 +220,9 @@ MonoBehaviour:
   _moveRef: {fileID: -8183824956638160338, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
   _stats:
     CharacterName: Layla
-    MaxHp: 100
+    MaxHp: 50
     CurrentHp: 0
     MovementSpeed: 30
     Attack: 20
     AttackSpeed: 1.5
-    Defense: 30
+    Defense: 20

@@ -176,7 +176,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 500
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
@@ -222,7 +222,7 @@ MonoBehaviour:
     CharacterName: Astar
     MaxHp: 100
     CurrentHp: 0
-    MovementSpeed: 50
-    Attack: 30
+    MovementSpeed: 40
+    Attack: 10
     AttackSpeed: 1
-    Defense: 50
+    Defense: 30

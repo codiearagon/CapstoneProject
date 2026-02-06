@@ -40,22 +40,6 @@ public class CharSelectUIController : MonoBehaviour
         _charSelectButton.UnregisterCallback<ClickEvent>(SelectCharacter);
     }
 
-    public void SelectCharacter(ClickEvent evt)
-    {
-        PlayerPersistentState.Instance.SetCharacter(_selectedCharacter.GetComponent<Character>());
-        SceneManager.LoadScene("Main");
-    }
-
-    public void OpenCharSelect()
-    {
-        _charSelectElement.style.display = DisplayStyle.Flex;
-    }
-
-    public void CloseCharSelect()
-    {
-        _charSelectElement.style.display = DisplayStyle.None;
-    }
-
     private void ResolveReferences()
     {
         _root = GetComponent<UIDocument>().rootVisualElement;
@@ -111,5 +95,21 @@ public class CharSelectUIController : MonoBehaviour
                                                "Attack Speed: {3}\n" +
                                                "Defense: {4}", _charMeta.Stats.MaxHp, _charMeta.Stats.MovementSpeed,
                                                _charMeta.Stats.Attack, _charMeta.Stats.AttackSpeed, _charMeta.Stats.Defense);
+    }
+
+    public void SelectCharacter(ClickEvent evt)
+    {
+        PlayerPersistentState.Instance.SetCharacter(_selectedCharacter);
+        SceneManager.LoadScene("Main");
+    }
+
+    public void OpenCharSelect()
+    {
+        _charSelectElement.style.display = DisplayStyle.Flex;
+    }
+
+    public void CloseCharSelect()
+    {
+        _charSelectElement.style.display = DisplayStyle.None;
     }
 }
