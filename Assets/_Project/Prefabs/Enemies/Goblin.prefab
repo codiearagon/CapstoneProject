@@ -81,7 +81,8 @@ GameObject:
   - component: {fileID: 4150612127160297832}
   - component: {fileID: 1785213722731947224}
   - component: {fileID: 4352915952331059390}
-  m_Layer: 0
+  - component: {fileID: -8964286921995387516}
+  m_Layer: 7
   m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,10 +251,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _stats:
     EnemyName: Goblin
+    Affinity: 4
     MaxHp: 20
     CurrentHp: 0
-    MovementSpeed: 1
+    MovementSpeed: 2
     Attack: 10
     AttackSpeed: 1
     Defense: 10
     AttackRange: 1.5
+--- !u!114 &-8964286921995387516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614719710841126021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a0c07cb713ee84eb82832668029138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeCombat

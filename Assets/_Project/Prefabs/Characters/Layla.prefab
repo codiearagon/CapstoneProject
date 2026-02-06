@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 4983793589966103754}
   - component: {fileID: 8395579049703637350}
   - component: {fileID: 691234132994313955}
-  m_Layer: 0
+  - component: {fileID: 8792691625519951028}
+  m_Layer: 6
   m_Name: Layla
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -218,11 +219,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
   _moveRef: {fileID: -8183824956638160338, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
+  _lookRef: {fileID: 4523440419757146692, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
+  _attackRef: {fileID: 7161650873401729932, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
   _stats:
     CharacterName: Layla
+    Affinity: 0
     MaxHp: 50
     CurrentHp: 0
     MovementSpeed: 30
     Attack: 20
     AttackSpeed: 1.5
     Defense: 20
+--- !u!114 &8792691625519951028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2606402699127159773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b446e4da3ecc9f043b3922dde0614726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RangedCombat
+  _projectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
+  _projectileSpeed: 20

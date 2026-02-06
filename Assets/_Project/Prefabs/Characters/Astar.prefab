@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 4983793589966103754}
   - component: {fileID: -4294568214342362921}
   - component: {fileID: 691234132994313955}
-  m_Layer: 0
+  - component: {fileID: 1984609728154734200}
+  m_Layer: 6
   m_Name: Astar
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -218,11 +219,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
   _moveRef: {fileID: -8183824956638160338, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
+  _attackRef: {fileID: 7161650873401729932, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
   _stats:
     CharacterName: Astar
+    Affinity: 0
     MaxHp: 100
     CurrentHp: 0
     MovementSpeed: 40
     Attack: 10
     AttackSpeed: 1
     Defense: 30
+--- !u!114 &1984609728154734200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2606402699127159773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a0c07cb713ee84eb82832668029138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeCombat

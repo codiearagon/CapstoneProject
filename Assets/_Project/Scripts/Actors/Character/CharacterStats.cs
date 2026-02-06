@@ -9,10 +9,10 @@ public class CharacterStats
 
     [Header("Properties")]
     public Affinity Affinity;
-    public int MaxHp;
-    public int CurrentHp;
+    public float MaxHp;
+    public float CurrentHp;
     public float MovementSpeed;
-    public int Attack;
+    public float Attack;
     public float AttackSpeed;
-    public int Defense;
+    public float Defense;
 }

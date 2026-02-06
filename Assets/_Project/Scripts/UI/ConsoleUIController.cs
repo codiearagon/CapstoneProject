@@ -106,14 +106,12 @@ public class ConsoleUIController : MonoBehaviour
     {
         if (_consoleElement.style.display == DisplayStyle.None) 
         { 
-            _playerMap.Disable();
             _consoleElement.style.display = DisplayStyle.Flex;
             _logView.Rebuild();
             _logView.ScrollToItem(-1);
         } 
         else
         {
-            _playerMap.Enable();
             _consoleElement.style.display = DisplayStyle.None;
         }
     }

@@ -8481,6 +8481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c7b6ce95bd15a4693b836cc190d7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawner
+  _prefab: {fileID: 2606402699127159773, guid: a85ad4f526930644dacb25a32dbc388b, type: 3}
   _playerCam: {fileID: 267576140}
 --- !u!1 &1871046704
 GameObject:
@@ -8635,11 +8636,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4643151212596533583, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.96766
+      value: -5.48
       objectReference: {fileID: 0}
     - target: {fileID: 4643151212596533583, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.46024
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 4643151212596533583, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
       propertyPath: m_LocalPosition.z
