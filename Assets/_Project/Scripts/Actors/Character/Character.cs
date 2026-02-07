@@ -1,11 +1,14 @@
+using System.Collections.Generic;
 using System;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Character : MonoBehaviour, IDamageable
 {
-    public static event Action<CharacterStats> OnStatsChanged;
+    public event Action<CharacterStats> OnStatsChanged;
+    public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
+    public event Action<float, float> OnExperienceReceived;
+    public event Action OnLevelUp;
 
     [Header("References")]
     [SerializeField]
@@ -14,9 +17,12 @@ public class Character : MonoBehaviour, IDamageable
     [SerializeField]
     private InputActionReference _lookRef;
 
-    [Header("Properties")]
+    [Header("Details")]
     [SerializeField]
     private CharacterStats _stats;
+
+    [SerializeField]
+    private List<CharacterAdvancement> _advancements;
 
     private Rigidbody2D _rb;
 
@@ -44,11 +50,6 @@ public class Character : MonoBehaviour, IDamageable
         Logger.Log("Character Initialized");
     }
 
-    private void Start()
-    {
-        OnStatsChanged?.Invoke(_stats);
-    }
-
     private void Update()
     {
         _lookValue = _lookRef.action.ReadValue<Vector2>();
@@ -60,11 +61,43 @@ public class Character : MonoBehaviour, IDamageable
         _rb.MovePosition(_rb.position + _moveValue * (_stats.MovementSpeed / 10) * Time.deltaTime);
     }
 
-
     private void LevelUp()
     {
         _stats.Level++;
-        _stats.ExpToLevelUp += _stats.ExpToLevelUp * (2 / 1.5f);
+        _stats.ExpToLevelUp += _stats.ExpToLevelUp * 1.2f;
+
+        if (_stats.Level >= _stats.NextAdvancementLevel)
+            TriggerAdvancement();
+
+        // Recursive call if exp is more than the new cap
+        if (_stats.CurrentExp >= _stats.ExpToLevelUp)
+            LevelUp();
+
+        OnStatsChanged.Invoke(_stats);
+    }
+
+    private void TriggerAdvancement()
+    {
+        OnAdvancementTriggered.Invoke(_advancements);
+    }
+
+    public void SelectAdvancement(CharacterAdvancement advancement)
+    {
+        // Add bonus stats
+        _stats.MaxHp += advancement.MaxHp;
+        _stats.MovementSpeed += advancement.MovementSpeed;
+        _stats.Attack += advancement.Attack;
+        _stats.AttackSpeed += advancement.AttackSpeed;
+        _stats.Defense += advancement.Defense;
+
+        // Add new scalings
+        _stats.HpScaling += advancement.HpScaling;
+        _stats.AttackScaling += advancement.AttackScaling;
+        _stats.DefenseScaling += advancement.DefenseScaling;
+
+        // Change progression
+        _stats.NextAdvancementLevel = advancement.NextAdvancementLevel;
+        _advancements = advancement.Advancements;
     }
 
     public void TakeDamage(float amount, Affinity damageAffinity)
@@ -86,8 +119,6 @@ public class Character : MonoBehaviour, IDamageable
     public void ReceiveExperience(float amount)
     {
         _stats.CurrentExp += amount;
-
-        Logger.Log("Current Exp: " + _stats.CurrentExp + ", Level: " + _stats.Level);
 
         if (_stats.CurrentExp >= _stats.ExpToLevelUp)
             LevelUp();

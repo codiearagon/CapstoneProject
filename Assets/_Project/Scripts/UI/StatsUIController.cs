@@ -3,6 +3,11 @@ using UnityEngine.UIElements;
 
 public class StatsUIController : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerRoot _playerRoot;
+
+    private Character _playerObj;
+
     private VisualElement _root;
     private Label _statsText;
 
@@ -14,12 +19,20 @@ public class StatsUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        Character.OnStatsChanged += UpdateStatsUI;
+        _playerRoot.OnPlayerSpawned += HandlePlayerSpawned;
+        _playerObj.OnStatsChanged += UpdateStatsUI;
     }
 
     private void OnDisable()
     {
-        Character.OnStatsChanged -= UpdateStatsUI;
+        _playerRoot.OnPlayerSpawned -= HandlePlayerSpawned;
+        _playerObj.OnStatsChanged -= UpdateStatsUI;
+    }
+
+    private void HandlePlayerSpawned(GameObject playerObj)
+    {
+        _playerObj = playerObj.GetComponent<Character>();
+        UpdateStatsUI(_playerObj.Stats);
     }
 
     private void UpdateStatsUI(CharacterStats stats)

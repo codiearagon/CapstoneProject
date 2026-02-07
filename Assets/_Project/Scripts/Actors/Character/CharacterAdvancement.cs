@@ -1,31 +1,26 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-[Serializable]
-public class CharacterStats
+[CreateAssetMenu(fileName = "New Advancement", menuName = "New Advancement")]
+public class CharacterAdvancement : ScriptableObject
 {
-    [Header("Basic Details")]
-    public string CharacterName;
+    public Sprite Icon;
+    public Sprite SplashArt;
 
-    [Header("Properties")]
-    public Affinity Affinity;
+    [Header("Bonus Stats")]
     public float MaxHp;
-    public float CurrentHp;
     public float MovementSpeed;
     public float Attack;
     public float AttackSpeed;
     public float Defense;
 
-    [Header("Scalings")]
+    [Header("Bonus Scalings")]
     public float HpScaling;
     public float AttackScaling;
     public float DefenseScaling;
 
-    [Header("Experience")]
-    public float Level;
-    public float ExpToLevelUp;
-    public float CurrentExp;
-
     [Header("Progression")]
     public int NextAdvancementLevel;
+    public List<CharacterAdvancement> Advancements;
 }

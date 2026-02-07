@@ -35,6 +35,19 @@ public class CharacterRangedAttack : MonoBehaviour
         Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
 
         GameObject projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().SetProperties(_character.Stats.Attack, direction, _character.Stats.Affinity, LayerMask.NameToLayer("CharacterAttack"));
+
+        float damage = CalculateDamage();
+        projectile.GetComponent<Projectile>().SetProperties(damage, direction, _character.Stats.Affinity, LayerMask.NameToLayer("CharacterAttack"));
+    }
+
+    private float CalculateDamage()
+    {
+        float hpBaseDamage = _character.Stats.HpScaling * _character.Stats.MaxHp;
+        float attackBaseDamage = _character.Stats.AttackScaling * _character.Stats.Attack;
+        float defenseBaseDamage = _character.Stats.DefenseScaling * _character.Stats.Defense;
+
+        float baseDamage = hpBaseDamage + attackBaseDamage + defenseBaseDamage;
+
+        return baseDamage;
     }
 }

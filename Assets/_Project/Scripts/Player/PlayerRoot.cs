@@ -1,16 +1,19 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerRoot : MonoBehaviour
 {
+    public event Action<GameObject> OnPlayerSpawned;
+
     //testing only
     [SerializeField]
     private GameObject _prefab;
 
-    public GameObject PlayerObject { get; private set; }
-
     [SerializeField]
     private CinemachineCamera _playerCam;
+
+    private GameObject _playerObj;
 
     private void Awake()
     {
@@ -18,6 +21,7 @@ public class PlayerRoot : MonoBehaviour
         GameObject player = Instantiate(_prefab, Vector2.zero, Quaternion.identity);
 
         _playerCam.Follow = player.transform;
-        PlayerObject = player;
+        _playerObj = player;
+        OnPlayerSpawned.Invoke(_playerObj);
     }
 }

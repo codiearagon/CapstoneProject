@@ -8622,6 +8622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff7bab0b6b210c4981617a80633623f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
+  _playerRoot: {fileID: 1865891065}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

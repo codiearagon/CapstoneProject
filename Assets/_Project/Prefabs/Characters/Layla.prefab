@@ -229,9 +229,17 @@ MonoBehaviour:
     Attack: 20
     AttackSpeed: 1.5
     Defense: 20
+    HpScaling: 0
+    AttackScaling: 1
+    DefenseScaling: 0
     Level: 1
     ExpToLevelUp: 100
     CurrentExp: 0
+    FirstAdvancementLevel: 15
+    SecondAdvancementLevel: 30
+  _advancements:
+  - {fileID: 11400000, guid: 7ed22ece3b37d7442a44fe6ff4543357, type: 2}
+  - {fileID: 11400000, guid: 03157946cd620954695cf95af429f4b1, type: 2}
 --- !u!1 &4878263640123240559
 GameObject:
   m_ObjectHideFlags: 0
