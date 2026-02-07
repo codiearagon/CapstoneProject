@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class Character : MonoBehaviour, IDamageable
 {
+    public event Action<float> OnHealthChanged;
     public event Action<CharacterStats> OnStatsChanged;
     public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
-    public event Action<float, float> OnExperienceReceived;
-    public event Action OnLevelUp;
+    public event Action<float> OnExperienceReceived;
+    public event Action<int, float, float, float> OnLevelUp;
 
     [Header("References")]
     [SerializeField]
@@ -63,8 +64,11 @@ public class Character : MonoBehaviour, IDamageable
 
     private void LevelUp()
     {
+        float currentExpToLevelUp = _stats.ExpToLevelUp; 
         _stats.Level++;
         _stats.ExpToLevelUp += _stats.ExpToLevelUp * 1.2f;
+
+        OnLevelUp?.Invoke(_stats.Level, _stats.CurrentExp, currentExpToLevelUp, _stats.ExpToLevelUp);
 
         if (_stats.Level >= _stats.NextAdvancementLevel)
             TriggerAdvancement();
@@ -104,7 +108,7 @@ public class Character : MonoBehaviour, IDamageable
     {
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
         float finalDamage = amount * affinityMultiplier;
-        Logger.Log(string.Format("Received Damage: {0}, {1} base * {2}, {3}", finalDamage, amount, affinityMultiplier, _stats.CharacterName));
+        //Logger.Log(string.Format("Received Damage: {0}, {1} base * {2}, {3}", finalDamage, amount, affinityMultiplier, _stats.CharacterName));
 
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
 
@@ -113,12 +117,13 @@ public class Character : MonoBehaviour, IDamageable
 
         GetComponent<SpriteRenderer>().color = objCol;
 
-        OnStatsChanged?.Invoke(_stats);
+        OnHealthChanged?.Invoke(_stats.CurrentHp);
     }
 
     public void ReceiveExperience(float amount)
     {
         _stats.CurrentExp += amount;
+        OnExperienceReceived?.Invoke(amount);
 
         if (_stats.CurrentExp >= _stats.ExpToLevelUp)
             LevelUp();

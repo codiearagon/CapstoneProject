@@ -1,0 +1,32 @@
+:root {
+}
+
+#CharHealthBar .unity-progress-bar__container {
+    flex-grow: 1;
+    max-height: 50%;
+}
+
+#CharHealthBar .unity-progress-bar__background {
+    background-color: rgba(180, 0, 0, 255);
+}
+
+#CharHealthBar .unity-progress-bar__progress {
+    margin: 0;
+    flex-grow: 1;
+    width: 80%;
+    background-color: lightgreen;
+}
+
+#ExpBar .unity-progress-bar__container {
+}
+
+#ExpBar .unity-progress-bar__background {
+    background-color: black;
+}
+
+#ExpBar .unity-progress-bar__progress {
+    margin: 0;
+    flex-grow: 1;
+    width: 80%;
+    background-color: yellow;
+}

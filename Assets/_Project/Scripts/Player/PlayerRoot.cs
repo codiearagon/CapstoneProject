@@ -22,6 +22,10 @@ public class PlayerRoot : MonoBehaviour
 
         _playerCam.Follow = player.transform;
         _playerObj = player;
-        OnPlayerSpawned.Invoke(_playerObj);
+    }
+
+    private void Start()
+    {
+        OnPlayerSpawned?.Invoke(_playerObj);
     }
 }

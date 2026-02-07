@@ -1,6 +1,17 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/_Project/UI/HUDStyle.uss?fileID=7433441132597879392&amp;guid=d39aa722a6ccd4a438c1cf8a76209459&amp;type=3#HUDStyle"/>
-    <ui:VisualElement name="StatsElement" style="flex-grow: 0; opacity: 1; width: 20%; height: 50%; position: absolute; margin-left: 20px; margin-top: 20px; display: flex; top: auto; left: auto; right: 0; bottom: auto; flex-direction: column; flex-wrap: nowrap; align-items: stretch; align-self: auto; justify-content: flex-start; align-content: flex-start;">
-        <ui:Label text="Stats:&#10;Max HP:&#10;Current HP:&#10;Move Speed:&#10;Attack:&#10;Attack Speed:&#10;Defense: " name="StatsText" style="text-overflow: clip; white-space: normal; font-size: 30px; -unity-text-outline-color: rgb(0, 0, 0); color: rgb(255, 255, 255);"/>
+    <Style src="project://database/Assets/_Project/UI/InGameUI.uss?fileID=7433441132597879392&amp;guid=d39aa722a6ccd4a438c1cf8a76209459&amp;type=3#InGameUI"/>
+    <ui:VisualElement name="MainUI" picking-mode="Ignore" style="flex-grow: 1;">
+        <ui:VisualElement name="MainTopElement" picking-mode="Ignore" style="flex-grow: 1;">
+            <ui:VisualElement name="DetailsElement" picking-mode="Ignore" style="flex-grow: 0; flex-direction: row; width: 30%; height: 20%; margin-top: 20px; margin-left: 20px; background-color: rgba(0, 0, 0, 0.73); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+                <ui:VisualElement name="CharIconElement" picking-mode="Ignore" style="flex-grow: 0; width: 20%; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+                    <ui:Image source="project://database/Assets/_Project/Sprites/Jessie.png?fileID=2800000&amp;guid=cf4f88e7a6219e541a9c2bdc6a136f6e&amp;type=3#Jessie" name="CharIcon" picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0;"/>
+                </ui:VisualElement>
+                <ui:ProgressBar value="39.4" title="HP" high-value="100" low-value="0" name="CharHealthBar" picking-mode="Ignore" class="CharHealthBar" style="width: 80%; align-items: stretch; align-self: stretch;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="MainBottomElement" picking-mode="Ignore" style="flex-grow: 1;">
+            <ui:VisualElement name="AbilitiesElement" style="flex-grow: 1;"/>
+            <ui:ProgressBar value="0" title="" name="ExpBar" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

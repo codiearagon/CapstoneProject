@@ -22,7 +22,7 @@ public class CharacterStats
     public float DefenseScaling;
 
     [Header("Experience")]
-    public float Level;
+    public int Level;
     public float ExpToLevelUp;
     public float CurrentExp;
 
