@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    private IProjectileMovement _movement;
+    private IProjectileHit _hit;
+
     [SerializeField]
     private float _speed;
+
+    private float _timeToLive;
 
     private Rigidbody2D _rb;
     private float _damage;

@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyToSpawn: {fileID: 2614719710841126021, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
-  _spawnInterval: 4
+  _spawnInterval: 2
   _isSpawning: 1
 --- !u!1 &619394800
 GameObject:
@@ -8622,6 +8622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff7bab0b6b210c4981617a80633623f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
+  _openStats: {fileID: -7612976211172628468, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
   _playerRoot: {fileID: 1865891065}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenStats",
+                    "type": "Button",
+                    "id": "cfd93f94-c70d-484c-96c8-ae274edb53f0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -142,6 +151,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e2b330a-69f3-41d3-81ef-79634488dc18",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "OpenStats",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

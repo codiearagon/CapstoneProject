@@ -9,7 +9,7 @@ public class Character : MonoBehaviour, IDamageable
     public event Action<CharacterStats> OnStatsChanged;
     public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
     public event Action<float> OnExperienceReceived;
-    public event Action<int, float, float, float> OnLevelUp;
+    public event Action<int, float, float> OnLevelUp;
 
     [Header("References")]
     [SerializeField]
@@ -64,11 +64,12 @@ public class Character : MonoBehaviour, IDamageable
 
     private void LevelUp()
     {
-        float currentExpToLevelUp = _stats.ExpToLevelUp; 
         _stats.Level++;
-        _stats.ExpToLevelUp += _stats.ExpToLevelUp * 1.2f;
+        _stats.CurrentExp -= _stats.ExpToLevelUp;
+        _stats.ExpToLevelUp = _stats.ExpToLevelUp * 1.2f;
 
-        OnLevelUp?.Invoke(_stats.Level, _stats.CurrentExp, currentExpToLevelUp, _stats.ExpToLevelUp);
+        OnLevelUp?.Invoke(_stats.Level, _stats.CurrentExp, _stats.ExpToLevelUp);
+
 
         if (_stats.Level >= _stats.NextAdvancementLevel)
             TriggerAdvancement();
@@ -77,12 +78,12 @@ public class Character : MonoBehaviour, IDamageable
         if (_stats.CurrentExp >= _stats.ExpToLevelUp)
             LevelUp();
 
-        OnStatsChanged.Invoke(_stats);
+        OnStatsChanged?.Invoke(_stats);
     }
 
     private void TriggerAdvancement()
     {
-        OnAdvancementTriggered.Invoke(_advancements);
+        OnAdvancementTriggered?.Invoke(_advancements);
     }
 
     public void SelectAdvancement(CharacterAdvancement advancement)

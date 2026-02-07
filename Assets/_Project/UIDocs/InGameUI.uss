@@ -8,6 +8,7 @@
 
 #CharHealthBar .unity-progress-bar__background {
     background-color: rgba(180, 0, 0, 255);
+    border-width: 0;
 }
 
 #CharHealthBar .unity-progress-bar__progress {
@@ -22,6 +23,7 @@
 
 #ExpBar .unity-progress-bar__background {
     background-color: black;
+    border-width: 0;
 }
 
 #ExpBar .unity-progress-bar__progress {
