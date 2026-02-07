@@ -60,6 +60,13 @@ public class Character : MonoBehaviour, IDamageable
         _rb.MovePosition(_rb.position + _moveValue * (_stats.MovementSpeed / 10) * Time.deltaTime);
     }
 
+
+    private void LevelUp()
+    {
+        _stats.Level++;
+        _stats.ExpToLevelUp += _stats.ExpToLevelUp * (2 / 1.5f);
+    }
+
     public void TakeDamage(float amount, Affinity damageAffinity)
     {
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
@@ -74,6 +81,16 @@ public class Character : MonoBehaviour, IDamageable
         GetComponent<SpriteRenderer>().color = objCol;
 
         OnStatsChanged?.Invoke(_stats);
+    }
+
+    public void ReceiveExperience(float amount)
+    {
+        _stats.CurrentExp += amount;
+
+        Logger.Log("Current Exp: " + _stats.CurrentExp + ", Level: " + _stats.Level);
+
+        if (_stats.CurrentExp >= _stats.ExpToLevelUp)
+            LevelUp();
     }
 
     public CharacterStats Stats => _stats;

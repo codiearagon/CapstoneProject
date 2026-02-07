@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using TMPro.EditorUtilities;
 using UnityEngine;
@@ -39,6 +40,12 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
+    private void Die()
+    {
+        _targetObj.GetComponent<Character>().ReceiveExperience(_stats.ExpOnKill);
+        Destroy(gameObject);
+    }
+      
 
     public void TakeDamage(float amount, Affinity damageAffinity)
     {
@@ -49,7 +56,7 @@ public class Enemy : MonoBehaviour, IDamageable
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
 
         if (_stats.CurrentHp <= 0)
-            Destroy(gameObject);
+            Die();
     }
 
     public EnemyStats Stats => _stats;

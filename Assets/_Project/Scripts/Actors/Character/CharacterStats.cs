@@ -15,4 +15,9 @@ public class CharacterStats
     public float Attack;
     public float AttackSpeed;
     public float Defense;
+
+    [Header("Experience")]
+    public float Level;
+    public float ExpToLevelUp;
+    public float CurrentExp;
 }

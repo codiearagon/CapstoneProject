@@ -271,3 +271,4 @@ MonoBehaviour:
     AttackSpeed: 1
     Defense: 10
     AttackRange: 1.5
+    ExpOnKill: 10

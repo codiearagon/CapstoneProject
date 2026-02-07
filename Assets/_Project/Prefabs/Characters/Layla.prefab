@@ -229,6 +229,9 @@ MonoBehaviour:
     Attack: 20
     AttackSpeed: 1.5
     Defense: 20
+    Level: 1
+    ExpToLevelUp: 100
+    CurrentExp: 0
 --- !u!1 &4878263640123240559
 GameObject:
   m_ObjectHideFlags: 0

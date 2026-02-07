@@ -16,4 +16,7 @@ public class EnemyStats
     public float AttackSpeed;
     public float Defense;
     public float AttackRange;
+
+    [Header("Experience")]
+    public float ExpOnKill;
 }
