@@ -1,8 +1,28 @@
+using System;
 using UnityEngine;
 
-public class Ability : MonoBehaviour
+public enum AbilityState
 {
-    public Affinity affinity { get; private set; }
-    public int damage { get; private set; }
-    public int size { get; private set; }
+    Cooldown,
+    Ready,
+    Active
+}
+
+public abstract class Ability : MonoBehaviour
+{
+    [Header("Details")]
+    public string AbilityName;
+    public Sprite Icon;
+
+    [Header("Base Properties")]
+    public Affinity Affinity;
+    public float HpMultiplier;
+    public float AttackMultiplier;
+    public float DefenseMultiplier;
+    public float CooldownTime;
+    public bool AlwaysActive;
+
+    protected float FinalDamage;
+
+    public abstract void Cast(GameObject caster, LayerMask layer);
 }

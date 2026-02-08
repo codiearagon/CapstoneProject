@@ -266,7 +266,7 @@ MonoBehaviour:
     Affinity: 4
     MaxHp: 20
     CurrentHp: 0
-    MovementSpeed: 2
+    MovementSpeed: 10
     Attack: 10
     AttackSpeed: 1
     Defense: 10

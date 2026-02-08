@@ -229,9 +229,6 @@ MonoBehaviour:
     Attack: 20
     AttackSpeed: 1.5
     Defense: 20
-    HpScaling: 0
-    AttackScaling: 1
-    DefenseScaling: 0
     Level: 1
     ExpToLevelUp: 100
     CurrentExp: 0
@@ -283,5 +280,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d04fd3a5c88bae4eb96590c8e1fd2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterRangedAttack
-  _projectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
+  _projectileAbility: {fileID: -9057539487607955701, guid: f633a18f001767f4f8befbe6e70fec95, type: 3}
   _attackRef: {fileID: 7161650873401729932, guid: c502fded2be96714d8f74d82c61d9967, type: 3}

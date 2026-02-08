@@ -25,9 +25,6 @@
             <ui:Label text="Label" name="AttackLabel"/>
             <ui:Label text="Label" name="AttackSpeedLabel"/>
             <ui:Label text="Label" name="DefenseLabel"/>
-            <ui:Label text="Label" name="HpScalingLabel"/>
-            <ui:Label text="Label" name="AttackScalingLabel"/>
-            <ui:Label text="Label" name="DefenseScalingLabel"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

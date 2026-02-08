@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4863614956449113639}
   - component: {fileID: 639571169265993802}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: MagicAttackProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,3 +170,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   _speed: 10
+  _timeToLive: 5

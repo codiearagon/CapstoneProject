@@ -16,11 +16,6 @@ public class CharacterStats
     public float AttackSpeed;
     public float Defense;
 
-    [Header("Scalings")]
-    public float HpScaling;
-    public float AttackScaling;
-    public float DefenseScaling;
-
     [Header("Experience")]
     public int Level;
     public float ExpToLevelUp;

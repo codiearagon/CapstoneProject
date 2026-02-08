@@ -1,14 +1,6 @@
 using UnityEngine;
 
-public class IProjectileMovement : MonoBehaviour
+public interface IProjectileMovement
 {
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
+    public void Move(Projectile projectile, Rigidbody2D projectileRb);
 }

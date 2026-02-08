@@ -21,8 +21,6 @@ public class Enemy : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody2D>();
 
         _stats.CurrentHp = _stats.MaxHp;
-
-        Logger.Log("Enemy Initialized");
     }
 
     private void Start()
@@ -51,7 +49,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
         float finalDamage = amount * affinityMultiplier;
-        //Logger.Log(string.Format("Received Damage: {0}, {1} base * {2}, {3}", finalDamage, amount, affinityMultiplier, _stats.EnemyName));
+        Logger.Log(string.Format("Received Damage: {0}, {1} base * {2}, {3}", finalDamage, amount, affinityMultiplier, _stats.EnemyName));
 
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
 

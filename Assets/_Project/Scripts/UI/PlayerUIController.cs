@@ -24,9 +24,6 @@ public class PlayerUIController : MonoBehaviour
     private Label _attackLabel;
     private Label _attackSpeedLabel;
     private Label _defenseLabel;
-    private Label _hpScalingLabel;
-    private Label _attackScalingLabel;
-    private Label _defenseScalingLabel;
 
     private ProgressBar _expBar;
     private ProgressBar _healthBar;
@@ -50,9 +47,6 @@ public class PlayerUIController : MonoBehaviour
         _attackLabel = _characterStatsElement.Q<Label>("AttackLabel");
         _attackSpeedLabel = _characterStatsElement.Q<Label>("AttackSpeedLabel");
         _defenseLabel = _characterStatsElement.Q<Label>("DefenseLabel");
-        _hpScalingLabel = _characterStatsElement.Q<Label>("HpScalingLabel");
-        _attackScalingLabel = _characterStatsElement.Q<Label>("AttackScalingLabel");
-        _defenseScalingLabel = _characterStatsElement.Q<Label>("DefenseScalingLabel");
 
         _characterStatsElement.style.display = DisplayStyle.None;
     }
@@ -100,9 +94,6 @@ public class PlayerUIController : MonoBehaviour
         _attackLabel.text = "Attack: " + stats.Attack;
         _attackSpeedLabel.text = "Attack Speed: " + stats.AttackSpeed;
         _defenseLabel.text = "Defense: " + stats.Defense;
-        _hpScalingLabel.text = "HP Scaling: " + stats.HpScaling;
-        _attackScalingLabel.text = "Attack Scaling: " + stats.AttackScaling;
-        _defenseScalingLabel.text = "Defense Scaling: " + stats.DefenseScaling;
     }
 
     private void AddExperience(float amount)

@@ -95,11 +95,6 @@ public class Character : MonoBehaviour, IDamageable
         _stats.AttackSpeed += advancement.AttackSpeed;
         _stats.Defense += advancement.Defense;
 
-        // Add new scalings
-        _stats.HpScaling += advancement.HpScaling;
-        _stats.AttackScaling += advancement.AttackScaling;
-        _stats.DefenseScaling += advancement.DefenseScaling;
-
         // Change progression
         _stats.NextAdvancementLevel = advancement.NextAdvancementLevel;
         _advancements = advancement.Advancements;

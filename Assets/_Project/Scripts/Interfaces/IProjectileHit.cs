@@ -1,14 +1,6 @@
 using UnityEngine;
 
-public class IProjectileHit : MonoBehaviour
+public interface IProjectileHit
 {
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
+    public void OnHit(Projectile projectile, Collider2D other);
 }

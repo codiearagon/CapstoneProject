@@ -1,14 +1,19 @@
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+
 
 public class CharacterRangedAttack : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _projectilePrefab;
+    private ProjectileAbility _projectileAbility;
 
     [SerializeField]
     private InputActionReference _attackRef;
 
+    private GameObject _projectilePrefab;
     private Character _character;
     private Rigidbody2D _rb;
 
@@ -24,30 +29,38 @@ public class CharacterRangedAttack : MonoBehaviour
         _attackRef.action.performed -= AttackPerformed;
     }
 
+    private void Awake()
+    {
+        _projectilePrefab = _projectileAbility.ProjectilePrefab;
+    }
+
     private void Start()
     {
         _character = GetComponentInParent<Character>();
         _rb = _character.GetComponent<Rigidbody2D>();
+
+        _projectileAbility.SetBehaviour(new StraightProjectile(), new DamageOnHitProjectile());
     }
 
     private void AttackPerformed(InputAction.CallbackContext context)
     {
+        Logger.Log("Fired");
+
         Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
 
-        GameObject projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
-
-        float damage = CalculateDamage();
-        projectile.GetComponent<Projectile>().SetProperties(damage, direction, _character.Stats.Affinity, LayerMask.NameToLayer("CharacterAttack"));
+        _projectileAbility.SetDamage(CalculateDamage());
+        _projectileAbility.SetDirection(direction);
+        _projectileAbility.Cast(transform.parent.gameObject, LayerMask.NameToLayer("CharacterAttack"));
     }
 
     private float CalculateDamage()
     {
-        float hpBaseDamage = _character.Stats.HpScaling * _character.Stats.MaxHp;
-        float attackBaseDamage = _character.Stats.AttackScaling * _character.Stats.Attack;
-        float defenseBaseDamage = _character.Stats.DefenseScaling * _character.Stats.Defense;
+        float hpDamage = _character.Stats.MaxHp * _projectileAbility.HpMultiplier;
+        float attackDamage = _character.Stats.Attack * _projectileAbility.AttackMultiplier;
+        float defenseDamage = _character.Stats.Defense * _projectileAbility.DefenseMultiplier;
 
-        float baseDamage = hpBaseDamage + attackBaseDamage + defenseBaseDamage;
+        float finalDamage = hpDamage + attackDamage + defenseDamage;
 
-        return baseDamage;
+        return finalDamage;
     }
 }
