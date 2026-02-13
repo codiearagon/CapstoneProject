@@ -3,8 +3,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-
 public class CharacterRangedAttack : MonoBehaviour
 {
     [SerializeField]

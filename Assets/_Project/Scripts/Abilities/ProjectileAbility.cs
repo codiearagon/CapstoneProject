@@ -7,19 +7,17 @@ public class ProjectileAbility : Ability
     public float Speed;
     public float TimeToLive;
 
-    [Header("Explosion")]
-    public float ExplosionRadius;
+    [SerializeField]
+    private ProjectileMovementBehaviour _movementBehaviour;
 
-    private IProjectileMovement _movement;
-    private IProjectileHit _hit;
+    [SerializeField]
+    private ProjectileHitBehaviour _hitBehaviour;
+
+    [Header("Miscellaneous Properties")]
+    public float ExplosionRadius;
 
     private Vector2 _direction;
     private float _finalDamage;
-
-    private void Awake()
-    {
-
-    }
 
     public void SetData(float damage, Vector2 direction)
     {
@@ -27,48 +25,46 @@ public class ProjectileAbility : Ability
         _direction = direction;
     }
 
-    public void ChangeMovementBehaviour(IProjectileMovement newMovement)
+    public void SetMovementBehaviour(ProjectileMovementBehaviour movement)
     {
-        _movement = newMovement;
+        _movementBehaviour = movement;
     }
 
-    public void ChangeHitBehaviour(IProjectileHit newHit)
+    public void SetHitBehaviour(ProjectileHitBehaviour hit)
     {
-        _hit = newHit;
+        _hitBehaviour = hit;
     }
 
     public override void Cast(GameObject caster, LayerMask layer)
     {
-        _movement = new StraightProjectile(Speed, _direction);
-        _hit = new DamageOnHitProjectile(_finalDamage, Affinity);
+        IProjectileMovement movement = CreateMovementBehaviour(_movementBehaviour);
+        IProjectileHit hit = CreateHitBehaviour(_hitBehaviour);
 
         GameObject projectile = Instantiate(ProjectilePrefab, caster.transform.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().SetBehaviour(_movement, _hit, TimeToLive, layer);
+        projectile.GetComponent<Projectile>().SetBehaviour(movement, hit, TimeToLive, layer);
     }
 
-    private IProjectileMovement CreateMovementBehaviour()
-    {
-        Logger.Log(_movement.GetType().FullName);
 
-        if (_movement is StraightProjectile)
+    // ------ Movement and Hit Factory ------
+    private IProjectileMovement CreateMovementBehaviour(ProjectileMovementBehaviour movement)
+    {
+        switch (movement)
         {
-            Logger.Log("Creating movement behaviour");
-            return new StraightProjectile(Speed, _direction);
+            case ProjectileMovementBehaviour.Straight:
+                return new StraightProjectile(Speed, _direction);
+            default:
+                return null;
         }
-        else
-            return null;
     }
 
-    private IProjectileHit CreateHitBehaviour()
+    private IProjectileHit CreateHitBehaviour(ProjectileHitBehaviour hit)
     {
-        Logger.Log(_hit.GetType().FullName);
-
-        if (_hit is DamageOnHitProjectile)
+        switch (hit)
         {
-            Logger.Log("Creating hit behaviour");
-            return new DamageOnHitProjectile(_finalDamage, Affinity);
+            case ProjectileHitBehaviour.Damage:
+                return new DamageOnHitProjectile(_finalDamage, Affinity);
+            default:
+                return null;
         }
-        else
-            return null;
     }
 }
