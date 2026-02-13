@@ -22,7 +22,5 @@ public abstract class Ability : MonoBehaviour
     public float CooldownTime;
     public bool AlwaysActive;
 
-    protected float FinalDamage;
-
     public abstract void Cast(GameObject caster, LayerMask layer);
 }

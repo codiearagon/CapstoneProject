@@ -51,5 +51,7 @@ MonoBehaviour:
   AttackMultiplier: 1
   DefenseMultiplier: 0
   CooldownTime: 0
+  AlwaysActive: 0
   ProjectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
+  Speed: 5
   TimeToLive: 2

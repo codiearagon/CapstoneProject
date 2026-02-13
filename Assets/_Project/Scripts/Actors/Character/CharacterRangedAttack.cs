@@ -13,7 +13,6 @@ public class CharacterRangedAttack : MonoBehaviour
     [SerializeField]
     private InputActionReference _attackRef;
 
-    private GameObject _projectilePrefab;
     private Character _character;
     private Rigidbody2D _rb;
 
@@ -29,17 +28,10 @@ public class CharacterRangedAttack : MonoBehaviour
         _attackRef.action.performed -= AttackPerformed;
     }
 
-    private void Awake()
-    {
-        _projectilePrefab = _projectileAbility.ProjectilePrefab;
-    }
-
     private void Start()
     {
         _character = GetComponentInParent<Character>();
         _rb = _character.GetComponent<Rigidbody2D>();
-
-        _projectileAbility.SetBehaviour(new StraightProjectile(), new DamageOnHitProjectile());
     }
 
     private void AttackPerformed(InputAction.CallbackContext context)
@@ -48,8 +40,7 @@ public class CharacterRangedAttack : MonoBehaviour
 
         Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
 
-        _projectileAbility.SetDamage(CalculateDamage());
-        _projectileAbility.SetDirection(direction);
+        _projectileAbility.SetData(CalculateDamage(), direction);
         _projectileAbility.Cast(transform.parent.gameObject, LayerMask.NameToLayer("CharacterAttack"));
     }
 
