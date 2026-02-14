@@ -7,11 +7,8 @@ public class ProjectileAbility : Ability
     public float Speed;
     public float TimeToLive;
 
-    [SerializeField]
-    private ProjectileMovementBehaviour _movementBehaviour;
-
-    [SerializeField]
-    private ProjectileHitBehaviour _hitBehaviour;
+    [SerializeField] private ProjectileMovementBehaviour _movementBehaviour;
+    [SerializeField] private ProjectileHitBehaviour _hitBehaviour;
 
     [Header("Miscellaneous Properties")]
     public float ExplosionRadius;

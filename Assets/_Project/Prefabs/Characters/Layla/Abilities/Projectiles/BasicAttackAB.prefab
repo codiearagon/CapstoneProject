@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 638949062865999924}
   - component: {fileID: -9057539487607955701}
   m_Layer: 0
-  m_Name: MagicAttackAbility
+  m_Name: BasicAttackAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,4 +55,8 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
   Speed: 5
   TimeToLive: 2
+  _movementBehaviour: 0
+  _hitBehaviour: 0
+  _moveParticle: {fileID: 0}
+  _hitParticle: {fileID: 6441916085968280928, guid: a52dd800156478a4e95b9cdff1d23a94, type: 3}
   ExplosionRadius: 0

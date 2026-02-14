@@ -15,6 +15,6 @@ public class DamageOnHitProjectile : IProjectileHit
     public void OnHit(Projectile projectile, Collider2D other)
     {
         other?.GetComponent<IDamageable>().TakeDamage(_damage, _affinity);
-        projectile.Destroy();
+        GameObject.Destroy(projectile.gameObject);
     }
 }
