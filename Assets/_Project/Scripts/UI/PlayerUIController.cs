@@ -190,8 +190,8 @@ public class PlayerUIController : MonoBehaviour
 
         _abilityName.text = ability.AbilityName;
         _abilityAffinity.text = ability.Affinity.ToString();
-        _abilityCost.text = ability.ManaCost.ToString();
-        _abilityCooldown.text = ability.CooldownTime.ToString();
+        _abilityCost.text = ability.ManaCost.ToString() + " mana";
+        _abilityCooldown.text = ability.CooldownTime.ToString() + " secs";
         _abilityDescription.text = ability.Description;
         _abilityMultiplier.text = ability.AttackMultiplier * 100 + "% of attack";
 
