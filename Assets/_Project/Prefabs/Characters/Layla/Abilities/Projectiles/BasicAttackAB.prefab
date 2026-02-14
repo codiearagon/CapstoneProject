@@ -45,11 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileAbility
   AbilityName: Magic Attack
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: a5cbb7baffcd5184f8f65f0c9674f6af, type: 3}
+  Description: Shoots out a small projectile that deals damage on hit
   Affinity: 0
-  HpMultiplier: 0
   AttackMultiplier: 1
-  DefenseMultiplier: 0
   ManaCost: 0
   CooldownTime: 0
   AlwaysActive: 0

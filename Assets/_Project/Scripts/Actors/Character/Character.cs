@@ -5,12 +5,20 @@ using UnityEngine.InputSystem;
 
 public class Character : MonoBehaviour, IDamageable
 {
+    // Stats events
     public event Action<float> OnHealthChanged;
     public event Action<float> OnManaChanged;
     public event Action<CharacterStats> OnStatsChanged;
-    public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
+
+    // Ability events
+    public event Action<List<Ability>> OnAbilitiesChanged;
+    public event Action OnAbilityUnlockTriggered;
+    public event Action OnAbilityUpgradeTriggered;
+
+    // Progression events
     public event Action<float> OnExperienceReceived;
     public event Action<int, float, float> OnLevelUp;
+    public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
 
     [Header("References")]
     [SerializeField]
@@ -26,6 +34,7 @@ public class Character : MonoBehaviour, IDamageable
     [SerializeField]
     private List<CharacterAdvancement> _advancements;
 
+    private List<Ability> _abilities = new List<Ability>();
     private Rigidbody2D _rb;
 
     private Vector2 _moveValue;
@@ -76,6 +85,12 @@ public class Character : MonoBehaviour, IDamageable
         if (_stats.Level >= _stats.NextAdvancementLevel)
             TriggerAdvancement();
 
+        if (_stats.Level >= _stats.NextAbilityUnlockLevel)
+            TriggerAbilityUnlock();
+
+        if (_stats.Level >= _stats.NextAbilityUpgradeLevel)
+            TriggerAbilityUpgrade();
+
         // Recursive call if exp is more than the new cap
         if (_stats.CurrentExp >= _stats.ExpToLevelUp)
             LevelUp();
@@ -86,6 +101,20 @@ public class Character : MonoBehaviour, IDamageable
     private void TriggerAdvancement()
     {
         OnAdvancementTriggered?.Invoke(_advancements);
+    }
+
+    private void TriggerAbilityUnlock()
+    {
+        OnAbilityUnlockTriggered?.Invoke();
+
+        _stats.NextAbilityUnlockLevel += 10;
+    }
+
+    private void TriggerAbilityUpgrade()
+    {
+        OnAbilityUpgradeTriggered?.Invoke();
+
+        _stats.NextAbilityUpgradeLevel += 10;
     }
 
     public void SelectAdvancement(CharacterAdvancement advancement)
@@ -132,6 +161,13 @@ public class Character : MonoBehaviour, IDamageable
 
         if (_stats.CurrentExp >= _stats.ExpToLevelUp)
             LevelUp();
+    }
+
+    public void AddAbility(Ability ability)
+    {
+        _abilities.Add(ability);
+
+        OnAbilitiesChanged?.Invoke(_abilities);
     }
 
     public CharacterStats Stats => _stats;

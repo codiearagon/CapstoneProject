@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -19,7 +20,10 @@ public class PlayerUIController : MonoBehaviour
     private VisualElement _mainBottomElement;
 
     private VisualElement _characterStatsElement;
+    private Label _affinityLabel;
     private Label _maxHpLabel;
+    private Label _maxManaLabel;
+    private Label _manaRegenLabel;
     private Label _moveSpeedLabel;
     private Label _attackLabel;
     private Label _attackSpeedLabel;
@@ -27,7 +31,20 @@ public class PlayerUIController : MonoBehaviour
 
     private ProgressBar _expBar;
     private ProgressBar _healthBar;
+    private ProgressBar _manaBar;
     private Label _levelLabel;
+
+    private VisualElement _abilityDetailsElement;
+    private VisualElement _abilitiesElement;
+
+    private Label _abilityName;
+    private Label _abilityAffinity;
+    private Label _abilityCost;
+    private Label _abilityCooldown;
+    private Label _abilityDescription;
+    private Label _abilityMultiplier;
+
+    private List<VisualElement> _abilitySlots;
 
     private void Awake()
     {
@@ -38,17 +55,33 @@ public class PlayerUIController : MonoBehaviour
         _mainBottomElement = _mainElement.Q<VisualElement>("MainBottomElement");
 
         _healthBar = _mainTopElement.Q<ProgressBar>("CharHealthBar");
+        _manaBar = _mainTopElement.Q<ProgressBar>("CharManaBar");
         _levelLabel = _mainTopElement.Q<Label>("LevelLabel");
         _expBar = _mainBottomElement.Q<ProgressBar>("ExpBar");
 
         _characterStatsElement = _root.Q<VisualElement>("CharacterStats");
+        _affinityLabel = _characterStatsElement.Q<Label>("AffinityLabel");
         _maxHpLabel = _characterStatsElement.Q<Label>("MaxHpLabel");
+        _maxManaLabel = _characterStatsElement.Q<Label>("MaxManaLabel");
+        _manaRegenLabel = _characterStatsElement.Q<Label>("ManaRegenLabel");
         _moveSpeedLabel = _characterStatsElement.Q<Label>("MoveSpeedLabel");
         _attackLabel = _characterStatsElement.Q<Label>("AttackLabel");
         _attackSpeedLabel = _characterStatsElement.Q<Label>("AttackSpeedLabel");
         _defenseLabel = _characterStatsElement.Q<Label>("DefenseLabel");
 
+        _abilityDetailsElement = _mainBottomElement.Q<VisualElement>("AbilityDetailsElement");
+        _abilitiesElement = _mainBottomElement.Q<VisualElement>("AbilitiesElement");
+
+        _abilitySlots = _abilitiesElement.Query("AbilitySlot").ToList();
+        _abilityName = _abilityDetailsElement.Q<Label>("Name");
+        _abilityAffinity = _abilityDetailsElement.Q<Label>("Affinity");
+        _abilityCost = _abilityDetailsElement.Q<Label>("ManaCost");
+        _abilityCooldown = _abilityDetailsElement.Q<Label>("Cooldown");
+        _abilityDescription = _abilityDetailsElement.Q<Label>("Description");
+        _abilityMultiplier = _abilityDetailsElement.Q<Label>("AttackMultiplier");
+
         _characterStatsElement.style.display = DisplayStyle.None;
+        _abilityDetailsElement.style.display = DisplayStyle.None;
     }
 
     private void OnEnable()
@@ -69,6 +102,14 @@ public class PlayerUIController : MonoBehaviour
         _playerObj.OnExperienceReceived -= AddExperience;
         _playerObj.OnLevelUp -= HandleLevelUp;
         _playerObj.OnHealthChanged -= HandleTakeDamage;
+        _playerObj.OnManaChanged -= HandleUseMana;
+        _playerObj.OnAbilitiesChanged -= HandleAbilityChanged;
+
+        foreach (VisualElement slot in _abilitySlots)
+        {
+            slot.UnregisterCallback<MouseEnterEvent>(HandleMouseEnter);
+            slot.UnregisterCallback<MouseLeaveEvent>(HandleMouseLeave);
+        }
     }
 
     private void HandlePlayerSpawned(GameObject playerObj)
@@ -78,6 +119,14 @@ public class PlayerUIController : MonoBehaviour
         _playerObj.OnExperienceReceived += AddExperience;
         _playerObj.OnLevelUp += HandleLevelUp;
         _playerObj.OnHealthChanged += HandleTakeDamage;
+        _playerObj.OnManaChanged += HandleUseMana;
+        _playerObj.OnAbilitiesChanged += HandleAbilityChanged;
+
+        foreach (VisualElement slot in _abilitySlots)
+        {
+            slot.RegisterCallback<MouseEnterEvent>(HandleMouseEnter);
+            slot.RegisterCallback<MouseLeaveEvent>(HandleMouseLeave);
+        }
 
         UpdateStatsUI(_playerObj.Stats);
     }
@@ -89,7 +138,10 @@ public class PlayerUIController : MonoBehaviour
         _healthBar.highValue = stats.MaxHp;
         _healthBar.value = stats.CurrentHp;
 
+        _affinityLabel.text = "Affinity: " + stats.Affinity.ToString();
         _maxHpLabel.text = "Max HP: " + stats.MaxHp;
+        _maxManaLabel.text = "Max Mana: " + stats.MaxMana;
+        _manaRegenLabel.text = "Mana Regen: " + stats.ManaRegenRate;
         _moveSpeedLabel.text = "Movement Speed: " + stats.MovementSpeed;
         _attackLabel.text = "Attack: " + stats.Attack;
         _attackSpeedLabel.text = "Attack Speed: " + stats.AttackSpeed;
@@ -113,6 +165,11 @@ public class PlayerUIController : MonoBehaviour
         _healthBar.value = amount;
     }
 
+    private void HandleUseMana(float amount)
+    {
+        _manaBar.value = amount;
+    }
+
     private void OnOpenStats(InputAction.CallbackContext context)
     {
         if (_characterStatsElement.style.display == DisplayStyle.None)
@@ -120,5 +177,45 @@ public class PlayerUIController : MonoBehaviour
         else
             _characterStatsElement.style.display = DisplayStyle.None;
 
+    }
+
+    private void HandleMouseEnter(MouseEnterEvent evt)
+    {
+        VisualElement slot = evt.target as VisualElement;
+
+        if (slot.dataSource == null)
+            return;
+
+        Ability ability = slot.dataSource as Ability;
+
+        _abilityName.text = ability.AbilityName;
+        _abilityAffinity.text = ability.Affinity.ToString();
+        _abilityCost.text = ability.ManaCost.ToString();
+        _abilityCooldown.text = ability.CooldownTime.ToString();
+        _abilityDescription.text = ability.Description;
+        _abilityMultiplier.text = ability.AttackMultiplier * 100 + "% of attack";
+
+        _abilityDetailsElement.style.display = DisplayStyle.Flex;
+
+    }
+
+    private void HandleMouseLeave(MouseLeaveEvent evt)
+    {
+        VisualElement slot = evt.target as VisualElement;
+
+        if (slot.dataSource == null)
+            return;
+
+        _abilityDetailsElement.style.display = DisplayStyle.None;
+    }
+
+    private void HandleAbilityChanged(List<Ability> abilities)
+    {
+        for(int i = 0; i < abilities.Count; i++)
+        {
+            _abilitySlots[i].dataSource = abilities[i];
+
+            _abilitySlots[i].Q<Image>("Image").image = abilities[i].Icon.texture;
+        }
     }
 }

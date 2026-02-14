@@ -13,16 +13,12 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="MainBottomElement" style="flex-grow: 1; align-content: flex-start; align-self: auto; justify-content: flex-start; align-items: stretch;">
-            <ui:VisualElement name="AbilityDetailsElement" style="flex-grow: 1; width: 20%; justify-content: flex-start; align-items: stretch; align-self: center; margin-bottom: 15px; background-color: rgba(0, 0, 0, 0.69); color: rgb(255, 255, 255); padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;">
+        <ui:VisualElement name="MainBottomElement" style="flex-grow: 1; align-content: flex-start; align-self: auto; justify-content: flex-end; align-items: stretch;">
+            <ui:VisualElement name="AbilityDetailsElement" style="flex-grow: 1; width: 20%; justify-content: flex-start; align-items: stretch; align-self: center; margin-bottom: 15px; background-color: rgba(0, 0, 0, 0.69); color: rgb(255, 255, 255); padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; display: none;">
                 <ui:VisualElement name="Container" style="flex-grow: 0; flex-direction: row; justify-content: space-between;">
                     <ui:VisualElement name="Container" style="flex-grow: 1; margin-right: 15px;">
                         <ui:Label text="Label" name="Name" style="font-size: 20px;"/>
-                        <ui:VisualElement name="MultipliersContainer" style="flex-grow: 0; flex-direction: row; justify-content: space-around;">
-                            <ui:Label text="Label" name="HpMultiplier"/>
-                            <ui:Label text="Label" name="AttackMultiplier"/>
-                            <ui:Label text="Label" name="DefenseMultiplier"/>
-                        </ui:VisualElement>
+                        <ui:Label text="Label" name="AttackMultiplier"/>
                     </ui:VisualElement>
                     <ui:VisualElement name="Container" style="flex-grow: 0; justify-content: flex-start; align-self: auto; align-content: center; -unity-text-align: upper-right;">
                         <ui:Label text="Fire" name="Affinity"/>
@@ -35,43 +31,43 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="AbilitiesElement" picking-mode="Ignore" style="flex-grow: 0; align-items: stretch; align-self: center; align-content: stretch; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; flex-shrink: 0; width: 20%; height: 30%; margin-bottom: 30px;">
-                <ui:VisualElement name="AbilitySlot" class="ability-slot">
-                    <ui:Image>
+                <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
+                    <ui:Image name="Image">
                         <ui:Label text="Label"/>
                     </ui:Image>
                 </ui:VisualElement>
-                <ui:VisualElement name="AbilitySlot" class="ability-slot">
-                    <ui:Image>
+                <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
+                    <ui:Image name="Image">
                         <ui:Label text="Label"/>
                     </ui:Image>
                 </ui:VisualElement>
-                <ui:VisualElement name="AbilitySlot" class="ability-slot">
-                    <ui:Image>
+                <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
+                    <ui:Image name="Image">
                         <ui:Label text="Label"/>
                     </ui:Image>
                 </ui:VisualElement>
-                <ui:VisualElement name="AbilitySlot" class="ability-slot">
-                    <ui:Image>
+                <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
+                    <ui:Image name="Image">
                         <ui:Label text="Label"/>
                     </ui:Image>
                 </ui:VisualElement>
-                <ui:VisualElement name="AbilitySlot" class="ability-slot">
-                    <ui:Image>
+                <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
+                    <ui:Image name="Image">
                         <ui:Label text="Label"/>
                     </ui:Image>
                 </ui:VisualElement>
-                <ui:VisualElement name="AbilitySlot" class="ability-slot">
-                    <ui:Image>
+                <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
+                    <ui:Image name="Image">
                         <ui:Label text="Label"/>
                     </ui:Image>
                 </ui:VisualElement>
-                <ui:VisualElement name="AbilitySlot" class="ability-slot">
-                    <ui:Image>
+                <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
+                    <ui:Image name="Image">
                         <ui:Label text="Label"/>
                     </ui:Image>
                 </ui:VisualElement>
-                <ui:VisualElement name="AbilitySlot" class="ability-slot">
-                    <ui:Image>
+                <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
+                    <ui:Image name="Image">
                         <ui:Label text="Label"/>
                     </ui:Image>
                 </ui:VisualElement>
@@ -82,6 +78,7 @@
     <ui:VisualElement name="CharacterStats" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 15%; top: 233px; left: 22px;">
         <ui:VisualElement name="Background" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.57); position: absolute; width: 100%; height: 100%;"/>
         <ui:VisualElement name="StatsElement" picking-mode="Ignore" style="flex-grow: 1; color: rgb(255, 255, 255); font-size: 18px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;">
+            <ui:Label text="Label" name="AffinityLabel"/>
             <ui:Label text="Label" name="MaxHpLabel"/>
             <ui:Label text="Label" name="MaxManaLabel"/>
             <ui:Label text="Label" name="ManaRegenLabel"/>

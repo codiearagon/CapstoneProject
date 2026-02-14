@@ -25,6 +25,7 @@ public class CharacterStats
     public float CurrentExp;
 
     [Header("Progression")]
-    public int FirstAbilityLevel;
+    public int NextAbilityUnlockLevel;
+    public int NextAbilityUpgradeLevel;
     public int NextAdvancementLevel;
 }

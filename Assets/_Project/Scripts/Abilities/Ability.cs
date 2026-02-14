@@ -14,11 +14,12 @@ public abstract class Ability : MonoBehaviour
     public string AbilityName;
     public Sprite Icon;
 
+    [TextArea] 
+    public string Description;
+
     [Header("Base Properties")]
     public Affinity Affinity;
-    public float HpMultiplier;
     public float AttackMultiplier;
-    public float DefenseMultiplier;
     public float ManaCost;
     public float CooldownTime;
     public bool AlwaysActive;
