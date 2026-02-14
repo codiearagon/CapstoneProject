@@ -11,6 +11,9 @@ public class CharacterStats
     public Affinity Affinity;
     public float MaxHp;
     public float CurrentHp;
+    public float MaxMana;
+    public float CurrentMana;
+    public float ManaRegenRate;
     public float MovementSpeed;
     public float Attack;
     public float AttackSpeed;
@@ -22,5 +25,6 @@ public class CharacterStats
     public float CurrentExp;
 
     [Header("Progression")]
+    public int FirstAbilityLevel;
     public int NextAdvancementLevel;
 }

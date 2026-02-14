@@ -225,6 +225,8 @@ MonoBehaviour:
     Affinity: 0
     MaxHp: 50
     CurrentHp: 0
+    MaxMana: 100
+    CurrentMana: 0
     MovementSpeed: 30
     Attack: 20
     AttackSpeed: 1.5
@@ -232,7 +234,7 @@ MonoBehaviour:
     Level: 1
     ExpToLevelUp: 100
     CurrentExp: 0
-    NextAdvancementLevel: 5
+    NextAdvancementLevel: 10
   _advancements:
   - {fileID: 11400000, guid: 7ed22ece3b37d7442a44fe6ff4543357, type: 2}
   - {fileID: 11400000, guid: 03157946cd620954695cf95af429f4b1, type: 2}

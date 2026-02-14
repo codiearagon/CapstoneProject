@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Character : MonoBehaviour, IDamageable
 {
     public event Action<float> OnHealthChanged;
+    public event Action<float> OnManaChanged;
     public event Action<CharacterStats> OnStatsChanged;
     public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
     public event Action<float> OnExperienceReceived;
@@ -47,6 +48,7 @@ public class Character : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody2D>();
 
         _stats.CurrentHp = _stats.MaxHp;
+        _stats.CurrentMana = _stats.MaxMana;
 
         Logger.Log("Character Initialized");
     }
@@ -114,6 +116,13 @@ public class Character : MonoBehaviour, IDamageable
         GetComponent<SpriteRenderer>().color = objCol;
 
         OnHealthChanged?.Invoke(_stats.CurrentHp);
+    }
+
+    public void UseMana(float amount)
+    {
+        _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana - amount, 0, _stats.MaxMana);
+
+        OnManaChanged?.Invoke(_stats.CurrentMana);
     }
 
     public void ReceiveExperience(float amount)

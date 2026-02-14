@@ -3,7 +3,6 @@
 
 #CharHealthBar .unity-progress-bar__container {
     flex-grow: 1;
-    max-height: 50%;
 }
 
 #CharHealthBar .unity-progress-bar__background {
@@ -16,6 +15,22 @@
     flex-grow: 1;
     width: 80%;
     background-color: lightgreen;
+}
+
+#CharManaBar .unity-progress-bar__container {
+    flex-grow: 1;
+}
+
+#CharManaBar .unity-progress-bar__background {
+    background-color: rgba(20, 50, 120, 255);
+    border-width: 0;
+}
+
+#CharManaBar .unity-progress-bar__progress {
+    margin: 0;
+    flex-grow: 1;
+    width: 80%;
+    background-color: lightblue;
 }
 
 #ExpBar .unity-progress-bar__container {
@@ -31,4 +46,38 @@
     flex-grow: 1;
     width: 80%;
     background-color: yellow;
+}
+
+.ability-slot {
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    background-color: rgba(0, 0, 0, 0.76);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    height: 50%;
+    width: 20%;
+    flex-grow: 1;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    align-content: flex-start;
+    align-self: auto;
+    justify-content: space-around;
+}
+
+.progress-bar-text {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-shadow: 20px 20px 10px rgb(0, 0, 0);
+}
+
+.wrap {
+    white-space: normal;
 }

@@ -34,12 +34,18 @@ public class CharacterRangedAttack : MonoBehaviour
 
     private void AttackPerformed(InputAction.CallbackContext context)
     {
-        Logger.Log("Fired");
+        if (_character.Stats.CurrentMana < _projectileAbility.ManaCost)
+        {
+            Logger.Log("Not enough mana");
+            return;
+        }
 
         Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
 
         _projectileAbility.SetData(CalculateDamage(), direction);
         _projectileAbility.Cast(transform.parent.gameObject, LayerMask.NameToLayer("CharacterAttack"));
+
+        _character.UseMana(_projectileAbility.ManaCost);
     }
 
     private float CalculateDamage()

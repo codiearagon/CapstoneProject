@@ -19,6 +19,7 @@ public abstract class Ability : MonoBehaviour
     public float HpMultiplier;
     public float AttackMultiplier;
     public float DefenseMultiplier;
+    public float ManaCost;
     public float CooldownTime;
     public bool AlwaysActive;
 

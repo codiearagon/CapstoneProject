@@ -1,26 +1,90 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UIDocs/InGameUI.uss?fileID=7433441132597879392&amp;guid=d39aa722a6ccd4a438c1cf8a76209459&amp;type=3#InGameUI"/>
     <ui:VisualElement name="MainUI" picking-mode="Ignore" style="flex-grow: 1; position: absolute; flex-shrink: 0; width: 100%; height: 100%;">
-        <ui:VisualElement name="MainTopElement" picking-mode="Ignore" style="flex-grow: 1;">
-            <ui:VisualElement name="DetailsElement" picking-mode="Ignore" style="flex-grow: 0; flex-direction: row; width: 30%; height: 20%; margin-top: 20px; margin-left: 20px; background-color: rgba(0, 0, 0, 0.73); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+        <ui:VisualElement name="MainTopElement" picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0;">
+            <ui:VisualElement name="DetailsElement" picking-mode="Ignore" style="flex-grow: 0; flex-direction: row; width: 30%; height: 25%; margin-top: 20px; margin-left: 20px; background-color: rgba(0, 0, 0, 0.73); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
                 <ui:VisualElement name="CharIconElement" picking-mode="Ignore" style="flex-grow: 0; width: 20%; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
                     <ui:Image source="project://database/Assets/_Project/Sprites/Jessie.png?fileID=2800000&amp;guid=cf4f88e7a6219e541a9c2bdc6a136f6e&amp;type=3#Jessie" name="CharIcon" picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0;"/>
                 </ui:VisualElement>
-                <ui:VisualElement name="HealthLevelElement" style="flex-grow: 1; justify-content: flex-start; align-self: center;">
-                    <ui:ProgressBar value="39.4" title="" high-value="100" low-value="0" name="CharHealthBar" picking-mode="Ignore" class="CharHealthBar" style="width: auto; align-items: stretch; align-self: stretch; height: auto; justify-content: flex-start;"/>
+                <ui:VisualElement name="BasicStatsElement" style="flex-grow: 0; justify-content: flex-start; align-self: center; width: 80%;">
+                    <ui:ProgressBar value="76.2" high-value="100" low-value="0" name="CharHealthBar" picking-mode="Ignore" title="5" class="progress-bar-text"/>
+                    <ui:ProgressBar value="38.5" title="55" high-value="100" low-value="0" name="CharManaBar" picking-mode="Ignore" class="progress-bar-text" style="align-items: stretch; align-self: stretch; justify-content: flex-start;"/>
                     <ui:Label text="Level" name="LevelLabel" enable-rich-text="true" style="color: rgb(255, 255, 255); font-size: 20px; justify-content: flex-start; align-self: flex-start; align-content: flex-start;"/>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="MainBottomElement" style="flex-grow: 1;">
-            <ui:VisualElement name="AbilitiesElement" picking-mode="Ignore" style="flex-grow: 1;"/>
+        <ui:VisualElement name="MainBottomElement" style="flex-grow: 1; align-content: flex-start; align-self: auto; justify-content: flex-start; align-items: stretch;">
+            <ui:VisualElement name="AbilityDetailsElement" style="flex-grow: 1; width: 20%; justify-content: flex-start; align-items: stretch; align-self: center; margin-bottom: 15px; background-color: rgba(0, 0, 0, 0.69); color: rgb(255, 255, 255); padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;">
+                <ui:VisualElement name="Container" style="flex-grow: 0; flex-direction: row; justify-content: space-between;">
+                    <ui:VisualElement name="Container" style="flex-grow: 1; margin-right: 15px;">
+                        <ui:Label text="Label" name="Name" style="font-size: 20px;"/>
+                        <ui:VisualElement name="MultipliersContainer" style="flex-grow: 0; flex-direction: row; justify-content: space-around;">
+                            <ui:Label text="Label" name="HpMultiplier"/>
+                            <ui:Label text="Label" name="AttackMultiplier"/>
+                            <ui:Label text="Label" name="DefenseMultiplier"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Container" style="flex-grow: 0; justify-content: flex-start; align-self: auto; align-content: center; -unity-text-align: upper-right;">
+                        <ui:Label text="Fire" name="Affinity"/>
+                        <ui:Label text="30 Mana" name="ManaCost"/>
+                        <ui:Label text="50 secs" name="Cooldown"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="DetailsContainer" style="flex-grow: 1; flex-wrap: wrap;">
+                    <ui:Label text="blahbalhlablalhalhlahlablalhlahlablalblabalblaaaaaaaaaaaaaaaaaaa" name="Description" enable-rich-text="true" class="wrap" style="flex-wrap: wrap; justify-content: flex-start; height: 100%;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="AbilitiesElement" picking-mode="Ignore" style="flex-grow: 0; align-items: stretch; align-self: center; align-content: stretch; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; flex-shrink: 0; width: 20%; height: 30%; margin-bottom: 30px;">
+                <ui:VisualElement name="AbilitySlot" class="ability-slot">
+                    <ui:Image>
+                        <ui:Label text="Label"/>
+                    </ui:Image>
+                </ui:VisualElement>
+                <ui:VisualElement name="AbilitySlot" class="ability-slot">
+                    <ui:Image>
+                        <ui:Label text="Label"/>
+                    </ui:Image>
+                </ui:VisualElement>
+                <ui:VisualElement name="AbilitySlot" class="ability-slot">
+                    <ui:Image>
+                        <ui:Label text="Label"/>
+                    </ui:Image>
+                </ui:VisualElement>
+                <ui:VisualElement name="AbilitySlot" class="ability-slot">
+                    <ui:Image>
+                        <ui:Label text="Label"/>
+                    </ui:Image>
+                </ui:VisualElement>
+                <ui:VisualElement name="AbilitySlot" class="ability-slot">
+                    <ui:Image>
+                        <ui:Label text="Label"/>
+                    </ui:Image>
+                </ui:VisualElement>
+                <ui:VisualElement name="AbilitySlot" class="ability-slot">
+                    <ui:Image>
+                        <ui:Label text="Label"/>
+                    </ui:Image>
+                </ui:VisualElement>
+                <ui:VisualElement name="AbilitySlot" class="ability-slot">
+                    <ui:Image>
+                        <ui:Label text="Label"/>
+                    </ui:Image>
+                </ui:VisualElement>
+                <ui:VisualElement name="AbilitySlot" class="ability-slot">
+                    <ui:Image>
+                        <ui:Label text="Label"/>
+                    </ui:Image>
+                </ui:VisualElement>
+            </ui:VisualElement>
             <ui:ProgressBar value="0" title="" name="ExpBar" picking-mode="Ignore" low-value="0" high-value="100" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="CharacterStats" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 15%; top: 15%; left: 1%;">
+    <ui:VisualElement name="CharacterStats" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 15%; top: 233px; left: 22px;">
         <ui:VisualElement name="Background" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.57); position: absolute; width: 100%; height: 100%;"/>
         <ui:VisualElement name="StatsElement" picking-mode="Ignore" style="flex-grow: 1; color: rgb(255, 255, 255); font-size: 18px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;">
             <ui:Label text="Label" name="MaxHpLabel"/>
+            <ui:Label text="Label" name="MaxManaLabel"/>
+            <ui:Label text="Label" name="ManaRegenLabel"/>
             <ui:Label text="Label" name="MoveSpeedLabel"/>
             <ui:Label text="Label" name="AttackLabel"/>
             <ui:Label text="Label" name="AttackSpeedLabel"/>
