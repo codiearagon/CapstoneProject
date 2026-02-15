@@ -93,7 +93,7 @@ public class ProgressionUIController : MonoBehaviour
         Button button = evt.currentTarget as Button;
         Ability ability = button.dataSource as Ability;
 
-        _playerObj.AddAbility(ability);
+        //_playerObj.AddAbility(ability);
 
         button.UnregisterCallback<ClickEvent>(UnlockAbility);
         _abilityHelper.RemoveAbility(ability);

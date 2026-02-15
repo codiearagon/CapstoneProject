@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "PlayerActions",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Player",
@@ -37,6 +37,78 @@
                     "name": "OpenStats",
                     "type": "Button",
                     "id": "cfd93f94-c70d-484c-96c8-ae274edb53f0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability1",
+                    "type": "Button",
+                    "id": "b795971a-9e48-4df2-a372-f1a0625fbe02",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability2",
+                    "type": "Button",
+                    "id": "c986f563-fcf0-4b93-8be9-c91251af4eb3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability3",
+                    "type": "Button",
+                    "id": "3f559369-068a-40d7-9c6c-a72b69afe90a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability4",
+                    "type": "Button",
+                    "id": "93856095-cf70-44ee-8e34-cf2c9af4f3a9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability5",
+                    "type": "Button",
+                    "id": "add7423b-7e14-47cc-a77f-31fc1777398c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability6",
+                    "type": "Button",
+                    "id": "5e75ef61-2d12-4ec4-b38f-b3df96851719",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability7",
+                    "type": "Button",
+                    "id": "8798f2fd-8b51-4b9a-acb6-94fda4ac3bd0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability8",
+                    "type": "Button",
+                    "id": "e2f5f02a-e36f-42a5-9eec-825fb6aa7a4b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -162,6 +234,94 @@
                     "processors": "",
                     "groups": ";K&B",
                     "action": "OpenStats",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7e89cb1-623e-413d-8046-6cb34f17fcd5",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Ability1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9a94a6a-27a2-4e0d-8a76-35ce3c1b2988",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Ability2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d920c83a-6892-4a02-9df7-41f8b31bffa4",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Ability3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "412e62c7-18e8-45ec-9316-da75cfd645fc",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Ability4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93df7fc5-3f90-40c4-bd92-ef8ce0ae8bd8",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Ability5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0633b809-3652-464d-9d9a-281596c6bf1c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Ability6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8581cf5-fa8d-41b2-9a84-20b1b6def9d7",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Ability7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "810ebc84-30ac-4b9a-bedb-f35f286d6a96",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";K&B",
+                    "action": "Ability8",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,25 +1,15 @@
 using UnityEngine;
 
-public class ProjectileAbility : Ability
+public class ProjectileAbility : IAbilityExecution
 {
-    [Header("Core Projectile Properties")]
-    public GameObject ProjectilePrefab;
-    public float Speed;
-    public float TimeToLive;
+    private ProjectileMovementBehaviour _movementBehaviour;
+    private ProjectileHitBehaviour _hitBehaviour;
 
-    [SerializeField] private ProjectileMovementBehaviour _movementBehaviour;
-    [SerializeField] private ProjectileHitBehaviour _hitBehaviour;
+    private ProjectileProperties _properties;
 
-    [Header("Miscellaneous Properties")]
-    public float ExplosionRadius;
-
-    private Vector2 _direction;
-    private float _finalDamage;
-
-    public void SetData(float damage, Vector2 direction)
+    public ProjectileAbility(ProjectileProperties properties)
     {
-        _finalDamage = damage;
-        _direction = direction;
+        _properties = properties;
     }
 
     public void SetMovementBehaviour(ProjectileMovementBehaviour movement)
@@ -32,13 +22,13 @@ public class ProjectileAbility : Ability
         _hitBehaviour = hit;
     }
 
-    public override void Cast(GameObject caster, LayerMask layer)
+    public void Execute(GameObject caster, Ability ability, LayerMask layer)
     {
         IProjectileMovement movement = CreateMovementBehaviour(_movementBehaviour);
         IProjectileHit hit = CreateHitBehaviour(_hitBehaviour);
 
-        GameObject projectile = Instantiate(ProjectilePrefab, caster.transform.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().SetBehaviour(movement, hit, TimeToLive, layer);
+        GameObject projectile = GameObject.Instantiate(_properties.ProjectilePrefab, caster.transform.position, Quaternion.identity);
+        projectile.GetComponent<Projectile>().SetBehaviour(movement, hit, _properties.TimeToLive, layer);
     }
 
 
@@ -48,7 +38,7 @@ public class ProjectileAbility : Ability
         switch (movement)
         {
             case ProjectileMovementBehaviour.Straight:
-                return new StraightProjectile(Speed, _direction);
+                return new StraightProjectile(_properties);
             default:
                 return null;
         }
@@ -59,7 +49,7 @@ public class ProjectileAbility : Ability
         switch (hit)
         {
             case ProjectileHitBehaviour.Damage:
-                return new DamageOnHitProjectile(_finalDamage, Affinity);
+                return new DamageOnHitProjectile(_properties);
             default:
                 return null;
         }

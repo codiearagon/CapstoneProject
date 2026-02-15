@@ -6,10 +6,10 @@ public class StraightProjectile : IProjectileMovement
     private float _speed;
     private Vector2 _direction;
 
-    public StraightProjectile(float speed, Vector2 direction)
+    public StraightProjectile(ProjectileProperties _projectileProperties)
     {
-        _speed = speed;
-        _direction = direction;
+        _speed = _projectileProperties.Speed;
+        _direction = _projectileProperties.Direction;
     }
 
     // To be called in fixed delta time

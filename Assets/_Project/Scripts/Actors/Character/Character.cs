@@ -20,13 +20,6 @@ public class Character : MonoBehaviour, IDamageable
     public event Action<int, float, float> OnLevelUp;
     public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
 
-    [Header("References")]
-    [SerializeField]
-    private InputActionReference _moveRef;
-
-    [SerializeField]
-    private InputActionReference _lookRef;
-
     [Header("Details")]
     [SerializeField]
     private CharacterStats _stats;
@@ -34,27 +27,16 @@ public class Character : MonoBehaviour, IDamageable
     [SerializeField]
     private List<CharacterAdvancement> _advancements;
 
-    private List<Ability> _abilities = new List<Ability>();
+    private PlayerInput _input;
     private Rigidbody2D _rb;
 
     private Vector2 _moveValue;
     private Vector2 _lookValue;
 
-    private void OnEnable()
-    {
-        _moveRef.action.Enable();
-        _lookRef.action.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _moveRef.action.Disable();
-        _lookRef.action.Disable();
-    }
-
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _input = new PlayerInput();
 
         _stats.CurrentHp = _stats.MaxHp;
         _stats.CurrentMana = _stats.MaxMana;
@@ -62,10 +44,32 @@ public class Character : MonoBehaviour, IDamageable
         Logger.Log("Character Initialized");
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        _lookValue = _lookRef.action.ReadValue<Vector2>();
-        _moveValue = _moveRef.action.ReadValue<Vector2>();
+        _input.Player.Enable();
+        _input.Player.Move.performed += OnMove;
+        _input.Player.Look.performed += OnLook;
+        _input.Player.Move.canceled += OnMove;
+        _input.Player.Look.canceled += OnLook;
+    }
+
+    private void OnDisable()
+    {
+        _input.Player.Disable();
+        _input.Player.Move.performed -= OnMove;
+        _input.Player.Look.performed -= OnLook;
+        _input.Player.Move.canceled -= OnMove;
+        _input.Player.Look.canceled -= OnLook;
+    }
+
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        _moveValue = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnLook(InputAction.CallbackContext ctx)
+    {
+        _lookValue = ctx.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
@@ -161,13 +165,6 @@ public class Character : MonoBehaviour, IDamageable
 
         if (_stats.CurrentExp >= _stats.ExpToLevelUp)
             LevelUp();
-    }
-
-    public void AddAbility(Ability ability)
-    {
-        _abilities.Add(ability);
-
-        OnAbilitiesChanged?.Invoke(_abilities);
     }
 
     public CharacterStats Stats => _stats;

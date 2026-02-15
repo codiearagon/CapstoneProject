@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 638949062865999924}
-  - component: {fileID: -9057539487607955701}
   m_Layer: 0
   m_Name: FireBallAB
   m_TagString: Untagged
@@ -32,29 +31,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-9057539487607955701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4755958239769329579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c449d74754c613e439812d95bfd60473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectileAbility
-  AbilityName: Fire Ball
-  Icon: {fileID: 21300000, guid: a5cbb7baffcd5184f8f65f0c9674f6af, type: 3}
-  Description: Shoots out a small projectile that deals damage on hit
-  Affinity: 1
-  AttackMultiplier: 1.4
-  ManaCost: 5
-  CooldownTime: 10
-  AlwaysActive: 0
-  ProjectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
-  Speed: 5
-  TimeToLive: 2
-  _movementBehaviour: 0
-  _hitBehaviour: 0
-  ExplosionRadius: 0

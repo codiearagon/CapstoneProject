@@ -1,42 +1,46 @@
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CharacterRangedAttack : MonoBehaviour
 {
     [SerializeField]
-    private ProjectileAbility _projectileAbility;
+    private Ability _ability;
 
-    [SerializeField]
-    private InputActionReference _attackRef;
-
+    private PlayerInput _input;
     private Character _character;
     private Rigidbody2D _rb;
 
+    private void Awake()
+    {
+        _input = new PlayerInput();
+    }
+
     private void OnEnable()
     {
-        _attackRef.action.Enable();
-        _attackRef.action.performed += AttackPerformed;
+        _input.Player.Enable();
+        _input.Player.Attack.started += OnAttackStarted;
+        _input.Player.Attack.canceled += OnAttackCancelled;
     }
 
     private void OnDisable()
     {
-        _attackRef.action.Disable();
-        _attackRef.action.performed -= AttackPerformed;
+        _input.Player.Disable();
+        _input.Player.Attack.started -= OnAttackStarted;
+        _input.Player.Attack.canceled -= OnAttackCancelled;
     }
+
 
     private void Start()
     {
         _character = GetComponentInParent<Character>();
         _rb = _character.GetComponent<Rigidbody2D>();
-
-        _character.AddAbility(_projectileAbility);
     }
 
-    private void AttackPerformed(InputAction.CallbackContext context)
+    private void OnAttackStarted(InputAction.CallbackContext ctx)
     {
-        if (_character.Stats.CurrentMana < _projectileAbility.ManaCost)
+        if (_character.Stats.CurrentMana < _ability.ManaCost)
         {
             Logger.Log("Not enough mana");
             return;
@@ -44,15 +48,20 @@ public class CharacterRangedAttack : MonoBehaviour
 
         Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
 
-        _projectileAbility.SetData(CalculateDamage(), direction);
-        _projectileAbility.Cast(transform.parent.gameObject, LayerMask.NameToLayer("CharacterAttack"));
+        _ability.SetRuntimeData(CalculateDamage(), direction);
+        _ability.Cast(transform.parent.gameObject);
 
-        _character.UseMana(_projectileAbility.ManaCost);
+        _character.UseMana(_ability.ManaCost);
+    }
+
+    private void OnAttackCancelled(InputAction.CallbackContext ctx)
+    {
+        
     }
 
     private float CalculateDamage()
     {
-        float attackDamage = _character.Stats.Attack * _projectileAbility.AttackMultiplier;
+        float attackDamage = _character.Stats.Attack * _ability.AttackMultiplier;
 
         float finalDamage = attackDamage;
 

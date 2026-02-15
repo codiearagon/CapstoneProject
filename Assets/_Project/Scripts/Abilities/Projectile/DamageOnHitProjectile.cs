@@ -6,10 +6,10 @@ public class DamageOnHitProjectile : IProjectileHit
     private float _damage;
     private Affinity _affinity;
 
-    public DamageOnHitProjectile(float damage, Affinity affinity)
+    public DamageOnHitProjectile(ProjectileProperties _projectileProperties)
     {
-        _damage = damage;
-        _affinity = affinity;
+        _damage = _projectileProperties.Damage;
+        _affinity = _projectileProperties.Affinity;
     }
 
     public void OnHit(Projectile projectile, Collider2D other)
