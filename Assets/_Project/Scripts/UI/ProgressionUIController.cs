@@ -67,6 +67,7 @@ public class ProgressionUIController : MonoBehaviour
             Image image = option.Q<Image>("Image");
             Label name = option.Q<Label>("Name");
             Label affinity = option.Q<Label>("Affinity");
+            Label multiplier = option.Q<Label>("Multiplier");
             Label cost = option.Q<Label>("Cost");
             Label cooldown = option.Q<Label>("Cooldown");
             Label description = option.Q<Label>("Description");
@@ -75,6 +76,7 @@ public class ProgressionUIController : MonoBehaviour
             image.image = rolledAbilities[i].Icon.texture;
             name.text = rolledAbilities[i].AbilityName;
             affinity.text = rolledAbilities[i].Affinity.ToString();
+            multiplier.text = rolledAbilities[i].AttackMultiplier * 100 + "% of attack"; 
             cost.text = rolledAbilities[i].ManaCost.ToString() + " mana";
             cooldown.text = rolledAbilities[i].CooldownTime.ToString() + " secs";
             description.text = rolledAbilities[i].Description;
@@ -93,7 +95,7 @@ public class ProgressionUIController : MonoBehaviour
         Button button = evt.currentTarget as Button;
         Ability ability = button.dataSource as Ability;
 
-        //_playerObj.AddAbility(ability);
+        _playerObj.AddAbility(ability);
 
         button.UnregisterCallback<ClickEvent>(UnlockAbility);
         _abilityHelper.RemoveAbility(ability);

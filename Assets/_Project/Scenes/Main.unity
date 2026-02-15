@@ -18977,9 +18977,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityHelper
   abilities:
-  - {fileID: -9057539487607955701, guid: 50bbf7d1ae01deb4a8aab20d8065e2bd, type: 3}
-  - {fileID: -9057539487607955701, guid: b31970de17a565d42aa838cfe4973a7e, type: 3}
-  - {fileID: -9057539487607955701, guid: ab433edb125167042916aea69f722469, type: 3}
+  - {fileID: 3050894501572034644, guid: 50bbf7d1ae01deb4a8aab20d8065e2bd, type: 3}
+  - {fileID: 3050894501572034644, guid: a7adfd8551223ed49a5349900e30d10c, type: 3}
+  - {fileID: 3050894501572034644, guid: 85c3db1629531a14a811d0bf1d311276, type: 3}
 --- !u!4 &1933569685
 Transform:
   m_ObjectHideFlags: 0

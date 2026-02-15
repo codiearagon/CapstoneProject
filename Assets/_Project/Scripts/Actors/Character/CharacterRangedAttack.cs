@@ -36,6 +36,7 @@ public class CharacterRangedAttack : MonoBehaviour
     {
         _character = GetComponentInParent<Character>();
         _rb = _character.GetComponent<Rigidbody2D>();
+        _ability.SetLayer(transform.parent.gameObject.layer);
     }
 
     private void OnAttackStarted(InputAction.CallbackContext ctx)
@@ -62,8 +63,8 @@ public class CharacterRangedAttack : MonoBehaviour
     private float CalculateDamage()
     {
         float attackDamage = _character.Stats.Attack * _ability.AttackMultiplier;
-
-        float finalDamage = attackDamage;
+        float affinityMultiplier = Utility.GetMultiplier(_character.Stats, _ability.Affinity);
+        float finalDamage = attackDamage * affinityMultiplier;
 
         return finalDamage;
     }

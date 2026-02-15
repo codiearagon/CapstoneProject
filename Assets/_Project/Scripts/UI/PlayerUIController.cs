@@ -28,6 +28,12 @@ public class PlayerUIController : MonoBehaviour
     private Label _attackLabel;
     private Label _attackSpeedLabel;
     private Label _defenseLabel;
+    private Label _fireMultiplierLabel;
+    private Label _waterMultiplierLabel;
+    private Label _airMultiplierLabel;
+    private Label _earthMultiplierLabel;
+    private Label _darkMultiplierLabel;
+    private Label _lightMultiplierLabel;
 
     private ProgressBar _expBar;
     private ProgressBar _healthBar;
@@ -68,6 +74,12 @@ public class PlayerUIController : MonoBehaviour
         _attackLabel = _characterStatsElement.Q<Label>("AttackLabel");
         _attackSpeedLabel = _characterStatsElement.Q<Label>("AttackSpeedLabel");
         _defenseLabel = _characterStatsElement.Q<Label>("DefenseLabel");
+        _fireMultiplierLabel = _characterStatsElement.Q<Label>("FireMultiplierLabel");
+        _waterMultiplierLabel = _characterStatsElement.Q<Label>("WaterMultiplierLabel");
+        _airMultiplierLabel = _characterStatsElement.Q<Label>("AirMultiplierLabel");
+        _earthMultiplierLabel = _characterStatsElement.Q<Label>("EarthMultiplierLabel");
+        _darkMultiplierLabel = _characterStatsElement.Q<Label>("DarkMultiplierLabel");
+        _lightMultiplierLabel = _characterStatsElement.Q<Label>("LightMultiplierLabel");
 
         _abilityDetailsElement = _mainBottomElement.Q<VisualElement>("AbilityDetailsElement");
         _abilitiesElement = _mainBottomElement.Q<VisualElement>("AbilitiesElement");
@@ -146,6 +158,12 @@ public class PlayerUIController : MonoBehaviour
         _attackLabel.text = "Attack: " + stats.Attack;
         _attackSpeedLabel.text = "Attack Speed: " + stats.AttackSpeed;
         _defenseLabel.text = "Defense: " + stats.Defense;
+        _fireMultiplierLabel.text = "Fire Multiplier: " + stats.FireMultiplier * 100 + "%";
+        _waterMultiplierLabel.text = "Water Multiplier: " + stats.WaterMultiplier * 100 + "%";
+        _airMultiplierLabel.text = "Air Multiplier: " + stats.AirMultiplier * 100 + "%";
+        _earthMultiplierLabel.text = "Earth Multiplier: " + stats.EarthMultiplier * 100 + "%";
+        _darkMultiplierLabel.text = "Dark Multiplier: " + stats.DarkMultiplier * 100 + "%";
+        _lightMultiplierLabel.text = "Light Multiplier: " + stats.LightMultiplier * 100 + "%";
     }
 
     private void AddExperience(float amount)
@@ -216,6 +234,7 @@ public class PlayerUIController : MonoBehaviour
             _abilitySlots[i].dataSource = abilities[i];
 
             _abilitySlots[i].Q<Image>("Image").image = abilities[i].Icon.texture;
+            _abilitySlots[i].Q<Label>("Cooldown").text = abilities[i].CooldownRemaining.ToString("0.#");
         }
     }
 }

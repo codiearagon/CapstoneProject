@@ -33,42 +33,42 @@
             <ui:VisualElement name="AbilitiesElement" picking-mode="Ignore" style="flex-grow: 0; align-items: stretch; align-self: center; align-content: stretch; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; flex-shrink: 0; width: 20%; height: 30%; margin-bottom: 30px;">
                 <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
                     <ui:Image name="Image">
-                        <ui:Label text="Label"/>
+                        <ui:Label text="Label" name="Cooldown"/>
                     </ui:Image>
                 </ui:VisualElement>
                 <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
                     <ui:Image name="Image">
-                        <ui:Label text="Label"/>
+                        <ui:Label text="Label" name="Cooldown"/>
                     </ui:Image>
                 </ui:VisualElement>
                 <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
                     <ui:Image name="Image">
-                        <ui:Label text="Label"/>
+                        <ui:Label text="Label" name="Cooldown"/>
                     </ui:Image>
                 </ui:VisualElement>
                 <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
                     <ui:Image name="Image">
-                        <ui:Label text="Label"/>
+                        <ui:Label text="Label" name="Cooldown"/>
                     </ui:Image>
                 </ui:VisualElement>
                 <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
                     <ui:Image name="Image">
-                        <ui:Label text="Label"/>
+                        <ui:Label text="Label" name="Cooldown"/>
                     </ui:Image>
                 </ui:VisualElement>
                 <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
                     <ui:Image name="Image">
-                        <ui:Label text="Label"/>
+                        <ui:Label text="Label" name="Cooldown"/>
                     </ui:Image>
                 </ui:VisualElement>
                 <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
                     <ui:Image name="Image">
-                        <ui:Label text="Label"/>
+                        <ui:Label text="Label" name="Cooldown"/>
                     </ui:Image>
                 </ui:VisualElement>
                 <ui:VisualElement name="AbilitySlot" picking-mode="Position" class="ability-slot">
                     <ui:Image name="Image">
-                        <ui:Label text="Label"/>
+                        <ui:Label text="Label" name="Cooldown"/>
                     </ui:Image>
                 </ui:VisualElement>
             </ui:VisualElement>
@@ -86,6 +86,12 @@
             <ui:Label text="Label" name="AttackLabel"/>
             <ui:Label text="Label" name="AttackSpeedLabel"/>
             <ui:Label text="Label" name="DefenseLabel"/>
+            <ui:Label text="Label" name="FireMultiplierLabel"/>
+            <ui:Label text="Label" name="WaterMultiplierLabel"/>
+            <ui:Label text="Label" name="AirMultiplierLabel"/>
+            <ui:Label text="Label" name="EarthMultiplierLabel"/>
+            <ui:Label text="Label" name="DarkMultiplierLabel"/>
+            <ui:Label text="Label" name="LightMultiplierLabel"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

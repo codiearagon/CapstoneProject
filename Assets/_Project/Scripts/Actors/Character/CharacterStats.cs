@@ -18,6 +18,12 @@ public class CharacterStats
     public float Attack;
     public float AttackSpeed;
     public float Defense;
+    public float FireMultiplier;
+    public float WaterMultiplier;
+    public float AirMultiplier;
+    public float EarthMultiplier;
+    public float DarkMultiplier;
+    public float LightMultiplier;
 
     [Header("Experience")]
     public int Level;

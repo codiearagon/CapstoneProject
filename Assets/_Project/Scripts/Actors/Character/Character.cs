@@ -29,6 +29,7 @@ public class Character : MonoBehaviour, IDamageable
 
     private PlayerInput _input;
     private Rigidbody2D _rb;
+    private CharacterAbilities _abilities;
 
     private Vector2 _moveValue;
     private Vector2 _lookValue;
@@ -37,6 +38,7 @@ public class Character : MonoBehaviour, IDamageable
     {
         _rb = GetComponent<Rigidbody2D>();
         _input = new PlayerInput();
+        _abilities = GetComponentInChildren<CharacterAbilities>();
 
         _stats.CurrentHp = _stats.MaxHp;
         _stats.CurrentMana = _stats.MaxMana;
@@ -165,6 +167,13 @@ public class Character : MonoBehaviour, IDamageable
 
         if (_stats.CurrentExp >= _stats.ExpToLevelUp)
             LevelUp();
+    }
+
+    public void AddAbility(Ability ability)
+    {
+        _abilities.AddAbility(ability);
+
+        OnAbilitiesChanged?.Invoke(_abilities.GetList());
     }
 
     public CharacterStats Stats => _stats;

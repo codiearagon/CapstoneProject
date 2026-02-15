@@ -7,6 +7,7 @@
         <ui:VisualElement name="Container" style="flex-grow: 1;">
             <ui:Label text="Label" name="Name" style="align-self: center; font-size: 25px;"/>
             <ui:Label text="Label" name="Affinity" style="align-self: center; font-size: 20px;"/>
+            <ui:Label text="Label" name="Multiplier" style="align-self: center; font-size: 14px;"/>
             <ui:VisualElement name="Container" style="flex-grow: 0; flex-direction: row; justify-content: space-around;">
                 <ui:Label text="Label" name="Cost"/>
                 <ui:Label text="Label" name="Cooldown"/>

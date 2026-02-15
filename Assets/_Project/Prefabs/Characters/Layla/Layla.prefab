@@ -261,6 +261,12 @@ MonoBehaviour:
     Attack: 20
     AttackSpeed: 1.5
     Defense: 20
+    FireMultiplier: 1
+    WaterMultiplier: 1
+    AirMultiplier: 1
+    EarthMultiplier: 1
+    DarkMultiplier: 1
+    LightMultiplier: 1
     Level: 1
     ExpToLevelUp: 100
     CurrentExp: 0
@@ -315,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d04fd3a5c88bae4eb96590c8e1fd2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterRangedAttack
-  _projectileAbility: {fileID: -9057539487607955701, guid: f633a18f001767f4f8befbe6e70fec95, type: 3}
+  _ability: {fileID: -4532022896088927897, guid: f633a18f001767f4f8befbe6e70fec95, type: 3}
 --- !u!114 &4900406421385798879
 MonoBehaviour:
   m_ObjectHideFlags: 0

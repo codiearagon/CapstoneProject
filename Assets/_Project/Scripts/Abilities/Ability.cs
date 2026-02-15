@@ -23,6 +23,7 @@ public class Ability : MonoBehaviour
     public float AttackMultiplier;
     public float ManaCost;
     public float CooldownTime;
+    public float CooldownRemaining;
     public bool AlwaysActive;
     public AbilityType Type;
 
@@ -34,11 +35,12 @@ public class Ability : MonoBehaviour
     private float _finalDamage;
     private LayerMask _layer;
 
-    private void Awake()
+    public void SetLayer(LayerMask layer)
     {
-        if (gameObject.layer == LayerMask.NameToLayer("Character"))
+        // simple if statement works because this will not change
+        if (layer == LayerMask.NameToLayer("Character"))
             _layer = LayerMask.NameToLayer("CharacterAttack");
-        else if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        else if (layer == LayerMask.NameToLayer("Enemy"))
             _layer = LayerMask.NameToLayer("EnemyAttack");
         else
             Logger.Log("Invalid ability layer");
@@ -47,6 +49,7 @@ public class Ability : MonoBehaviour
     public void Cast(GameObject caster)
     {
         _execution = CreateAbilityExecution();
+        _execution.Execute(caster, this, _layer);
     }
 
     public void SetRuntimeData(float damage, Vector2 direction)
@@ -55,11 +58,14 @@ public class Ability : MonoBehaviour
         _direction = direction;
     }
 
+    // execution factory
     private IAbilityExecution CreateAbilityExecution()
     {
         switch(Type)
         {
             case AbilityType.Projectile:
+                ProjectileProperties.SetDamage(_finalDamage);
+                ProjectileProperties.SetDirection(_direction);
                 ProjectileProperties.SetAffinity(Affinity);
                 return new ProjectileAbility(ProjectileProperties);
             default:
