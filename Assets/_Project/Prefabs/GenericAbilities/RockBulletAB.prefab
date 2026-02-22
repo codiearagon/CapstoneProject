@@ -48,7 +48,7 @@ MonoBehaviour:
     AbilityName: Rock Bullet
     Icon: {fileID: 21300000, guid: 48bb234a2507b1a4996e6cacc706dacd, type: 3}
     Description: Shoots out a bullet of rock that greatly damages its target
-    Affinity: 0
+    Affinity: 4
     AttackMultiplier: 2
     ManaCost: 10
     CooldownTime: 5

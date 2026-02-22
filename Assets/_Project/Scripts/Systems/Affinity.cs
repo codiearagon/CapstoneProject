@@ -21,24 +21,28 @@ public static class AffinityLookup
         {
             [Affinity.Fire] = new Dictionary<Affinity, float>
             {
+                [Affinity.Fire] = 0.1f,
                 [Affinity.Water] = 0.5f,
                 [Affinity.Earth] = 2f
             },
 
             [Affinity.Water] = new Dictionary<Affinity, float>
             {
+                [Affinity.Water] = 0.1f,
                 [Affinity.Fire] = 2f,
                 [Affinity.Air] = 0.5f
             },
 
             [Affinity.Air] = new Dictionary<Affinity, float>
             {
+                [Affinity.Air] = 0.1f,
                 [Affinity.Water] = 2f,
                 [Affinity.Earth] = 0.5f
             },
 
             [Affinity.Earth] = new Dictionary<Affinity, float>
             {
+                [Affinity.Earth] = 0.1f,
                 [Affinity.Air] = 2f,
                 [Affinity.Fire] = 0.5f
             },

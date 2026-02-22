@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1785213722731947224}
   - component: {fileID: 4352915952331059390}
   m_Layer: 7
-  m_Name: Goblin
+  m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: bfd00f02709026a40bf521643ad02fac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82c97878b4f8b86479cdd1d9c408a504, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -262,13 +262,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _stats:
-    EnemyName: Goblin
-    Affinity: 4
-    MaxHp: 100
+    EnemyName: Water Slime
+    Affinity: 2
+    MaxHp: 50
     CurrentHp: 0
-    MovementSpeed: 10
-    Attack: 10
+    MovementSpeed: 5
+    Attack: 5
     AttackSpeed: 1
-    Defense: 10
+    Defense: 20
     AttackRange: 1.5
     ExpOnKill: 50
