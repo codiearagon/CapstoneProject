@@ -73,13 +73,13 @@ public class ProgressionUIController : MonoBehaviour
             Label description = option.Q<Label>("Description");
             Button choose = option.Q<Button>("Choose");
 
-            image.image = rolledAbilities[i].Icon.texture;
-            name.text = rolledAbilities[i].AbilityName;
-            affinity.text = rolledAbilities[i].Affinity.ToString();
-            multiplier.text = rolledAbilities[i].AttackMultiplier * 100 + "% of attack"; 
-            cost.text = rolledAbilities[i].ManaCost.ToString() + " mana";
-            cooldown.text = rolledAbilities[i].CooldownTime.ToString() + " secs";
-            description.text = rolledAbilities[i].Description;
+            image.image = rolledAbilities[i].Properties.Icon.texture;
+            name.text = rolledAbilities[i].Properties.AbilityName;
+            affinity.text = rolledAbilities[i].Properties.Affinity.ToString();
+            multiplier.text = rolledAbilities[i].Properties.AttackMultiplier * 100 + "% of attack"; 
+            cost.text = rolledAbilities[i].Properties.ManaCost.ToString() + " mana";
+            cooldown.text = rolledAbilities[i].Properties.CooldownTime.ToString() + " secs";
+            description.text = rolledAbilities[i].Properties.Description;
 
             choose.RegisterCallback<ClickEvent>(UnlockAbility);
             choose.dataSource = rolledAbilities[i];

@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4248580432332298131}
   - component: {fileID: 8263783755286137964}
-  - component: {fileID: 6337294314544691704}
+  - component: {fileID: 1565548794089504906}
   - component: {fileID: 4863614956449113639}
   - component: {fileID: 639571169265993802}
-  - component: {fileID: -3532863084506616774}
+  - component: {fileID: 358226646029449492}
   m_Layer: 0
-  m_Name: BasicAttackPROJ
+  m_Name: WaterbladePROJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: a5cbb7baffcd5184f8f65f0c9674f6af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec1d1019b2688bf4e85e83da1aef00fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,8 +95,8 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!58 &6337294314544691704
-CircleCollider2D:
+--- !u!61 &1565548794089504906
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -125,12 +125,22 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: -0.0357534, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.5392176, y: 4}
+  m_EdgeRadius: 0
 --- !u!50 &4863614956449113639
 Rigidbody2D:
   serializedVersion: 5
@@ -173,7 +183,7 @@ MonoBehaviour:
   _moveParticle: {fileID: 0}
   _hitParticle: {fileID: 6441916085968280928, guid: a52dd800156478a4e95b9cdff1d23a94, type: 3}
   _hitSound: {fileID: 8300000, guid: dbac6311182013546bbef84d15b17bb5, type: 3}
---- !u!96 &-3532863084506616774
+--- !u!96 &358226646029449492
 TrailRenderer:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -226,13 +236,13 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 1.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0027932962
-        value: 0.36477745
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -241,7 +251,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.19496155
+        value: 0.70882064
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -253,8 +263,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.70825917, g: 0.8679245, b: 0.8567686, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key0: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
+      key1: {r: 0.21960786, g: 0.49803925, b: 0.5529412, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -262,7 +272,7 @@ TrailRenderer:
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
+      ctime1: 35466
       ctime2: 0
       ctime3: 0
       ctime4: 0

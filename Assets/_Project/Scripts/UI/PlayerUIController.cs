@@ -114,7 +114,7 @@ public class PlayerUIController : MonoBehaviour
         _playerObj.OnExperienceReceived -= AddExperience;
         _playerObj.OnLevelUp -= HandleLevelUp;
         _playerObj.OnHealthChanged -= HandleTakeDamage;
-        _playerObj.OnManaChanged -= HandleUseMana;
+        _playerObj.OnManaChanged -= HandleManaChanged;
         _playerObj.OnAbilitiesChanged -= HandleAbilityChanged;
 
         foreach (VisualElement slot in _abilitySlots)
@@ -131,7 +131,7 @@ public class PlayerUIController : MonoBehaviour
         _playerObj.OnExperienceReceived += AddExperience;
         _playerObj.OnLevelUp += HandleLevelUp;
         _playerObj.OnHealthChanged += HandleTakeDamage;
-        _playerObj.OnManaChanged += HandleUseMana;
+        _playerObj.OnManaChanged += HandleManaChanged;
         _playerObj.OnAbilitiesChanged += HandleAbilityChanged;
 
         foreach (VisualElement slot in _abilitySlots)
@@ -183,7 +183,7 @@ public class PlayerUIController : MonoBehaviour
         _healthBar.value = amount;
     }
 
-    private void HandleUseMana(float amount)
+    private void HandleManaChanged(float amount)
     {
         _manaBar.value = amount;
     }
@@ -206,12 +206,12 @@ public class PlayerUIController : MonoBehaviour
 
         Ability ability = slot.dataSource as Ability;
 
-        _abilityName.text = ability.AbilityName;
-        _abilityAffinity.text = ability.Affinity.ToString();
-        _abilityCost.text = ability.ManaCost.ToString() + " mana";
-        _abilityCooldown.text = ability.CooldownTime.ToString() + " secs";
-        _abilityDescription.text = ability.Description;
-        _abilityMultiplier.text = ability.AttackMultiplier * 100 + "% of attack";
+        _abilityName.text = ability.Properties  .AbilityName;
+        _abilityAffinity.text = ability.Properties.Affinity.ToString();
+        _abilityCost.text = ability.Properties.ManaCost.ToString() + " mana";
+        _abilityCooldown.text = ability.Properties.CooldownTime.ToString() + " secs";
+        _abilityDescription.text = ability.Properties.Description;
+        _abilityMultiplier.text = ability.Properties.AttackMultiplier * 100 + "% of attack";
 
         _abilityDetailsElement.style.display = DisplayStyle.Flex;
 
@@ -233,8 +233,8 @@ public class PlayerUIController : MonoBehaviour
         {
             _abilitySlots[i].dataSource = abilities[i];
 
-            _abilitySlots[i].Q<Image>("Image").image = abilities[i].Icon.texture;
-            _abilitySlots[i].Q<Label>("Cooldown").text = abilities[i].CooldownRemaining.ToString("0.#");
+            _abilitySlots[i].Q<Image>("Image").image = abilities[i].Properties.Icon.texture;
+            _abilitySlots[i].Q<Label>("Cooldown").text = abilities[i].Properties.CooldownRemaining.ToString("0.#");
         }
     }
 }

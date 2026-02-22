@@ -63,7 +63,7 @@ public class CharacterAbilities : MonoBehaviour
         if (index >= _abilities.Count)
             return;
 
-        if (_character.Stats.CurrentMana < _abilities[index].ManaCost)
+        if (_character.Stats.CurrentMana < _abilities[index].Properties.ManaCost)
         {
             Logger.Log("Not enough mana");
             return;
@@ -74,13 +74,13 @@ public class CharacterAbilities : MonoBehaviour
         _abilities[index].SetRuntimeData(CalculateDamage(_abilities[index]), direction);
         _abilities[index].Cast(transform.parent.gameObject);
 
-        _character.UseMana(_abilities[index].ManaCost);
+        _character.UseMana(_abilities[index].Properties.ManaCost);
     }
 
     private float CalculateDamage(Ability ability)
     {
-        float attackDamage = _character.Stats.Attack * ability.AttackMultiplier;
-        float affinityMultiplier = Utility.GetMultiplier(_character.Stats, ability.Affinity);
+        float attackDamage = _character.Stats.Attack * ability.Properties.AttackMultiplier;
+        float affinityMultiplier = Utility.GetMultiplier(_character.Stats, ability.Properties.Affinity);
         float finalDamage = attackDamage * affinityMultiplier;
 
         return finalDamage;

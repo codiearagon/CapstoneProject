@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class ProjectileAbility : IAbilityExecution
 {
-    private ProjectileMovementBehaviour _movementBehaviour;
-    private ProjectileHitBehaviour _hitBehaviour;
-
     private ProjectileProperties _properties;
 
     public ProjectileAbility(ProjectileProperties properties)
@@ -14,18 +11,18 @@ public class ProjectileAbility : IAbilityExecution
 
     public void SetMovementBehaviour(ProjectileMovementBehaviour movement)
     {
-        _movementBehaviour = movement;
+        _properties.MovementBehaviour = movement;
     }
 
     public void SetHitBehaviour(ProjectileHitBehaviour hit)
     {
-        _hitBehaviour = hit;
+        _properties.HitBehaviour = hit;
     }
 
     public void Execute(GameObject caster, Ability ability, LayerMask layer)
     {
-        IProjectileMovement movement = CreateMovementBehaviour(_movementBehaviour);
-        IProjectileHit hit = CreateHitBehaviour(_hitBehaviour);
+        IProjectileMovement movement = CreateMovementBehaviour();
+        IProjectileHit hit = CreateHitBehaviour();
 
         GameObject projectile = GameObject.Instantiate(_properties.ProjectilePrefab, caster.transform.position, Quaternion.identity);
         projectile.GetComponent<Projectile>().SetBehaviour(movement, hit, _properties.TimeToLive, layer);
@@ -33,9 +30,9 @@ public class ProjectileAbility : IAbilityExecution
 
 
     // ------ Movement and Hit Factory ------
-    private IProjectileMovement CreateMovementBehaviour(ProjectileMovementBehaviour movement)
+    private IProjectileMovement CreateMovementBehaviour()
     {
-        switch (movement)
+        switch (_properties.MovementBehaviour)
         {
             case ProjectileMovementBehaviour.Straight:
                 return new StraightProjectile(_properties);
@@ -44,12 +41,14 @@ public class ProjectileAbility : IAbilityExecution
         }
     }
 
-    private IProjectileHit CreateHitBehaviour(ProjectileHitBehaviour hit)
+    private IProjectileHit CreateHitBehaviour()
     {
-        switch (hit)
+        switch (_properties.HitBehaviour)
         {
             case ProjectileHitBehaviour.Damage:
                 return new DamageOnHitProjectile(_properties);
+            case ProjectileHitBehaviour.Piercing:
+                return new PiercingProjectile(_properties);
             default:
                 return null;
         }

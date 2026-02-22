@@ -2,7 +2,9 @@ using UnityEngine;
 
 public enum ProjectileHitBehaviour
 {
-    Damage
+    Damage,
+    Piercing
+
 }
 
 public interface IProjectileHit

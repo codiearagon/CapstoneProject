@@ -25,7 +25,7 @@ public class AbilityHelper : MonoBehaviour
 
     public void RemoveAbility(Ability ability)
     {
-        int index = abilities.FindIndex(a => a.AbilityName == ability.AbilityName);
+        int index = abilities.FindIndex(a => a.Properties.AbilityName == ability.Properties.AbilityName);
         abilities.RemoveAt(index);
     }
 }

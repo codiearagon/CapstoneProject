@@ -4,31 +4,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 
-public enum AbilityState
-{
-    Cooldown,
-    Ready,
-    Active
-}
-
 public class Ability : MonoBehaviour
 {
-    // details
-    public string AbilityName;
-    public Sprite Icon;
-    public string Description;
-
-    // basic properties
-    public Affinity Affinity;
-    public float AttackMultiplier;
-    public float ManaCost;
-    public float CooldownTime;
-    public float CooldownRemaining;
-    public bool AlwaysActive;
-    public AbilityType Type;
-
-    // projectile related fields
-    public ProjectileProperties ProjectileProperties;
+    public AbilityProperties Properties;
 
     private IAbilityExecution _execution;
     private Vector2 _direction;
@@ -61,13 +39,13 @@ public class Ability : MonoBehaviour
     // execution factory
     private IAbilityExecution CreateAbilityExecution()
     {
-        switch(Type)
+        switch(Properties.Type)
         {
             case AbilityType.Projectile:
-                ProjectileProperties.SetDamage(_finalDamage);
-                ProjectileProperties.SetDirection(_direction);
-                ProjectileProperties.SetAffinity(Affinity);
-                return new ProjectileAbility(ProjectileProperties);
+                Properties.ProjectileProperties.SetDamage(_finalDamage);
+                Properties.ProjectileProperties.SetDirection(_direction);
+                Properties.ProjectileProperties.SetAffinity(Properties.Affinity);
+                return new ProjectileAbility(Properties.ProjectileProperties);
             default:
                 return null;
         }

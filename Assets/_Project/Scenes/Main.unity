@@ -892,7 +892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyToSpawn: {fileID: 2614719710841126021, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
   _spawnInterval: 2
-  _isSpawning: 1
+  _isSpawning: 0
 --- !u!1 &1322851100
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ public class CharacterRangedAttack : MonoBehaviour
 
     private void OnAttackStarted(InputAction.CallbackContext ctx)
     {
-        if (_character.Stats.CurrentMana < _ability.ManaCost)
+        if (_character.Stats.CurrentMana < _ability.Properties.ManaCost)
         {
             Logger.Log("Not enough mana");
             return;
@@ -52,7 +52,7 @@ public class CharacterRangedAttack : MonoBehaviour
         _ability.SetRuntimeData(CalculateDamage(), direction);
         _ability.Cast(transform.parent.gameObject);
 
-        _character.UseMana(_ability.ManaCost);
+        _character.UseMana(_ability.Properties.ManaCost);
     }
 
     private void OnAttackCancelled(InputAction.CallbackContext ctx)
@@ -62,8 +62,8 @@ public class CharacterRangedAttack : MonoBehaviour
 
     private float CalculateDamage()
     {
-        float attackDamage = _character.Stats.Attack * _ability.AttackMultiplier;
-        float affinityMultiplier = Utility.GetMultiplier(_character.Stats, _ability.Affinity);
+        float attackDamage = _character.Stats.Attack * _ability.Properties.AttackMultiplier;
+        float affinityMultiplier = Utility.GetMultiplier(_character.Stats, _ability.Properties.Affinity);
         float finalDamage = attackDamage * affinityMultiplier;
 
         return finalDamage;

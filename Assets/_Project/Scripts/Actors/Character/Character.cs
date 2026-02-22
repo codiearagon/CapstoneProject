@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class Character : MonoBehaviour, IDamageable
 {
@@ -33,6 +34,7 @@ public class Character : MonoBehaviour, IDamageable
 
     private Vector2 _moveValue;
     private Vector2 _lookValue;
+    private bool _isManaRegen;
 
     private void Awake()
     {
@@ -42,6 +44,9 @@ public class Character : MonoBehaviour, IDamageable
 
         _stats.CurrentHp = _stats.MaxHp;
         _stats.CurrentMana = _stats.MaxMana;
+
+        _isManaRegen = true;
+        StartCoroutine(ManaRegen());
 
         Logger.Log("Character Initialized");
     }
@@ -121,6 +126,17 @@ public class Character : MonoBehaviour, IDamageable
         OnAbilityUpgradeTriggered?.Invoke();
 
         _stats.NextAbilityUpgradeLevel += 10;
+    }
+
+    private IEnumerator ManaRegen()
+    {
+        while(_isManaRegen)
+        {
+            yield return new WaitForSeconds(1f);
+            _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + _stats.ManaRegenRate, 0, _stats.MaxMana);
+
+            OnManaChanged?.Invoke(_stats.CurrentMana);
+        }
     }
 
     public void SelectAdvancement(CharacterAdvancement advancement)

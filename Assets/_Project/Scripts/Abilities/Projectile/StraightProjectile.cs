@@ -16,5 +16,6 @@ public class StraightProjectile : IProjectileMovement
     public void Move(Projectile projectile, Rigidbody2D projectileRb)
     {
         projectileRb.MovePosition(projectileRb.position + _direction * _speed * Time.fixedDeltaTime);
+        projectileRb.MoveRotation(Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg);
     }
 }
