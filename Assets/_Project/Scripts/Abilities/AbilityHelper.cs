@@ -12,6 +12,8 @@ public class AbilityHelper : MonoBehaviour
         if(abilities.Count == 0)
             return null;
 
+        amount = Mathf.Min(amount, abilities.Count);
+
         List<Ability> rolledAbilities = new List<Ability>();
 
         for(int i = 0; i < amount; i++)
@@ -25,7 +27,7 @@ public class AbilityHelper : MonoBehaviour
 
     public void RemoveAbility(Ability ability)
     {
-        int index = abilities.FindIndex(a => a.Properties.AbilityName == ability.Properties.AbilityName);
+        int index = abilities.FindIndex(a => a.Properties.Identifier == ability.Properties.Identifier);
         abilities.RemoveAt(index);
     }
 }

@@ -1,13 +1,15 @@
-using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
+    public int Level;
     public AbilityProperties Properties;
 
+    [Header("Add upgrades to ability (Sets values)")]
+    public List<AbilityProperties> Upgrades;
+
+    private float _cooldownRemaining;
     private IAbilityExecution _execution;
     private Vector2 _direction;
     private float _finalDamage;
@@ -42,12 +44,12 @@ public class Ability : MonoBehaviour
         switch(Properties.Type)
         {
             case AbilityType.Projectile:
-                Properties.ProjectileProperties.SetDamage(_finalDamage);
-                Properties.ProjectileProperties.SetDirection(_direction);
-                Properties.ProjectileProperties.SetAffinity(Properties.Affinity);
+                Properties.ProjectileProperties.ApplyRuntimeData(_direction, Properties.Affinity, _finalDamage);
                 return new ProjectileAbility(Properties.ProjectileProperties);
             default:
                 return null;
         }
     }
+
+    public float CooldownRemaining => _cooldownRemaining;
 }

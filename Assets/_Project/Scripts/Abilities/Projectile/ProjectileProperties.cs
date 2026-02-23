@@ -11,6 +11,7 @@ public class ProjectileProperties
     public ProjectileHitBehaviour HitBehaviour;
 
     [Header("Properties")]
+    public float Size;
     public float Speed;
     public float TimeToLive;
 
@@ -18,19 +19,21 @@ public class ProjectileProperties
     private Affinity _affinity;
     private Vector2 _direction;
 
-    public void SetDirection(Vector2 direction)
-    { 
-        _direction = direction; 
-    }
-
-    public void SetAffinity(Affinity affinity)
+    public void ApplyRuntimeData(Vector2 direction, Affinity affinity, float damage)
     {
+        _direction = direction;
         _affinity = affinity;
+        _damage = damage;
     }
 
-    public void SetDamage(float damage)
+    public void ApplyProperties(ProjectileProperties properties)
     {
-        _damage = damage;
+        ProjectilePrefab = properties.ProjectilePrefab;
+        MovementBehaviour = properties.MovementBehaviour;
+        HitBehaviour = properties.HitBehaviour;
+        Size = properties.Size;
+        Speed = properties.Speed;
+        TimeToLive = properties.TimeToLive;
     }
 
     public float Damage => _damage;

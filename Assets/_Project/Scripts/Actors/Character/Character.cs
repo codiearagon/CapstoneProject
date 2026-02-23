@@ -14,7 +14,7 @@ public class Character : MonoBehaviour, IDamageable
     // Ability events
     public event Action<List<Ability>> OnAbilitiesChanged;
     public event Action OnAbilityUnlockTriggered;
-    public event Action OnAbilityUpgradeTriggered;
+    public event Action<List<Ability>> OnAbilityUpgradeTriggered;
 
     // Progression events
     public event Action<float> OnExperienceReceived;
@@ -123,7 +123,7 @@ public class Character : MonoBehaviour, IDamageable
 
     private void TriggerAbilityUpgrade()
     {
-        OnAbilityUpgradeTriggered?.Invoke();
+        OnAbilityUpgradeTriggered?.Invoke(_abilities.GetList());
 
         _stats.NextAbilityUpgradeLevel += 10;
     }
@@ -188,6 +188,13 @@ public class Character : MonoBehaviour, IDamageable
     public void AddAbility(Ability ability)
     {
         _abilities.AddAbility(ability);
+
+        OnAbilitiesChanged?.Invoke(_abilities.GetList());
+    }
+
+    public void UpgradeAbility(AbilityProperties properties)
+    {
+        _abilities.UpgradeAbility(properties);
 
         OnAbilitiesChanged?.Invoke(_abilities.GetList());
     }

@@ -49,11 +49,13 @@ public static class AffinityLookup
 
             [Affinity.Dark] = new Dictionary<Affinity, float>
             {
+                [Affinity.Dark] = 0.1f,
                 [Affinity.Light] = 2f,
             },
 
             [Affinity.Light] = new Dictionary<Affinity, float>
             {
+                [Affinity.Light] = 0.1f,
                 [Affinity.Dark] = 2f,
             }
 

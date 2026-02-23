@@ -44,20 +44,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b737e0ceb1b9e48a1a023f9c30a65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ability
+  Level: 1
   Properties:
     AbilityName: Rock Bullet
+    Identifier: rockbullet
     Icon: {fileID: 21300000, guid: 48bb234a2507b1a4996e6cacc706dacd, type: 3}
-    Description: Shoots out a bullet of rock that greatly damages its target
+    Description: Shoots out a bullet of rock
     Affinity: 4
-    AttackMultiplier: 2
+    AttackMultiplier: 3
     ManaCost: 10
     CooldownTime: 5
-    CooldownRemaining: 0
     AlwaysActive: 0
     Type: 0
     ProjectileProperties:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: eb4152b553d15454f856e7b7dc0b0501, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 0
-      Speed: 20
-      TimeToLive: 3
+      Size: 0.5
+      Speed: 15
+      TimeToLive: 5
+  Upgrades:
+  - AbilityName: Rock Bullet+
+    Identifier: rockbullet
+    Icon: {fileID: 21300000, guid: 48bb234a2507b1a4996e6cacc706dacd, type: 3}
+    Description: Increased damage. Decreased mana cost
+    Affinity: 0
+    AttackMultiplier: 3.5
+    ManaCost: 8
+    CooldownTime: 5
+    AlwaysActive: 0
+    Type: 0
+    ProjectileProperties:
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: eb4152b553d15454f856e7b7dc0b0501, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      Size: 0.5
+      Speed: 15
+      TimeToLive: 5

@@ -234,7 +234,7 @@ public class PlayerUIController : MonoBehaviour
             _abilitySlots[i].dataSource = abilities[i];
 
             _abilitySlots[i].Q<Image>("Image").image = abilities[i].Properties.Icon.texture;
-            _abilitySlots[i].Q<Label>("Cooldown").text = abilities[i].Properties.CooldownRemaining.ToString("0.#");
+            _abilitySlots[i].Q<Label>("Cooldown").text = abilities[i].CooldownRemaining.ToString("0.#");
         }
     }
 }

@@ -44,20 +44,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b737e0ceb1b9e48a1a023f9c30a65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ability
+  Level: 1
   Properties:
     AbilityName: Fireball
+    Identifier: fireball
     Icon: {fileID: 21300000, guid: 389d848c2ace85b4781fda60f38041a9, type: 3}
-    Description: Shoots out a ball of fire that damages all enemies in its path
+    Description: "Shoots out a ball of fire that damages everything in its path\t\t"
     Affinity: 1
     AttackMultiplier: 1.4
-    ManaCost: 5
+    ManaCost: 15
     CooldownTime: 5
-    CooldownRemaining: 0
     AlwaysActive: 0
     Type: 0
     ProjectileProperties:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: abee7f9c631b36e4fbecb2cb9cffd9d2, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 1
-      Speed: 10
-      TimeToLive: 100
+      Size: 1
+      Speed: 5
+      TimeToLive: 5
+  Upgrades:
+  - AbilityName: Fireball+
+    Identifier: fireball
+    Icon: {fileID: 21300000, guid: 389d848c2ace85b4781fda60f38041a9, type: 3}
+    Description: Increased damage and size. Decreased mana cost.
+    Affinity: 1
+    AttackMultiplier: 1.6
+    ManaCost: 10
+    CooldownTime: 5
+    AlwaysActive: 0
+    Type: 0
+    ProjectileProperties:
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: abee7f9c631b36e4fbecb2cb9cffd9d2, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 1
+      Size: 1.5
+      Speed: 5
+      TimeToLive: 5

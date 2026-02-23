@@ -26,6 +26,7 @@ public class ProjectileAbility : IAbilityExecution
 
         GameObject projectile = GameObject.Instantiate(_properties.ProjectilePrefab, caster.transform.position, Quaternion.identity);
         projectile.GetComponent<Projectile>().SetBehaviour(movement, hit, _properties.TimeToLive, layer);
+        projectile.transform.localScale = new Vector3(_properties.Size, _properties.Size, 0);
     }
 
 

@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UIDocs/AbilityUnlockOption.uss?fileID=7433441132597879392&amp;guid=349983a17a274054d966f359ae0cf132&amp;type=3#AbilityUnlockOption"/>
-    <ui:VisualElement name="Option" class="option-container" style="justify-content: flex-start; flex-grow: 1;">
-        <ui:VisualElement name="ImageContainer" style="flex-grow: 1; width: 100%; height: 20%;">
-            <ui:Image name="Image"/>
+    <ui:VisualElement name="Option" class="option-container" style="justify-content: flex-start; flex-grow: 1; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;">
+        <ui:VisualElement name="ImageContainer" style="flex-grow: 1; width: 100%; height: 20%; margin-bottom: 15px;">
+            <ui:Image name="Image" source="project://database/Assets/_Project/Sprites/Abilities/Fireball.png?fileID=2800000&amp;guid=389d848c2ace85b4781fda60f38041a9&amp;type=3#Fireball" style="width: 100%; height: 100%;"/>
         </ui:VisualElement>
         <ui:VisualElement name="Container" style="flex-grow: 1;">
             <ui:Label text="Label" name="Name" style="align-self: center; font-size: 25px;"/>

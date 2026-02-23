@@ -1,22 +1,37 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class AbilityProperties
 {
-    // details
+    [Header("Details")]
     public string AbilityName;
+    public string Identifier;
     public Sprite Icon;
-    public string Description;
+    [TextArea] public string Description;
 
-    // basic properties
+    [Header("Basic Properties")]
     public Affinity Affinity;
     public float AttackMultiplier;
     public float ManaCost;
     public float CooldownTime;
-    public float CooldownRemaining;
     public bool AlwaysActive;
     public AbilityType Type;
 
-    // projectile related fields
+    [Space]
     public ProjectileProperties ProjectileProperties;
+
+    public void ApplyProperties(AbilityProperties properties)
+    {
+        AbilityName = properties.AbilityName;
+        Icon = properties.Icon;
+        Affinity = properties.Affinity;
+        AttackMultiplier = properties.AttackMultiplier;
+        ManaCost = properties.ManaCost;
+        CooldownTime = properties.CooldownTime;
+        AlwaysActive = properties.AlwaysActive;
+        Type = properties.Type;
+
+        ProjectileProperties.ApplyProperties(properties.ProjectileProperties);
+    }
 }

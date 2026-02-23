@@ -44,20 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b737e0ceb1b9e48a1a023f9c30a65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ability
+  Level: 1
   Properties:
     AbilityName: Magic Attack
+    Identifier: magicattack
     Icon: {fileID: 21300000, guid: a5cbb7baffcd5184f8f65f0c9674f6af, type: 3}
-    Description: Shoots out a ball of magic
+    Description: Shoots out a magic projectile
     Affinity: 0
     AttackMultiplier: 1
     ManaCost: 0
     CooldownTime: 0
-    CooldownRemaining: 0
     AlwaysActive: 0
     Type: 0
     ProjectileProperties:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 0
+      Size: 0.5
       Speed: 10
-      TimeToLive: 2
+      TimeToLive: 5
+  Upgrades: []

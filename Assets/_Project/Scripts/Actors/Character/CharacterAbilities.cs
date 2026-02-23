@@ -92,6 +92,13 @@ public class CharacterAbilities : MonoBehaviour
         _abilities.Add(ability);
     }
 
+    public void UpgradeAbility(AbilityProperties properties)
+    {
+        Ability a = _abilities.Find(a => a.Properties.Identifier == properties.Identifier);
+        a.Properties.ApplyProperties(properties);
+        a.Level++;
+    }
+
     public List<Ability> GetList()
     {
         return _abilities;
