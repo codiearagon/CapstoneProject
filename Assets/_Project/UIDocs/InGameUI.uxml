@@ -80,6 +80,7 @@
         <ui:VisualElement name="StatsElement" picking-mode="Ignore" style="flex-grow: 1; color: rgb(255, 255, 255); font-size: 18px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;">
             <ui:Label text="Label" name="AffinityLabel"/>
             <ui:Label text="Label" name="MaxHpLabel"/>
+            <ui:Label text="Label" name="HpRegenLabel"/>
             <ui:Label text="Label" name="MaxManaLabel"/>
             <ui:Label text="Label" name="ManaRegenLabel"/>
             <ui:Label text="Label" name="MoveSpeedLabel"/>

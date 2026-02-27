@@ -214,7 +214,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.3333334, y: 1.3333334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -271,4 +271,6 @@ MonoBehaviour:
     AttackSpeed: 1
     Defense: 10
     AttackRange: 1.5
-    ExpOnKill: 50
+    ExpOnKill: 150
+  _buffPrefab: {fileID: 720070607113045562, guid: 1604fdba41376484eb72fa309daccf77, type: 3}
+  _damageTextPrefab: {fileID: 4691129356514585756, guid: 4df499b817884f94c9785a698a671a87, type: 3}

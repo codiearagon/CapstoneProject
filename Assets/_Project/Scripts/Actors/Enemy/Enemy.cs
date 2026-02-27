@@ -9,6 +9,13 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField]
     private EnemyStats _stats;
 
+    [SerializeField]
+    private GameObject _buffPrefab;
+
+    [SerializeField]
+    private GameObject _damageTextPrefab;
+
+
     private Rigidbody2D _rb;
 
     private GameObject _targetObj;
@@ -41,6 +48,10 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Die()
     {
         _targetObj.GetComponent<Character>().ReceiveExperience(_stats.ExpOnKill);
+
+        if(Utility.RollChance(25))
+            Instantiate(_buffPrefab, transform.position, Quaternion.identity);
+
         Destroy(gameObject);
     }
       
@@ -48,10 +59,17 @@ public class Enemy : MonoBehaviour, IDamageable
     public void TakeDamage(float amount, Affinity damageAffinity)
     {
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
-        float finalDamage = amount * affinityMultiplier;
+        float defenseMultiplier = 1 - (_stats.Defense / (_stats.Defense + 1000));
+        float finalDamage = amount * affinityMultiplier * defenseMultiplier;
         Logger.Log(string.Format("Received Damage: {0}, {1} base * {2}, {3}", finalDamage, amount, affinityMultiplier, _stats.EnemyName));
 
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
+
+        float randomX = Random.Range(-1f, 2f);
+        float randomY = Random.Range(1f, 2f);
+        Vector3 pos = new Vector3(transform.position.x + randomX, transform.position.y + randomY, transform.position.z);
+        DamageText text = Instantiate(_damageTextPrefab.transform, pos, Quaternion.identity).GetComponent<DamageText>();
+        text.SetDamageText(damageAffinity, finalDamage);
 
         if (_stats.CurrentHp <= 0)
             Die();

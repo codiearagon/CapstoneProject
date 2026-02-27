@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Character : MonoBehaviour, IDamageable
 {
@@ -34,6 +35,7 @@ public class Character : MonoBehaviour, IDamageable
 
     private Vector2 _moveValue;
     private Vector2 _lookValue;
+    private bool _isHpRegen;
     private bool _isManaRegen;
 
     private void Awake()
@@ -45,7 +47,9 @@ public class Character : MonoBehaviour, IDamageable
         _stats.CurrentHp = _stats.MaxHp;
         _stats.CurrentMana = _stats.MaxMana;
 
+        _isHpRegen = true;
         _isManaRegen = true;
+        StartCoroutine(HpRegen());
         StartCoroutine(ManaRegen());
 
         Logger.Log("Character Initialized");
@@ -118,14 +122,25 @@ public class Character : MonoBehaviour, IDamageable
     {
         OnAbilityUnlockTriggered?.Invoke();
 
-        _stats.NextAbilityUnlockLevel += 10;
+        _stats.NextAbilityUnlockLevel += 5;
     }
 
     private void TriggerAbilityUpgrade()
     {
         OnAbilityUpgradeTriggered?.Invoke(_abilities.GetList());
 
-        _stats.NextAbilityUpgradeLevel += 10;
+        _stats.NextAbilityUpgradeLevel += _stats.NextAbilityUnlockLevel + 5;
+    }
+
+    private IEnumerator HpRegen()
+    {
+        while (_isHpRegen)
+        {
+            yield return new WaitForSeconds(1f);
+            _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp + _stats.HpRegenRate, 0, _stats.MaxHp);
+
+            OnHealthChanged?.Invoke(_stats.CurrentHp);
+        }
     }
 
     private IEnumerator ManaRegen()
@@ -153,10 +168,11 @@ public class Character : MonoBehaviour, IDamageable
         _advancements = advancement.Advancements;
     }
 
-    public void TakeDamage(float amount, Affinity damageAffinity)
+    public void TakeDamage(float amount, Affinity damageAffinity) 
     {
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
-        float finalDamage = amount * affinityMultiplier;
+        float defenseMultiplier = 1 - (_stats.Defense / (_stats.Defense + 1000));
+        float finalDamage = amount * affinityMultiplier * defenseMultiplier;
         //Logger.Log(string.Format("Received Damage: {0}, {1} base * {2}, {3}", finalDamage, amount, affinityMultiplier, _stats.CharacterName));
 
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
@@ -197,6 +213,13 @@ public class Character : MonoBehaviour, IDamageable
         _abilities.UpgradeAbility(properties);
 
         OnAbilitiesChanged?.Invoke(_abilities.GetList());
+    }
+
+    public void BuffStat(StatType type, float amount)
+    {
+        _stats.GetStat(type) += _stats.GetStat(type) * amount;
+
+        OnStatsChanged?.Invoke(_stats);
     }
 
     public CharacterStats Stats => _stats;

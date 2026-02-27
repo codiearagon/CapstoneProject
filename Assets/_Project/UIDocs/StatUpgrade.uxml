@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UIDocs/StatUpgrade.uss?fileID=7433441132597879392&amp;guid=52b1b575a0a2b0d4e9817485fd4a1301&amp;type=3#StatUpgrade"/>
+    <ui:VisualElement name="StatContainer" style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: space-around; align-self: auto;">
+        <ui:Label text="Label" name="StatLabel" style="flex-grow: 1;"/>
+        <ui:VisualElement name="Buttons" style="flex-direction: row;">
+            <ui:Button text="-" name="Decrease" class="upgrade-button"/>
+            <ui:Button text="+" name="Increase" class="upgrade-button"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

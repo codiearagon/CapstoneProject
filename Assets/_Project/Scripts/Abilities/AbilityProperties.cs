@@ -15,7 +15,7 @@ public class AbilityProperties
     public float AttackMultiplier;
     public float ManaCost;
     public float CooldownTime;
-    public bool AlwaysActive;
+    public bool Toggable;
     public AbilityType Type;
 
     [Space]
@@ -29,7 +29,7 @@ public class AbilityProperties
         AttackMultiplier = properties.AttackMultiplier;
         ManaCost = properties.ManaCost;
         CooldownTime = properties.CooldownTime;
-        AlwaysActive = properties.AlwaysActive;
+        Toggable = properties.Toggable;
         Type = properties.Type;
 
         ProjectileProperties.ApplyProperties(properties.ProjectileProperties);

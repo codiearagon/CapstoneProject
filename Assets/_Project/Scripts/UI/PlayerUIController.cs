@@ -22,6 +22,7 @@ public class PlayerUIController : MonoBehaviour
     private VisualElement _characterStatsElement;
     private Label _affinityLabel;
     private Label _maxHpLabel;
+    private Label _hpRegenLabel;
     private Label _maxManaLabel;
     private Label _manaRegenLabel;
     private Label _moveSpeedLabel;
@@ -68,6 +69,7 @@ public class PlayerUIController : MonoBehaviour
         _characterStatsElement = _root.Q<VisualElement>("CharacterStats");
         _affinityLabel = _characterStatsElement.Q<Label>("AffinityLabel");
         _maxHpLabel = _characterStatsElement.Q<Label>("MaxHpLabel");
+        _hpRegenLabel = _characterStatsElement.Q<Label>("HpRegenLabel");
         _maxManaLabel = _characterStatsElement.Q<Label>("MaxManaLabel");
         _manaRegenLabel = _characterStatsElement.Q<Label>("ManaRegenLabel");
         _moveSpeedLabel = _characterStatsElement.Q<Label>("MoveSpeedLabel");
@@ -146,24 +148,32 @@ public class PlayerUIController : MonoBehaviour
     private void UpdateStatsUI(CharacterStats stats)
     {
         _levelLabel.text = "Level " + stats.Level;
+
         _healthBar.lowValue = 0;
         _healthBar.highValue = stats.MaxHp;
         _healthBar.value = stats.CurrentHp;
+        _healthBar.title = _healthBar.value.ToString("N0") + "/" + _healthBar.highValue.ToString("N0");
+
+        _manaBar.lowValue = 0;
+        _manaBar.highValue = stats.MaxMana;
+        _manaBar.value = stats.CurrentMana;
+        _manaBar.title = _manaBar.value.ToString("N0") + "/" + _manaBar.highValue.ToString("N0");
 
         _affinityLabel.text = "Affinity: " + stats.Affinity.ToString();
-        _maxHpLabel.text = "Max HP: " + stats.MaxHp;
-        _maxManaLabel.text = "Max Mana: " + stats.MaxMana;
-        _manaRegenLabel.text = "Mana Regen: " + stats.ManaRegenRate;
-        _moveSpeedLabel.text = "Movement Speed: " + stats.MovementSpeed;
-        _attackLabel.text = "Attack: " + stats.Attack;
-        _attackSpeedLabel.text = "Attack Speed: " + stats.AttackSpeed;
-        _defenseLabel.text = "Defense: " + stats.Defense;
-        _fireMultiplierLabel.text = "Fire Multiplier: " + stats.FireMultiplier * 100 + "%";
-        _waterMultiplierLabel.text = "Water Multiplier: " + stats.WaterMultiplier * 100 + "%";
-        _airMultiplierLabel.text = "Air Multiplier: " + stats.AirMultiplier * 100 + "%";
-        _earthMultiplierLabel.text = "Earth Multiplier: " + stats.EarthMultiplier * 100 + "%";
-        _darkMultiplierLabel.text = "Dark Multiplier: " + stats.DarkMultiplier * 100 + "%";
-        _lightMultiplierLabel.text = "Light Multiplier: " + stats.LightMultiplier * 100 + "%";
+        _maxHpLabel.text = "Max HP: " + stats.MaxHp.ToString("F2");
+        _hpRegenLabel.text = "HP Regen: " + stats.HpRegenRate.ToString("F2");
+        _maxManaLabel.text = "Max Mana: " + stats.MaxMana.ToString("F2");
+        _manaRegenLabel.text = "Mana Regen: " + stats.ManaRegenRate.ToString("F2");
+        _moveSpeedLabel.text = "Movement Speed: " + stats.MovementSpeed.ToString("F2");
+        _attackLabel.text = "Attack: " + stats.Attack.ToString("F2");
+        _attackSpeedLabel.text = "Attack Speed: " + stats.AttackSpeed.ToString("F2");
+        _defenseLabel.text = "Defense: " + stats.Defense.ToString("F2");
+        _fireMultiplierLabel.text = "Fire Multiplier: " + (stats.FireMultiplier * 100).ToString("F2") + "%";
+        _waterMultiplierLabel.text = "Water Multiplier: " + (stats.WaterMultiplier * 100).ToString("F2") + "%";
+        _airMultiplierLabel.text = "Air Multiplier: " + (stats.AirMultiplier * 100).ToString("F2") + "%";
+        _earthMultiplierLabel.text = "Earth Multiplier: " + (stats.EarthMultiplier * 100).ToString("F2") + "%";
+        _darkMultiplierLabel.text = "Dark Multiplier: " + (stats.DarkMultiplier * 100).ToString("F2") + "%";
+        _lightMultiplierLabel.text = "Light Multiplier: " + (stats.LightMultiplier * 100).ToString("F2") + "%";
     }
 
     private void AddExperience(float amount)
@@ -181,11 +191,13 @@ public class PlayerUIController : MonoBehaviour
     private void HandleTakeDamage(float amount)
     {
         _healthBar.value = amount;
+        _healthBar.title = _healthBar.value.ToString("N0") + "/" + _healthBar.highValue.ToString("N0");
     }
 
     private void HandleManaChanged(float amount)
     {
         _manaBar.value = amount;
+        _manaBar.title = _manaBar.value.ToString("N0") + "/" + _manaBar.highValue.ToString("N0");
     }
 
     private void OnOpenStats(InputAction.CallbackContext context)
