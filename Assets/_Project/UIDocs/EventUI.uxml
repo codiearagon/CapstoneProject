@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="EventTitleContainer" style="flex-grow: 1; position: absolute; align-self: center; top: 25%; color: rgb(255, 255, 255); font-size: 75px; text-shadow: 50px 20px 5px rgb(0, 0, 0);">
+        <ui:Label text="Label" name="EventTitleLabel"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="EventDetailsContainer" style="flex-grow: 1; position: absolute; align-self: center; top: 40%; color: rgb(255, 255, 255); font-size: 25px;"/>
+</ui:UXML>

@@ -11,7 +11,9 @@ public class ProgressionUIController : MonoBehaviour
     private VisualTreeAsset _abilityUnlockOption;
 
     private VisualElement _root;
-    private VisualElement _abilityProgressElement;
+    private VisualElement _abilityUnlockElement;
+    private VisualElement _abilityUpgradeElement;
+    private VisualElement _advancementElement;
 
     private AbilityHelper _abilityHelper;
     private Character _playerObj;
@@ -19,11 +21,15 @@ public class ProgressionUIController : MonoBehaviour
     private void Awake()
     {
         _root = GetComponent<UIDocument>().rootVisualElement;
-        _abilityProgressElement = _root.Q<VisualElement>("AbilityProgression");
+        _abilityUnlockElement = _root.Q<VisualElement>("AbilityUnlock");
+        _abilityUpgradeElement = _root.Q<VisualElement>("AbilityUpgrade");
+        _advancementElement = _root.Q<VisualElement>("Advancement");
 
         _abilityHelper = FindAnyObjectByType<AbilityHelper>();
 
-        _abilityProgressElement.style.display = DisplayStyle.None;
+        _abilityUnlockElement.style.display = DisplayStyle.None;
+        _abilityUpgradeElement.style.display = DisplayStyle.None;
+        _advancementElement.style.display = DisplayStyle.None;
     }
 
     private void Update()
@@ -86,10 +92,10 @@ public class ProgressionUIController : MonoBehaviour
             choose.RegisterCallback<ClickEvent>(UnlockAbility);
             choose.dataSource = rolledAbilities[i];
 
-            _abilityProgressElement.Add(option);
+            _abilityUnlockElement.Add(option);
         }
 
-        _abilityProgressElement.style.display = DisplayStyle.Flex;
+        _abilityUnlockElement.style.display = DisplayStyle.Flex;
     }
 
     private void HandleAbilityUpgrade(List<Ability> abilities)
@@ -129,13 +135,13 @@ public class ProgressionUIController : MonoBehaviour
             choose.RegisterCallback<ClickEvent>(UnlockUpgrade);
             choose.dataSource = ability.Upgrades[upgradeIndex];
 
-            _abilityProgressElement.Add(option);
+            _abilityUpgradeElement.Add(option);
         }
 
-        if (_abilityProgressElement.childCount == 0)
+        if (_abilityUpgradeElement.childCount == 0)
             return;
 
-        _abilityProgressElement.style.display = DisplayStyle.Flex;
+        _abilityUpgradeElement.style.display = DisplayStyle.Flex;
     }
 
     private void UnlockAbility(ClickEvent evt)
@@ -149,8 +155,8 @@ public class ProgressionUIController : MonoBehaviour
         button.UnregisterCallback<ClickEvent>(UnlockAbility);
         _abilityHelper.RemoveAbility(ability);
 
-        _abilityProgressElement.Clear();
-        _abilityProgressElement.style.display = DisplayStyle.None;
+        _abilityUnlockElement.Clear();
+        _abilityUnlockElement.style.display = DisplayStyle.None;
     }
 
     private void UnlockUpgrade(ClickEvent evt)
@@ -162,7 +168,7 @@ public class ProgressionUIController : MonoBehaviour
 
         button.UnregisterCallback<ClickEvent>(UnlockUpgrade);
 
-        _abilityProgressElement.Clear();
-        _abilityProgressElement.style.display = DisplayStyle.None;
+        _abilityUpgradeElement.Clear();
+        _abilityUpgradeElement.style.display = DisplayStyle.None;
     }
 }

@@ -271,6 +271,6 @@ MonoBehaviour:
     AttackSpeed: 1
     Defense: 20
     AttackRange: 1.5
-    ExpOnKill: 25
+    ExpOnKill: 10
   _buffPrefab: {fileID: 720070607113045562, guid: 1604fdba41376484eb72fa309daccf77, type: 3}
   _damageTextPrefab: {fileID: 4691129356514585756, guid: 4df499b817884f94c9785a698a671a87, type: 3}

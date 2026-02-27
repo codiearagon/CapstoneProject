@@ -107,4 +107,9 @@ public static class Utility
         int rand = Random.Range(1, 101);
         return rand <= probability;
     }
+
+    public static float RollRandomPercentage(int min, int max)
+    {
+        return Random.Range(min, max + 1) / 100f;
+    }
 }

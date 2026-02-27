@@ -20,17 +20,12 @@ public class BuffDrop : MonoBehaviour
         _label = GetComponent<UIDocument>().rootVisualElement.Q<Label>("Label");
 
         _statToBuff = Utility.RollRandomStat();
-        _percentAmount = RollRandomPercentage();
+        _percentAmount = Utility.RollRandomPercentage(1, 5);
         _pickupRange = 1f;
 
         _collider.radius = _pickupRange;
 
         _label.text = "+" + _percentAmount * 100 + "% " + _statToBuff;
-    }
-
-    private float RollRandomPercentage()
-    {
-        return Random.Range(1, 5) / 100f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

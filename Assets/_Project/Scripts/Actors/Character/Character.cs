@@ -20,6 +20,7 @@ public class Character : MonoBehaviour, IDamageable
     // Progression events
     public event Action<float> OnExperienceReceived;
     public event Action<int, float, float> OnLevelUp;
+    public event Action<StatType, float> OnLevelUpBuff;
     public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
 
     [Header("Details")]
@@ -94,8 +95,8 @@ public class Character : MonoBehaviour, IDamageable
         _stats.CurrentExp -= _stats.ExpToLevelUp;
         _stats.ExpToLevelUp = _stats.ExpToLevelUp * 1.2f;
 
+        GainRandomStats(4);
         OnLevelUp?.Invoke(_stats.Level, _stats.CurrentExp, _stats.ExpToLevelUp);
-
 
         if (_stats.Level >= _stats.NextAdvancementLevel)
             TriggerAdvancement();
@@ -116,6 +117,8 @@ public class Character : MonoBehaviour, IDamageable
     private void TriggerAdvancement()
     {
         OnAdvancementTriggered?.Invoke(_advancements);
+
+        _stats.NextAdvancementLevel *= 2;
     }
 
     private void TriggerAbilityUnlock()
@@ -129,7 +132,19 @@ public class Character : MonoBehaviour, IDamageable
     {
         OnAbilityUpgradeTriggered?.Invoke(_abilities.GetList());
 
-        _stats.NextAbilityUpgradeLevel += _stats.NextAbilityUnlockLevel + 5;
+        _stats.NextAbilityUpgradeLevel += 5;
+    }
+
+    private void GainRandomStats(int amount)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            StatType stat = Utility.RollRandomStat();
+            float percent = Utility.RollRandomPercentage(5, 10);
+            BuffStat(stat, percent);
+
+            OnLevelUpBuff?.Invoke(stat, percent);
+        }
     }
 
     private IEnumerator HpRegen()

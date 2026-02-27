@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         _targetObj.GetComponent<Character>().ReceiveExperience(_stats.ExpOnKill);
 
-        if(Utility.RollChance(25))
+        if(Utility.RollChance(50))
             Instantiate(_buffPrefab, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
