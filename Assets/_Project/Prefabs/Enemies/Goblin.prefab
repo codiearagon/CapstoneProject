@@ -273,4 +273,4 @@ MonoBehaviour:
     AttackRange: 1.5
     ExpOnKill: 50
   _buffPrefab: {fileID: 720070607113045562, guid: 1604fdba41376484eb72fa309daccf77, type: 3}
-  _damageTextPrefab: {fileID: 4691129356514585756, guid: 4df499b817884f94c9785a698a671a87, type: 3}
+  _damageTextPrefab: {fileID: 6293451624518223884, guid: 80f63f84e37a52549a485ab307c72bea, type: 3}

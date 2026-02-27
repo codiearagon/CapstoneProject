@@ -1,22 +1,22 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class DamageText : MonoBehaviour
 {
     [SerializeField]
-    private Label _damageLabel;
+    private TextMeshProUGUI _damageLabel;
 
     private float aliveTime = 0.5f ;
 
     private void Awake()
     {
-        _damageLabel = GetComponent<UIDocument>().rootVisualElement.Q<Label>("Label");
+        _damageLabel = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void SetDamageText(Affinity affinity, float damage)
     {
-        _damageLabel.style.color = Utility.GetAffinityColor(affinity);
+        _damageLabel.color = Utility.GetAffinityColor(affinity);
         _damageLabel.text = damage.ToString("N0");
 
         StartCoroutine(DeathTimer());

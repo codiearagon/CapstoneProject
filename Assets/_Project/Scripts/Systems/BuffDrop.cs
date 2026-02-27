@@ -1,5 +1,5 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class BuffDrop : MonoBehaviour
 {
@@ -11,13 +11,13 @@ public class BuffDrop : MonoBehaviour
     private CharacterStats stats;
     private CircleCollider2D _collider;
 
-    private Label _label;
+    private TextMeshProUGUI _label;
 
     private void Awake()
     {
         stats = new CharacterStats();
         _collider = GetComponent<CircleCollider2D>();
-        _label = GetComponent<UIDocument>().rootVisualElement.Q<Label>("Label");
+        _label = GetComponentInChildren<TextMeshProUGUI>();
 
         _statToBuff = Utility.RollRandomStat();
         _percentAmount = Utility.RollRandomPercentage(1, 5);

@@ -140,7 +140,7 @@ public class Character : MonoBehaviour, IDamageable
         for(int i = 0; i < 4; i++)
         {
             StatType stat = Utility.RollRandomStat();
-            float percent = Utility.RollRandomPercentage(5, 10);
+            float percent = Utility.RollRandomPercentage(2, 6);
             BuffStat(stat, percent);
 
             OnLevelUpBuff?.Invoke(stat, percent);
@@ -192,11 +192,6 @@ public class Character : MonoBehaviour, IDamageable
 
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
 
-        Color objCol = GetComponent<SpriteRenderer>().color;
-        objCol.a = (_stats.CurrentHp) / (_stats.MaxHp);
-
-        GetComponent<SpriteRenderer>().color = objCol;
-
         OnHealthChanged?.Invoke(_stats.CurrentHp);
     }
 
@@ -219,14 +214,12 @@ public class Character : MonoBehaviour, IDamageable
     public void AddAbility(Ability ability)
     {
         _abilities.AddAbility(ability);
-
         OnAbilitiesChanged?.Invoke(_abilities.GetList());
     }
 
     public void UpgradeAbility(AbilityProperties properties)
     {
         _abilities.UpgradeAbility(properties);
-
         OnAbilitiesChanged?.Invoke(_abilities.GetList());
     }
 

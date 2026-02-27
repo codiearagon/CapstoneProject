@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Utility
 {
+    private static int _pauseRequests = 0;
+
     private static Dictionary<StatType, float> _statWeights = new Dictionary<StatType, float>()
     {
         [StatType.MaxHp] = 20f,
@@ -111,5 +113,21 @@ public static class Utility
     public static float RollRandomPercentage(int min, int max)
     {
         return Random.Range(min, max + 1) / 100f;
+    }
+
+    public static void RequestPause()
+    {
+        _pauseRequests++;
+
+        if (_pauseRequests >= 1)
+            Time.timeScale = 0f;
+    }
+
+    public static void ReleasePause()
+    {
+        _pauseRequests = Mathf.Max(0, _pauseRequests - 1);
+
+        if (_pauseRequests == 0)
+            Time.timeScale = 1f;
     }
 }

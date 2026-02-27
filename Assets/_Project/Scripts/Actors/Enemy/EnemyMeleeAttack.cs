@@ -24,12 +24,14 @@ public class EnemyMeleeAttack : MonoBehaviour
     {
         _target = collision.gameObject;
         _playerInRange = true;
+        _enemy.PlayerInRange(true);
         StartCoroutine(Attack());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         _target = collision.gameObject;
+        _enemy.PlayerInRange(false);
         _playerInRange = false;
     }
 
@@ -37,8 +39,9 @@ public class EnemyMeleeAttack : MonoBehaviour
     {
         while (_playerInRange)
         {
-            _target.GetComponent<IDamageable>()?.TakeDamage(_enemy.Stats.Attack, _enemy.Stats.Affinity);
             yield return new WaitForSeconds(1 / _enemy.Stats.AttackSpeed);
+            if(!_enemy.IsPaused)
+                _target.GetComponent<IDamageable>()?.TakeDamage(_enemy.Stats.Attack, _enemy.Stats.Affinity);
         }
     }
 

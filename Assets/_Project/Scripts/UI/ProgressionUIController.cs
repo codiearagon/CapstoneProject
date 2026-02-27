@@ -60,11 +60,13 @@ public class ProgressionUIController : MonoBehaviour
 
     private void HandleAbilityUnlock()
     {
+        Utility.RequestPause();
         List<Ability> rolledAbilities = _abilityHelper.RollRandomAbilities(3);
 
         if(rolledAbilities == null)
         {
             Logger.Log("No abilities available in pool");
+            Utility.ReleasePause();
             return;
         }
 
@@ -100,6 +102,7 @@ public class ProgressionUIController : MonoBehaviour
 
     private void HandleAbilityUpgrade(List<Ability> abilities)
     {
+        Utility.RequestPause();
         int amount = Mathf.Min(3, abilities.Count);
 
         for(int i = 0; i < amount; i++)
@@ -139,7 +142,10 @@ public class ProgressionUIController : MonoBehaviour
         }
 
         if (_abilityUpgradeElement.childCount == 0)
+        {
+            Utility.ReleasePause();
             return;
+        }
 
         _abilityUpgradeElement.style.display = DisplayStyle.Flex;
     }
@@ -157,6 +163,8 @@ public class ProgressionUIController : MonoBehaviour
 
         _abilityUnlockElement.Clear();
         _abilityUnlockElement.style.display = DisplayStyle.None;
+
+        Utility.ReleasePause();
     }
 
     private void UnlockUpgrade(ClickEvent evt)
@@ -170,5 +178,7 @@ public class ProgressionUIController : MonoBehaviour
 
         _abilityUpgradeElement.Clear();
         _abilityUpgradeElement.style.display = DisplayStyle.None;
+
+        Utility.ReleasePause();
     }
 }
