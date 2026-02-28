@@ -22,6 +22,7 @@ public class Character : MonoBehaviour, IDamageable
     public event Action<int, float, float> OnLevelUp;
     public event Action<StatType, float> OnLevelUpBuff;
     public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
+    public event Action<CharacterAdvancement> OnAdvancementChosen;
 
     [Header("Details")]
     [SerializeField]
@@ -172,15 +173,30 @@ public class Character : MonoBehaviour, IDamageable
     public void SelectAdvancement(CharacterAdvancement advancement)
     {
         // Add bonus stats
+        _stats.Affinity = advancement.Affinity;
         _stats.MaxHp += advancement.MaxHp;
+        _stats.CurrentHp = _stats.MaxHp;
+        _stats.HpRegenRate += advancement.HpRegenRate;
+        _stats.MaxMana += advancement.MaxMana;
+        _stats.CurrentMana = _stats.MaxMana;
+        _stats.ManaRegenRate += advancement.ManaRegenRate;
         _stats.MovementSpeed += advancement.MovementSpeed;
         _stats.Attack += advancement.Attack;
         _stats.AttackSpeed += advancement.AttackSpeed;
         _stats.Defense += advancement.Defense;
+        _stats.FireMultiplier += advancement.FireMultiplier;
+        _stats.WaterMultiplier += advancement.WaterMultiplier;
+        _stats.AirMultiplier += advancement.AirMultiplier;
+        _stats.EarthMultiplier += advancement.EarthMultiplier;
+        _stats.DarkMultiplier += advancement.DarkMultiplier;
+        _stats.LightMultiplier += advancement.LightMultiplier;
 
         // Change progression
         _stats.NextAdvancementLevel = advancement.NextAdvancementLevel;
         _advancements = advancement.Advancements;
+
+        OnAdvancementChosen?.Invoke(advancement);
+        OnStatsChanged?.Invoke(_stats);
     }
 
     public void TakeDamage(float amount, Affinity damageAffinity) 

@@ -1,0 +1,20 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UIDocs/AdvancementUnlock.uss?fileID=7433441132597879392&amp;guid=8652fdf55642ccb4f8f93d1f60025abc&amp;type=3#AdvancementUnlock"/>
+    <ui:VisualElement name="Option" style="flex-grow: 1; color: rgb(255, 255, 255);">
+        <ui:VisualElement name="ImageContainer" style="flex-grow: 1; display: flex;">
+            <ui:Image name="SplashImage"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="DetailsContainer" style="flex-grow: 1; display: none; justify-content: flex-start; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+            <ui:VisualElement name="Container" style="flex-grow: 1;">
+                <ui:Label text="Fire path" name="Name"/>
+                <ui:Label text="Fire&#10;" name="Affinity"/>
+                <ui:Label text="the fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire path" name="Description" class="wrap"/>
+                <ui:Label text="blablablalblablabla" name="StatSummary" class="wrap"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="SpecialContainer" style="flex-grow: 1; justify-content: space-around;">
+                <ui:Label text="Special Abilities" name="SpecialAbilities"/>
+                <ui:VisualElement name="AbilitiesContainer" style="flex-grow: 1; flex-direction: row;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

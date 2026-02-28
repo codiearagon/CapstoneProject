@@ -26,6 +26,11 @@ public class Ability : MonoBehaviour
             Logger.Log("Invalid ability layer");
     }
 
+    public void ChangeAffinity(Affinity affinity)
+    {
+        Properties.Affinity = affinity;
+    }
+
     public void Cast(GameObject caster)
     {
         _execution = CreateAbilityExecution();

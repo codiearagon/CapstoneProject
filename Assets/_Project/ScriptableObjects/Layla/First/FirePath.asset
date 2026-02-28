@@ -12,14 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb5040be23091c47a166188be01c0c8, type: 3}
   m_Name: FirePath
   m_EditorClassIdentifier: Assembly-CSharp::CharacterAdvancement
-  icon: {fileID: 0}
-  splashArt: {fileID: 0}
+  AdvancementName: Rekindled Ember
+  Description: 'A quiet spark, long suppressed, reignites within her.
+
+    These
+    embers consume her anger, and the world awaits her fire.'
+  StatSummary: Higher damage for fire abilities. Overall stronger attacks, attack
+    speed, and better mana.
+  Icon: {fileID: 0}
+  SplashArt: {fileID: 3759154250996858190, guid: f30457ea7406b0242945ae625c37e63a, type: 3}
+  Affinity: 1
   MaxHp: 0
+  HpRegenRate: 0
+  MaxMana: 5
+  ManaRegenRate: 2
   MovementSpeed: 1
   Attack: 10
   AttackSpeed: 0.1
   Defense: 5
-  HpScaling: 0
-  AttackScaling: 0.2
-  DefenseScaling: 0
-  advancements: []
+  FireMultiplier: 0.05
+  WaterMultiplier: 0
+  AirMultiplier: 0
+  EarthMultiplier: 0
+  DarkMultiplier: 0
+  LightMultiplier: 0
+  Abilities: []
+  NextAdvancementLevel: 0
+  Advancements: []

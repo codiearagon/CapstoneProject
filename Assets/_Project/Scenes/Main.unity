@@ -267,6 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProgressionUIController
   _playerRoot: {fileID: 1865891065}
   _abilityUnlockOption: {fileID: 9197481963319205126, guid: 69547fde589cfaf4bbaadaecd63ffece, type: 3}
+  _advancementOption: {fileID: 9197481963319205126, guid: 82259234fa4bc61489697575a2f83e1b, type: 3}
 --- !u!1 &238691798
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,20 +11,42 @@ public class ProgressionUIController : MonoBehaviour
     [SerializeField]
     private VisualTreeAsset _abilityUnlockOption;
 
+    [SerializeField]
+    private VisualTreeAsset _advancementOption;
+
     private VisualElement _root;
     private VisualElement _abilityUnlockElement;
     private VisualElement _abilityUpgradeElement;
     private VisualElement _advancementElement;
+    private VisualElement _optionContainer;
+
+    private Button _prevButton;
+    private Button _nextButton;
+    private Button _detailsButton;
+    private Button _chooseButton;
+
+    private List<VisualElement> _characterAdvancements;
+
+    private VisualElement _selectedAdvancement;
+    private int _selectedIndex;
 
     private AbilityHelper _abilityHelper;
     private Character _playerObj;
 
     private void Awake()
     {
+        _characterAdvancements = new List<VisualElement>();
+
         _root = GetComponent<UIDocument>().rootVisualElement;
         _abilityUnlockElement = _root.Q<VisualElement>("AbilityUnlock");
         _abilityUpgradeElement = _root.Q<VisualElement>("AbilityUpgrade");
         _advancementElement = _root.Q<VisualElement>("Advancement");
+        _optionContainer = _advancementElement.Q<VisualElement>("OptionContainer");
+
+        _prevButton = _advancementElement.Q<Button>("PreviousButton");
+        _nextButton = _advancementElement.Q<Button>("NextButton");
+        _detailsButton = _advancementElement.Q<Button>("DetailsButton");
+        _chooseButton = _advancementElement.Q<Button>("ChooseButton");
 
         _abilityHelper = FindAnyObjectByType<AbilityHelper>();
 
@@ -32,15 +55,14 @@ public class ProgressionUIController : MonoBehaviour
         _advancementElement.style.display = DisplayStyle.None;
     }
 
-    private void Update()
-    {
-        
-    }
-
-
     private void OnEnable()
     {
         _playerRoot.OnPlayerSpawned += HandlePlayerSpawned;
+
+        _prevButton.RegisterCallback<ClickEvent>(PreviousAdvancement);
+        _nextButton.RegisterCallback<ClickEvent>(NextAdvancement);
+        _detailsButton.RegisterCallback<ClickEvent>(ShowDetails);
+        _chooseButton.RegisterCallback<ClickEvent>(ChooseAdvancement);
     }
     private void OnDisable()
     {
@@ -48,6 +70,12 @@ public class ProgressionUIController : MonoBehaviour
 
         _playerObj.OnAbilityUnlockTriggered -= HandleAbilityUnlock;
         _playerObj.OnAbilityUpgradeTriggered -= HandleAbilityUpgrade;
+        _playerObj.OnAdvancementTriggered -= HandleAdvancement;
+
+        _prevButton.UnregisterCallback<ClickEvent>(PreviousAdvancement);
+        _nextButton.UnregisterCallback<ClickEvent>(NextAdvancement);
+        _detailsButton.UnregisterCallback<ClickEvent>(ShowDetails);
+        _chooseButton.UnregisterCallback<ClickEvent>(ChooseAdvancement);
     }
 
     private void HandlePlayerSpawned(GameObject player)
@@ -56,6 +84,7 @@ public class ProgressionUIController : MonoBehaviour
 
         _playerObj.OnAbilityUnlockTriggered += HandleAbilityUnlock;
         _playerObj.OnAbilityUpgradeTriggered += HandleAbilityUpgrade;
+        _playerObj.OnAdvancementTriggered += HandleAdvancement;
     }
 
     private void HandleAbilityUnlock()
@@ -150,6 +179,104 @@ public class ProgressionUIController : MonoBehaviour
         _abilityUpgradeElement.style.display = DisplayStyle.Flex;
     }
 
+    private void HandleAdvancement(List<CharacterAdvancement> list)
+    {
+        if (list.Count == 0)
+            return;
+
+        Utility.RequestPause();
+
+        foreach (CharacterAdvancement advancement in list)
+        {
+            VisualElement option = _advancementOption.CloneTree();
+            option.dataSource = advancement;
+
+            Image splash = option.Q<Image>("SplashImage");
+            Label name = option.Q<Label>("Name");
+            Label affinity = option.Q<Label>("Affinity");
+            Label description = option.Q<Label>("Description");
+            Label statSummary = option.Q<Label>("StatSummary");
+            VisualElement abilities = option.Q<VisualElement>("AbilitiesContainer");
+
+            splash.image = advancement.SplashArt.texture;
+            name.text = advancement.AdvancementName;
+            affinity.text = advancement.Affinity.ToString();
+            description.text = advancement.Description;
+            statSummary.text = advancement.StatSummary;
+
+            foreach (Ability ability in advancement.Abilities)
+            {
+                Image ab = new Image();
+                ab.image = ability.Properties.Icon.texture;
+
+                abilities.Add(ab);
+            }
+
+            _characterAdvancements.Add(option);
+        }
+
+        _selectedIndex = 0;
+        _selectedAdvancement = _characterAdvancements[_selectedIndex];
+        _optionContainer.Add(_selectedAdvancement);
+
+        _advancementElement.style.display = DisplayStyle.Flex;
+    }
+
+    private void PreviousAdvancement(ClickEvent evt)
+    {
+        if (_selectedIndex == 0)
+            _selectedIndex = _characterAdvancements.Count - 1;
+        else
+            _selectedIndex--;
+
+        ResetStyle();
+        _selectedAdvancement = _characterAdvancements[_selectedIndex];
+        _optionContainer.Clear();
+        _optionContainer.Add(_selectedAdvancement);
+    }
+
+    private void NextAdvancement(ClickEvent evt)
+    {
+        if (_selectedIndex == _characterAdvancements.Count - 1)
+            _selectedIndex = 0;
+        else
+            _selectedIndex++;
+
+        ResetStyle();
+        _selectedAdvancement = _characterAdvancements[_selectedIndex];
+        _optionContainer.Clear();
+        _optionContainer.Add(_selectedAdvancement);
+    }
+
+    private void ShowDetails(ClickEvent evt)
+    {
+        VisualElement _detailsContainer = _selectedAdvancement.Q<VisualElement>("DetailsContainer");
+        VisualElement _imageContainer = _selectedAdvancement.Q<VisualElement>("ImageContainer");
+
+        if (_detailsContainer.style.display == DisplayStyle.Flex)
+        {
+            _detailsButton.text = "Show Details";
+            _detailsContainer.style.display = DisplayStyle.None;
+            _imageContainer.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            _detailsButton.text = "Hide Details";
+            _detailsContainer.style.display = DisplayStyle.Flex;
+            _imageContainer.style.display = DisplayStyle.None;
+        }
+    }
+
+    private void ChooseAdvancement(ClickEvent evt)
+    {
+        _playerObj.SelectAdvancement(_selectedAdvancement.dataSource as CharacterAdvancement);
+        _characterAdvancements.Clear();
+        _selectedAdvancement.Clear();
+        _optionContainer.Clear();
+        _advancementElement.style.display = DisplayStyle.None;
+        Utility.ReleasePause();
+    }
+
     private void UnlockAbility(ClickEvent evt)
     {
         Button button = evt.currentTarget as Button;
@@ -180,5 +307,16 @@ public class ProgressionUIController : MonoBehaviour
         _abilityUpgradeElement.style.display = DisplayStyle.None;
 
         Utility.ReleasePause();
+    }
+
+    private void ResetStyle()
+    {
+        VisualElement _detailsContainer = _selectedAdvancement.Q<VisualElement>("DetailsContainer");
+        VisualElement _imageContainer = _selectedAdvancement.Q<VisualElement>("ImageContainer");
+
+        _detailsContainer.style.display = DisplayStyle.None;
+        _imageContainer.style.display = DisplayStyle.Flex;
+
+        _detailsButton.text = "Show Details";
     }
 }

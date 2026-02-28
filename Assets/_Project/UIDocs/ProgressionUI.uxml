@@ -1,6 +1,17 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UIDocs/ProgressionUI.uss?fileID=7433441132597879392&amp;guid=7e26bf56bdb753d41b4978029ea9a502&amp;type=3#ProgressionUI"/>
-    <ui:VisualElement name="AbilityUnlock" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgba(0, 0, 0, 0.65); top: 25%; left: 25%; flex-direction: row; justify-content: center; display: none;"/>
-    <ui:VisualElement name="AbilityUpgrade" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgba(0, 0, 0, 0.65); top: 25%; left: 25%; flex-direction: row; justify-content: center; display: none;"/>
-    <ui:VisualElement name="Advancement" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgba(0, 0, 0, 0.65); top: 25%; left: 25%; flex-direction: row; justify-content: center; display: none;"/>
+    <ui:VisualElement name="AbilityUnlock" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgb(0, 0, 0); top: 25%; left: 25%; flex-direction: row; justify-content: center; display: none;"/>
+    <ui:VisualElement name="AbilityUpgrade" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgb(0, 0, 0); top: 25%; left: 25%; flex-direction: row; justify-content: center; display: none;"/>
+    <ui:VisualElement name="Advancement" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgb(0, 0, 0); top: 25%; left: 25%; flex-direction: column; justify-content: center; display: none;">
+        <ui:Label text="Select Advancement" style="color: rgb(255, 255, 255); margin-left: 10px; margin-bottom: 4px;"/>
+        <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: row; flex-shrink: 1;">
+            <ui:Button text="&lt;" name="PreviousButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+            <ui:VisualElement name="OptionContainer" style="flex-grow: 1;"/>
+            <ui:Button text="&gt;" name="NextButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="ButtonContainer" style="flex-grow: 0; flex-direction: row; justify-content: flex-end; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; flex-shrink: 0;">
+            <ui:Button text="Show Details" name="DetailsButton"/>
+            <ui:Button text="Choose" name="ChooseButton"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
