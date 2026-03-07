@@ -17,6 +17,8 @@ public class EnemyStats
     public float Defense;
     public float AttackRange;
 
-    [Header("Experience")]
+    [Header("Progression")]
     public float ExpOnKill;
+    public float BuffDropChance;
+    public float BuffDropAmount;
 }

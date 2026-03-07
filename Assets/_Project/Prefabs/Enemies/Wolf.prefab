@@ -266,11 +266,13 @@ MonoBehaviour:
   _stats:
     EnemyName: Wolf
     Affinity: 5
-    MaxHp: 70
+    MaxHp: 15
     CurrentHp: 0
-    MovementSpeed: 15
-    Attack: 10
+    MovementSpeed: 35
+    Attack: 3
     AttackSpeed: 1
     Defense: 10
     AttackRange: 1.5
-    ExpOnKill: 50
+    ExpOnKill: 70
+    BuffDropChance: 5
+    BuffDropAmount: 0

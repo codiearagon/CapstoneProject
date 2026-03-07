@@ -274,3 +274,5 @@ MonoBehaviour:
     Defense: 10
     AttackRange: 1.5
     ExpOnKill: 100
+    BuffDropChance: 0
+    BuffDropAmount: 0

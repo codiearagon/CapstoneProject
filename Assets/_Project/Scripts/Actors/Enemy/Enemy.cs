@@ -1,8 +1,4 @@
-using NUnit.Framework;
-using System.Collections;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
@@ -56,17 +52,14 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         _targetObj.GetComponent<Character>().ReceiveExperience(_stats.ExpOnKill);
 
-        if(Utility.RollChance(50))
-            Instantiate(_buffPrefab, transform.position, Quaternion.identity);
+        if(Utility.RollChance(_stats.BuffDropChance))
+        {
+            for(int i = 0; i < _stats.BuffDropAmount; i++)
+                Instantiate(_buffPrefab, transform.position, Quaternion.identity);
+        }
 
         Destroy(gameObject);
-    }
-
-    private void HandlePause()
-    {
-        _isPaused = !_isPaused;
-    }
-      
+    } 
 
     public void TakeDamage(float amount, Affinity damageAffinity)
     {
@@ -85,6 +78,30 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (_stats.CurrentHp <= 0)
             Die();
+    }
+
+    public void MultiplyStats(float multiplier)
+    {
+        _stats.MaxHp *= multiplier;
+        _stats.CurrentHp *= multiplier;
+        _stats.MovementSpeed *= multiplier;
+        _stats.Attack *= multiplier;
+        _stats.AttackSpeed *= multiplier;
+        _stats.Defense *= multiplier;
+        _stats.AttackRange *= multiplier;
+        _stats.ExpOnKill *= multiplier;
+    }
+
+    public void MakeElite(float multiplier)
+    {
+        transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+        _stats.MaxHp *= multiplier;
+        _stats.CurrentHp *= multiplier;
+        _stats.Attack *= multiplier;
+        _stats.Defense *= multiplier;
+        _stats.ExpOnKill *= multiplier;
+        _stats.BuffDropChance = 100;
+        _stats.BuffDropAmount = 5;
     }
 
     public void PlayerInRange(bool value)

@@ -103,6 +103,7 @@ public class ProgressionUIController : MonoBehaviour
         {
             VisualElement option = _abilityUnlockOption.CloneTree();
 
+            option.style.width = Length.Percent(100);
             Image image = option.Q<Image>("Image");
             Label name = option.Q<Label>("Name");
             Label affinity = option.Q<Label>("Affinity");
@@ -141,6 +142,7 @@ public class ProgressionUIController : MonoBehaviour
             VisualElement option = _abilityUnlockOption.CloneTree();
             Ability ability = abilities[randomIdx];
 
+            option.style.width = Length.Percent(100);
             Image image = option.Q<Image>("Image");
             Label name = option.Q<Label>("Name");
             Label affinity = option.Q<Label>("Affinity");

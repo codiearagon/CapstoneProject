@@ -269,8 +269,10 @@ MonoBehaviour:
     MaxHp: 30
     CurrentHp: 0
     MovementSpeed: 5
-    Attack: 5
+    Attack: 2
     AttackSpeed: 1
     Defense: 20
     AttackRange: 1.5
-    ExpOnKill: 25
+    ExpOnKill: 35
+    BuffDropChance: 5
+    BuffDropAmount: 0

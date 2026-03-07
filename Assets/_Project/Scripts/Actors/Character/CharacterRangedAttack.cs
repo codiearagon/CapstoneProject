@@ -13,25 +13,31 @@ public class CharacterRangedAttack : MonoBehaviour
     private Character _character;
     private Rigidbody2D _rb;
 
+    private bool _isAttacking;
+    private Coroutine _attackCoroutine;
+
     private void Awake()
     {
         _input = new PlayerInput();
+        _isAttacking = false;
     }
 
     private void OnEnable()
     {
         _input.Player.Enable();
-        _input.Player.Attack.started += OnAttackStarted;
+        _input.Player.Attack.performed += OnAttackPerformed;
         _input.Player.Attack.canceled += OnAttackCancelled;
     }
 
     private void OnDisable()
     {
         _input.Player.Disable();
-        _input.Player.Attack.started -= OnAttackStarted;
+        _input.Player.Attack.performed -= OnAttackPerformed;
         _input.Player.Attack.canceled -= OnAttackCancelled;
 
         _character.OnAdvancementChosen -= HandleAdvancementChosen;
+
+        _isAttacking = false;
     }
 
 
@@ -46,25 +52,36 @@ public class CharacterRangedAttack : MonoBehaviour
         _runtimeAbility.SetLayer(transform.parent.gameObject.layer);
     }
 
-    private void OnAttackStarted(InputAction.CallbackContext ctx)
+    private void OnAttackPerformed(InputAction.CallbackContext ctx)
     {
-        if (_character.Stats.CurrentMana < _runtimeAbility.Properties.ManaCost)
-        {
-            Logger.Log("Not enough mana");
-            return;
-        }
+        _isAttacking = true;
 
-        Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
-
-        _runtimeAbility.SetRuntimeData(CalculateDamage(), direction);
-        _runtimeAbility.Cast(transform.parent.gameObject);
-
-        _character.UseMana(_runtimeAbility.Properties.ManaCost);
+        if (_attackCoroutine == null)
+            _attackCoroutine = StartCoroutine(AttackCoroutine());
     }
 
     private void OnAttackCancelled(InputAction.CallbackContext ctx)
     {
-        
+        _isAttacking = false;
+    }
+
+    private IEnumerator AttackCoroutine()
+    {
+        while(true)
+        {
+            Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
+
+            _runtimeAbility.SetRuntimeData(CalculateDamage(), direction);
+            _runtimeAbility.Cast(transform.parent.gameObject);
+
+            yield return new WaitForSeconds(1f / _character.Stats.AttackSpeed);
+
+            if (!_isAttacking)
+            {
+                _attackCoroutine = null;
+                yield break;
+            }
+        }
     }
 
     private void HandleAdvancementChosen(CharacterAdvancement advancement)
@@ -80,4 +97,6 @@ public class CharacterRangedAttack : MonoBehaviour
 
         return finalDamage;
     }
+
+    
 }

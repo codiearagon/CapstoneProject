@@ -133,7 +133,7 @@ public class Character : MonoBehaviour, IDamageable
     {
         OnAbilityUpgradeTriggered?.Invoke(_abilities.GetList());
 
-        _stats.NextAbilityUpgradeLevel += 5;
+        _stats.NextAbilityUpgradeLevel += 10;
     }
 
     private void GainRandomStats(int amount)

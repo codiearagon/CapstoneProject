@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
 public class CharSelectUIController : MonoBehaviour
