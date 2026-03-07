@@ -11,11 +11,13 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private bool _isSpawningConstantly;
-    private float _currentScaling;
+    private float _statScaling;
+    private float _expScaling;
 
     private void Awake()
     {
-        _currentScaling = 1;
+        _statScaling = 1;
+        _expScaling = 1;
     }
 
     private void Start()
@@ -38,9 +40,10 @@ public class EnemySpawner : MonoBehaviour
         Gizmos.DrawSphere(transform.position, 0.5f);
     }
 
-    public void ChangeScaling(float scaling)
+    public void ChangeScaling(float scaling, float expScaling)
     {
-        _currentScaling = scaling;
+        _statScaling = scaling;
+        _expScaling = expScaling;
     }
 
     public void TriggerSpawning(bool value)
@@ -56,18 +59,18 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        SpawnEnemy(_currentScaling);
+        SpawnEnemy(_statScaling);
     }
 
     public void SpawnEnemy(float scaling)
     {
         GameObject enemy = Instantiate(_enemyToSpawn, transform.position, Quaternion.identity);
-        enemy.GetComponent<Enemy>().MultiplyStats(_currentScaling);
+        enemy.GetComponent<Enemy>().MultiplyStats(_statScaling, _expScaling);
     }
 
     public void SpawnElite(GameObject prefab, float scaling)
     {
-        GameObject enemy = Instantiate(_enemyToSpawn, transform.position, Quaternion.identity);
+        GameObject enemy = Instantiate(prefab, transform.position, Quaternion.identity);
         enemy.GetComponent<Enemy>().MakeElite(scaling);
     }
 

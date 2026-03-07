@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyToSpawn: {fileID: 2614719710841126021, guid: 53083f7bc738bac48916b464fcde3510, type: 3}
   _spawnInterval: 20
-  _isSpawningConstantly: 0
+  _isSpawningConstantly: 1
 --- !u!1 &69245408
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyToSpawn: {fileID: 2614719710841126021, guid: 72278649ff0d0f146895513528e3acbc, type: 3}
   _spawnInterval: 10
-  _isSpawningConstantly: 0
+  _isSpawningConstantly: 1
 --- !u!1 &142549109
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +621,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   _playerRoot: {fileID: 1865891065}
   spawnerParent: {fileID: 420038657}
+  _normalSpawnersTransform: {fileID: 1052286300}
+  _eliteSpawnersTransform: {fileID: 1942739844}
 --- !u!1 &506383575
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyToSpawn: {fileID: 2614719710841126021, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
   _spawnInterval: 15
-  _isSpawningConstantly: 0
+  _isSpawningConstantly: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,7 +1400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyToSpawn: {fileID: 2614719710841126021, guid: 53083f7bc738bac48916b464fcde3510, type: 3}
   _spawnInterval: 20
-  _isSpawningConstantly: 0
+  _isSpawningConstantly: 1
 --- !u!1 &1200012474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyToSpawn: {fileID: 2614719710841126021, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
   _spawnInterval: 15
-  _isSpawningConstantly: 0
+  _isSpawningConstantly: 1
 --- !u!1 &1322851100
 GameObject:
   m_ObjectHideFlags: 0
@@ -19625,7 +19627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemyToSpawn: {fileID: 2614719710841126021, guid: 72278649ff0d0f146895513528e3acbc, type: 3}
   _spawnInterval: 10
-  _isSpawningConstantly: 0
+  _isSpawningConstantly: 1
 --- !u!1 &1933569683
 GameObject:
   m_ObjectHideFlags: 0

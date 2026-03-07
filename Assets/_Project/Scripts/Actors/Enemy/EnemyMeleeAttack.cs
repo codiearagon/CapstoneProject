@@ -8,6 +8,7 @@ public class EnemyMeleeAttack : MonoBehaviour
 
     private GameObject _target;
     private bool _playerInRange;
+    private Coroutine _attackCoroutine;
 
     private void Awake()
     {
@@ -25,7 +26,9 @@ public class EnemyMeleeAttack : MonoBehaviour
         _target = collision.gameObject;
         _playerInRange = true;
         _enemy.PlayerInRange(true);
-        StartCoroutine(Attack());
+
+        if(_attackCoroutine == null)
+            _attackCoroutine = StartCoroutine(Attack());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -37,11 +40,18 @@ public class EnemyMeleeAttack : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        while (_playerInRange)
+        while (true)
         {
-            yield return new WaitForSeconds(1 / _enemy.Stats.AttackSpeed);
+            yield return new WaitForSeconds(1f / _enemy.Stats.AttackSpeed);
+
             if(!_enemy.IsPaused)
                 _target.GetComponent<IDamageable>()?.TakeDamage(_enemy.Stats.Attack, _enemy.Stats.Affinity);
+
+            if(!_playerInRange)
+            {
+                _attackCoroutine = null;
+                yield break;
+            }
         }
     }
 

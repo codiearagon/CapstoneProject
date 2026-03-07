@@ -55,7 +55,12 @@ public class Enemy : MonoBehaviour, IDamageable
         if(Utility.RollChance(_stats.BuffDropChance))
         {
             for(int i = 0; i < _stats.BuffDropAmount; i++)
-                Instantiate(_buffPrefab, transform.position, Quaternion.identity);
+            {
+                float randomX = Random.Range(transform.position.x - 1.5f, transform.position.x + 1.5f);
+                float randomY = Random.Range(transform.position.y - 1.5f, transform.position.y + 1.5f);
+                Vector3 randomPos = new Vector3(randomX, randomY, 0);
+                Instantiate(_buffPrefab, randomPos, Quaternion.identity);
+            }
         }
 
         Destroy(gameObject);
@@ -80,16 +85,16 @@ public class Enemy : MonoBehaviour, IDamageable
             Die();
     }
 
-    public void MultiplyStats(float multiplier)
+    public void MultiplyStats(float multiplier, float expScaling)
     {
         _stats.MaxHp *= multiplier;
         _stats.CurrentHp *= multiplier;
-        _stats.MovementSpeed *= multiplier;
+        _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed * multiplier, 100);
         _stats.Attack *= multiplier;
         _stats.AttackSpeed *= multiplier;
         _stats.Defense *= multiplier;
         _stats.AttackRange *= multiplier;
-        _stats.ExpOnKill *= multiplier;
+        _stats.ExpOnKill *= expScaling;
     }
 
     public void MakeElite(float multiplier)

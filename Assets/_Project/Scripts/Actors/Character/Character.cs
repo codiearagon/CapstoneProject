@@ -180,7 +180,7 @@ public class Character : MonoBehaviour, IDamageable
         _stats.MaxMana += advancement.MaxMana;
         _stats.CurrentMana = _stats.MaxMana;
         _stats.ManaRegenRate += advancement.ManaRegenRate;
-        _stats.MovementSpeed += advancement.MovementSpeed;
+        _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed + advancement.MovementSpeed, 120);
         _stats.Attack += advancement.Attack;
         _stats.AttackSpeed += advancement.AttackSpeed;
         _stats.Defense += advancement.Defense;
@@ -242,6 +242,8 @@ public class Character : MonoBehaviour, IDamageable
     public void BuffStat(StatType type, float amount)
     {
         _stats.GetStat(type) += _stats.GetStat(type) * amount;
+
+        _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed, 120);
 
         OnStatsChanged?.Invoke(_stats);
     }

@@ -259,7 +259,7 @@ MonoBehaviour:
     CurrentMana: 0
     ManaRegenRate: 1
     MovementSpeed: 30
-    Attack: 10
+    Attack: 15
     AttackSpeed: 1.5
     Defense: 20
     FireMultiplier: 1

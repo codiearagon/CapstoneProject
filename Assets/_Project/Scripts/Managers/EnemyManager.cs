@@ -14,29 +14,31 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private GameObject spawnerParent;
     
-    private List<EnemySpawner> _normalSpawners;
-    private List<EnemySpawner> _eliteSpawners;
-
-    private Character _playerObj;
-    private float _currentScaling;
-
+    [SerializeField]
     private Transform _normalSpawnersTransform;
+
+    [SerializeField]
     private Transform _eliteSpawnersTransform;
 
+    private List<EnemySpawner> _normalSpawners;
+    private List<EnemySpawner> _eliteSpawners;
     private HashSet<GameObject> _enemyPrefabs;
+
+    private Character _playerObj;
+    private float _statScaling;
+    private float _expScaling;
 
     private void Awake()
     {
         _normalSpawners = new List<EnemySpawner>();
         _eliteSpawners = new List<EnemySpawner>();
-        _currentScaling = 1;
+        _enemyPrefabs = new HashSet<GameObject>();
+        _statScaling = 1;
+        _expScaling = 1;
     }
 
     private void Start()
     {
-        _normalSpawnersTransform = transform.Find("NormalSpawners");
-        _eliteSpawnersTransform = transform.Find("EliteSpawnersLocs");
-
         foreach (Transform child in _normalSpawnersTransform)
         {
             _normalSpawners.Add(child.GetComponent<EnemySpawner>());
@@ -70,20 +72,25 @@ public class EnemyManager : MonoBehaviour
         if (level % 10 == 0)
         {
             // scale up the enemies
-            _currentScaling += 0.5f;
+            _statScaling += 2f;
+            _expScaling *= 2f;
             foreach (EnemySpawner spawner in _normalSpawners)
-                spawner.ChangeScaling(_currentScaling);
+                spawner.ChangeScaling(_statScaling, _expScaling);
 
             OnScaleUp?.Invoke();
         }
 
         if (level % 5 == 0)
         {
-            // spawn elite enemy
-            int randomIdx = UnityEngine.Random.Range(0, _eliteSpawners.Count);
-            GameObject randomPrefab = _enemyPrefabs.ElementAt(UnityEngine.Random.Range(0, _enemyPrefabs.Count));
+            // spawn elite enemy, num depends on scaling
 
-            _eliteSpawners[randomIdx].SpawnElite(randomPrefab, 5);
+            for(int i = 0; i < Mathf.Floor(_statScaling + 0.5f); i++)
+            {
+                int randomIdx = UnityEngine.Random.Range(0, _eliteSpawners.Count);
+                GameObject randomPrefab = _enemyPrefabs.ElementAt(UnityEngine.Random.Range(0, _enemyPrefabs.Count));
+
+                _eliteSpawners[randomIdx].SpawnElite(randomPrefab, 5 * _statScaling);
+            }
 
             OnEliteSpawn?.Invoke();
         }
