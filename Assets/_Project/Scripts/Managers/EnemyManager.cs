@@ -69,7 +69,7 @@ public class EnemyManager : MonoBehaviour
 
     private void HandleOnLevelUp(int level, float currentExp, float nextExpToLevel)
     {
-        if (level % 10 == 0)
+        if (level % 5 == 0)
         {
             // scale up the enemies
             _statScaling += 0.5f;

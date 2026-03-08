@@ -6,10 +6,10 @@ public class PiercingProjectile : IProjectileHit
     private float _damage;
     private Affinity _affinity;
 
-    public PiercingProjectile(ProjectileProperties _projectileProperties)
+    public PiercingProjectile(ProjectileProperties properties)
     {
-        _damage = _projectileProperties.Damage;
-        _affinity = _projectileProperties.Affinity;
+        _damage = properties.Damage;
+        _affinity = properties.Affinity;
     }
 
     public void OnHit(Projectile projectile, Collider2D other)

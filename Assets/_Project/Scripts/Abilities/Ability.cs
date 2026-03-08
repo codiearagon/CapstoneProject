@@ -15,27 +15,26 @@ public class Ability : MonoBehaviour
     private Vector2 _direction;
     private float _finalDamage;
     private Coroutine _manaDrain;
+    private GameObject _caster;
     private LayerMask _layer;
 
-    private bool UseMana(GameObject caster)
-    {
-        if (!caster.GetComponent<IManaUser>().HasMana(Properties.ManaCost))
-            return false;
-
-        caster.GetComponent<IManaUser>().UseMana(Properties.ManaCost);
-        return true;
-    }
-
-    private IEnumerator ConstantManaDrain(GameObject caster)
+    private IEnumerator ConstantManaDrain()
     {
         while (true)
         {
-            if (!UseMana(caster))
-                continue;
-
             yield return new WaitForSeconds(2f);
 
-            if(_execution == null)
+            if (!_caster.GetComponent<IManaUser>().HasMana(Properties.ManaCost))
+            {
+                _execution.Stop();
+                _execution = null;
+                _manaDrain = null;
+                yield break;
+            }
+
+            _caster.GetComponent<IManaUser>().UseMana(Properties.ManaCost);
+
+            if (_execution == null)
             {
                 _manaDrain = null;
                 yield break;
@@ -61,6 +60,10 @@ public class Ability : MonoBehaviour
 
     public void Cast(GameObject caster)
     {
+        _caster = caster;
+        if (!_caster.GetComponent<IManaUser>().HasMana(Properties.ManaCost))
+            return;
+
         if (Properties.Toggable)
         {
             if(_execution != null)
@@ -74,13 +77,12 @@ public class Ability : MonoBehaviour
             _execution.Execute(caster, this, _layer);
 
             if (_manaDrain == null)
-                _manaDrain = StartCoroutine(ConstantManaDrain(caster));
+                _manaDrain = StartCoroutine(ConstantManaDrain());
 
             return;
         }
 
-        if (!UseMana(caster))
-            return;
+        _caster.GetComponent<IManaUser>().UseMana(Properties.ManaCost);
 
         _execution = CreateAbilityExecution();
         _execution.Execute(caster, this, _layer);
@@ -101,7 +103,7 @@ public class Ability : MonoBehaviour
                 Properties.ProjectileProperties.ApplyRuntimeData(_direction, Properties.Affinity, _finalDamage);
                 return new ProjectileAbility(Properties.ProjectileProperties);
             case AbilityType.AOE:
-                Properties.AOEProperties.ApplyRuntimeData(Properties.Affinity, _finalDamage);
+                Properties.AOEProperties.ApplyRuntimeData(_caster, Properties.Affinity, _finalDamage, Properties.ManaCost, _caster.GetComponent<IManaUser>());
                 return new AOEAbility(Properties.AOEProperties);
             default:
                 return null;

@@ -5,64 +5,74 @@ using System.Linq;
 
 public class AOE : MonoBehaviour
 {
-    private AOEProperties _properties;
-    private GameObject _followTarget;
+    private IAOEMovement _movementBehaviour;
+    private IAOEHit _hitBehaviour;
 
-    private List<IDamageable> _enemiesInRange = new List<IDamageable>();
+    private IManaUser _manaUser;
+    private float _manaCost;
+    private float _attackInterval;
+    private float _timeToLive;
 
-    private void Start()
-    {
-        // less than 0 is just infinite
-        if (_properties.TimeToLive >= 0)
-            StartCoroutine(StartCountdown());
-
-        StartCoroutine(DamageCoroutine());
-    }
+    private List<Collider2D> _enemiesInRange = new List<Collider2D>();
 
     private void FixedUpdate()
     {
-        transform.position = _followTarget.transform.position;
+        _movementBehaviour.Move(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _enemiesInRange.Add(collision?.GetComponent<IDamageable>());
+        Logger.Log("Enemies within AOE: " + _enemiesInRange.Count);
+        _enemiesInRange.Add(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _enemiesInRange.Remove(collision?.GetComponent<IDamageable>());
+        _enemiesInRange.Remove(collision);
     }
 
-    private IEnumerator DamageCoroutine()
+    private IEnumerator OnHitCoroutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(_properties.AttackInterval);
+            yield return new WaitForSeconds(_attackInterval);
 
-            foreach (IDamageable enemy in _enemiesInRange.ToList())
+            if (!_manaUser.HasMana(_manaCost))
+                yield break;
+
+            foreach (Collider2D enemy in _enemiesInRange.ToList())
             {
-                if (enemy.IsDead()) continue;
+                if (enemy.GetComponent<IDamageable>().IsDead()) continue;
 
-                enemy.TakeDamage(_properties.Damage, _properties.Affinity);
+                _hitBehaviour.OnHit(this, enemy);
             }
 
-            _enemiesInRange.RemoveAll(e => e == null || e.IsDead());
+            _enemiesInRange.RemoveAll(e => e == null || e.GetComponent<IDamageable>().IsDead());
         }
     }
 
     private IEnumerator StartCountdown()
     {
-        yield return new WaitForSeconds(_properties.TimeToLive);
+        yield return new WaitForSeconds(_timeToLive);
         Destroy(gameObject);
     }
 
-    public void ApplyRuntimeData(GameObject caster, AOEProperties properties, LayerMask layer)
+    public void SetBehaviour(IAOEMovement movement, IAOEHit hit, AOEProperties properties, LayerMask layer)
     {
-        _followTarget = caster;
-        _properties = properties;
+        _movementBehaviour = movement;
+        _hitBehaviour = hit;
+        _manaUser = properties.ManaUser;
+        _manaCost = properties.ManaCost;
+        _attackInterval = properties.AttackInterval;
+        _timeToLive = properties.TimeToLive;
         gameObject.layer = layer;
 
-        transform.localScale = new Vector3(_properties.Size, _properties.Size, 0);
+        transform.localScale = new Vector3(properties.Size, properties.Size, 0);
+
+        // less than 0 is just infinite
+        if (_timeToLive >= 0)
+            StartCoroutine(StartCountdown());
+
+        StartCoroutine(OnHitCoroutine());
     }
 }
