@@ -42,6 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: AOE
+    uniqueID: 267808657
+    locked: 0
   - name: Projectile
     uniqueID: 3354256871
     locked: 0

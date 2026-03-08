@@ -72,7 +72,7 @@ public class EnemyManager : MonoBehaviour
         if (level % 10 == 0)
         {
             // scale up the enemies
-            _statScaling += 2f;
+            _statScaling += 0.5f;
             _expScaling *= 2f;
             foreach (EnemySpawner spawner in _normalSpawners)
                 spawner.ChangeScaling(_statScaling, _expScaling);

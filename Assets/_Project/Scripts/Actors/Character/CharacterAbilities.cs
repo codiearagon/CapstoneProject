@@ -63,18 +63,10 @@ public class CharacterAbilities : MonoBehaviour
         if (index >= _abilities.Count)
             return;
 
-        if (_character.Stats.CurrentMana < _abilities[index].Properties.ManaCost)
-        {
-            Logger.Log("Not enough mana");
-            return;
-        }
-
         Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
 
         _abilities[index].SetRuntimeData(CalculateDamage(_abilities[index]), direction);
         _abilities[index].Cast(transform.parent.gameObject);
-
-        _character.UseMana(_abilities[index].Properties.ManaCost);
     }
 
     private float CalculateDamage(Ability ability)

@@ -11,4 +11,5 @@ public enum AbilityType
 public interface IAbilityExecution
 {
     public void Execute(GameObject caster, Ability ability, LayerMask layer);
+    public void Stop();
 }

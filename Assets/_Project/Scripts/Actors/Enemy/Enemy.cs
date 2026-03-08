@@ -1,6 +1,7 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable, IManaUser
 {
     [SerializeField]
     private GameObject _buffPrefab;
@@ -64,7 +65,9 @@ public class Enemy : MonoBehaviour, IDamageable
         }
 
         Destroy(gameObject);
-    } 
+    }
+
+    public bool IsDead() => _stats.CurrentHp <= 0;
 
     public void TakeDamage(float amount, Affinity damageAffinity)
     {
@@ -93,7 +96,6 @@ public class Enemy : MonoBehaviour, IDamageable
         _stats.Attack *= multiplier;
         _stats.AttackSpeed *= multiplier;
         _stats.Defense *= multiplier;
-        _stats.AttackRange *= multiplier;
         _stats.ExpOnKill *= expScaling;
     }
 
@@ -112,6 +114,19 @@ public class Enemy : MonoBehaviour, IDamageable
     public void PlayerInRange(bool value)
     {
         _playerInRange = value;
+    }
+
+    public bool HasMana(float amount)
+    {
+        return false;
+    }
+
+    public void UseMana(float amount)
+    {
+    }
+
+    public void GainMana(float amount)
+    {
     }
 
     public bool IsPaused => _isPaused;

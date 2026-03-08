@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using Unity.VisualScripting;
 
-public class Character : MonoBehaviour, IDamageable
+public class Character : MonoBehaviour, IDamageable, IManaUser
 {
     // Stats events
     public event Action<float> OnHealthChanged;
@@ -199,6 +199,8 @@ public class Character : MonoBehaviour, IDamageable
         OnStatsChanged?.Invoke(_stats);
     }
 
+    public bool IsDead() => _stats.CurrentHp <= 0;
+
     public void TakeDamage(float amount, Affinity damageAffinity) 
     {
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
@@ -211,9 +213,21 @@ public class Character : MonoBehaviour, IDamageable
         OnHealthChanged?.Invoke(_stats.CurrentHp);
     }
 
+    public bool HasMana(float amount)
+    {
+        return _stats.CurrentMana >= amount;
+    }
+
     public void UseMana(float amount)
     {
         _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana - amount, 0, _stats.MaxMana);
+
+        OnManaChanged?.Invoke(_stats.CurrentMana);
+    }
+
+    public void GainMana(float amount)
+    {
+        _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + amount, 0, _stats.MaxMana);
 
         OnManaChanged?.Invoke(_stats.CurrentMana);
     }

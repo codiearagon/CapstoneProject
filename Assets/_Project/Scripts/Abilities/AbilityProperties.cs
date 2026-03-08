@@ -20,6 +20,7 @@ public class AbilityProperties
 
     [Space]
     public ProjectileProperties ProjectileProperties;
+    public AOEProperties AOEProperties;
 
     public void ApplyProperties(AbilityProperties properties)
     {
@@ -33,5 +34,6 @@ public class AbilityProperties
         Type = properties.Type;
 
         ProjectileProperties.ApplyProperties(properties.ProjectileProperties);
+        AOEProperties.ApplyProperties(properties.AOEProperties);
     }
 }

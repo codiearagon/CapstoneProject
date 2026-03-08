@@ -29,6 +29,7 @@ public class ProjectileAbility : IAbilityExecution
         projectile.transform.localScale = new Vector3(_properties.Size, _properties.Size, 0);
     }
 
+    public void Stop() { }
 
     // ------ Movement and Hit Factory ------
     private IProjectileMovement CreateMovementBehaviour()
