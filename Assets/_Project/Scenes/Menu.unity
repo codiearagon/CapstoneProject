@@ -392,7 +392,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharSelectUIController
   _playableCharacters:
-  - {fileID: 2606402699127159773, guid: 1b904b5942be7bd40846ea917cbb367a, type: 3}
   - {fileID: 2606402699127159773, guid: a85ad4f526930644dacb25a32dbc388b, type: 3}
 --- !u!114 &1271290125
 MonoBehaviour:

@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.Rendering.HableCurve;
 
 public class EnemyMeleeAttack : MonoBehaviour
 {
+    private SpriteRenderer _rangeSprite;
     private CircleCollider2D _rangeCollider;
     private Enemy _enemy;
 
@@ -13,12 +15,16 @@ public class EnemyMeleeAttack : MonoBehaviour
     private void Awake()
     {
         _rangeCollider = GetComponent<CircleCollider2D>();
+        _rangeSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
     {
         _enemy = GetComponentInParent<Enemy>();
         _rangeCollider.radius = _enemy.Stats.AttackRange;
+
+        _rangeSprite.color = new Color(1f, 0f, 0f, 0.3f);
+        _rangeSprite.transform.localScale = new Vector3(_enemy.Stats.AttackRange * 2.5f, _enemy.Stats.AttackRange * 2.5f, 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

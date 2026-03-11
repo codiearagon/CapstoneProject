@@ -10,7 +10,7 @@ public class CharacterMetadata : MonoBehaviour
 
     public CharacterStats Stats { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         Stats = GetComponent<Character>().Stats;
     }

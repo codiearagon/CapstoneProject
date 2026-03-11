@@ -84,15 +84,16 @@ public class CharSelectUIController : MonoBehaviour
     private void UpdateSelectedCharacterUI()
     {
         CharacterMetadata _charMeta = _selectedCharacter.GetComponent<CharacterMetadata>();
+        Character _char = _selectedCharacter.GetComponent<Character>();
 
         _charNameLabel.text = _selectedCharacter.name;
-        _charSplashArtImage.sprite = _charMeta.Icon;
+        _charSplashArtImage.sprite = _charMeta.SplashArt;
         _charStatsLabel.text = System.String.Format("HP: {0}\n" +
                                                "Movement Speed: {1}\n" +
                                                "Attack: {2}\n" +
                                                "Attack Speed: {3}\n" +
-                                               "Defense: {4}", _charMeta.Stats.MaxHp, _charMeta.Stats.MovementSpeed,
-                                               _charMeta.Stats.Attack, _charMeta.Stats.AttackSpeed, _charMeta.Stats.Defense);
+                                               "Defense: {4}", _char.Stats.MaxHp, _char.Stats.MovementSpeed,
+                                               _char.Stats.Attack, _char.Stats.AttackSpeed, _char.Stats.Defense);
     }
 
     public void SelectCharacter(ClickEvent evt)
