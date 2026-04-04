@@ -11,6 +11,7 @@ public class Character : MonoBehaviour, IDamageable, IManaUser
     public event Action<float> OnHealthChanged;
     public event Action<float> OnManaChanged;
     public event Action<CharacterStats> OnStatsChanged;
+    public event Action OnDeath;
 
     // Ability events
     public event Action<List<Ability>> OnAbilitiesChanged;
@@ -59,7 +60,7 @@ public class Character : MonoBehaviour, IDamageable, IManaUser
 
     private void OnEnable()
     {
-        _input.Player.Enable();
+        //_input.Player.Enable();
         _input.Player.Move.performed += OnMove;
         _input.Player.Look.performed += OnLook;
         _input.Player.Move.canceled += OnMove;
@@ -170,6 +171,7 @@ public class Character : MonoBehaviour, IDamageable, IManaUser
         }
     }
 
+    // stats get scaled but move speed is capped
     public void SelectAdvancement(CharacterAdvancement advancement)
     {
         // Add bonus stats
@@ -209,6 +211,11 @@ public class Character : MonoBehaviour, IDamageable, IManaUser
         //Logger.Log(string.Format("Received Damage: {0}, {1} base * {2}, {3}", finalDamage, amount, affinityMultiplier, _stats.CharacterName));
 
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
+
+        if(_stats.CurrentHp <= 0)
+        {
+            OnDeath?.Invoke();
+        }
 
         OnHealthChanged?.Invoke(_stats.CurrentHp);
     }

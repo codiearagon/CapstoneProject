@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum GameState
@@ -10,6 +11,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [SerializeField]
+    private PlayerRoot _playerRoot;
+
+    [SerializeField]
+    private DeathUIController _deathUI;
+
+    private Character _playerObj;
+
     private void Awake()
     {
         // Singleton setup
@@ -20,7 +29,29 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+    }
 
+    private void OnEnable()
+    {
+        _playerRoot.OnPlayerSpawned += HandlePlayerSpawned;
+    }
+
+    private void OnDisable()
+    {
+        _playerRoot.OnPlayerSpawned -= HandlePlayerSpawned;
+        _playerObj.OnDeath -= HandleOnDeath;
+    }
+
+    private void HandlePlayerSpawned(GameObject playerObj)
+    {
+        _playerObj = playerObj.GetComponent<Character>();
+        _playerObj.OnDeath += HandleOnDeath;
+    }
+
+    private void HandleOnDeath()
+    {
+        Utility.RequestPause();
+        _deathUI.TriggerUI();
+        Logger.Log("Player died");
     }
 }

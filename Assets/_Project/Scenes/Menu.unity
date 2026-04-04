@@ -232,22 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConsoleUIController
   _playerActions: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
-  _console: {fileID: 370406551}
-  _submit: {fileID: 1271290125}
---- !u!114 &370406551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: UI/Console
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
-  m_ActionId: 95050c8a-058f-480e-a8c4-dc1cd9eabcc9
+  _console: {fileID: -1483049388946313518, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
+  _submit: {fileID: 6772967974327744193, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
 --- !u!1 &465696411
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,20 +379,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharSelectUIController
   _playableCharacters:
   - {fileID: 2606402699127159773, guid: a85ad4f526930644dacb25a32dbc388b, type: 3}
---- !u!114 &1271290125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: UI/Submit
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: c502fded2be96714d8f74d82c61d9967, type: 3}
-  m_ActionId: 056a9d99-ddec-4306-bc43-252ad4ae1cf2
 --- !u!1 &2045273144
 GameObject:
   m_ObjectHideFlags: 0
