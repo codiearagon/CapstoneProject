@@ -71,7 +71,7 @@ public class CharacterRangedAttack : MonoBehaviour
         {
             Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
 
-            _runtimeAbility.SetRuntimeData(CalculateDamage(), direction);
+            _runtimeAbility.SetRuntimeData(_character.Stats, direction);
             _runtimeAbility.Cast(transform.parent.gameObject);
 
             yield return new WaitForSeconds(1f / _character.Stats.AttackSpeed);
@@ -88,15 +88,4 @@ public class CharacterRangedAttack : MonoBehaviour
     {
         _runtimeAbility.ChangeAffinity(advancement.Affinity);
     }
-
-    private float CalculateDamage()
-    {
-        float attackDamage = _character.Stats.Attack * _ability.Properties.AttackMultiplier;
-        float affinityMultiplier = Utility.GetMultiplier(_character.Stats, _ability.Properties.Affinity);
-        float finalDamage = attackDamage * affinityMultiplier;
-
-        return finalDamage;
-    }
-
-    
 }

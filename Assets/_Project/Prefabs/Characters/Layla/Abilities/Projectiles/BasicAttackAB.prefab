@@ -54,7 +54,7 @@ MonoBehaviour:
     AttackMultiplier: 1
     ManaCost: 0
     CooldownTime: 0
-    AlwaysActive: 0
+    Toggable: 0
     Type: 0
     ProjectileProperties:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
@@ -63,4 +63,13 @@ MonoBehaviour:
       Size: 0.5
       Speed: 10
       TimeToLive: 5
+      StatusEffectProperties: []
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      Size: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []
   Upgrades: []

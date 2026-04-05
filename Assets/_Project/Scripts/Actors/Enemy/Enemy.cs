@@ -1,7 +1,7 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class Enemy : MonoBehaviour, IDamageable, IManaUser
+public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable
 {
     [SerializeField]
     private GameObject _buffPrefab;
@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser
     private GameObject _targetObj;
     private Rigidbody2D _targetRb;
 
+    private List<IStatusEffect> _activeStatusEffects;
+
     private Vector2 _lookValue;
     private bool _playerInRange;
     private bool _isPaused;
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _activeStatusEffects = new List<IStatusEffect>();
 
         _isPaused = false;
         _stats.CurrentHp = _stats.MaxHp;
@@ -127,6 +130,19 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser
 
     public void GainMana(float amount)
     {
+    }
+
+    public void Apply(IStatusEffect effect)
+    {
+        Logger.Log("Status effect applied to: " + Stats.Name);
+        StartCoroutine(effect.Tick(GetComponent<Collider2D>()));
+
+        _activeStatusEffects.Add(effect);
+    }
+
+    public void Remove(IStatusEffect effect)
+    {
+        _activeStatusEffects.Remove(effect);
     }
 
     public bool IsPaused => _isPaused;

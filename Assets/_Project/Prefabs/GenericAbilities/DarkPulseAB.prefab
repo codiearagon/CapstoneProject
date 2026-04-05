@@ -64,9 +64,13 @@ MonoBehaviour:
       Size: 0
       Speed: 0
       TimeToLive: 0
+      StatusEffectProperties: []
     AOEProperties:
       AoePrefab: {fileID: 2774732550181386862, guid: 473e5e1a4ec5705438dcc12882042541, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 0
       Size: 10
       AttackInterval: 2
       TimeToLive: -1
+      StatusEffectProperties: []
   Upgrades: []

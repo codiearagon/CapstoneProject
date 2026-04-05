@@ -2,19 +2,9 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class EnemyStats
+public class EnemyStats : Stats
 {
-    [Header("Basic Details")]
-    public string EnemyName;
-
-    [Header("Properties")]
-    public Affinity Affinity;
-    public float MaxHp;
-    public float CurrentHp;
-    public float MovementSpeed;
-    public float Attack;
-    public float AttackSpeed;
-    public float Defense;
+    [Header("Extra Properties")]
     public float AttackRange;
 
     [Header("Progression")]

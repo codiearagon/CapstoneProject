@@ -54,7 +54,7 @@ MonoBehaviour:
     AttackMultiplier: 1.4
     ManaCost: 15
     CooldownTime: 5
-    AlwaysActive: 0
+    Toggable: 0
     Type: 0
     ProjectileProperties:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: abee7f9c631b36e4fbecb2cb9cffd9d2, type: 3}
@@ -63,6 +63,15 @@ MonoBehaviour:
       Size: 1
       Speed: 5
       TimeToLive: 5
+      StatusEffectProperties: []
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      Size: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []
   Upgrades:
   - AbilityName: Fireball+
     Identifier: fireball
@@ -72,7 +81,7 @@ MonoBehaviour:
     AttackMultiplier: 1.6
     ManaCost: 10
     CooldownTime: 5
-    AlwaysActive: 0
+    Toggable: 0
     Type: 0
     ProjectileProperties:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: abee7f9c631b36e4fbecb2cb9cffd9d2, type: 3}
@@ -81,3 +90,17 @@ MonoBehaviour:
       Size: 1.5
       Speed: 5
       TimeToLive: 5
+      StatusEffectProperties:
+      - Effect: 3
+        Affinity: 1
+        Duration: 10
+        Interval: 1
+        BaseDamage: 2
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      Size: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []

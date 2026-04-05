@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileAbility : IAbilityExecution
 {
     private ProjectileProperties _properties;
+    private List<IStatusEffect> _statusEffects = new List<IStatusEffect>();
 
     public ProjectileAbility(ProjectileProperties properties)
     {
@@ -23,6 +25,12 @@ public class ProjectileAbility : IAbilityExecution
     {
         IProjectileMovement movement = CreateMovementBehaviour();
         IProjectileHit hit = CreateHitBehaviour();
+
+        foreach(StatusEffectProperties statProps in _properties.StatusEffectProperties)
+        {
+            Logger.Log("Created status effect");
+            _statusEffects.Add(StatusEffectFactory.CreateStatusEffect(statProps));
+        }
 
         GameObject projectile = GameObject.Instantiate(_properties.ProjectilePrefab, caster.transform.position, Quaternion.identity);
         projectile.GetComponent<Projectile>().SetBehaviour(movement, hit, _properties.TimeToLive, layer);
@@ -48,9 +56,9 @@ public class ProjectileAbility : IAbilityExecution
         switch (_properties.HitBehaviour)
         {
             case ProjectileHitBehaviour.Damage:
-                return new DamageOnHitProjectile(_properties);
+                return new DamageOnHitProjectile(_properties, _statusEffects);
             case ProjectileHitBehaviour.Piercing:
-                return new PiercingProjectile(_properties);
+                return new PiercingProjectile(_properties, _statusEffects);
             default:
                 return null;
         }

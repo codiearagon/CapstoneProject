@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Ability : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Ability : MonoBehaviour
 
     [Header("Add upgrades to ability (Sets values)")]
     public List<AbilityProperties> Upgrades;
+
+    private Stats _casterStats;
 
     private float _cooldownRemaining;
     private IAbilityExecution _execution;
@@ -88,10 +91,15 @@ public class Ability : MonoBehaviour
         _execution.Execute(caster, this, _layer);
     }
 
-    public void SetRuntimeData(float damage, Vector2 direction)
+    public void SetRuntimeData(Stats stats, Vector2 direction)
     {
-        _finalDamage = damage;
+        _casterStats = stats;
         _direction = direction;
+
+        float attackDamage = _casterStats.Attack * Properties.AttackMultiplier;
+        float affinityMultiplier = Utility.GetMultiplier(_casterStats, Properties.Affinity);
+
+        _finalDamage = attackDamage * affinityMultiplier;
     }
 
     // execution factory
@@ -100,10 +108,10 @@ public class Ability : MonoBehaviour
         switch(Properties.Type)
         {
             case AbilityType.Projectile:
-                Properties.ProjectileProperties.ApplyRuntimeData(_direction, Properties.Affinity, _finalDamage);
+                Properties.ProjectileProperties.ApplyRuntimeData(_direction, Properties.Affinity, _finalDamage, _casterStats);
                 return new ProjectileAbility(Properties.ProjectileProperties);
             case AbilityType.AOE:
-                Properties.AOEProperties.ApplyRuntimeData(_caster, Properties.Affinity, _finalDamage, Properties.ManaCost, _caster.GetComponent<IManaUser>());
+                Properties.AOEProperties.ApplyRuntimeData(_caster, Properties.Affinity, _finalDamage, Properties.ManaCost, _caster.GetComponent<IManaUser>(), _casterStats);
                 return new AOEAbility(Properties.AOEProperties);
             default:
                 return null;

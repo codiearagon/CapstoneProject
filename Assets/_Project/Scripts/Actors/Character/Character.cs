@@ -3,9 +3,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using Unity.VisualScripting;
 
-public class Character : MonoBehaviour, IDamageable, IManaUser
+public class Character : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable
 {
     // Stats events
     public event Action<float> OnHealthChanged;
@@ -35,6 +34,8 @@ public class Character : MonoBehaviour, IDamageable, IManaUser
     private PlayerInput _input;
     private Rigidbody2D _rb;
     private CharacterAbilities _abilities;
+
+    private List<IStatusEffect> _activeStatusEffects;
 
     private Vector2 _moveValue;
     private Vector2 _lookValue;
@@ -237,6 +238,18 @@ public class Character : MonoBehaviour, IDamageable, IManaUser
         _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + amount, 0, _stats.MaxMana);
 
         OnManaChanged?.Invoke(_stats.CurrentMana);
+    }
+
+    public void Apply(IStatusEffect effect)
+    {
+        StartCoroutine(effect.Tick(GetComponent<Collider2D>()));
+
+        _activeStatusEffects.Add(effect);
+    }
+
+    public void Remove(IStatusEffect effect)
+    {
+        _activeStatusEffects.Remove(effect);
     }
 
     public void ReceiveExperience(float amount)

@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
   _stats:
-    CharacterName: Layla
+    Name: Layla
     Affinity: 0
     MaxHp: 50
     CurrentHp: 0

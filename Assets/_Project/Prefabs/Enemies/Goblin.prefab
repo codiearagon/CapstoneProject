@@ -265,14 +265,24 @@ MonoBehaviour:
   _buffPrefab: {fileID: 720070607113045562, guid: 1604fdba41376484eb72fa309daccf77, type: 3}
   _damageTextPrefab: {fileID: 6293451624518223884, guid: 80f63f84e37a52549a485ab307c72bea, type: 3}
   _stats:
-    EnemyName: Goblin
+    Name: Goblin
     Affinity: 4
     MaxHp: 100
     CurrentHp: 0
+    HpRegenRate: 0
+    MaxMana: 0
+    CurrentMana: 0
+    ManaRegenRate: 0
     MovementSpeed: 10
     Attack: 10
     AttackSpeed: 1
     Defense: 10
+    FireMultiplier: 0
+    WaterMultiplier: 0
+    AirMultiplier: 0
+    EarthMultiplier: 0
+    DarkMultiplier: 0
+    LightMultiplier: 0
     AttackRange: 1.5
     ExpOnKill: 100
     BuffDropChance: 0

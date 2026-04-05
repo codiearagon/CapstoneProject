@@ -24,7 +24,7 @@ public static class Utility
         [StatType.LightMultiplier] = 1f,
     };
 
-    public static float GetMultiplier(CharacterStats stats, Affinity affinity)
+    public static float GetMultiplier(Stats stats, Affinity affinity)
     {
         float multiplier = 0f;
 

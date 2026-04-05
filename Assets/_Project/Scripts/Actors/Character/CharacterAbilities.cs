@@ -65,17 +65,8 @@ public class CharacterAbilities : MonoBehaviour
 
         Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(_character.LookValue) - _rb.position).normalized;
 
-        _abilities[index].SetRuntimeData(CalculateDamage(_abilities[index]), direction);
+        _abilities[index].SetRuntimeData(_character.Stats, direction);
         _abilities[index].Cast(transform.parent.gameObject);
-    }
-
-    private float CalculateDamage(Ability ability)
-    {
-        float attackDamage = _character.Stats.Attack * ability.Properties.AttackMultiplier;
-        float affinityMultiplier = Utility.GetMultiplier(_character.Stats, ability.Properties.Affinity);
-        float finalDamage = attackDamage * affinityMultiplier;
-
-        return finalDamage;
     }
 
     public void AddAbility(Ability ability)
