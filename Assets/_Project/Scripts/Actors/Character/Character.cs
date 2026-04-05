@@ -60,7 +60,7 @@ public class Character : MonoBehaviour, IDamageable, IManaUser
 
     private void OnEnable()
     {
-        //_input.Player.Enable();
+        _input.Player.Enable();
         _input.Player.Move.performed += OnMove;
         _input.Player.Look.performed += OnLook;
         _input.Player.Move.canceled += OnMove;

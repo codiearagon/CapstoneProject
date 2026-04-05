@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 public class DeathUIController : MonoBehaviour
 {
     private VisualElement _root;
+    private VisualElement _container;
 
     private Button _restartButton;
     private Button _menuButton;
@@ -12,11 +13,12 @@ public class DeathUIController : MonoBehaviour
     private void Awake()
     {
         _root = GetComponent<UIDocument>().rootVisualElement;
-
+        
+        _container = _root.Q<VisualElement>("Container");
         _restartButton = _root.Q<Button>("Restart");
         _menuButton = _root.Q<Button>("Menu");
 
-        _root.style.display = DisplayStyle.None;
+        _container.style.display = DisplayStyle.None;
     }
 
     private void OnEnable()
@@ -45,7 +47,7 @@ public class DeathUIController : MonoBehaviour
 
     public void TriggerUI()
     {
-        _root.style.display = DisplayStyle.Flex;
+        _container.style.display = DisplayStyle.Flex;
     }
 
 }

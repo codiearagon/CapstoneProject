@@ -92,21 +92,21 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser
     {
         _stats.MaxHp *= multiplier;
         _stats.CurrentHp *= multiplier;
-        _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed * multiplier, 100);
+        _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed * multiplier, 70);
         _stats.Attack *= multiplier;
         _stats.AttackSpeed *= multiplier;
         _stats.Defense *= multiplier;
         _stats.ExpOnKill *= expScaling;
     }
 
-    public void MakeElite(float multiplier)
+    public void MakeElite(float multiplier, float expScaling)
     {
         transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
         _stats.MaxHp *= multiplier;
         _stats.CurrentHp *= multiplier;
         _stats.Attack *= multiplier;
         _stats.Defense *= multiplier;
-        _stats.ExpOnKill *= multiplier;
+        _stats.ExpOnKill *= expScaling;
         _stats.BuffDropChance = 100;
         _stats.BuffDropAmount = 5;
     }

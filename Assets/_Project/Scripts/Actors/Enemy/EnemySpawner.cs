@@ -1,10 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _enemyToSpawn;
+    private List<GameObject> _enemies;
+
+    [SerializeField]
+    private float _spawnPadding;
 
     [SerializeField]
     private float _spawnInterval;
@@ -14,15 +18,14 @@ public class EnemySpawner : MonoBehaviour
     private float _statScaling;
     private float _expScaling;
 
+    private Camera _camera;
+
     private void Awake()
     {
+        _camera = Camera.main;
+
         _statScaling = 1;
         _expScaling = 1;
-    }
-
-    private void Start()
-    {
-        TriggerSpawning(_isSpawningConstantly);
     }
 
     private IEnumerator SpawningCoroutine()
@@ -34,10 +37,28 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private Vector2 GetSpawnPosition()
     {
-        Gizmos.color = Color.white;
-        Gizmos.DrawSphere(transform.position, 0.5f);
+        float camHeight = _camera.orthographicSize;
+        float camWidth = camHeight * _camera.aspect;
+
+        Vector2 camPos = _camera.transform.position;
+
+        int side = Random.Range(0, 4);
+
+        switch (side)
+        {
+            case 0:
+                return new Vector2(Random.Range(camPos.x - camWidth, camPos.x + camWidth), camPos.y + camHeight + _spawnPadding);
+            case 1:
+                return new Vector2(Random.Range(camPos.x - camWidth, camPos.x + camWidth), camPos.y - camHeight - _spawnPadding);
+            case 2:
+                return new Vector2(camPos.x - camWidth - _spawnPadding, Random.Range(camPos.y - camHeight, camPos.y + camHeight));
+            case 3:
+                return new Vector2(camPos.x + camWidth + _spawnPadding, Random.Range(camPos.y - camHeight, camPos.y + camHeight));
+            default:
+                return new Vector2(Random.Range(camPos.x - camWidth, camPos.x + camWidth), camPos.y + camHeight + _spawnPadding);
+        }
     }
 
     public void ChangeScaling(float scaling, float expScaling)
@@ -59,20 +80,21 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        SpawnEnemy(_statScaling);
-    }
+        int idx = Random.Range(0, _enemies.Count);
+        GameObject prefab = _enemies[idx];
+        Vector2 pos = GetSpawnPosition();
 
-    public void SpawnEnemy(float scaling)
-    {
-        GameObject enemy = Instantiate(_enemyToSpawn, transform.position, Quaternion.identity);
+        GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
         enemy.GetComponent<Enemy>().MultiplyStats(_statScaling, _expScaling);
     }
-
-    public void SpawnElite(GameObject prefab, float scaling)
+    
+    public void SpawnElite()
     {
-        GameObject enemy = Instantiate(prefab, transform.position, Quaternion.identity);
-        enemy.GetComponent<Enemy>().MakeElite(scaling);
-    }
+        int idx = Random.Range(0, _enemies.Count);
+        GameObject prefab = _enemies[idx];
+        Vector2 pos = GetSpawnPosition();
 
-    public GameObject EnemyPrefab => _enemyToSpawn;
+        GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
+        enemy.GetComponent<Enemy>().MakeElite(5 * _statScaling, 5 * _expScaling);
+    }
 }
