@@ -14,3 +14,23 @@
     padding-bottom: 20px;
     padding-left: 20px;
 }
+
+.title-main {
+    -unity-font-definition: url("project://database/Assets/_Project/Font/novem___.ttf?fileID=12800000&guid=5959b81331a03b048aa33fbb46d88234&type=3#novem___");
+    font-size: 50px;
+}
+
+.font-main {
+    -unity-font-definition: url("project://database/Assets/_Project/Font/novem___.ttf?fileID=12800000&guid=5959b81331a03b048aa33fbb46d88234&type=3#novem___");
+    font-size: 25px;
+}
+
+.button-style {
+    -unity-background-image-tint-color: rgba(12, 12, 12, 0);
+    background-color: rgb(55, 51, 47);
+    color: rgb(255, 255, 255);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}

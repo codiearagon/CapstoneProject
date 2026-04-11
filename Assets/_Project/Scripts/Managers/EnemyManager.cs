@@ -55,7 +55,7 @@ public class EnemyManager : MonoBehaviour
         if (level % 5 == 0)
         {
             // scale up the enemies
-            _statScaling += 0.5f;
+            _statScaling += 0.3f;
             _expScaling *= 2f;
             _spawner.ChangeScaling(_statScaling, _expScaling);
 

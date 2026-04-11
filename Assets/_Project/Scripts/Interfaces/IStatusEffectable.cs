@@ -1,5 +1,5 @@
 public interface IStatusEffectable
 {
-    public void Apply(IStatusEffect effect);
-    public void Remove(IStatusEffect effect);
+    public void ApplyEffect(IStatusEffect effect);
+    public void RemoveEffect(IStatusEffect effect);
 }

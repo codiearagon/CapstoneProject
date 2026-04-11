@@ -34,7 +34,7 @@ public class ProjectileAbility : IAbilityExecution
 
         GameObject projectile = GameObject.Instantiate(_properties.ProjectilePrefab, caster.transform.position, Quaternion.identity);
         projectile.GetComponent<Projectile>().SetBehaviour(movement, hit, _properties.TimeToLive, layer);
-        projectile.transform.localScale = new Vector3(_properties.Size, _properties.Size, 0);
+        projectile.transform.localScale = new Vector3(_properties.XSize, _properties.YSize, 0);
     }
 
     public void Stop() { }
@@ -59,6 +59,8 @@ public class ProjectileAbility : IAbilityExecution
                 return new DamageOnHitProjectile(_properties, _statusEffects);
             case ProjectileHitBehaviour.Piercing:
                 return new PiercingProjectile(_properties, _statusEffects);
+            case ProjectileHitBehaviour.Knockback:
+                return new KnockbackProjectile(_properties, _statusEffects);
             default:
                 return null;
         }

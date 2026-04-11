@@ -364,7 +364,7 @@ MonoBehaviour:
     MaxMana: 0
     CurrentMana: 0
     ManaRegenRate: 0
-    MovementSpeed: 35
+    MovementSpeed: 20
     Attack: 3
     AttackSpeed: 1
     Defense: 10
@@ -375,6 +375,6 @@ MonoBehaviour:
     DarkMultiplier: 0
     LightMultiplier: 0
     AttackRange: 1.5
-    ExpOnKill: 70
+    ExpOnKill: 30
     BuffDropChance: 5
     BuffDropAmount: 0

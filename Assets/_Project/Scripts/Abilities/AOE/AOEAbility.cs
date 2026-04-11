@@ -8,6 +8,7 @@ public class AOEAbility : IAbilityExecution
     private List<IStatusEffect> _statusEffects = new List<IStatusEffect>();
 
     private GameObject _aoeRef;
+    private GameObject _pivot;
 
     public AOEAbility(AOEProperties properties)
     {
@@ -16,6 +17,8 @@ public class AOEAbility : IAbilityExecution
 
     public void Execute(GameObject caster, Ability ability, LayerMask layer)
     {
+        _pivot = new GameObject("BeamPivot");
+
         IAOEMovement movement = CreateMovementBehaviour();
         IAOEHit hit = CreateHitBehaviour();
 
@@ -31,6 +34,7 @@ public class AOEAbility : IAbilityExecution
     public void Stop()
     {
         GameObject.Destroy(_aoeRef);
+        GameObject.Destroy(_pivot);
     }
 
     private IAOEMovement CreateMovementBehaviour()
@@ -39,6 +43,9 @@ public class AOEAbility : IAbilityExecution
         {
             case AOEMovementBehaviour.Follow:
                 return new FollowAOE(_properties);
+            case AOEMovementBehaviour.FollowAndAim:
+                Logger.Log(_pivot);
+                return new FollowAndAimAOE(_properties, _pivot);
             default:
                 return null;
         }

@@ -19,6 +19,7 @@ public class ProgressionUIController : MonoBehaviour
     private VisualElement _abilityUpgradeElement;
     private VisualElement _advancementElement;
     private VisualElement _optionContainer;
+    private Image _advancementBg;
 
     private Button _prevButton;
     private Button _nextButton;
@@ -43,6 +44,7 @@ public class ProgressionUIController : MonoBehaviour
         _advancementElement = _root.Q<VisualElement>("Advancement");
         _optionContainer = _advancementElement.Q<VisualElement>("OptionContainer");
 
+        _advancementBg = _advancementElement.Q<Image>("Background");
         _prevButton = _advancementElement.Q<Button>("PreviousButton");
         _nextButton = _advancementElement.Q<Button>("NextButton");
         _detailsButton = _advancementElement.Q<Button>("DetailsButton");
@@ -220,7 +222,7 @@ public class ProgressionUIController : MonoBehaviour
         _selectedIndex = 0;
         _selectedAdvancement = _characterAdvancements[_selectedIndex];
         _optionContainer.Add(_selectedAdvancement);
-
+        SetBg();
         _advancementElement.style.display = DisplayStyle.Flex;
     }
 
@@ -235,6 +237,7 @@ public class ProgressionUIController : MonoBehaviour
         _selectedAdvancement = _characterAdvancements[_selectedIndex];
         _optionContainer.Clear();
         _optionContainer.Add(_selectedAdvancement);
+        SetBg();
     }
 
     private void NextAdvancement(ClickEvent evt)
@@ -248,6 +251,13 @@ public class ProgressionUIController : MonoBehaviour
         _selectedAdvancement = _characterAdvancements[_selectedIndex];
         _optionContainer.Clear();
         _optionContainer.Add(_selectedAdvancement);
+        SetBg();
+    }
+
+    private void SetBg()
+    {
+        _advancementBg.image = (_selectedAdvancement.dataSource as CharacterAdvancement).SplashArt.texture;
+        _advancementBg.scaleMode = ScaleMode.ScaleAndCrop;
     }
 
     private void ShowDetails(ClickEvent evt)

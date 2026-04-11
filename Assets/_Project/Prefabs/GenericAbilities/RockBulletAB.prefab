@@ -60,9 +60,22 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: eb4152b553d15454f856e7b7dc0b0501, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 0
-      Size: 0.5
+      Rotating: 1
+      XSize: 0.5
+      YSize: 0.5
+      Knockback: 0
       Speed: 15
       TimeToLive: 5
+      StatusEffectProperties: []
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []
   Upgrades:
   - AbilityName: Rock Bullet+
     Identifier: rockbullet
@@ -78,6 +91,19 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: eb4152b553d15454f856e7b7dc0b0501, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 0
-      Size: 0.5
+      Rotating: 1
+      XSize: 1
+      YSize: 1
+      Knockback: 0
       Speed: 15
       TimeToLive: 5
+      StatusEffectProperties: []
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []

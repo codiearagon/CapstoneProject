@@ -11,6 +11,7 @@ public class StatusEffectProperties
     public float Duration;
     public float Interval;
     public float BaseDamage;
+    public float Multiplier;
 
     private float _damage;
 
@@ -26,6 +27,7 @@ public class StatusEffectProperties
         Duration = properties.Duration;
         Interval = properties.Interval;
         BaseDamage = properties.BaseDamage;
+        Multiplier = properties.Multiplier;
     }
 
     public float Damage => _damage;

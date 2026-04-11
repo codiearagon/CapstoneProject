@@ -60,7 +60,10 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: abee7f9c631b36e4fbecb2cb9cffd9d2, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 1
-      Size: 1
+      Rotating: 1
+      XSize: 1
+      YSize: 1
+      Knockback: 0
       Speed: 5
       TimeToLive: 5
       StatusEffectProperties: []
@@ -68,7 +71,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
-      Size: 0
+      XSize: 0
+      YSize: 0
       AttackInterval: 0
       TimeToLive: 0
       StatusEffectProperties: []
@@ -87,7 +91,10 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: abee7f9c631b36e4fbecb2cb9cffd9d2, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 1
-      Size: 1.5
+      Rotating: 1
+      XSize: 2
+      YSize: 2
+      Knockback: 0
       Speed: 5
       TimeToLive: 5
       StatusEffectProperties:
@@ -96,11 +103,13 @@ MonoBehaviour:
         Duration: 10
         Interval: 1
         BaseDamage: 2
+        Multiplier: 0
     AOEProperties:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
-      Size: 0
+      XSize: 0
+      YSize: 0
       AttackInterval: 0
       TimeToLive: 0
       StatusEffectProperties: []

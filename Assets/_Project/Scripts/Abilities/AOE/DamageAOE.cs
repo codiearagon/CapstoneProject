@@ -21,7 +21,7 @@ public class DamageAOE : IAOEHit
 
         foreach (IStatusEffect effect in _statusEffects)
         {
-            other?.GetComponent<IStatusEffectable>().Apply(effect);
+            other?.GetComponent<IStatusEffectable>().ApplyEffect(effect);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-public class Character : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable
+public class Character : MonoBehaviour, IActor
 {
     // Stats events
     public event Action<float> OnHealthChanged;
@@ -128,7 +128,7 @@ public class Character : MonoBehaviour, IDamageable, IManaUser, IStatusEffectabl
     {
         OnAbilityUnlockTriggered?.Invoke();
 
-        _stats.NextAbilityUnlockLevel += 5;
+        _stats.NextAbilityUnlockLevel += 10;
     }
 
     private void TriggerAbilityUpgrade()
@@ -140,10 +140,10 @@ public class Character : MonoBehaviour, IDamageable, IManaUser, IStatusEffectabl
 
     private void GainRandomStats(int amount)
     {
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < amount; i++)
         {
             StatType stat = Utility.RollRandomStat();
-            float percent = Utility.RollRandomPercentage(2, 6);
+            float percent = Utility.RollRandomPercentage(1, 3);
             BuffStat(stat, percent);
 
             OnLevelUpBuff?.Invoke(stat, percent);
@@ -240,14 +240,14 @@ public class Character : MonoBehaviour, IDamageable, IManaUser, IStatusEffectabl
         OnManaChanged?.Invoke(_stats.CurrentMana);
     }
 
-    public void Apply(IStatusEffect effect)
+    public void ApplyEffect(IStatusEffect effect)
     {
         StartCoroutine(effect.Tick(GetComponent<Collider2D>()));
 
         _activeStatusEffects.Add(effect);
     }
 
-    public void Remove(IStatusEffect effect)
+    public void RemoveEffect(IStatusEffect effect)
     {
         _activeStatusEffects.Remove(effect);
     }
@@ -280,6 +280,16 @@ public class Character : MonoBehaviour, IDamageable, IManaUser, IStatusEffectabl
         _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed, 120);
 
         OnStatsChanged?.Invoke(_stats);
+    }
+
+    public Vector2 GetPosition()
+    {
+        return transform.position;
+    }
+
+    public Vector2 GetLook()
+    {
+        return LookValue;
     }
 
     public CharacterStats Stats => _stats;

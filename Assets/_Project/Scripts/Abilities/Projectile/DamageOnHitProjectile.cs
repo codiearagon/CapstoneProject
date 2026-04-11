@@ -21,7 +21,7 @@ public class DamageOnHitProjectile : IProjectileHit
 
         foreach (IStatusEffect effect in _statusEffects)
         {
-            other?.GetComponent<IStatusEffectable>().Apply(effect);
+            other?.GetComponent<IStatusEffectable>().ApplyEffect(effect);
         }
 
         GameObject.Destroy(projectile.gameObject);

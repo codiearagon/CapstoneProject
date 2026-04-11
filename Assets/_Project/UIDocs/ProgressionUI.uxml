@@ -2,16 +2,19 @@
     <Style src="project://database/Assets/_Project/UIDocs/ProgressionUI.uss?fileID=7433441132597879392&amp;guid=7e26bf56bdb753d41b4978029ea9a502&amp;type=3#ProgressionUI"/>
     <ui:VisualElement name="AbilityUpgrade" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgb(0, 0, 0); top: 25%; left: 25%; flex-direction: row; justify-content: center; display: none;"/>
     <ui:VisualElement name="AbilityUnlock" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgb(0, 0, 0); top: 25%; left: 25%; flex-direction: row; justify-content: center; display: none;"/>
-    <ui:VisualElement name="Advancement" style="flex-grow: 1; position: absolute; align-self: center; width: 50%; height: 50%; background-color: rgb(0, 0, 0); top: 25%; left: 25%; flex-direction: column; justify-content: center; display: none;">
-        <ui:Label text="Select Advancement" style="color: rgb(255, 255, 255); margin-left: 10px; margin-bottom: 4px;"/>
+    <ui:VisualElement name="Advancement" style="flex-grow: 0; position: relative; width: 100%; height: 100%; flex-direction: column; display: none; background-color: rgb(63, 48, 48);">
+        <ui:Image scale-mode="ScaleAndCrop" name="Background" class="blur" style="flex-grow: 0; width: 100%; height: 100%; position: absolute; display: flex; justify-content: space-around; align-self: stretch; align-content: stretch; filter: blur(20) tint(rgb(135, 135, 135));"/>
         <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: row; flex-shrink: 1;">
-            <ui:Button text="&lt;" name="PreviousButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
-            <ui:VisualElement name="OptionContainer" style="flex-grow: 1;"/>
-            <ui:Button text="&gt;" name="NextButton" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
-        </ui:VisualElement>
-        <ui:VisualElement name="ButtonContainer" style="flex-grow: 0; flex-direction: row; justify-content: flex-end; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; flex-shrink: 0;">
-            <ui:Button text="Show Details" name="DetailsButton"/>
-            <ui:Button text="Choose" name="ChooseButton"/>
+            <ui:Button text="&lt;" name="PreviousButton" class="button-style" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-shrink: 0; flex-grow: 0; width: 5%; font-size: 50px;"/>
+            <ui:VisualElement name="Everything" style="flex-grow: 1;">
+                <ui:Label text="Select Advancement" name="Title" class="title-main" style="color: rgb(255, 255, 255); margin-left: 20px; margin-bottom: 20px; margin-top: 20px;"/>
+                <ui:VisualElement name="OptionContainer" style="flex-grow: 1;"/>
+                <ui:VisualElement name="ButtonContainer" style="flex-grow: 0; flex-direction: row; justify-content: flex-end; margin-top: 15px; margin-right: 20px; margin-bottom: 15px; margin-left: 5px; flex-shrink: 0;">
+                    <ui:Button text="Show Details" name="DetailsButton" class="font-main button-style" style="font-size: 35px;"/>
+                    <ui:Button text="Choose" name="ChooseButton" class="font-main button-style" style="font-size: 35px;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button text="&gt;" name="NextButton" class="button-style" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-grow: 0; width: 5%; font-size: 50px;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

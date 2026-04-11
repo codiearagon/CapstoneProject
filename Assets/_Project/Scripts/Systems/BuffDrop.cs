@@ -20,12 +20,12 @@ public class BuffDrop : MonoBehaviour
         _label = GetComponentInChildren<TextMeshProUGUI>();
 
         _statToBuff = Utility.RollRandomStat();
-        _percentAmount = Utility.RollRandomPercentage(1, 5);
+        _percentAmount = Utility.RollRandomPercentage(1, 3);
         _pickupRange = 1f;
 
         _collider.radius = _pickupRange;
 
-        _label.text = "+" + _percentAmount * 100 + "% " + _statToBuff;
+        _label.text = "+" + (_percentAmount * 100).ToString("F1") + "% " + _statToBuff;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

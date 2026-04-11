@@ -110,9 +110,9 @@ public static class Utility
         return rand <= probability;
     }
 
-    public static float RollRandomPercentage(int min, int max)
+    public static float RollRandomPercentage(float min, float max)
     {
-        return Random.Range(min, max + 1) / 100f;
+        return Random.Range(min, max + 1f) / 100f;
     }
 
     public static void RequestPause()

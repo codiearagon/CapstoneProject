@@ -36,9 +36,10 @@ public class AOE : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(_attackInterval);
-
             if (!_manaUser.HasMana(_manaCost))
-                yield break;
+                continue;
+
+            _manaUser.UseMana(_manaCost);
 
             foreach (Collider2D enemy in _enemiesInRange.ToList())
             {
@@ -67,7 +68,7 @@ public class AOE : MonoBehaviour
         _timeToLive = properties.TimeToLive;
         gameObject.layer = layer;
 
-        transform.localScale = new Vector3(properties.Size, properties.Size, 0);
+        transform.localScale = new Vector3(properties.XSize, properties.YSize, 0);
 
         // less than 0 is just infinite
         if (_timeToLive >= 0)

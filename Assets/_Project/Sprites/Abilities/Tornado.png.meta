@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8fa999d11755e40418c50675280edc2d
+guid: 9f95ec184fba0174e8b5277550b4b5f8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1527885550625387242
-    second: HolyBeam_0
+      213: -2105305842262875611
+    second: Tornado_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,12 +113,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HolyBeam_0
+      name: Tornado_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 32
+        width: 28
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 61d8581df2cdbcae0800000000000000
-      internalID: -1527885550625387242
+      spriteID: 522ed58ad7378c2e0800000000000000
+      internalID: -2105305842262875611
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HolyBeam_0: -1527885550625387242
+      Tornado_0: -2105305842262875611
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

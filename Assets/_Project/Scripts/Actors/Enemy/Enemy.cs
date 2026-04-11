@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 
-public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable
+public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, IMoveEffectable
 {
     [SerializeField]
     private GameObject _buffPrefab;
@@ -23,14 +25,18 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable
     private Vector2 _lookValue;
     private bool _playerInRange;
     private bool _isPaused;
-    
+    private bool _isKnockedback;
+    private float _speedMultiplier;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _activeStatusEffects = new List<IStatusEffect>();
 
         _isPaused = false;
+        _isKnockedback = false;
         _stats.CurrentHp = _stats.MaxHp;
+        _speedMultiplier = 1;
     }
 
     private void Start()
@@ -42,12 +48,12 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable
 
     private void FixedUpdate()
     {
-        if (_isPaused)
+        if (_isPaused || _isKnockedback)
             return;
 
         if(_targetObj != null && !_playerInRange)
         {
-            _rb.MovePosition(Vector2.MoveTowards(_rb.position, _targetRb.position, (_stats.MovementSpeed / 10) * Time.fixedDeltaTime));
+            _rb.MovePosition(Vector2.MoveTowards(_rb.position, _targetRb.position, (_stats.MovementSpeed / 10) * _speedMultiplier * Time.fixedDeltaTime));
             _lookValue = (_targetRb.position - _rb.position).normalized;
         }
     }
@@ -68,6 +74,12 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable
         }
 
         Destroy(gameObject);
+    }
+
+    private IEnumerator Knockbacked()
+    {
+         yield return new WaitForSeconds(1f);
+        _isKnockedback = false;
     }
 
     public bool IsDead() => _stats.CurrentHp <= 0;
@@ -132,15 +144,35 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable
     {
     }
 
-    public void Apply(IStatusEffect effect)
+    public void ApplyKnockback(Vector2 force)
     {
+        _rb.AddForce(force, ForceMode2D.Impulse);
+        _isKnockedback = true;
+        StartCoroutine(Knockbacked());
+    }
+
+    public void ApplyMoveSpeed(float multiplier)
+    {
+        _speedMultiplier = multiplier;
+    }
+
+    public void ApplyEffect(IStatusEffect effect)
+    {
+        IStatusEffect existing = _activeStatusEffects.FirstOrDefault(e => e.GetType() == effect.GetType());
+
+        if(existing != null)
+        {
+            existing.Refresh();
+            return;
+        }
+
         Logger.Log("Status effect applied to: " + Stats.Name);
         StartCoroutine(effect.Tick(GetComponent<Collider2D>()));
 
         _activeStatusEffects.Add(effect);
     }
 
-    public void Remove(IStatusEffect effect)
+    public void RemoveEffect(IStatusEffect effect)
     {
         _activeStatusEffects.Remove(effect);
     }

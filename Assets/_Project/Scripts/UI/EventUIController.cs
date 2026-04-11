@@ -68,7 +68,7 @@ public class EventUIController : MonoBehaviour
     private void HandleOnLevelUpBuff(StatType type, float amount)
     {
         Label statBuff = new Label();
-        statBuff.text = "+" + amount * 100 + "% " + type;
+        statBuff.text = "+" + (amount * 100).ToString("F1") + "% " + type;
         statBuff.style.color = Color.white;
         statBuff.style.fontSize = 25f;
 

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 638949062865999924}
-  - component: {fileID: -4532022896088927897}
+  - component: {fileID: 3050894501572034644}
   m_Layer: 0
-  m_Name: BasicAttackAB
+  m_Name: TornadoAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4532022896088927897
+--- !u!114 &3050894501572034644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,25 +46,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ability
   Level: 1
   Properties:
-    AbilityName: Magic Attack
-    Identifier: magicattack
-    Icon: {fileID: 21300000, guid: a5cbb7baffcd5184f8f65f0c9674f6af, type: 3}
-    Description: Shoots out a magic projectile
-    Affinity: 0
-    AttackMultiplier: 1
-    ManaCost: 0
-    CooldownTime: 0
+    AbilityName: Tornado
+    Identifier: tornado
+    Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
+    Description: Conjures a tornado that pushes all enemies in its path.
+    Affinity: 3
+    AttackMultiplier: 1.2
+    ManaCost: 15
+    CooldownTime: 5
     Toggable: 0
     Type: 0
     ProjectileProperties:
-      ProjectilePrefab: {fileID: 6525881876598589149, guid: 7946817ddf5503d4399a9ea7d8dcb6a8, type: 3}
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: c377baeb1f1405e40922ed1decac44e9, type: 3}
       MovementBehaviour: 0
-      HitBehaviour: 0
+      HitBehaviour: 2
       Rotating: 0
-      XSize: 0.5
-      YSize: 0.5
-      Speed: 10
-      TimeToLive: 5
+      XSize: 2
+      YSize: 2
+      Knockback: 100
+      Speed: 5
+      TimeToLive: 10
       StatusEffectProperties: []
     AOEProperties:
       AoePrefab: {fileID: 0}
@@ -75,4 +76,34 @@ MonoBehaviour:
       AttackInterval: 0
       TimeToLive: 0
       StatusEffectProperties: []
-  Upgrades: []
+  Upgrades:
+  - AbilityName: Big Tornado
+    Identifier: tornado
+    Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
+    Description: Bigger and stronger.
+    Affinity: 3
+    AttackMultiplier: 1.4
+    ManaCost: 15
+    CooldownTime: 0
+    Toggable: 0
+    Type: 0
+    ProjectileProperties:
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: c377baeb1f1405e40922ed1decac44e9, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 2
+      Rotating: 0
+      XSize: 3
+      YSize: 3
+      Knockback: 200
+      Speed: 5
+      TimeToLive: 10
+      StatusEffectProperties: []
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []

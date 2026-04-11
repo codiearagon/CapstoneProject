@@ -12,7 +12,10 @@ public class ProjectileProperties
     public ProjectileHitBehaviour HitBehaviour;
 
     [Header("Properties")]
-    public float Size;
+    public bool Rotating;
+    public float XSize;
+    public float YSize;
+    public float Knockback;
     public float Speed;
     public float TimeToLive;
 
@@ -42,7 +45,10 @@ public class ProjectileProperties
         ProjectilePrefab = properties.ProjectilePrefab;
         MovementBehaviour = properties.MovementBehaviour;
         HitBehaviour = properties.HitBehaviour;
-        Size = properties.Size;
+        Rotating = properties.Rotating;
+        XSize = properties.XSize;
+        YSize = properties.YSize;
+        Knockback = properties.Knockback;
         Speed = properties.Speed;
         TimeToLive = properties.TimeToLive;
         StatusEffectProperties = properties.StatusEffectProperties;

@@ -11,7 +11,8 @@ public class AOEProperties
     public AOEHitBehaviour HitBehaviour;
 
     [Header("Properties")]
-    public float Size;
+    public float XSize;
+    public float YSize;
     public float AttackInterval;
     public float TimeToLive;
 
@@ -43,7 +44,8 @@ public class AOEProperties
     public void ApplyProperties(AOEProperties properties) 
     {
         AoePrefab = properties.AoePrefab;
-        Size = properties.Size;
+        XSize = properties.XSize;
+        YSize = properties.YSize;
         AttackInterval = properties.AttackInterval;
         TimeToLive = properties.TimeToLive;
         StatusEffectProperties = properties.StatusEffectProperties;

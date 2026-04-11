@@ -50,17 +50,73 @@ MonoBehaviour:
     Identifier: waterblade
     Icon: {fileID: 21300000, guid: ec1d1019b2688bf4e85e83da1aef00fc, type: 3}
     Description: Shoots out a blade of water that slices everything in its path.
+      Slows enemies by 10%.
     Affinity: 2
     AttackMultiplier: 1.4
     ManaCost: 15
     CooldownTime: 5
-    AlwaysActive: 0
+    Toggable: 0
     Type: 0
     ProjectileProperties:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: 71413f3ae5a5cc347b53502d2cd6d5e8, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 1
-      Size: 1
+      Rotating: 1
+      XSize: 1
+      YSize: 1
+      Knockback: 0
       Speed: 5
       TimeToLive: 10
-  Upgrades: []
+      StatusEffectProperties:
+      - Effect: 1
+        Affinity: 2
+        Duration: 5
+        Interval: 0
+        BaseDamage: 0
+        Multiplier: 0.9
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []
+  Upgrades:
+  - AbilityName: Water Blade+
+    Identifier: waterblade
+    Icon: {fileID: 21300000, guid: ec1d1019b2688bf4e85e83da1aef00fc, type: 3}
+    Description: Faster, stronger, bigger. Slows enemies on hit by 30%.
+    Affinity: 2
+    AttackMultiplier: 1.6
+    ManaCost: 15
+    CooldownTime: 0
+    Toggable: 0
+    Type: 0
+    ProjectileProperties:
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: 71413f3ae5a5cc347b53502d2cd6d5e8, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 1
+      Rotating: 1
+      XSize: 1
+      YSize: 1
+      Knockback: 0
+      Speed: 10
+      TimeToLive: 10
+      StatusEffectProperties:
+      - Effect: 1
+        Affinity: 2
+        Duration: 5
+        Interval: 0
+        BaseDamage: 0
+        Multiplier: 0.7
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []

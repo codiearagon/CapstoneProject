@@ -17,33 +17,8 @@ public class Ability : MonoBehaviour
     private IAbilityExecution _execution;
     private Vector2 _direction;
     private float _finalDamage;
-    private Coroutine _manaDrain;
     private GameObject _caster;
     private LayerMask _layer;
-
-    private IEnumerator ConstantManaDrain()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(2f);
-
-            if (!_caster.GetComponent<IManaUser>().HasMana(Properties.ManaCost))
-            {
-                _execution.Stop();
-                _execution = null;
-                _manaDrain = null;
-                yield break;
-            }
-
-            _caster.GetComponent<IManaUser>().UseMana(Properties.ManaCost);
-
-            if (_execution == null)
-            {
-                _manaDrain = null;
-                yield break;
-            }
-        }
-    }
 
     public void SetLayer(LayerMask layer)
     {
@@ -64,9 +39,6 @@ public class Ability : MonoBehaviour
     public void Cast(GameObject caster)
     {
         _caster = caster;
-        if (!_caster.GetComponent<IManaUser>().HasMana(Properties.ManaCost))
-            return;
-
         if (Properties.Toggable)
         {
             if(_execution != null)
@@ -79,14 +51,14 @@ public class Ability : MonoBehaviour
             _execution = CreateAbilityExecution();
             _execution.Execute(caster, this, _layer);
 
-            if (_manaDrain == null)
-                _manaDrain = StartCoroutine(ConstantManaDrain());
-
             return;
         }
 
-        _caster.GetComponent<IManaUser>().UseMana(Properties.ManaCost);
+        if (!_caster.GetComponent<IManaUser>().HasMana(Properties.ManaCost))
+            return;
 
+        _caster.GetComponent<IManaUser>().UseMana(Properties.ManaCost);
+        
         _execution = CreateAbilityExecution();
         _execution.Execute(caster, this, _layer);
     }

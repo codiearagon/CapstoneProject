@@ -19251,8 +19251,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbilityHelper
   abilities:
   - {fileID: 3050894501572034644, guid: 50bbf7d1ae01deb4a8aab20d8065e2bd, type: 3}
-  - {fileID: 3050894501572034644, guid: a7adfd8551223ed49a5349900e30d10c, type: 3}
   - {fileID: 3050894501572034644, guid: 85c3db1629531a14a811d0bf1d311276, type: 3}
+  - {fileID: 3050894501572034644, guid: a7adfd8551223ed49a5349900e30d10c, type: 3}
+  - {fileID: 3050894501572034644, guid: 15b6654d4793fe2469d1301e33dcd8e1, type: 3}
+  - {fileID: 3050894501572034644, guid: 5d8ccf39fe1b8fc44a854589e97241a3, type: 3}
   - {fileID: 3050894501572034644, guid: 25335773760fcac43830638ba56dead6, type: 3}
 --- !u!4 &1933569685
 Transform:

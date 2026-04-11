@@ -6,8 +6,10 @@ public static class StatusEffectFactory
         {
             case StatusEffect.None:
                 return null;
-            case StatusEffect.Burn:
-                return new BurnEffect(properties);
+            case StatusEffect.Dot:
+                return new DotEffect(properties);
+            case StatusEffect.Slow:
+                return new SlowEffect(properties);
             default:
                 return null;
         }
