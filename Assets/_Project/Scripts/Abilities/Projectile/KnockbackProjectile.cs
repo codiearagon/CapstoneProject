@@ -21,7 +21,7 @@ public class KnockbackProjectile : IProjectileHit
 
     public void OnHit(Projectile projectile, Collider2D other)
     {
-        other?.GetComponent<IMoveEffectable>().ApplyKnockback(_direction * _knockback);
+        other?.GetComponent<IStatEffectable>().ApplyKnockback(_direction * _knockback);
         other?.GetComponent<IDamageable>().TakeDamage(_damage, _affinity);
 
         foreach (IStatusEffect effect in _statusEffects)

@@ -49,7 +49,8 @@ MonoBehaviour:
     AbilityName: Fireball
     Identifier: fireball
     Icon: {fileID: 21300000, guid: 389d848c2ace85b4781fda60f38041a9, type: 3}
-    Description: "Shoots out a ball of fire that damages everything in its path\t\t"
+    Description: "Shoots out a ball of fire that damages everything in its path.\t"
+    UpgradeDescription: 
     Affinity: 1
     AttackMultiplier: 1.4
     ManaCost: 15
@@ -80,10 +81,14 @@ MonoBehaviour:
   - AbilityName: Fireball+
     Identifier: fireball
     Icon: {fileID: 21300000, guid: 389d848c2ace85b4781fda60f38041a9, type: 3}
-    Description: Increased damage and size. Decreased mana cost.
+    Description: 'Shoots out a ball of fire that damages everything in its path.
+
+      Applies
+      burn to damaged benemies.'
+    UpgradeDescription: Increased damage and size. Applies burn for 5 seconds.
     Affinity: 1
     AttackMultiplier: 1.6
-    ManaCost: 10
+    ManaCost: 15
     CooldownTime: 5
     Toggable: 0
     Type: 0
@@ -100,9 +105,50 @@ MonoBehaviour:
       StatusEffectProperties:
       - Effect: 3
         Affinity: 1
+        Duration: 5
+        Interval: 1
+        BaseDamage: 1
+        Multiplier: 0
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []
+  - AbilityName: Fireball++
+    Identifier: fireball
+    Icon: {fileID: 21300000, guid: 389d848c2ace85b4781fda60f38041a9, type: 3}
+    Description: 'Shoots out a ball of fire that damages everything in its path.
+
+      Applies
+      burn to damaged benemies.'
+    UpgradeDescription: Increased damage and size. Applies stronger burn for 10 seconds.
+      Uses more mana.
+    Affinity: 1
+    AttackMultiplier: 1.8
+    ManaCost: 25
+    CooldownTime: 5
+    Toggable: 0
+    Type: 0
+    ProjectileProperties:
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: abee7f9c631b36e4fbecb2cb9cffd9d2, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 1
+      Rotating: 1
+      XSize: 3
+      YSize: 3
+      Knockback: 0
+      Speed: 5
+      TimeToLive: 5
+      StatusEffectProperties:
+      - Effect: 3
+        Affinity: 1
         Duration: 10
         Interval: 1
-        BaseDamage: 2
+        BaseDamage: 3
         Multiplier: 0
     AOEProperties:
       AoePrefab: {fileID: 0}

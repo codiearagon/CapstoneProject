@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 
-public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, IMoveEffectable
+public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, IStatEffectable
 {
     [SerializeField]
     private GameObject _buffPrefab;
@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, I
     private bool _isPaused;
     private bool _isKnockedback;
     private float _speedMultiplier;
+    private bool _isManaRegen;
 
     private void Awake()
     {
@@ -35,7 +36,12 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, I
 
         _isPaused = false;
         _isKnockedback = false;
+
         _stats.CurrentHp = _stats.MaxHp;
+        _stats.CurrentMana = _stats.MaxMana;
+        _isManaRegen = true;
+        StartCoroutine(ManaRegen());
+
         _speedMultiplier = 1;
     }
 
@@ -80,6 +86,16 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, I
     {
          yield return new WaitForSeconds(1f);
         _isKnockedback = false;
+        _rb.linearVelocity = Vector3.zero;
+    }
+
+    private IEnumerator ManaRegen()
+    {
+        while (_isManaRegen)
+        {
+            yield return new WaitForSeconds(1f);
+            _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + _stats.ManaRegenRate, 0, _stats.MaxMana);
+        }
     }
 
     public bool IsDead() => _stats.CurrentHp <= 0;
@@ -133,15 +149,17 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, I
 
     public bool HasMana(float amount)
     {
-        return false;
+        return _stats.CurrentMana >= amount;
     }
 
     public void UseMana(float amount)
     {
+        _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana - amount, 0, _stats.MaxMana);
     }
 
     public void GainMana(float amount)
     {
+        _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + amount, 0, _stats.MaxMana);
     }
 
     public void ApplyKnockback(Vector2 force)
@@ -154,6 +172,11 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, I
     public void ApplyMoveSpeed(float multiplier)
     {
         _speedMultiplier = multiplier;
+    }
+
+    public void ApplyStatChange(StatType stat, float multiplier)
+    {
+        _stats.GetStat(stat);
     }
 
     public void ApplyEffect(IStatusEffect effect)

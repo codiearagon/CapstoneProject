@@ -50,6 +50,7 @@ MonoBehaviour:
     Identifier: tornado
     Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
     Description: Conjures a tornado that pushes all enemies in its path.
+    UpgradeDescription: 
     Affinity: 3
     AttackMultiplier: 1.2
     ManaCost: 15
@@ -63,8 +64,8 @@ MonoBehaviour:
       Rotating: 0
       XSize: 2
       YSize: 2
-      Knockback: 100
-      Speed: 5
+      Knockback: 200
+      Speed: 10
       TimeToLive: 10
       StatusEffectProperties: []
     AOEProperties:
@@ -80,7 +81,8 @@ MonoBehaviour:
   - AbilityName: Big Tornado
     Identifier: tornado
     Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
-    Description: Bigger and stronger.
+    Description: Conjures a tornado that pushes all enemies in its path.
+    UpgradeDescription: Bigger and stronger.
     Affinity: 3
     AttackMultiplier: 1.4
     ManaCost: 15
@@ -94,8 +96,39 @@ MonoBehaviour:
       Rotating: 0
       XSize: 3
       YSize: 3
-      Knockback: 200
-      Speed: 5
+      Knockback: 300
+      Speed: 10
+      TimeToLive: 10
+      StatusEffectProperties: []
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []
+  - AbilityName: Titanic Tornado
+    Identifier: tornado
+    Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
+    Description: Conjures a tornado that pushes all enemies in its path.
+    UpgradeDescription: Bigger, faster, and stronger. Uses more mana.
+    Affinity: 3
+    AttackMultiplier: 1.6
+    ManaCost: 20
+    CooldownTime: 0
+    Toggable: 0
+    Type: 0
+    ProjectileProperties:
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: c377baeb1f1405e40922ed1decac44e9, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 2
+      Rotating: 0
+      XSize: 4
+      YSize: 4
+      Knockback: 500
+      Speed: 15
       TimeToLive: 10
       StatusEffectProperties: []
     AOEProperties:

@@ -202,8 +202,8 @@ Transform:
   m_GameObject: {fileID: 2614719710841126021}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.96766, y: 1.46024, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7586474594058182600}
@@ -302,17 +302,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.01338274}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3333334, y: 0.6666667}
+    oldSize: {x: 1, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.5105732}
   m_EdgeRadius: 0
 --- !u!50 &1785213722731947224
 Rigidbody2D:
@@ -358,7 +358,7 @@ MonoBehaviour:
   _stats:
     Name: Wolf
     Affinity: 5
-    MaxHp: 15
+    MaxHp: 20
     CurrentHp: 0
     HpRegenRate: 0
     MaxMana: 0
@@ -374,7 +374,7 @@ MonoBehaviour:
     EarthMultiplier: 0
     DarkMultiplier: 0
     LightMultiplier: 0
-    AttackRange: 1.5
+    AttackRange: 1
     ExpOnKill: 30
     BuffDropChance: 5
     BuffDropAmount: 0

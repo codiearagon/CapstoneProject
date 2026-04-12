@@ -7,6 +7,7 @@ public enum StatusEffect
     Slow,
     Root,
     Dot,
+    DefShred,
     Regen,
 }
 

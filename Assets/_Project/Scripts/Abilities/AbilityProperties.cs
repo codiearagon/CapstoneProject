@@ -9,6 +9,7 @@ public class AbilityProperties
     public string Identifier;
     public Sprite Icon;
     [TextArea] public string Description;
+    [TextArea] public string UpgradeDescription;
 
     [Header("Basic Properties")]
     public Affinity Affinity;
@@ -26,6 +27,7 @@ public class AbilityProperties
     {
         AbilityName = properties.AbilityName;
         Icon = properties.Icon;
+        Description = properties.Description;
         Affinity = properties.Affinity;
         AttackMultiplier = properties.AttackMultiplier;
         ManaCost = properties.ManaCost;

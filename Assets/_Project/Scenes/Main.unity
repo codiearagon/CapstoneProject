@@ -19083,8 +19083,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _enemies:
   - {fileID: 2614719710841126021, guid: 8d4fe882000748745bb79b7209f18e81, type: 3}
+  - {fileID: 2614719710841126021, guid: d4b1f93331572bc4b8ea54a2141ef772, type: 3}
   - {fileID: 2614719710841126021, guid: 72278649ff0d0f146895513528e3acbc, type: 3}
   - {fileID: 2614719710841126021, guid: 53083f7bc738bac48916b464fcde3510, type: 3}
+  - {fileID: 2614719710841126021, guid: 8e125834035fe59448d27e443e32e992, type: 3}
   _spawnPadding: 2
   _spawnInterval: 2
   _isSpawningConstantly: 0

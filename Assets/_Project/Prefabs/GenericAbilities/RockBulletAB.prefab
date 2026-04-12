@@ -49,7 +49,8 @@ MonoBehaviour:
     AbilityName: Rock Bullet
     Identifier: rockbullet
     Icon: {fileID: 21300000, guid: 48bb234a2507b1a4996e6cacc706dacd, type: 3}
-    Description: Shoots out a bullet of rock
+    Description: Shoots out a bullet of rock.
+    UpgradeDescription: 
     Affinity: 4
     AttackMultiplier: 3
     ManaCost: 10
@@ -80,10 +81,11 @@ MonoBehaviour:
   - AbilityName: Rock Bullet+
     Identifier: rockbullet
     Icon: {fileID: 21300000, guid: 48bb234a2507b1a4996e6cacc706dacd, type: 3}
-    Description: Increased damage. Decreased mana cost
+    Description: Shoots out a bullet of rock.
+    UpgradeDescription: Increased damage.
     Affinity: 4
-    AttackMultiplier: 3.5
-    ManaCost: 8
+    AttackMultiplier: 4
+    ManaCost: 10
     CooldownTime: 5
     Toggable: 0
     Type: 0
@@ -92,8 +94,39 @@ MonoBehaviour:
       MovementBehaviour: 0
       HitBehaviour: 0
       Rotating: 1
-      XSize: 1
-      YSize: 1
+      XSize: 0.5
+      YSize: 0.5
+      Knockback: 0
+      Speed: 15
+      TimeToLive: 5
+      StatusEffectProperties: []
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []
+  - AbilityName: Rock Bullet++
+    Identifier: rockbullet
+    Icon: {fileID: 21300000, guid: 48bb234a2507b1a4996e6cacc706dacd, type: 3}
+    Description: Shoots out a bullet of rock.
+    UpgradeDescription: Increased damage. Uses more mana.
+    Affinity: 4
+    AttackMultiplier: 5
+    ManaCost: 15
+    CooldownTime: 5
+    Toggable: 0
+    Type: 0
+    ProjectileProperties:
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: eb4152b553d15454f856e7b7dc0b0501, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      Rotating: 1
+      XSize: 0.5
+      YSize: 0.5
       Knockback: 0
       Speed: 15
       TimeToLive: 5

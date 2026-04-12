@@ -166,7 +166,7 @@ public class ProgressionUIController : MonoBehaviour
             multiplier.text = ability.Properties.AttackMultiplier * 100 + "% -> " + ability.Upgrades[upgradeIndex].AttackMultiplier * 100 + "% of attack";
             cost.text = ability.Properties.ManaCost + " -> " + ability.Upgrades[upgradeIndex].ManaCost.ToString() + " mana";
             cooldown.text = ability.Properties.CooldownTime + " -> " + ability.Upgrades[upgradeIndex].CooldownTime.ToString() + " secs";
-            description.text = ability.Upgrades[upgradeIndex].Description;
+            description.text = ability.Upgrades[upgradeIndex].UpgradeDescription;
 
             choose.RegisterCallback<ClickEvent>(UnlockUpgrade);
             choose.dataSource = ability.Upgrades[upgradeIndex];

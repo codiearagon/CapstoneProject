@@ -265,7 +265,7 @@ MonoBehaviour:
   _stats:
     Name: Layla
     Affinity: 0
-    MaxHp: 50
+    MaxHp: 80
     CurrentHp: 0
     HpRegenRate: 1
     MaxMana: 100
@@ -274,7 +274,7 @@ MonoBehaviour:
     MovementSpeed: 30
     Attack: 15
     AttackSpeed: 1.5
-    Defense: 20
+    Defense: 50
     FireMultiplier: 1
     WaterMultiplier: 1
     AirMultiplier: 1

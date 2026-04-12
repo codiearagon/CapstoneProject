@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e04f0a0309080374f96a8e39d9d34365
+guid: 2a5258ff8dbf1394782434f85865580b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -127,9 +127,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Goblin
+  - name: MageGoblin
     originalName: 
-    pivot: {x: 0.6818182, y: 0}
+    pivot: {x: 0.6315789, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,9 +137,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 22
+      width: 19
       height: 31
-    spriteID: 67b4b42b7e77cd14aa55d2d35ee271d5
+    spriteID: 2c942f309af0ac7449b789e845d66c56
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -153,25 +153,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 4157225617
+      value0: 2502475199
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: Goblin
+    name: MageGoblin
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Goblin
+    - name: MageGoblin
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 1
+        x: 4
         y: 0
-        width: 22
+        width: 19
         height: 31
-      spriteId: 67b4b42b7e77cd14aa55d2d35ee271d5
+      spriteId: 2c942f309af0ac7449b789e845d66c56
     linkedCells: []
     tileCells: []
     tileSetIndex: 0

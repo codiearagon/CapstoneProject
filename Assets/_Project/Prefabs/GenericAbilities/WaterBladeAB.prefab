@@ -51,6 +51,7 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: ec1d1019b2688bf4e85e83da1aef00fc, type: 3}
     Description: Shoots out a blade of water that slices everything in its path.
       Slows enemies by 10%.
+    UpgradeDescription: 
     Affinity: 2
     AttackMultiplier: 1.4
     ManaCost: 15
@@ -71,7 +72,7 @@ MonoBehaviour:
       - Effect: 1
         Affinity: 2
         Duration: 5
-        Interval: 0
+        Interval: 1
         BaseDamage: 0
         Multiplier: 0.9
     AOEProperties:
@@ -87,7 +88,9 @@ MonoBehaviour:
   - AbilityName: Water Blade+
     Identifier: waterblade
     Icon: {fileID: 21300000, guid: ec1d1019b2688bf4e85e83da1aef00fc, type: 3}
-    Description: Faster, stronger, bigger. Slows enemies on hit by 30%.
+    Description: Shoots out a blade of water that slices everything in its path.
+      Slows enemies by 30%.
+    UpgradeDescription: Faster, stronger, bigger. Slows enemies on hit by 30%.
     Affinity: 2
     AttackMultiplier: 1.6
     ManaCost: 15
@@ -99,18 +102,57 @@ MonoBehaviour:
       MovementBehaviour: 0
       HitBehaviour: 1
       Rotating: 1
-      XSize: 1
-      YSize: 1
+      XSize: 1.5
+      YSize: 1.5
       Knockback: 0
       Speed: 10
       TimeToLive: 10
       StatusEffectProperties:
       - Effect: 1
         Affinity: 2
-        Duration: 5
-        Interval: 0
+        Duration: 15
+        Interval: 1
         BaseDamage: 0
         Multiplier: 0.7
+    AOEProperties:
+      AoePrefab: {fileID: 0}
+      MovementBehaviour: 0
+      HitBehaviour: 0
+      XSize: 0
+      YSize: 0
+      AttackInterval: 0
+      TimeToLive: 0
+      StatusEffectProperties: []
+  - AbilityName: Water Blade++
+    Identifier: waterblade
+    Icon: {fileID: 21300000, guid: ec1d1019b2688bf4e85e83da1aef00fc, type: 3}
+    Description: Shoots out a blade of water that slices everything in its path.
+      Slows enemies by 60%.
+    UpgradeDescription: Faster and stronger. Slows enemies on hit by 60%. Uses more
+      mana.
+    Affinity: 2
+    AttackMultiplier: 2
+    ManaCost: 20
+    CooldownTime: 0
+    Toggable: 0
+    Type: 0
+    ProjectileProperties:
+      ProjectilePrefab: {fileID: 6525881876598589149, guid: 71413f3ae5a5cc347b53502d2cd6d5e8, type: 3}
+      MovementBehaviour: 0
+      HitBehaviour: 1
+      Rotating: 1
+      XSize: 1.5
+      YSize: 1.5
+      Knockback: 0
+      Speed: 15
+      TimeToLive: 10
+      StatusEffectProperties:
+      - Effect: 1
+        Affinity: 2
+        Duration: 15
+        Interval: 1
+        BaseDamage: 0
+        Multiplier: 0.4
     AOEProperties:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0

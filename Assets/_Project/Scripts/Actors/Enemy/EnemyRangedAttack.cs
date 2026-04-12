@@ -1,49 +1,86 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class EnemyRangedAttack : MonoBehaviour
 {
+    [SerializeField]
+    private Ability _ability;
+
+    private Ability _runtimeAbility;
+
+    private SpriteRenderer _rangeSprite;
     private CircleCollider2D _rangeCollider;
     private Enemy _enemy;
+    private Rigidbody2D _rb;
 
+    private GameObject _target;
     private bool _playerInRange;
+    private Coroutine _attackCoroutine;
 
     private void Awake()
     {
         _rangeCollider = GetComponent<CircleCollider2D>();
+        _rangeSprite = GetComponentInChildren<SpriteRenderer>();
+
     }
 
     private void Start()
     {
         _enemy = GetComponentInParent<Enemy>();
+        _rb = _enemy.GetComponent<Rigidbody2D>();
+        _rangeCollider.radius = _enemy.Stats.AttackRange;
+
+        _runtimeAbility = Instantiate(_ability, transform);
+        _runtimeAbility.SetLayer(transform.parent.gameObject.layer);
+
+        _rangeSprite.color = new Color(1f, 0f, 0f, 0.3f);
+        _rangeSprite.transform.localScale = new Vector3(_enemy.Stats.AttackRange * 2.5f, _enemy.Stats.AttackRange * 2.5f, 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        _target = collision.gameObject;
         _playerInRange = true;
-        StartCoroutine(Attack());
-        Logger.Log("Player in range");
+        _enemy.PlayerInRange(true);
+
+        if (_attackCoroutine == null)
+            _attackCoroutine = StartCoroutine(Attack());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        _target = collision.gameObject;
+        _enemy.PlayerInRange(false);
         _playerInRange = false;
-        Logger.Log("Player out of range");
     }
 
     private IEnumerator Attack()
     {
-        Logger.Log("Attack coroutine started");
-
-        while (_playerInRange)
+        while (true)
         {
-            yield return new WaitForSeconds(1 / _enemy.Stats.AttackSpeed);
+            Logger.Log("Ranged enemy attacked");
+            Vector2 direction = ((Vector2)_target.transform.position - _rb.position).normalized;
+
+            _runtimeAbility.SetRuntimeData(_enemy.Stats, direction);
+            _runtimeAbility.Cast(transform.parent.gameObject);
+
+            yield return new WaitForSeconds(1f / _enemy.Stats.AttackSpeed);
+
+            if (!_playerInRange)
+            {
+                _attackCoroutine = null;
+                yield break;
+            }
         }
     }
 
     // Editor stuff
     private void OnDrawGizmos()
     {
+        if (_enemy == null)
+            return;
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _enemy.Stats.AttackRange);
     }
