@@ -1,8 +1,9 @@
-using System.Collections.Generic;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 public class Character : MonoBehaviour, IActor
 {
@@ -41,12 +42,15 @@ public class Character : MonoBehaviour, IActor
     private Vector2 _lookValue;
     private bool _isHpRegen;
     private bool _isManaRegen;
+    private float _speedMultiplier;
+    private bool _isKnockedback;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _input = new PlayerInput();
         _abilities = GetComponentInChildren<CharacterAbilities>();
+        _activeStatusEffects = new List<IStatusEffect>();
 
         _stats.CurrentHp = _stats.MaxHp;
         _stats.CurrentMana = _stats.MaxMana;
@@ -55,6 +59,8 @@ public class Character : MonoBehaviour, IActor
         _isManaRegen = true;
         StartCoroutine(HpRegen());
         StartCoroutine(ManaRegen());
+
+        _speedMultiplier = 1;
 
         Logger.Log("Character Initialized");
     }
@@ -89,7 +95,10 @@ public class Character : MonoBehaviour, IActor
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _moveValue * (_stats.MovementSpeed / 10) * Time.deltaTime);
+        if (_isKnockedback)
+            return;
+
+        _rb.MovePosition(_rb.position + _moveValue * (_stats.MovementSpeed / 10) * _speedMultiplier * Time.deltaTime);
     }
 
     private void LevelUp()
@@ -172,6 +181,13 @@ public class Character : MonoBehaviour, IActor
         }
     }
 
+    private IEnumerator Knockbacked()
+    {
+        yield return new WaitForSeconds(1f);
+        _isKnockedback = false;
+        _rb.linearVelocity = Vector3.zero;
+    }
+
     // stats get scaled but move speed is capped
     public void SelectAdvancement(CharacterAdvancement advancement)
     {
@@ -221,6 +237,16 @@ public class Character : MonoBehaviour, IActor
         OnHealthChanged?.Invoke(_stats.CurrentHp);
     }
 
+    public void Heal(float amount)
+    {
+        _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp + amount, 0, _stats.MaxHp);
+    }
+
+    public void FullHeal()
+    {
+        _stats.CurrentHp = _stats.MaxHp;
+    }
+
     public bool HasMana(float amount)
     {
         return _stats.CurrentMana >= amount;
@@ -240,8 +266,22 @@ public class Character : MonoBehaviour, IActor
         OnManaChanged?.Invoke(_stats.CurrentMana);
     }
 
+    public void FullMana()
+    {
+        _stats.CurrentMana = _stats.MaxMana;
+    }
+
     public void ApplyEffect(IStatusEffect effect)
     {
+        IStatusEffect existing = _activeStatusEffects.FirstOrDefault(e => e.GetType() == effect.GetType());
+
+        if (existing != null)
+        {
+            existing.Refresh();
+            return;
+        }
+
+        Debug.Log("Status effect applied to: " + Stats.Name);
         StartCoroutine(effect.Tick(GetComponent<Collider2D>()));
 
         _activeStatusEffects.Add(effect);
@@ -294,12 +334,14 @@ public class Character : MonoBehaviour, IActor
 
     public void ApplyKnockback(Vector2 force)
     {
-        
+        _rb.AddForce(force, ForceMode2D.Impulse);
+        _isKnockedback = true;
+        StartCoroutine(Knockbacked());
     }
 
     public void ApplyMoveSpeed(float multiplier)
     {
-        
+        _speedMultiplier = multiplier;
     }
 
     public void ApplyStatChange(StatType stat, float multiplier)

@@ -5,6 +5,9 @@ using System.Linq;
 
 public class Enemy : MonoBehaviour, IActor
 {
+    public event System.Action<float> OnDamage;
+    public event System.Action OnDeath;
+
     [SerializeField]
     private GameObject _buffPrefab;
 
@@ -79,6 +82,7 @@ public class Enemy : MonoBehaviour, IActor
             }
         }
 
+        OnDeath?.Invoke();
         Destroy(gameObject);
     }
 
@@ -109,6 +113,8 @@ public class Enemy : MonoBehaviour, IActor
 
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
 
+        OnDamage?.Invoke(_stats.CurrentHp);
+
         float randomX = Random.Range(-1f, 1f);
         float randomY = Random.Range(0f, 1.5f);
         Vector3 pos = new Vector3(transform.position.x + randomX, transform.position.y + randomY, transform.position.z);
@@ -117,6 +123,16 @@ public class Enemy : MonoBehaviour, IActor
 
         if (_stats.CurrentHp <= 0)
             Die();
+    }
+
+    public void Heal(float amount)
+    {
+        _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp + amount, 0, _stats.MaxHp);
+    }
+
+    public void FullHeal()
+    {
+        _stats.CurrentHp = _stats.MaxHp;
     }
 
     public void MultiplyStats(float multiplier, float expScaling)
@@ -142,6 +158,18 @@ public class Enemy : MonoBehaviour, IActor
         _stats.BuffDropAmount = 5;
     }
 
+    public void MakeBoss(float multiplier, float expScaling)
+    {
+        transform.localScale = new Vector3(5.0f, 5.0f, 2.0f);
+        _stats.MaxHp *= multiplier;
+        _stats.CurrentHp *= multiplier;
+        _stats.Attack *= multiplier;
+        _stats.Defense *= multiplier;
+        _stats.ExpOnKill *= expScaling;
+        _stats.BuffDropChance = 100;
+        _stats.BuffDropAmount = 10;
+    }
+
     public void PlayerInRange(bool value)
     {
         _playerInRange = value;
@@ -160,6 +188,11 @@ public class Enemy : MonoBehaviour, IActor
     public void GainMana(float amount)
     {
         _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + amount, 0, _stats.MaxMana);
+    }
+
+    public void FullMana()
+    {
+        _stats.CurrentMana = _stats.MaxMana;
     }
 
     public void ApplyKnockback(Vector2 force)

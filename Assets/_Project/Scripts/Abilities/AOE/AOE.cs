@@ -43,12 +43,12 @@ public class AOE : MonoBehaviour
 
             foreach (Collider2D enemy in _enemiesInRange.ToList())
             {
-                if (enemy.GetComponent<IDamageable>().IsDead()) continue;
+                if (enemy.GetComponent<ILiving>().IsDead()) continue;
 
                 _hitBehaviour.OnHit(this, enemy);
             }
 
-            _enemiesInRange.RemoveAll(e => e == null || e.GetComponent<IDamageable>().IsDead());
+            _enemiesInRange.RemoveAll(e => e == null || e.GetComponent<ILiving>().IsDead());
         }
     }
 

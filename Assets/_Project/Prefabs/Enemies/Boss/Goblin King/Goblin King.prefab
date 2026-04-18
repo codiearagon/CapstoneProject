@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7586474594058182600}
   - component: {fileID: 287955655276886173}
-  - component: {fileID: 478604206507411540}
+  - component: {fileID: 8247644687823188390}
   m_Layer: 9
   m_Name: AttackRange
   m_TagString: Untagged
@@ -70,7 +70,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &478604206507411540
+--- !u!114 &8247644687823188390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,10 +79,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2444870730473923313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b64b4db3e6b4794880ee51d279c9606, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b8401ef9a442264b9538aaacc7f9b4c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyRangedAttack
-  _ability: {fileID: 3050894501572034644, guid: 50bbf7d1ae01deb4a8aab20d8065e2bd, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::BossAttack
+  _abilities:
+  - {fileID: 3050894501572034644, guid: 3c04523885e67114e88d8b6d3d0fb9bc, type: 3}
+  - {fileID: 3050894501572034644, guid: 2be41f510e5077c49bf8636f188b1a4e, type: 3}
+  - {fileID: 3050894501572034644, guid: 3de49c6375021714691db7dd6dccc12c, type: 3}
+  _abilityBurst: 2
 --- !u!1 &2614719710841126021
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +101,7 @@ GameObject:
   - component: {fileID: 1785213722731947224}
   - component: {fileID: 4352915952331059390}
   m_Layer: 7
-  m_Name: Fire Imp
+  m_Name: Goblin King
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +117,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7586474594058182600}
@@ -168,7 +172,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: beefcd4c12a0b8547891def1347f32ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0171d929b4ad6514abc6d508bc888e0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -212,7 +216,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.03940767, y: 0}
+  m_Offset: {x: 0.0062918067, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -222,7 +226,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5828563, y: 1}
+  m_Size: {x: 0.67425525, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &1785213722731947224
 Rigidbody2D:
@@ -266,26 +270,26 @@ MonoBehaviour:
   _buffPrefab: {fileID: 720070607113045562, guid: 1604fdba41376484eb72fa309daccf77, type: 3}
   _damageTextPrefab: {fileID: 6293451624518223884, guid: 80f63f84e37a52549a485ab307c72bea, type: 3}
   _stats:
-    Name: Fire Imp
-    Affinity: 1
-    MaxHp: 60
+    Name: Goblin King
+    Affinity: 4
+    MaxHp: 500
     CurrentHp: 0
     HpRegenRate: 0
-    MaxMana: 100
+    MaxMana: 1000
     CurrentMana: 0
-    ManaRegenRate: 100
+    ManaRegenRate: 1000
     MovementSpeed: 10
-    Attack: 5
-    AttackSpeed: 0.3
-    Defense: 10
+    Attack: 15
+    AttackSpeed: 1
+    Defense: 50
     FireMultiplier: 1
     WaterMultiplier: 1
     AirMultiplier: 1
-    EarthMultiplier: 1
+    EarthMultiplier: 2
     DarkMultiplier: 1
     LightMultiplier: 1
-    AttackRange: 4
-    ExpOnKill: 80
+    AttackRange: 2
+    ExpOnKill: 500
     BuffDropChance: 0
     BuffDropAmount: 0
 --- !u!1 &4511407439010370331

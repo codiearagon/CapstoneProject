@@ -8,6 +8,9 @@ public class EnemySpawner : MonoBehaviour
     private List<GameObject> _enemies;
 
     [SerializeField]
+    private GameObject _bossPrefab;
+
+    [SerializeField]
     private float _spawnPadding;
 
     [SerializeField]
@@ -95,6 +98,13 @@ public class EnemySpawner : MonoBehaviour
         Vector2 pos = GetSpawnPosition();
 
         GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
-        enemy.GetComponent<Enemy>().MakeElite(5 * _statScaling, 5 * _expScaling);
+        enemy.GetComponent<Enemy>().MakeElite(3 * _statScaling, 3 * _expScaling);
+    }
+
+    public Enemy SpawnBoss()
+    {
+        GameObject enemy = Instantiate(_bossPrefab, GetSpawnPosition(), Quaternion.identity);
+        enemy.GetComponent<Enemy>().MakeBoss(5 * _statScaling, 5 * _expScaling);
+        return enemy.GetComponent<Enemy>();
     }
 }

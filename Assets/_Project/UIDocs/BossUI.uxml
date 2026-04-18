@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UIDocs/BossUI.uss?fileID=7433441132597879392&amp;guid=74d1e4d0c49d3ec4b95c0d12b0a87bf8&amp;type=3#BossUI"/>
+    <ui:VisualElement name="Container" style="flex-grow: 1; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/novem___.ttf?fileID=12800000&amp;guid=5959b81331a03b048aa33fbb46d88234&amp;type=3#novem___&quot;); -unity-text-outline-width: 0.5px; -unity-text-outline-color: rgb(0, 0, 0); text-shadow: 5px 5px 0 rgb(0, 0, 0); color: rgb(255, 255, 255); justify-content: flex-start; align-items: center; margin-top: 40px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;">
+        <ui:Label text="Boss Name" name="Name" style="font-size: 50px; color: rgb(212, 37, 37);"/>
+        <ui:VisualElement name="HealthContainer" style="flex-grow: 1; width: 30%;">
+            <ui:ProgressBar value="76.2" high-value="100" low-value="0" name="BossHealthBar" picking-mode="Ignore" title="" class="progress-bar-text" style="width: 100%;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

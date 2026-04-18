@@ -7,6 +7,9 @@ public class BossAttack : MonoBehaviour
     [SerializeField]
     private List<Ability> _abilities;
 
+    [SerializeField]
+    private float _abilityBurst;
+
     private List<Ability> _runtimeAbilities;
 
     private SpriteRenderer _rangeSprite;
@@ -20,6 +23,7 @@ public class BossAttack : MonoBehaviour
 
     private void Awake()
     {
+        _runtimeAbilities = new List<Ability>();
         _rangeCollider = GetComponent<CircleCollider2D>();
         _rangeSprite = GetComponentInChildren<SpriteRenderer>();
     }
@@ -39,6 +43,26 @@ public class BossAttack : MonoBehaviour
 
         _rangeSprite.color = new Color(1f, 0f, 0f, 0.3f);
         _rangeSprite.transform.localScale = new Vector3(_enemy.Stats.AttackRange * 2.5f, _enemy.Stats.AttackRange * 2.5f, 1f);
+
+        // enemy events
+        _enemy.OnDamage += HandleOnDamage;
+        _enemy.OnDeath += HandleOnDeath;
+    }
+
+    private void OnDestroy()
+    {
+        _enemy.OnDamage -= HandleOnDamage;
+        _enemy.OnDeath -= HandleOnDeath;
+    }
+
+    private void HandleOnDamage(float currentHp)
+    {
+
+    }
+
+    private void HandleOnDeath()
+    {
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -63,15 +87,30 @@ public class BossAttack : MonoBehaviour
         while (true)
         {
             Logger.Log("Ranged enemy attacked");
-            Vector2 direction = ((Vector2)_target.transform.position - _rb.position).normalized;
 
-            yield return new WaitForSeconds(1f / _enemy.Stats.AttackSpeed);
+            StartCoroutine(AttackRandomAbility());
+            yield return new WaitForSeconds(3f / _enemy.Stats.AttackSpeed);
 
             if (!_playerInRange)
             {
                 _attackCoroutine = null;
                 yield break;
             }
+        }
+    }
+
+    private IEnumerator AttackRandomAbility()
+    {
+        int randomIdx = Random.Range(0, _runtimeAbilities.Count);
+        Ability toUse = _runtimeAbilities[randomIdx];
+
+        for(int i = 0; i < _abilityBurst; i++)
+        {
+            Vector2 direction = ((Vector2)_target.transform.position - _rb.position).normalized;
+
+            toUse.SetRuntimeData(_enemy.Stats, direction);
+            toUse.Cast(transform.parent.gameObject);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 }

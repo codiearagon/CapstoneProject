@@ -1,0 +1,19 @@
+:root {
+
+}
+
+#BossHealthBar .unity-progress-bar__container {
+    flex-grow: 1;
+}
+
+#BossHealthBar .unity-progress-bar__background {
+    background-color: black;
+    border-width: 0;
+}
+
+#BossHealthBar .unity-progress-bar__progress {
+    margin: 0;
+    flex-grow: 1;
+    width: 80%;
+    background-color: rgba(180, 0, 0, 255);
+}

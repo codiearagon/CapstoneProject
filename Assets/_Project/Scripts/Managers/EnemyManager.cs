@@ -9,6 +9,7 @@ public class EnemyManager : MonoBehaviour
     public event System.Action OnEliteSpawn;
     public event System.Action OnScaleUp;
     public event System.Action<float> OnBossTimerTick;
+    public event System.Action<Enemy> OnBossSpawned;
 
     [SerializeField]
     private PlayerRoot _playerRoot;
@@ -19,6 +20,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private float _bossTimer;
 
+    private Enemy _bossObject;
     private Camera _camera;
     private Character _playerObj;
     private float _statScaling;
@@ -49,6 +51,12 @@ public class EnemyManager : MonoBehaviour
         _playerRoot.OnPlayerSpawned -= HandlePlayerSpawned;
 
         _playerObj.OnLevelUp -= HandleOnLevelUp;
+    }
+
+    private void OnDestroy()
+    {
+        if(_bossObject != null)
+            _bossObject.OnDeath -= HandleOnBossDeath;
     }
 
     private void HandlePlayerSpawned(GameObject player)
@@ -86,6 +94,20 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    private void HandleOnBossDeath()
+    {
+
+    }
+
+    private void SpawnBoss()
+    {
+        _bossObject = _spawner.SpawnBoss();
+        _bossObject.OnDeath += HandleOnBossDeath;
+
+        _spawner.TriggerSpawning(false);
+        OnBossSpawned?.Invoke(_bossObject);
+    }
+
     private IEnumerator BossCountdown()
     {
         while(_currentTime > 0)
@@ -95,6 +117,6 @@ public class EnemyManager : MonoBehaviour
             OnBossTimerTick?.Invoke(_currentTime);
         }
 
-        Logger.Log("Boss spawned");
+        SpawnBoss();
     }
 }

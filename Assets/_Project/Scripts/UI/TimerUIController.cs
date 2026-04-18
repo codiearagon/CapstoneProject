@@ -32,6 +32,9 @@ public class TimerUIController : MonoBehaviour
         int seconds = (int)time % 60;
 
         _timer.text = $"Boss spawns in: {minute:D2}:{seconds:D2}";
+
+        if (time <= 0)
+            _root.style.display = DisplayStyle.None;
     }
 
 }

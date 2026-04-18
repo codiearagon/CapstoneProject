@@ -17,7 +17,7 @@ public class DamageOnHitProjectile : IProjectileHit
 
     public void OnHit(Projectile projectile, Collider2D other)
     {
-        other?.GetComponent<IDamageable>().TakeDamage(_damage, _affinity);
+        other?.GetComponent<ILiving>().TakeDamage(_damage, _affinity);
 
         foreach (IStatusEffect effect in _statusEffects)
         {

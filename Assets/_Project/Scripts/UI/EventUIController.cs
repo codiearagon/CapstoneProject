@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +37,9 @@ public class EventUIController : MonoBehaviour
         _playerRoot.OnPlayerSpawned += HandlePlayerSpawned;
         _enemyManager.OnScaleUp += HandleScaleUp;
         _enemyManager.OnEliteSpawn += HandleEliteSpawn;
+        _enemyManager.OnBossSpawned += HandleBossSpawned;
     }
+
     private void OnDisable()
     {
         _playerRoot.OnPlayerSpawned -= HandlePlayerSpawned;
@@ -45,6 +48,7 @@ public class EventUIController : MonoBehaviour
 
         _playerObj.OnLevelUp -= HandleOnLevelUp;
         _playerObj.OnLevelUpBuff -= HandleOnLevelUpBuff;
+        _enemyManager.OnBossSpawned -= HandleBossSpawned;
     }
 
     private void HandlePlayerSpawned(GameObject player)
@@ -87,6 +91,14 @@ public class EventUIController : MonoBehaviour
     private void HandleEliteSpawn()
     {
         _eventTitleQueue.Enqueue(("Elite enemy spawned!", Color.red));
+
+        if (!_titleRunning)
+            StartCoroutine(ShowTitle());
+    }
+
+    private void HandleBossSpawned(Enemy enemy)
+    {
+        _eventTitleQueue.Enqueue(("Boss spawned!", Color.red));
 
         if (!_titleRunning)
             StartCoroutine(ShowTitle());

@@ -51,7 +51,7 @@ public class EnemyMeleeAttack : MonoBehaviour
             yield return new WaitForSeconds(1f / _enemy.Stats.AttackSpeed);
 
             if(!_enemy.IsPaused)
-                _target.GetComponent<IDamageable>()?.TakeDamage(_enemy.Stats.Attack, _enemy.Stats.Affinity);
+                _target.GetComponent<ILiving>()?.TakeDamage(_enemy.Stats.Attack, _enemy.Stats.Affinity);
 
             if(!_playerInRange)
             {
