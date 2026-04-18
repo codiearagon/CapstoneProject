@@ -52,6 +52,5 @@ public class GameManager : MonoBehaviour
     {
         Utility.RequestPause();
         _deathUI.TriggerUI();
-        Logger.Log("Player died");
     }
 }

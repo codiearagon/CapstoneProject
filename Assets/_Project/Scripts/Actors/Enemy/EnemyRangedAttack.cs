@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class EnemyRangedAttack : MonoBehaviour
 {
@@ -73,15 +72,5 @@ public class EnemyRangedAttack : MonoBehaviour
                 yield break;
             }
         }
-    }
-
-    // Editor stuff
-    private void OnDrawGizmos()
-    {
-        if (_enemy == null)
-            return;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _enemy.Stats.AttackRange);
     }
 }

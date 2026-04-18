@@ -82,10 +82,10 @@ MonoBehaviour:
     Identifier: tornado
     Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
     Description: Conjures a tornado that pushes all enemies in its path.
-    UpgradeDescription: Bigger and stronger.
+    UpgradeDescription: Bigger and stronger. Increased manacost.
     Affinity: 3
     AttackMultiplier: 1.4
-    ManaCost: 15
+    ManaCost: 20
     CooldownTime: 0
     Toggable: 0
     Type: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
     UpgradeDescription: Bigger, faster, and stronger. Uses more mana.
     Affinity: 3
     AttackMultiplier: 1.6
-    ManaCost: 20
+    ManaCost: 25
     CooldownTime: 0
     Toggable: 0
     Type: 0

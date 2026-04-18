@@ -90,10 +90,11 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: ec1d1019b2688bf4e85e83da1aef00fc, type: 3}
     Description: Shoots out a blade of water that slices everything in its path.
       Slows enemies by 30%.
-    UpgradeDescription: Faster, stronger, bigger. Slows enemies on hit by 30%.
+    UpgradeDescription: Faster, stronger, bigger. Slows enemies on hit by 30%. Increase
+      mana cost.
     Affinity: 2
     AttackMultiplier: 1.6
-    ManaCost: 15
+    ManaCost: 20
     CooldownTime: 0
     Toggable: 0
     Type: 0
@@ -132,7 +133,7 @@ MonoBehaviour:
       mana.
     Affinity: 2
     AttackMultiplier: 2
-    ManaCost: 20
+    ManaCost: 25
     CooldownTime: 0
     Toggable: 0
     Type: 0

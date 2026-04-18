@@ -136,13 +136,14 @@ public class ProgressionUIController : MonoBehaviour
     {
         Utility.RequestPause();
         int amount = Mathf.Min(3, abilities.Count);
+        List<Ability> pool = new List<Ability>(abilities);
 
         for(int i = 0; i < amount; i++)
         {
-            int randomIdx = Random.Range(0, abilities.Count);
+            int randomIdx = Random.Range(0, pool.Count);
 
             VisualElement option = _abilityUnlockOption.CloneTree();
-            Ability ability = abilities[randomIdx];
+            Ability ability = pool[randomIdx];
 
             option.style.width = Length.Percent(100);
             Image image = option.Q<Image>("Image");
@@ -172,6 +173,7 @@ public class ProgressionUIController : MonoBehaviour
             choose.dataSource = ability.Upgrades[upgradeIndex];
 
             _abilityUpgradeElement.Add(option);
+            pool.RemoveAt(randomIdx);
         }
 
         if (_abilityUpgradeElement.childCount == 0)

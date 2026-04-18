@@ -52,7 +52,7 @@ MonoBehaviour:
     Description: Release a ray of light that damages everything in its sight. Toggable.
     UpgradeDescription: 
     Affinity: 6
-    AttackMultiplier: 0.5
+    AttackMultiplier: 0.3
     ManaCost: 3
     CooldownTime: 0
     Toggable: 1
@@ -82,10 +82,10 @@ MonoBehaviour:
     Identifier: holybeam
     Icon: {fileID: -1527885550625387242, guid: 8fa999d11755e40418c50675280edc2d, type: 3}
     Description: Release a ray of light that damages everything in its sight. Toggable.
-    UpgradeDescription: Increased range and damage.
+    UpgradeDescription: Increased range and damage. Increased mana cost
     Affinity: 6
-    AttackMultiplier: 0.7
-    ManaCost: 3
+    AttackMultiplier: 0.5
+    ManaCost: 5
     CooldownTime: 0
     Toggable: 1
     Type: 1
@@ -115,8 +115,8 @@ MonoBehaviour:
     Description: Release a ray of light that damages everything in its sight. Toggable.
     UpgradeDescription: Increased range and damage. Uses more mana.
     Affinity: 6
-    AttackMultiplier: 1.2
-    ManaCost: 8
+    AttackMultiplier: 0.7
+    ManaCost: 10
     CooldownTime: 0
     Toggable: 1
     Type: 1

@@ -85,10 +85,10 @@ MonoBehaviour:
     Description: "Release a continuous pulse of dark magic around you that damages
       everything within. \n\nSlows enemies within.\n\nToggable, continuously drains
       mana."
-    UpgradeDescription: Bigger. Applies 30% slow within.
+    UpgradeDescription: Bigger. Applies 30% slow within. Increased mana cost.
     Affinity: 5
     AttackMultiplier: 1.05
-    ManaCost: 10
+    ManaCost: 12
     CooldownTime: 0
     Toggable: 1
     Type: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
       - Effect: 1
         Affinity: 0
         Duration: 2
-        Interval: 0
+        Interval: 1
         BaseDamage: 0
         Multiplier: 0.7
   - AbilityName: Dark Pulse++
@@ -127,7 +127,7 @@ MonoBehaviour:
     UpgradeDescription: Bigger and stronger. Applies 60% slow within. Uses more mana.
     Affinity: 5
     AttackMultiplier: 1.1
-    ManaCost: 15
+    ManaCost: 17
     CooldownTime: 0
     Toggable: 1
     Type: 1
@@ -154,6 +154,6 @@ MonoBehaviour:
       - Effect: 1
         Affinity: 0
         Duration: 2
-        Interval: 0
+        Interval: 1
         BaseDamage: 0
         Multiplier: 0.4

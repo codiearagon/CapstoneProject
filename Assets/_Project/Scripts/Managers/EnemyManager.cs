@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public event System.Action OnEliteSpawn;
     public event System.Action OnScaleUp;
+    public event System.Action<float> OnBossTimerTick;
 
     [SerializeField]
     private PlayerRoot _playerRoot;
@@ -14,14 +16,20 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private EnemySpawner _spawner;
 
+    [SerializeField]
+    private float _bossTimer;
+
     private Camera _camera;
     private Character _playerObj;
     private float _statScaling;
     private float _expScaling;
 
+    private float _currentTime;
+
     private void Awake()
     {
         _camera = Camera.main;
+        _currentTime = _bossTimer;
 
         _statScaling = 1;
         _expScaling = 1;
@@ -48,6 +56,9 @@ public class EnemyManager : MonoBehaviour
         _playerObj = player.GetComponent<Character>();
 
         _playerObj.OnLevelUp += HandleOnLevelUp;
+
+        StartCoroutine(BossCountdown());
+        OnBossTimerTick?.Invoke(_currentTime);
     }
 
     private void HandleOnLevelUp(int level, float currentExp, float nextExpToLevel)
@@ -73,5 +84,17 @@ public class EnemyManager : MonoBehaviour
 
             OnEliteSpawn?.Invoke();
         }
+    }
+
+    private IEnumerator BossCountdown()
+    {
+        while(_currentTime > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            _currentTime -= 1f;
+            OnBossTimerTick?.Invoke(_currentTime);
+        }
+
+        Logger.Log("Boss spawned");
     }
 }

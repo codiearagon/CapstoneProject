@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 
-public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, IStatEffectable
+public class Enemy : MonoBehaviour, IActor
 {
     [SerializeField]
     private GameObject _buffPrefab;
@@ -132,7 +132,7 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, I
 
     public void MakeElite(float multiplier, float expScaling)
     {
-        transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+        transform.localScale = new Vector3(3.0f, 3.0f, 2.0f);
         _stats.MaxHp *= multiplier;
         _stats.CurrentHp *= multiplier;
         _stats.Attack *= multiplier;
@@ -189,7 +189,7 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, I
             return;
         }
 
-        Logger.Log("Status effect applied to: " + Stats.Name);
+        Debug.Log("Status effect applied to: " + Stats.Name);
         StartCoroutine(effect.Tick(GetComponent<Collider2D>()));
 
         _activeStatusEffects.Add(effect);
@@ -198,6 +198,16 @@ public class Enemy : MonoBehaviour, IDamageable, IManaUser, IStatusEffectable, I
     public void RemoveEffect(IStatusEffect effect)
     {
         _activeStatusEffects.Remove(effect);
+    }
+
+    public Vector2 GetPosition()
+    {
+        return transform.position;
+    }
+
+    public Vector2 GetLook()
+    {
+        return LookValue;
     }
 
     public bool IsPaused => _isPaused;

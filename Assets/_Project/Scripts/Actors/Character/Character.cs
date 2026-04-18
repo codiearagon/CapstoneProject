@@ -292,6 +292,21 @@ public class Character : MonoBehaviour, IActor
         return LookValue;
     }
 
+    public void ApplyKnockback(Vector2 force)
+    {
+        
+    }
+
+    public void ApplyMoveSpeed(float multiplier)
+    {
+        
+    }
+
+    public void ApplyStatChange(StatType stat, float multiplier)
+    {
+        
+    }
+
     public CharacterStats Stats => _stats;
     public Vector2 LookValue => _lookValue;
 }

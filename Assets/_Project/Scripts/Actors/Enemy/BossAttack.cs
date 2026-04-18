@@ -1,12 +1,18 @@
-using System.Collections;
 using UnityEngine;
-using static UnityEngine.Rendering.HableCurve;
+using System.Collections.Generic;
+using System.Collections;
 
-public class EnemyMeleeAttack : MonoBehaviour
+public class BossAttack : MonoBehaviour
 {
+    [SerializeField]
+    private List<Ability> _abilities;
+
+    private List<Ability> _runtimeAbilities;
+
     private SpriteRenderer _rangeSprite;
     private CircleCollider2D _rangeCollider;
     private Enemy _enemy;
+    private Rigidbody2D _rb;
 
     private GameObject _target;
     private bool _playerInRange;
@@ -21,7 +27,15 @@ public class EnemyMeleeAttack : MonoBehaviour
     private void Start()
     {
         _enemy = GetComponentInParent<Enemy>();
+        _rb = _enemy.GetComponent<Rigidbody2D>();
         _rangeCollider.radius = _enemy.Stats.AttackRange;
+
+        foreach (Ability ability in _abilities)
+        {
+            Ability runtimeAbility = Instantiate(ability, transform);
+            runtimeAbility.SetLayer(transform.parent.gameObject.layer);
+            _runtimeAbilities.Add(runtimeAbility);
+        }
 
         _rangeSprite.color = new Color(1f, 0f, 0f, 0.3f);
         _rangeSprite.transform.localScale = new Vector3(_enemy.Stats.AttackRange * 2.5f, _enemy.Stats.AttackRange * 2.5f, 1f);
@@ -33,7 +47,7 @@ public class EnemyMeleeAttack : MonoBehaviour
         _playerInRange = true;
         _enemy.PlayerInRange(true);
 
-        if(_attackCoroutine == null)
+        if (_attackCoroutine == null)
             _attackCoroutine = StartCoroutine(Attack());
     }
 
@@ -48,12 +62,12 @@ public class EnemyMeleeAttack : MonoBehaviour
     {
         while (true)
         {
+            Logger.Log("Ranged enemy attacked");
+            Vector2 direction = ((Vector2)_target.transform.position - _rb.position).normalized;
+
             yield return new WaitForSeconds(1f / _enemy.Stats.AttackSpeed);
 
-            if(!_enemy.IsPaused)
-                _target.GetComponent<IDamageable>()?.TakeDamage(_enemy.Stats.Attack, _enemy.Stats.Affinity);
-
-            if(!_playerInRange)
+            if (!_playerInRange)
             {
                 _attackCoroutine = null;
                 yield break;

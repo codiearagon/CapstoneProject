@@ -85,10 +85,11 @@ MonoBehaviour:
 
       Applies
       burn to damaged benemies.'
-    UpgradeDescription: Increased damage and size. Applies burn for 5 seconds.
+    UpgradeDescription: Increased damage and size. Applies burn for 5 seconds. Increased
+      mana cost.
     Affinity: 1
     AttackMultiplier: 1.6
-    ManaCost: 15
+    ManaCost: 20
     CooldownTime: 5
     Toggable: 0
     Type: 0

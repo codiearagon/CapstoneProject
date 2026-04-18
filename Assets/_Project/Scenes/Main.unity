@@ -494,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   _playerRoot: {fileID: 1865891065}
   _spawner: {fileID: 1856664505}
+  _bossTimer: 300
 --- !u!1 &506383575
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,6 +995,75 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1333902777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333902780}
+  - component: {fileID: 1333902779}
+  - component: {fileID: 1333902778}
+  m_Layer: 0
+  m_Name: TimerUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1333902778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333902777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d063c6179edca84295dbb287f1416c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimerUIController
+  _enemyManager: {fileID: 491075518}
+--- !u!114 &1333902779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333902777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: efec8a23db72aef47b8fbf4df05e597e, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: e8a6f808b3c42884b9694f856c0e9eb6, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &1333902780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333902777}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.98781, y: -1.7537, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19251,13 +19321,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e868902495f4f24ca76570f931f7759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityHelper
-  abilities:
+  _abilities:
+  - {fileID: 3050894501572034644, guid: 25335773760fcac43830638ba56dead6, type: 3}
   - {fileID: 3050894501572034644, guid: 50bbf7d1ae01deb4a8aab20d8065e2bd, type: 3}
-  - {fileID: 3050894501572034644, guid: 85c3db1629531a14a811d0bf1d311276, type: 3}
+  - {fileID: 3050894501572034644, guid: 5d8ccf39fe1b8fc44a854589e97241a3, type: 3}
   - {fileID: 3050894501572034644, guid: a7adfd8551223ed49a5349900e30d10c, type: 3}
   - {fileID: 3050894501572034644, guid: 15b6654d4793fe2469d1301e33dcd8e1, type: 3}
-  - {fileID: 3050894501572034644, guid: 5d8ccf39fe1b8fc44a854589e97241a3, type: 3}
-  - {fileID: 3050894501572034644, guid: 25335773760fcac43830638ba56dead6, type: 3}
+  - {fileID: 3050894501572034644, guid: 85c3db1629531a14a811d0bf1d311276, type: 3}
 --- !u!4 &1933569685
 Transform:
   m_ObjectHideFlags: 0
@@ -19361,6 +19431,7 @@ SceneRoots:
   - {fileID: 142549111}
   - {fileID: 308781428}
   - {fileID: 1418094782}
+  - {fileID: 1333902780}
   - {fileID: 506383578}
   - {fileID: 69245409}
   - {fileID: 491075517}
