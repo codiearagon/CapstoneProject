@@ -377,4 +377,4 @@ MonoBehaviour:
     AttackRange: 1
     ExpOnKill: 30
     BuffDropChance: 5
-    BuffDropAmount: 0
+    BuffDropAmount: 1

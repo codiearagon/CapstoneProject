@@ -286,8 +286,8 @@ MonoBehaviour:
     LightMultiplier: 1
     AttackRange: 3.5
     ExpOnKill: 100
-    BuffDropChance: 0
-    BuffDropAmount: 0
+    BuffDropChance: 5
+    BuffDropAmount: 1
 --- !u!1 &4511407439010370331
 GameObject:
   m_ObjectHideFlags: 0

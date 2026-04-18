@@ -37,6 +37,7 @@ public class Character : MonoBehaviour, IActor
     private CharacterAbilities _abilities;
 
     private List<IStatusEffect> _activeStatusEffects;
+    private List<IInteractable> _interactables;
 
     private Vector2 _moveValue;
     private Vector2 _lookValue;
@@ -51,6 +52,7 @@ public class Character : MonoBehaviour, IActor
         _input = new PlayerInput();
         _abilities = GetComponentInChildren<CharacterAbilities>();
         _activeStatusEffects = new List<IStatusEffect>();
+        _interactables = new List<IInteractable>();
 
         _stats.CurrentHp = _stats.MaxHp;
         _stats.CurrentMana = _stats.MaxMana;
@@ -70,8 +72,10 @@ public class Character : MonoBehaviour, IActor
         _input.Player.Enable();
         _input.Player.Move.performed += OnMove;
         _input.Player.Look.performed += OnLook;
+        _input.Player.Interact.performed += OnInteract;
         _input.Player.Move.canceled += OnMove;
         _input.Player.Look.canceled += OnLook;
+        _input.Player.Interact.canceled += OnInteract;
     }
 
     private void OnDisable()
@@ -79,8 +83,10 @@ public class Character : MonoBehaviour, IActor
         _input.Player.Disable();
         _input.Player.Move.performed -= OnMove;
         _input.Player.Look.performed -= OnLook;
+        _input.Player.Interact.performed -= OnInteract;
         _input.Player.Move.canceled -= OnMove;
         _input.Player.Look.canceled -= OnLook;
+        _input.Player.Interact.canceled -= OnInteract;
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
@@ -93,6 +99,14 @@ public class Character : MonoBehaviour, IActor
         _lookValue = ctx.ReadValue<Vector2>();
     }
 
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+        if(_interactables.Count > 0)
+        {
+            _interactables[0].OnInteract(this);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (_isKnockedback)
@@ -101,13 +115,25 @@ public class Character : MonoBehaviour, IActor
         _rb.MovePosition(_rb.position + _moveValue * (_stats.MovementSpeed / 10) * _speedMultiplier * Time.deltaTime);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<IInteractable>() != null)
+            _interactables.Add(collision.GetComponent<IInteractable>());
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<IInteractable>() != null)
+            _interactables.Remove(collision.GetComponent<IInteractable>());
+    }
+
     private void LevelUp()
     {
         _stats.Level++;
         _stats.CurrentExp -= _stats.ExpToLevelUp;
         _stats.ExpToLevelUp = _stats.ExpToLevelUp * 1.2f;
 
-        GainRandomStats(4);
+        GainRandomStats(4, 1, 3);
         OnLevelUp?.Invoke(_stats.Level, _stats.CurrentExp, _stats.ExpToLevelUp);
 
         if (_stats.Level >= _stats.NextAdvancementLevel)
@@ -145,18 +171,6 @@ public class Character : MonoBehaviour, IActor
         OnAbilityUpgradeTriggered?.Invoke(_abilities.GetList());
 
         _stats.NextAbilityUpgradeLevel += 10;
-    }
-
-    private void GainRandomStats(int amount)
-    {
-        for(int i = 0; i < amount; i++)
-        {
-            StatType stat = Utility.RollRandomStat();
-            float percent = Utility.RollRandomPercentage(1, 3);
-            BuffStat(stat, percent);
-
-            OnLevelUpBuff?.Invoke(stat, percent);
-        }
     }
 
     private IEnumerator HpRegen()
@@ -218,6 +232,18 @@ public class Character : MonoBehaviour, IActor
         OnStatsChanged?.Invoke(_stats);
     }
 
+    public void GainRandomStats(int amount, float minStat, float maxStat)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            StatType stat = Utility.RollRandomStat();
+            float percent = Utility.RollRandomPercentage(minStat, maxStat);
+            BuffStat(stat, percent);
+
+            OnLevelUpBuff?.Invoke(stat, percent);
+        }
+    }
+
     public bool IsDead() => _stats.CurrentHp <= 0;
 
     public void TakeDamage(float amount, Affinity damageAffinity) 
@@ -240,11 +266,15 @@ public class Character : MonoBehaviour, IActor
     public void Heal(float amount)
     {
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp + amount, 0, _stats.MaxHp);
+
+        OnHealthChanged?.Invoke(_stats.CurrentHp);
     }
 
     public void FullHeal()
     {
         _stats.CurrentHp = _stats.MaxHp;
+
+        OnHealthChanged?.Invoke(_stats.CurrentHp);
     }
 
     public bool HasMana(float amount)
@@ -269,6 +299,8 @@ public class Character : MonoBehaviour, IActor
     public void FullMana()
     {
         _stats.CurrentMana = _stats.MaxMana;
+
+        OnManaChanged?.Invoke(_stats.CurrentMana);
     }
 
     public void ApplyEffect(IStatusEffect effect)

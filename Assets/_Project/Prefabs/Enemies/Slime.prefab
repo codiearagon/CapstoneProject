@@ -286,7 +286,7 @@ MonoBehaviour:
     AttackRange: 1
     ExpOnKill: 35
     BuffDropChance: 5
-    BuffDropAmount: 0
+    BuffDropAmount: 1
 --- !u!1 &7495020428922429665
 GameObject:
   m_ObjectHideFlags: 0

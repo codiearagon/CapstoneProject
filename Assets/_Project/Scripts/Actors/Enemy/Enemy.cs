@@ -148,7 +148,7 @@ public class Enemy : MonoBehaviour, IActor
 
     public void MakeElite(float multiplier, float expScaling)
     {
-        transform.localScale = new Vector3(3.0f, 3.0f, 2.0f);
+        transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
         _stats.MaxHp *= multiplier;
         _stats.CurrentHp *= multiplier;
         _stats.Attack *= multiplier;
@@ -160,7 +160,7 @@ public class Enemy : MonoBehaviour, IActor
 
     public void MakeBoss(float multiplier, float expScaling)
     {
-        transform.localScale = new Vector3(5.0f, 5.0f, 2.0f);
+        transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
         _stats.MaxHp *= multiplier;
         _stats.CurrentHp *= multiplier;
         _stats.Attack *= multiplier;
