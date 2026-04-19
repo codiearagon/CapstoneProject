@@ -67,7 +67,7 @@ MonoBehaviour:
       YSize: 1
       Knockback: 0
       Speed: 5
-      TimeToLive: 10
+      TimeToLive: 2
       StatusEffectProperties:
       - Effect: 1
         Affinity: 2
@@ -107,7 +107,7 @@ MonoBehaviour:
       YSize: 1.5
       Knockback: 0
       Speed: 10
-      TimeToLive: 10
+      TimeToLive: 2
       StatusEffectProperties:
       - Effect: 1
         Affinity: 2
@@ -146,7 +146,7 @@ MonoBehaviour:
       YSize: 1.5
       Knockback: 0
       Speed: 15
-      TimeToLive: 10
+      TimeToLive: 2
       StatusEffectProperties:
       - Effect: 1
         Affinity: 2

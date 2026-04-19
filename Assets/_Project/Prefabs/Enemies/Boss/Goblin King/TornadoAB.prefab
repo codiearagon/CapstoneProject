@@ -65,7 +65,7 @@ MonoBehaviour:
       XSize: 4
       YSize: 4
       Knockback: 500
-      Speed: 10
+      Speed: 5
       TimeToLive: 10
       StatusEffectProperties: []
     AOEProperties:

@@ -207,6 +207,7 @@ public class ProgressionUIController : MonoBehaviour
             splash.image = advancement.SplashArt.texture;
             name.text = advancement.AdvancementName;
             affinity.text = advancement.Affinity.ToString();
+            affinity.style.color = Utility.GetAffinityColor(advancement.Affinity);
             description.text = advancement.Description;
             statSummary.text = advancement.StatSummary;
 

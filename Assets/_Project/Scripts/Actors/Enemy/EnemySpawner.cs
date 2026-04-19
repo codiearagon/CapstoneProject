@@ -18,6 +18,16 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private bool _isSpawningConstantly;
+
+    [SerializeField]
+    private EnemyScaling _commonScaling;
+
+    [SerializeField]
+    private EnemyScaling _eliteScaling;
+
+    [SerializeField]
+    private EnemyScaling _bossScaling;
+
     private float _statScaling;
     private float _expScaling;
 
@@ -27,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
     {
         _camera = Camera.main;
 
-        _statScaling = 1;
+        _statScaling = 0;
         _expScaling = 1;
     }
 
@@ -88,7 +98,7 @@ public class EnemySpawner : MonoBehaviour
         Vector2 pos = GetSpawnPosition();
 
         GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
-        enemy.GetComponent<Enemy>().MultiplyStats(_statScaling, _expScaling);
+        enemy.GetComponent<Enemy>().MultiplyStats(_statScaling, _expScaling, _commonScaling);
     }
     
     public void SpawnElite()
@@ -98,13 +108,13 @@ public class EnemySpawner : MonoBehaviour
         Vector2 pos = GetSpawnPosition();
 
         GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
-        enemy.GetComponent<Enemy>().MakeElite(3 * _statScaling, 3 * _expScaling);
+        enemy.GetComponent<Enemy>().MakeElite(_statScaling, _expScaling, _eliteScaling);
     }
 
     public Enemy SpawnBoss()
     {
         GameObject enemy = Instantiate(_bossPrefab, GetSpawnPosition(), Quaternion.identity);
-        enemy.GetComponent<Enemy>().MakeBoss(5 * _statScaling, 5 * _expScaling);
+        enemy.GetComponent<Enemy>().MakeBoss(_statScaling, _expScaling, _bossScaling);
         return enemy.GetComponent<Enemy>();
     }
 }

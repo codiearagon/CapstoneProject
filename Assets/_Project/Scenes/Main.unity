@@ -494,7 +494,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   _playerRoot: {fileID: 1865891065}
   _spawner: {fileID: 1856664505}
-  _bossTimer: 300
+  _bossSpawnTimer: 300
+  _bossTimeLimit: 300
 --- !u!1 &506383575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,6 +1496,27 @@ MonoBehaviour:
   _spawnPadding: 2
   _spawnInterval: 2
   _isSpawningConstantly: 0
+  _commonScaling:
+    Health: 1
+    Attack: 0.2
+    AttackSpeed: 0.1
+    MovementSpeed: 0.2
+    Defense: 1.5
+    Experience: 1
+  _eliteScaling:
+    Health: 2.5
+    Attack: 0.3
+    AttackSpeed: 0.3
+    MovementSpeed: 0.2
+    Defense: 1.5
+    Experience: 3
+  _bossScaling:
+    Health: 3
+    Attack: 0.1
+    AttackSpeed: 0.2
+    MovementSpeed: 0.2
+    Defense: 2
+    Experience: 5
 --- !u!4 &1856664506
 Transform:
   m_ObjectHideFlags: 0

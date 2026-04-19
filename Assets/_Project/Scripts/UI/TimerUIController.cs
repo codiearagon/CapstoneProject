@@ -18,12 +18,14 @@ public class TimerUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        _enemyManager.OnBossTimerTick += HandleBossTimerTick;
+        _enemyManager.OnBossTimerSpawn += HandleBossTimerTick;
+        _enemyManager.OnBossTimeLimit += HandleBossTimeLimit;
     }
 
     private void OnDisable()
     {
-        _enemyManager.OnBossTimerTick -= HandleBossTimerTick;
+        _enemyManager.OnBossTimerSpawn -= HandleBossTimerTick;
+        _enemyManager.OnBossTimeLimit -= HandleBossTimeLimit;
     }
 
     private void HandleBossTimerTick(float time)
@@ -32,9 +34,14 @@ public class TimerUIController : MonoBehaviour
         int seconds = (int)time % 60;
 
         _timer.text = $"Boss spawns in: {minute:D2}:{seconds:D2}";
+    }
 
-        if (time <= 0)
-            _root.style.display = DisplayStyle.None;
+    private void HandleBossTimeLimit(float time)
+    {
+        int minute = (int)time / 60;
+        int seconds = (int)time % 60;
+
+        _timer.text = $"Kill boss in: {minute:D2}:{seconds:D2}";
     }
 
 }

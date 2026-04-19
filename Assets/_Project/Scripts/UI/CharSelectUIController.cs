@@ -13,11 +13,13 @@ public class CharSelectUIController : MonoBehaviour
     private VisualElement _root;
     private VisualElement _charSelectElement;
 
+    private Button _backButton;
     private ScrollView _charScrollView;
     private Image _charSplashArtImage;
     private Label _charNameLabel;
     private Label _charStatsLabel;
     private Button _charSelectButton;
+    private Image _background;
 
     private void Awake()
     {
@@ -31,11 +33,13 @@ public class CharSelectUIController : MonoBehaviour
     private void OnEnable()
     {
         _charSelectButton.RegisterCallback<ClickEvent>(SelectCharacter);
+        _backButton.RegisterCallback<ClickEvent>(BackToMenu);
     }
 
     private void OnDisable()
     {
         _charSelectButton.UnregisterCallback<ClickEvent>(SelectCharacter);
+        _backButton.UnregisterCallback<ClickEvent>(BackToMenu);
     }
 
     private void ResolveReferences()
@@ -43,11 +47,13 @@ public class CharSelectUIController : MonoBehaviour
         _root = GetComponent<UIDocument>().rootVisualElement;
         _charSelectElement = _root.Q<VisualElement>("CharSelectElement");
 
+        _backButton = _charSelectElement.Q<Button>("BackButton");
         _charScrollView = _charSelectElement.Q<ScrollView>("CharScrollView");
         _charSplashArtImage = _charSelectElement.Q<Image>("CharSplashArtImage");
         _charNameLabel = _charSelectElement.Q<Label>("CharNameLabel");
         _charStatsLabel = _charSelectElement.Q<Label>("CharStatsLabel");
         _charSelectButton = _charSelectElement.Q<Button>("CharSelectButton");
+        _background = _charSelectElement.Q<Image>("Background");
     }
 
     private void SetupScrollView()
@@ -88,12 +94,24 @@ public class CharSelectUIController : MonoBehaviour
 
         _charNameLabel.text = _selectedCharacter.name;
         _charSplashArtImage.sprite = _charMeta.SplashArt;
-        _charStatsLabel.text = System.String.Format("HP: {0}\n" +
-                                               "Movement Speed: {1}\n" +
-                                               "Attack: {2}\n" +
-                                               "Attack Speed: {3}\n" +
-                                               "Defense: {4}", _char.Stats.MaxHp, _char.Stats.MovementSpeed,
-                                               _char.Stats.Attack, _char.Stats.AttackSpeed, _char.Stats.Defense);
+        _charStatsLabel.text = $"HP: {_char.Stats.MaxHp}\n" +
+                               $"Mana: {_char.Stats.MaxMana}\n" +
+                               $"Movement Speed: {_char.Stats.MovementSpeed}\n" +
+                               $"Attack: {_char.Stats.Attack}\n" +
+                               $"Attack Speed: {_char.Stats.AttackSpeed}\n" + 
+                               $"Defense: {_char.Stats.Defense}";
+
+        SetBg();
+    }
+    private void SetBg()
+    {
+        _background.image = _selectedCharacter.GetComponent<CharacterMetadata>().SplashArt.texture;
+        _background.scaleMode = ScaleMode.ScaleAndCrop;
+    }
+
+    private void BackToMenu(ClickEvent evt)
+    {
+        CloseCharSelect();
     }
 
     public void SelectCharacter(ClickEvent evt)
@@ -110,5 +128,6 @@ public class CharSelectUIController : MonoBehaviour
     public void CloseCharSelect()
     {
         _charSelectElement.style.display = DisplayStyle.None;
+        GetComponent<MainMenuUIController>().OpenMainMenu();
     }
 }

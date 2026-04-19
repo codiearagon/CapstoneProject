@@ -4,10 +4,10 @@
         <ui:VisualElement name="ImageContainer" style="flex-grow: 1; display: flex; position: relative; width: 100%; height: 100%;">
             <ui:Image name="SplashImage"/>
         </ui:VisualElement>
-        <ui:VisualElement name="DetailsContainer" style="flex-grow: 1; display: none; justify-content: flex-start; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
-            <ui:VisualElement name="Container" style="flex-grow: 1;">
-                <ui:Label text="Fire path" name="Name"/>
-                <ui:Label text="Fire&#10;" name="Affinity"/>
+        <ui:VisualElement name="DetailsContainer" style="flex-grow: 1; display: none; justify-content: flex-start; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/novem___.ttf?fileID=12800000&amp;guid=5959b81331a03b048aa33fbb46d88234&amp;type=3#novem___&quot;);">
+            <ui:VisualElement name="Container" style="flex-grow: 1; font-size: 20px; margin-top: 30px; width: 50%;">
+                <ui:Label text="Fire path" name="Name" style="font-size: 40px;"/>
+                <ui:Label text="Fire&#10;" name="Affinity" style="font-size: 30px; margin-top: 20px; margin-bottom: 20px;"/>
                 <ui:Label text="the fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire path" name="Description" class="wrap"/>
                 <ui:Label text="blablablalblablabla" name="StatSummary" class="wrap"/>
             </ui:VisualElement>

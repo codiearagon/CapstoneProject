@@ -8,7 +8,8 @@ public class EnemyManager : MonoBehaviour
 {
     public event System.Action OnEliteSpawn;
     public event System.Action OnScaleUp;
-    public event System.Action<float> OnBossTimerTick;
+    public event System.Action<float> OnBossTimeLimit;
+    public event System.Action<float> OnBossTimerSpawn;
     public event System.Action<Enemy> OnBossSpawned;
 
     [SerializeField]
@@ -18,7 +19,10 @@ public class EnemyManager : MonoBehaviour
     private EnemySpawner _spawner;
 
     [SerializeField]
-    private float _bossTimer;
+    private float _bossSpawnTimer;
+
+    [SerializeField]
+    private float _bossTimeLimit;
 
     private Enemy _bossObject;
     private Camera _camera;
@@ -31,9 +35,9 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         _camera = Camera.main;
-        _currentTime = _bossTimer;
+        _currentTime = _bossSpawnTimer;
 
-        _statScaling = 1;
+        _statScaling = 0;
         _expScaling = 1;
     }
 
@@ -65,8 +69,8 @@ public class EnemyManager : MonoBehaviour
 
         _playerObj.OnLevelUp += HandleOnLevelUp;
 
-        StartCoroutine(BossCountdown());
-        OnBossTimerTick?.Invoke(_currentTime);
+        StartCoroutine(BossSpawnTimer());
+        OnBossTimerSpawn?.Invoke(_currentTime);
     }
 
     private void HandleOnLevelUp(int level, float currentExp, float nextExpToLevel)
@@ -105,18 +109,32 @@ public class EnemyManager : MonoBehaviour
         _bossObject.OnDeath += HandleOnBossDeath;
 
         _spawner.TriggerSpawning(false);
+        StartCoroutine(BossTimeLimit());
         OnBossSpawned?.Invoke(_bossObject);
     }
 
-    private IEnumerator BossCountdown()
+    private IEnumerator BossSpawnTimer()
     {
         while(_currentTime > 0)
         {
             yield return new WaitForSeconds(1f);
             _currentTime -= 1f;
-            OnBossTimerTick?.Invoke(_currentTime);
+            OnBossTimerSpawn?.Invoke(_currentTime);
         }
 
         SpawnBoss();
+    }
+
+    private IEnumerator BossTimeLimit()
+    {
+        _currentTime = _bossTimeLimit;
+        while (_currentTime > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            _currentTime -= 1f;
+            OnBossTimeLimit?.Invoke(_currentTime);
+        }
+
+        _playerObj.GetComponent<ILiving>().TakeDamage(99999999999, Affinity.None);
     }
 }

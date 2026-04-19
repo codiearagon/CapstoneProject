@@ -66,7 +66,7 @@ MonoBehaviour:
       YSize: 0.5
       Knockback: 0
       Speed: 15
-      TimeToLive: 5
+      TimeToLive: 1
       StatusEffectProperties: []
     AOEProperties:
       AoePrefab: {fileID: 0}
@@ -98,7 +98,7 @@ MonoBehaviour:
       YSize: 0.5
       Knockback: 0
       Speed: 15
-      TimeToLive: 5
+      TimeToLive: 1
       StatusEffectProperties: []
     AOEProperties:
       AoePrefab: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
       YSize: 0.5
       Knockback: 0
       Speed: 15
-      TimeToLive: 5
+      TimeToLive: 1
       StatusEffectProperties: []
     AOEProperties:
       AoePrefab: {fileID: 0}

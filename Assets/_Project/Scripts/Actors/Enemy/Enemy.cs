@@ -135,37 +135,29 @@ public class Enemy : MonoBehaviour, IActor
         _stats.CurrentHp = _stats.MaxHp;
     }
 
-    public void MultiplyStats(float multiplier, float expScaling)
+    public void MultiplyStats(float multiplier, float expScaling, EnemyScaling scaling)
     {
-        _stats.MaxHp *= multiplier;
-        _stats.CurrentHp *= multiplier;
-        _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed * multiplier, 70);
-        _stats.Attack *= multiplier;
-        _stats.AttackSpeed *= multiplier;
-        _stats.Defense *= multiplier;
-        _stats.ExpOnKill *= expScaling;
+        _stats.MaxHp *= 1f + (multiplier * scaling.Health);
+        _stats.CurrentHp *= 1f + (multiplier * scaling.Health);
+        _stats.Attack *= 1f + (multiplier * scaling.Attack);
+        _stats.AttackSpeed *= 1f + (multiplier * scaling.AttackSpeed);
+        _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed * (1f + (multiplier * scaling.MovementSpeed)), 70);
+        _stats.Defense *= 1f + (multiplier * scaling.Defense);
+        _stats.ExpOnKill *= expScaling * scaling.Experience;
     }
 
-    public void MakeElite(float multiplier, float expScaling)
+    public void MakeElite(float multiplier, float expScaling, EnemyScaling scaling)
     {
         transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
-        _stats.MaxHp *= multiplier;
-        _stats.CurrentHp *= multiplier;
-        _stats.Attack *= multiplier;
-        _stats.Defense *= multiplier;
-        _stats.ExpOnKill *= expScaling;
+        MultiplyStats(multiplier, expScaling, scaling);
         _stats.BuffDropChance = 100;
         _stats.BuffDropAmount = 5;
     }
 
-    public void MakeBoss(float multiplier, float expScaling)
+    public void MakeBoss(float multiplier, float expScaling, EnemyScaling scaling)
     {
         transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
-        _stats.MaxHp *= multiplier;
-        _stats.CurrentHp *= multiplier;
-        _stats.Attack *= multiplier;
-        _stats.Defense *= multiplier;
-        _stats.ExpOnKill *= expScaling;
+        MultiplyStats(multiplier, expScaling, scaling);
         _stats.BuffDropChance = 100;
         _stats.BuffDropAmount = 10;
     }

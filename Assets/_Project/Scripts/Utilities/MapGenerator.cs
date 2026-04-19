@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MapGenerator : MonoBehaviour
 {
