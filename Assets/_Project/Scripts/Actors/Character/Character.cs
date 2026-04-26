@@ -270,6 +270,13 @@ public class Character : MonoBehaviour, IActor
         OnHealthChanged?.Invoke(_stats.CurrentHp);
     }
 
+    public void HealPercent(float percentage)
+    {
+        _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp + (_stats.MaxHp * percentage), 0, _stats.MaxHp);
+
+        OnHealthChanged?.Invoke(_stats.CurrentHp);
+    }
+
     public void FullHeal()
     {
         _stats.CurrentHp = _stats.MaxHp;
@@ -292,6 +299,13 @@ public class Character : MonoBehaviour, IActor
     public void GainMana(float amount)
     {
         _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + amount, 0, _stats.MaxMana);
+
+        OnManaChanged?.Invoke(_stats.CurrentMana);
+    }
+
+    public void GainManaPercent(float percentage)
+    {
+        _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + (_stats.MaxMana * percentage), 0, _stats.MaxMana);
 
         OnManaChanged?.Invoke(_stats.CurrentMana);
     }
@@ -345,12 +359,9 @@ public class Character : MonoBehaviour, IActor
         OnAbilitiesChanged?.Invoke(_abilities.GetList());
     }
 
-    public void BuffStat(StatType type, float amount)
+    public void BuffStat(StatType type, float multiplier)
     {
-        _stats.GetStat(type) += _stats.GetStat(type) * amount;
-
-        _stats.MovementSpeed = Mathf.Min(_stats.MovementSpeed, 120);
-
+       _stats.PermanentBuff(type, multiplier);
         OnStatsChanged?.Invoke(_stats);
     }
 
@@ -371,14 +382,29 @@ public class Character : MonoBehaviour, IActor
         StartCoroutine(Knockbacked());
     }
 
-    public void ApplyMoveSpeed(float multiplier)
+    public void ApplySilence()
     {
-        _speedMultiplier = multiplier;
+        throw new NotImplementedException();
     }
 
-    public void ApplyStatChange(StatType stat, float multiplier)
+    public void ApplyDisarm()
     {
-        
+        throw new NotImplementedException();
+    }
+
+    public void ApplyStun() 
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddStatModifier(StatModifier statModifier)
+    {
+        _stats.AddModifier(statModifier);
+    }
+
+    public void RemoveStatModifiers(object source)
+    {
+        _stats.RemoveModifier(source);
     }
 
     public CharacterStats Stats => _stats;

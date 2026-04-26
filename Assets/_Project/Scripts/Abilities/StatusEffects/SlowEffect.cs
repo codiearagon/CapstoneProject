@@ -28,15 +28,17 @@ public class SlowEffect : IStatusEffect
 
     public void RemoveEffect(Collider2D target)
     {
-        target.GetComponent<IStatEffectable>().ApplyMoveSpeed(1f);
+        target.GetComponent<IStatEffectable>().RemoveStatModifiers(this);
         target.GetComponent<IStatusEffectable>().RemoveEffect(this);
     }
 
     public IEnumerator Tick(Collider2D target)
     {
-        target.GetComponent<IStatEffectable>().ApplyMoveSpeed(_multiplier);
+        StatModifier slow = new StatModifier(StatType.MovementSpeed, _multiplier, this);
+        target.GetComponent<IStatEffectable>().AddStatModifier(slow);
         while (_currentDuration > 0)
         {
+            Debug.Log(_currentDuration);
             yield return new WaitForSeconds(_interval);
             _currentDuration -= _interval;
         }

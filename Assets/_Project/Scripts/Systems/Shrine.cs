@@ -29,8 +29,8 @@ public class Shrine : MonoBehaviour, IInteractable
         } 
         else
         {
-            character.Heal(20f);
-            character.GainMana(20f);
+            character.HealPercent(0.2f);
+            character.GainManaPercent(0.1f);
         }
 
         _onClaimed?.Invoke(_chunk);

@@ -68,7 +68,7 @@ public class Ability : MonoBehaviour
         _casterStats = stats;
         _direction = direction;
 
-        float attackDamage = _casterStats.Attack * Properties.AttackMultiplier;
+        float attackDamage = _casterStats.GetValue(StatType.Attack) * Properties.AttackMultiplier;
         float affinityMultiplier = Utility.GetMultiplier(_casterStats, Properties.Affinity);
 
         _finalDamage = attackDamage * affinityMultiplier;

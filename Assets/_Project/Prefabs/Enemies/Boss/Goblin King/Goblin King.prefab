@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7586474594058182600}
   - component: {fileID: 287955655276886173}
-  - component: {fileID: 8247644687823188390}
+  - component: {fileID: 8515374291390768184}
   m_Layer: 9
   m_Name: AttackRange
   m_TagString: Untagged
@@ -70,7 +70,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &8247644687823188390
+--- !u!114 &8515374291390768184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,14 +79,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2444870730473923313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8401ef9a442264b9538aaacc7f9b4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5315af7cefa81b74cbcf0c593f8f5adf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossAttack
-  _abilities:
-  - {fileID: 3050894501572034644, guid: 3c04523885e67114e88d8b6d3d0fb9bc, type: 3}
-  - {fileID: 3050894501572034644, guid: 2be41f510e5077c49bf8636f188b1a4e, type: 3}
-  - {fileID: 3050894501572034644, guid: 3de49c6375021714691db7dd6dccc12c, type: 3}
-  _abilityBurst: 2
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRange
 --- !u!1 &2614719710841126021
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,6 +95,9 @@ GameObject:
   - component: {fileID: 4150612127160297832}
   - component: {fileID: 1785213722731947224}
   - component: {fileID: 4352915952331059390}
+  - component: {fileID: 688085004380488068}
+  - component: {fileID: 2592182079421456240}
+  - component: {fileID: 6551654142710582375}
   m_Layer: 7
   m_Name: Goblin King
   m_TagString: Untagged
@@ -272,26 +270,67 @@ MonoBehaviour:
   _stats:
     Name: Goblin King
     Affinity: 4
-    MaxHp: 500
+    MaxHp: 600
     CurrentHp: 0
     HpRegenRate: 0
     MaxMana: 1000
     CurrentMana: 0
     ManaRegenRate: 1000
     MovementSpeed: 10
-    Attack: 20
+    Attack: 30
     AttackSpeed: 1
-    Defense: 50
+    Defense: 60
     FireMultiplier: 1
     WaterMultiplier: 1
     AirMultiplier: 1
-    EarthMultiplier: 2
+    EarthMultiplier: 1.5
     DarkMultiplier: 1
     LightMultiplier: 1
     AttackRange: 2
     ExpOnKill: 500
     BuffDropChance: 0
     BuffDropAmount: 0
+--- !u!114 &688085004380488068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614719710841126021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993233fbf0dbbae41b9bdacc238dc695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CommonEnemyBrain
+--- !u!114 &2592182079421456240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614719710841126021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bd3d6df335c7d41b26f219c3a4a498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+--- !u!114 &6551654142710582375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614719710841126021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8401ef9a442264b9538aaacc7f9b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoblinBossAttack
+  _abilities:
+  - {fileID: 3050894501572034644, guid: 3c04523885e67114e88d8b6d3d0fb9bc, type: 3}
+  - {fileID: 3050894501572034644, guid: 2be41f510e5077c49bf8636f188b1a4e, type: 3}
+  - {fileID: 3050894501572034644, guid: 3de49c6375021714691db7dd6dccc12c, type: 3}
+  _abilityBurst: 2
 --- !u!1 &4511407439010370331
 GameObject:
   m_ObjectHideFlags: 0

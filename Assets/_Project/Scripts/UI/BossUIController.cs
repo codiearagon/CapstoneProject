@@ -50,7 +50,7 @@ public class BossUIController : MonoBehaviour
         _root.style.display = DisplayStyle.Flex;
     }
 
-    private void HandleDamage(float amount)
+    private void HandleDamage(float amount, float maxHp)
     {
         _healthBar.value = amount;
     }

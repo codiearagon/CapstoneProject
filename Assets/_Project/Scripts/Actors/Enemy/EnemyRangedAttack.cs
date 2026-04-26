@@ -1,76 +1,30 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyRangedAttack : MonoBehaviour
+public class EnemyRangedAttack : EnemyAttack
 {
     [SerializeField]
     private Ability _ability;
-
     private Ability _runtimeAbility;
-
-    private SpriteRenderer _rangeSprite;
-    private CircleCollider2D _rangeCollider;
-    private Enemy _enemy;
-    private Rigidbody2D _rb;
-
-    private GameObject _target;
-    private bool _playerInRange;
-    private Coroutine _attackCoroutine;
 
     private void Awake()
     {
-        _rangeCollider = GetComponent<CircleCollider2D>();
-        _rangeSprite = GetComponentInChildren<SpriteRenderer>();
-
-    }
-
-    private void Start()
-    {
-        _enemy = GetComponentInParent<Enemy>();
-        _rb = _enemy.GetComponent<Rigidbody2D>();
-        _rangeCollider.radius = _enemy.Stats.AttackRange;
-
         _runtimeAbility = Instantiate(_ability, transform);
-        _runtimeAbility.SetLayer(transform.parent.gameObject.layer);
-
-        _rangeSprite.color = new Color(1f, 0f, 0f, 0.3f);
-        _rangeSprite.transform.localScale = new Vector3(_enemy.Stats.AttackRange * 2.5f, _enemy.Stats.AttackRange * 2.5f, 1f);
+        _runtimeAbility.SetLayer(gameObject.layer);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override IEnumerator AttackLoop(Stats stats, GameObject target)
     {
-        _target = collision.gameObject;
-        _playerInRange = true;
-        _enemy.PlayerInRange(true);
-
-        if (_attackCoroutine == null)
-            _attackCoroutine = StartCoroutine(Attack());
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        _target = collision.gameObject;
-        _enemy.PlayerInRange(false);
-        _playerInRange = false;
-    }
-
-    private IEnumerator Attack()
-    {
-        while (true)
+        while(_attacking)
         {
-            Logger.Log("Ranged enemy attacked");
-            Vector2 direction = ((Vector2)_target.transform.position - _rb.position).normalized;
+            Vector2 direction = (target.transform.position - transform.position).normalized;
 
-            _runtimeAbility.SetRuntimeData(_enemy.Stats, direction);
-            _runtimeAbility.Cast(transform.parent.gameObject);
+            _runtimeAbility.SetRuntimeData(stats, direction);
+            _runtimeAbility.Cast(gameObject);
 
-            yield return new WaitForSeconds(1f / _enemy.Stats.AttackSpeed);
-
-            if (!_playerInRange)
-            {
-                _attackCoroutine = null;
-                yield break;
-            }
+            yield return new WaitForSeconds(1f / stats.GetValue(StatType.AttackSpeed));
         }
+
+        _attackCoroutine = null;
     }
 }

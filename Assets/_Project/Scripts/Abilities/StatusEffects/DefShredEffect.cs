@@ -30,13 +30,14 @@ public class DefShredEffect : IStatusEffect
 
     public void RemoveEffect(Collider2D target)
     {
-        target.GetComponent<IStatEffectable>().ApplyStatChange(StatType.Defense, 1f);
+        target.GetComponent<IStatEffectable>().RemoveStatModifiers(this);
         target.GetComponent<IStatusEffectable>().RemoveEffect(this);
     }
 
     public IEnumerator Tick(Collider2D target)
     {
-        target.GetComponent<IStatEffectable>().ApplyStatChange(StatType.Defense, _multiplier);
+        StatModifier defShred = new StatModifier(StatType.Defense, _multiplier, this);
+        target.GetComponent<IStatEffectable>().AddStatModifier(defShred);
         while (_currentDuration > 0)
         {
             yield return new WaitForSeconds(_interval);

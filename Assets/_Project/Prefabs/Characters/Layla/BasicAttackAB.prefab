@@ -67,7 +67,13 @@ MonoBehaviour:
       Knockback: 0
       Speed: 10
       TimeToLive: 5
-      StatusEffectProperties: []
+      StatusEffectProperties:
+      - Effect: 1
+        Affinity: 0
+        Duration: 3
+        Interval: 1
+        BaseDamage: 0
+        Multiplier: 0.3
     AOEProperties:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0

@@ -160,8 +160,10 @@ public class MapGenerator : MonoBehaviour
     private TileBase GetTileFromNoise(float noise)
     {
         if (noise < 0.4f) return _tiles[0];
-        if (noise < 0.7f) return _tiles[1];
-        if (noise < 0.85f) return _tiles[2];
+        if (noise < 0.43f) return _tiles[1];
+        if (noise < 0.46) return _tiles[2];
+        if (noise < 0.85f) return _tiles[3];
+        if (noise < 0.90f) return _tiles[4];
         return _tiles[3];
     }
 

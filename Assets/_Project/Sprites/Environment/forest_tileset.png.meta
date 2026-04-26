@@ -96,6 +96,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -137,7 +150,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca83184a1c4f2ed4f88e6c4fdb7a3b0c
+      spriteID: a8414e1d6d34f5545b87b3abc881072c
       internalID: -861898781
       vertices: []
       indices: 
@@ -145,6 +158,28 @@ TextureImporter:
       weights: []
     - serializedVersion: 2
       name: forest_tileset_2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e2599a009bc1c1438fcf351116d3fc7
+      internalID: 71726679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_tileset_3
       rect:
         serializedVersion: 2
         x: 96
@@ -159,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a79ab901ebc77144b6cdbdf5cdcb73d
-      internalID: 71726679
+      spriteID: 22698a1c1a06a7f47961943087dcbe86
+      internalID: 2077029281
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: forest_tileset_3
+      name: forest_tileset_4
       rect:
         serializedVersion: 2
         x: 128
@@ -181,8 +216,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e45d090f9eb210479e46ead0f3c9883
-      internalID: 2077029281
+      spriteID: 142a5dae2229f7943959e365666835aa
+      internalID: -120443114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forest_tileset_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e2fa72f418703d47ac801f2498501bc
+      internalID: -1753723707
       vertices: []
       indices: 
       edges: []
@@ -207,6 +264,8 @@ TextureImporter:
       forest_tileset_1: -861898781
       forest_tileset_2: 71726679
       forest_tileset_3: 2077029281
+      forest_tileset_4: -120443114
+      forest_tileset_5: -1753723707
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

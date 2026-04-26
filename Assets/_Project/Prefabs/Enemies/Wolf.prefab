@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7586474594058182600}
   - component: {fileID: 287955655276886173}
-  - component: {fileID: 4407480408962537030}
+  - component: {fileID: 3102934344152627970}
   m_Layer: 9
   m_Name: AttackRange
   m_TagString: Untagged
@@ -161,7 +161,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &4407480408962537030
+--- !u!114 &3102934344152627970
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,9 +170,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2444870730473923313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f98ae958d1b67a4d904e005e532ab8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5315af7cefa81b74cbcf0c593f8f5adf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeAttack
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRange
 --- !u!1 &2614719710841126021
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +186,9 @@ GameObject:
   - component: {fileID: 4150612127160297832}
   - component: {fileID: 1785213722731947224}
   - component: {fileID: 4352915952331059390}
+  - component: {fileID: 5149591001742440519}
+  - component: {fileID: 5450364866934739616}
+  - component: {fileID: -2304792659186653309}
   m_Layer: 7
   m_Name: Wolf
   m_TagString: Untagged
@@ -378,3 +381,39 @@ MonoBehaviour:
     ExpOnKill: 30
     BuffDropChance: 5
     BuffDropAmount: 1
+--- !u!114 &5149591001742440519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614719710841126021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993233fbf0dbbae41b9bdacc238dc695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CommonEnemyBrain
+--- !u!114 &5450364866934739616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614719710841126021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f98ae958d1b67a4d904e005e532ab8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeAttack
+--- !u!114 &-2304792659186653309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614719710841126021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bd3d6df335c7d41b26f219c3a4a498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement

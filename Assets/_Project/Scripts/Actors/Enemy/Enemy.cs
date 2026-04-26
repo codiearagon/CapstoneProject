@@ -1,11 +1,11 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour, IActor
 {
-    public event System.Action<float> OnDamage;
+    public event System.Action<float, float> OnDamage;
     public event System.Action OnDeath;
 
     [SerializeField]
@@ -17,59 +17,26 @@ public class Enemy : MonoBehaviour, IActor
     [SerializeField]
     private EnemyStats _stats;
 
-    private Rigidbody2D _rb;
-
-    private EnemyManager _manager;
-    private GameObject _targetObj;
-    private Rigidbody2D _targetRb;
-
     private List<IStatusEffect> _activeStatusEffects;
 
-    private Vector2 _lookValue;
-    private bool _playerInRange;
-    private bool _isPaused;
-    private bool _isKnockedback;
-    private float _speedMultiplier;
+    private EnemyMovement _enemyMovement;
     private bool _isManaRegen;
+    private GameObject _target;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
         _activeStatusEffects = new List<IStatusEffect>();
-
-        _isPaused = false;
-        _isKnockedback = false;
+        _enemyMovement = GetComponent<EnemyMovement>();
 
         _stats.CurrentHp = _stats.MaxHp;
         _stats.CurrentMana = _stats.MaxMana;
         _isManaRegen = true;
         StartCoroutine(ManaRegen());
-
-        _speedMultiplier = 1;
-    }
-
-    private void Start()
-    {
-        _targetObj = GameObject.FindGameObjectWithTag("Character");
-        _manager = FindAnyObjectByType<EnemyManager>();
-        _targetRb = _targetObj.GetComponent<Rigidbody2D>();
-    }
-
-    private void FixedUpdate()
-    {
-        if (_isPaused || _isKnockedback)
-            return;
-
-        if(_targetObj != null && !_playerInRange)
-        {
-            _rb.MovePosition(Vector2.MoveTowards(_rb.position, _targetRb.position, (_stats.MovementSpeed / 10) * _speedMultiplier * Time.fixedDeltaTime));
-            _lookValue = (_targetRb.position - _rb.position).normalized;
-        }
     }
 
     private void Die()
     {
-        _targetObj.GetComponent<Character>().ReceiveExperience(_stats.ExpOnKill);
+        _target.GetComponent<Character>().ReceiveExperience(_stats.ExpOnKill);
 
         if(Utility.RollChance(_stats.BuffDropChance))
         {
@@ -86,13 +53,6 @@ public class Enemy : MonoBehaviour, IActor
         Destroy(gameObject);
     }
 
-    private IEnumerator Knockbacked()
-    {
-         yield return new WaitForSeconds(1f);
-        _isKnockedback = false;
-        _rb.linearVelocity = Vector3.zero;
-    }
-
     private IEnumerator ManaRegen()
     {
         while (_isManaRegen)
@@ -102,6 +62,11 @@ public class Enemy : MonoBehaviour, IActor
         }
     }
 
+    public void SetTarget(GameObject target)
+    {
+        _target = target;
+    }
+
     public bool IsDead() => _stats.CurrentHp <= 0;
 
     public void TakeDamage(float amount, Affinity damageAffinity)
@@ -109,11 +74,10 @@ public class Enemy : MonoBehaviour, IActor
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
         float defenseMultiplier = 1 - (_stats.Defense / (_stats.Defense + 1000));
         float finalDamage = amount * affinityMultiplier * defenseMultiplier;
-        //Logger.Log(string.Format("Received Damage: {0}, {1} base * {2}, {3}", finalDamage, amount, affinityMultiplier, _stats.EnemyName));
 
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp - finalDamage, 0, _stats.MaxHp);
 
-        OnDamage?.Invoke(_stats.CurrentHp);
+        OnDamage?.Invoke(_stats.CurrentHp, _stats.MaxHp);
 
         float randomX = Random.Range(-1f, 1f);
         float randomY = Random.Range(0f, 1.5f);
@@ -128,6 +92,11 @@ public class Enemy : MonoBehaviour, IActor
     public void Heal(float amount)
     {
         _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp + amount, 0, _stats.MaxHp);
+    }
+
+    public void HealPercent(float percentage)
+    {
+        _stats.CurrentHp = Mathf.Clamp(_stats.CurrentHp + (_stats.MaxHp * percentage), 0, _stats.MaxHp);
     }
 
     public void FullHeal()
@@ -162,11 +131,6 @@ public class Enemy : MonoBehaviour, IActor
         _stats.BuffDropAmount = 10;
     }
 
-    public void PlayerInRange(bool value)
-    {
-        _playerInRange = value;
-    }
-
     public bool HasMana(float amount)
     {
         return _stats.CurrentMana >= amount;
@@ -182,6 +146,11 @@ public class Enemy : MonoBehaviour, IActor
         _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + amount, 0, _stats.MaxMana);
     }
 
+    public void GainManaPercent(float percentage)
+    {
+        _stats.CurrentMana = Mathf.Clamp(_stats.CurrentMana + (_stats.MaxMana * percentage), 0, _stats.MaxMana);
+    }
+
     public void FullMana()
     {
         _stats.CurrentMana = _stats.MaxMana;
@@ -189,19 +158,22 @@ public class Enemy : MonoBehaviour, IActor
 
     public void ApplyKnockback(Vector2 force)
     {
-        _rb.AddForce(force, ForceMode2D.Impulse);
-        _isKnockedback = true;
-        StartCoroutine(Knockbacked());
+        _enemyMovement.ApplyKnockback(force);
     }
 
-    public void ApplyMoveSpeed(float multiplier)
+    public void ApplySilence()
     {
-        _speedMultiplier = multiplier;
+        throw new System.NotImplementedException();
     }
 
-    public void ApplyStatChange(StatType stat, float multiplier)
+    public void ApplyDisarm()
     {
-        _stats.GetStat(stat);
+        throw new System.NotImplementedException();
+    }
+
+    public void ApplyStun()
+    {
+        throw new System.NotImplementedException();
     }
 
     public void ApplyEffect(IStatusEffect effect)
@@ -225,6 +197,16 @@ public class Enemy : MonoBehaviour, IActor
         _activeStatusEffects.Remove(effect);
     }
 
+    public void AddStatModifier(StatModifier statModifier)
+    {
+        _stats.AddModifier(statModifier);
+    }
+
+    public void RemoveStatModifiers(object source)
+    {
+        _stats.RemoveModifier(source);
+    }
+
     public Vector2 GetPosition()
     {
         return transform.position;
@@ -232,11 +214,8 @@ public class Enemy : MonoBehaviour, IActor
 
     public Vector2 GetLook()
     {
-        return LookValue;
+        return _enemyMovement.LookValue;
     }
 
-    public bool IsPaused => _isPaused;
     public EnemyStats Stats => _stats;
-    public EnemyManager Manager => _manager;
-    public Vector2 LookValue => _lookValue;
 }
