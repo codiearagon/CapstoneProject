@@ -1,7 +1,32 @@
 :root {
-
 }
 
 .wrap {
-	white-space: normal;
+    white-space: normal;
+}
+
+.choose-button {
+    -unity-font-definition: url("project://database/Assets/_Project/Font/Cinzel-Bold.ttf?fileID=12800000&guid=10739b3ced1e9694fbb8740a0164a9d5&type=3#Cinzel-Bold");
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-shadow: 5px 5px 0 rgb(0, 0, 0);
+    border-left-color: rgb(43, 43, 43);
+    border-right-color: rgb(43, 43, 43);
+    border-top-color: rgb(43, 43, 43);
+    border-bottom-color: rgb(43, 43, 43);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: rgb(202, 115, 115);
+    margin-top: 15px;
+    transition-duration: 0.3s;
+}
+
+.choose-button:hover {
+    filter: tint(rgb(180, 180, 180));
+}
+
+.choose-button:active {
+    filter: tint(rgb(160, 160, 160));
 }

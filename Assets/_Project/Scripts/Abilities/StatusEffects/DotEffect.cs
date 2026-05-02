@@ -38,7 +38,6 @@ public class DotEffect : IStatusEffect
         while(_currentDuration > 0)
         {
             yield return new WaitForSeconds(_interval);
-            Logger.Log(_currentDuration);
             target.GetComponent<ILiving>().TakeDamage(_damage, _affinity);
             _currentDuration -= _interval;
         }

@@ -19,7 +19,7 @@ MonoBehaviour:
     become the waves that drown her sorrows.'
   StatSummary: Higher damage for water abilities. Overall better HP and Mana.
   Icon: {fileID: 0}
-  SplashArt: {fileID: -2612773521664694732, guid: a21ce8abe88b0914b83c723787c47c96, type: 3}
+  SplashArt: {fileID: 21300000, guid: 9768af297004d3a438d71d91f59c4a7e, type: 3}
   Affinity: 2
   MaxHp: 100
   HpRegenRate: 2

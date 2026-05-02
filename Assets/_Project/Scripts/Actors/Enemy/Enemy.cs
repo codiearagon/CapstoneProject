@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour, IActor
     private EnemyStats _stats;
 
     private List<IStatusEffect> _activeStatusEffects;
-
+    private SpriteRenderer _spriteRenderer;
     private EnemyMovement _enemyMovement;
     private bool _isManaRegen;
     private GameObject _target;
@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour, IActor
     {
         _activeStatusEffects = new List<IStatusEffect>();
         _enemyMovement = GetComponent<EnemyMovement>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
         _stats.CurrentHp = _stats.MaxHp;
         _stats.CurrentMana = _stats.MaxMana;
@@ -62,6 +63,22 @@ public class Enemy : MonoBehaviour, IActor
         }
     }
 
+    private IEnumerator HitFlash(Affinity affinity)
+    {
+        _spriteRenderer.material.SetColor("_FlashColor", Utility.GetAffinityColor(affinity));
+
+        float currentFlashAmount = 0f;
+        float elapsedTime = 0f;
+        while (elapsedTime < 0.2f)
+        {
+            elapsedTime += Time.deltaTime;
+            currentFlashAmount = Mathf.Lerp(1f, 0f, (elapsedTime / 0.2f));
+            _spriteRenderer.material.SetFloat("_FlashAmount", currentFlashAmount);
+
+            yield return null;
+        }
+    }
+
     public void SetTarget(GameObject target)
     {
         _target = target;
@@ -71,6 +88,7 @@ public class Enemy : MonoBehaviour, IActor
 
     public void TakeDamage(float amount, Affinity damageAffinity)
     {
+        StartCoroutine(HitFlash(damageAffinity));
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
         float defenseMultiplier = 1 - (_stats.Defense / (_stats.Defense + 1000));
         float finalDamage = amount * affinityMultiplier * defenseMultiplier;
@@ -103,6 +121,10 @@ public class Enemy : MonoBehaviour, IActor
     {
         _stats.CurrentHp = _stats.MaxHp;
     }
+    public void MultiplyStat(StatType type, float multiplier)
+    {
+        _stats.GetStat(type) *= multiplier;
+    }
 
     public void MultiplyStats(float multiplier, float expScaling, EnemyScaling scaling)
     {
@@ -114,6 +136,7 @@ public class Enemy : MonoBehaviour, IActor
         _stats.Defense *= 1f + (multiplier * scaling.Defense);
         _stats.ExpOnKill *= expScaling * scaling.Experience;
     }
+
 
     public void MakeElite(float multiplier, float expScaling, EnemyScaling scaling)
     {

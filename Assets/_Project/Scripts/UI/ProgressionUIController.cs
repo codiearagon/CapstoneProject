@@ -16,15 +16,16 @@ public class ProgressionUIController : MonoBehaviour
 
     private VisualElement _root;
     private VisualElement _abilityUnlockElement;
+    private VisualElement _abilityUnlockContainer;
     private VisualElement _abilityUpgradeElement;
+    private VisualElement _abilityUpgradeContainer;
     private VisualElement _advancementElement;
     private VisualElement _optionContainer;
+    private VisualElement _dimmer;
     private Image _advancementBg;
 
     private Button _prevButton;
     private Button _nextButton;
-    private Button _detailsButton;
-    private Button _chooseButton;
 
     private List<VisualElement> _characterAdvancements;
 
@@ -40,21 +41,23 @@ public class ProgressionUIController : MonoBehaviour
 
         _root = GetComponent<UIDocument>().rootVisualElement;
         _abilityUnlockElement = _root.Q<VisualElement>("AbilityUnlock");
+        _abilityUnlockContainer = _root.Q<VisualElement>("AbilityUnlockContainer");
         _abilityUpgradeElement = _root.Q<VisualElement>("AbilityUpgrade");
+        _abilityUpgradeContainer = _root.Q<VisualElement>("AbilityUpgradeContainer");
+        _dimmer = _root.Q<VisualElement>("Dimmer");
         _advancementElement = _root.Q<VisualElement>("Advancement");
         _optionContainer = _advancementElement.Q<VisualElement>("OptionContainer");
 
         _advancementBg = _advancementElement.Q<Image>("Background");
         _prevButton = _advancementElement.Q<Button>("PreviousButton");
         _nextButton = _advancementElement.Q<Button>("NextButton");
-        _detailsButton = _advancementElement.Q<Button>("DetailsButton");
-        _chooseButton = _advancementElement.Q<Button>("ChooseButton");
 
         _abilityHelper = FindAnyObjectByType<AbilityHelper>();
 
         _abilityUnlockElement.style.display = DisplayStyle.None;
         _abilityUpgradeElement.style.display = DisplayStyle.None;
         _advancementElement.style.display = DisplayStyle.None;
+        _dimmer.style.display = DisplayStyle.None;
     }
 
     private void OnEnable()
@@ -63,8 +66,6 @@ public class ProgressionUIController : MonoBehaviour
 
         _prevButton.RegisterCallback<ClickEvent>(PreviousAdvancement);
         _nextButton.RegisterCallback<ClickEvent>(NextAdvancement);
-        _detailsButton.RegisterCallback<ClickEvent>(ShowDetails);
-        _chooseButton.RegisterCallback<ClickEvent>(ChooseAdvancement);
     }
     private void OnDisable()
     {
@@ -76,8 +77,6 @@ public class ProgressionUIController : MonoBehaviour
 
         _prevButton.UnregisterCallback<ClickEvent>(PreviousAdvancement);
         _nextButton.UnregisterCallback<ClickEvent>(NextAdvancement);
-        _detailsButton.UnregisterCallback<ClickEvent>(ShowDetails);
-        _chooseButton.UnregisterCallback<ClickEvent>(ChooseAdvancement);
     }
 
     private void HandlePlayerSpawned(GameObject player)
@@ -118,17 +117,20 @@ public class ProgressionUIController : MonoBehaviour
             image.image = rolledAbilities[i].Properties.Icon.texture;
             name.text = rolledAbilities[i].Properties.AbilityName;
             affinity.text = rolledAbilities[i].Properties.Affinity.ToString();
+            affinity.style.color = Utility.GetAffinityColor(rolledAbilities[i].Properties.Affinity);
             multiplier.text = rolledAbilities[i].Properties.AttackMultiplier * 100 + "% of attack"; 
             cost.text = rolledAbilities[i].Properties.ManaCost.ToString() + " mana";
             cooldown.text = rolledAbilities[i].Properties.CooldownTime.ToString() + " secs";
             description.text = rolledAbilities[i].Properties.Description;
 
+            choose.style.backgroundColor = Utility.GetAffinityColor(rolledAbilities[i].Properties.Affinity);
             choose.RegisterCallback<ClickEvent>(UnlockAbility);
             choose.dataSource = rolledAbilities[i];
 
-            _abilityUnlockElement.Add(option);
+            _abilityUnlockContainer.Add(option);
         }
 
+        _dimmer.style.display = DisplayStyle.Flex;
         _abilityUnlockElement.style.display = DisplayStyle.Flex;
     }
 
@@ -164,15 +166,17 @@ public class ProgressionUIController : MonoBehaviour
             image.image = ability.Upgrades[upgradeIndex].Icon.texture;
             name.text = ability.Upgrades[upgradeIndex].AbilityName;
             affinity.text = ability.Upgrades[upgradeIndex].Affinity.ToString();
+            affinity.style.color = Utility.GetAffinityColor(ability.Properties.Affinity);
             multiplier.text = ability.Properties.AttackMultiplier * 100 + "% -> " + ability.Upgrades[upgradeIndex].AttackMultiplier * 100 + "% of attack";
             cost.text = ability.Properties.ManaCost + " -> " + ability.Upgrades[upgradeIndex].ManaCost.ToString() + " mana";
             cooldown.text = ability.Properties.CooldownTime + " -> " + ability.Upgrades[upgradeIndex].CooldownTime.ToString() + " secs";
             description.text = ability.Upgrades[upgradeIndex].UpgradeDescription;
 
+            choose.style.backgroundColor = Utility.GetAffinityColor(ability.Properties.Affinity);
             choose.RegisterCallback<ClickEvent>(UnlockUpgrade);
             choose.dataSource = ability.Upgrades[upgradeIndex];
 
-            _abilityUpgradeElement.Add(option);
+            _abilityUpgradeContainer.Add(option);
             pool.RemoveAt(randomIdx);
         }
 
@@ -182,6 +186,7 @@ public class ProgressionUIController : MonoBehaviour
             return;
         }
 
+        _dimmer.style.display = DisplayStyle.Flex;
         _abilityUpgradeElement.style.display = DisplayStyle.Flex;
     }
 
@@ -196,29 +201,55 @@ public class ProgressionUIController : MonoBehaviour
         {
             VisualElement option = _advancementOption.CloneTree();
             option.dataSource = advancement;
+            option.style.position = Position.Absolute;
+            option.style.width = Length.Percent(100);
+            option.style.height = Length.Percent(100);
 
-            Image splash = option.Q<Image>("SplashImage");
             Label name = option.Q<Label>("Name");
             Label affinity = option.Q<Label>("Affinity");
             Label description = option.Q<Label>("Description");
             Label statSummary = option.Q<Label>("StatSummary");
+            VisualElement statsContainer = option.Q<VisualElement>("StatsContainer");
             VisualElement abilities = option.Q<VisualElement>("AbilitiesContainer");
+            Button choose = option.Q<Button>("Choose");
 
-            splash.image = advancement.SplashArt.texture;
             name.text = advancement.AdvancementName;
             affinity.text = advancement.Affinity.ToString();
             affinity.style.color = Utility.GetAffinityColor(advancement.Affinity);
             description.text = advancement.Description;
             statSummary.text = advancement.StatSummary;
 
-            foreach (Ability ability in advancement.Abilities)
-            {
-                Image ab = new Image();
-                ab.image = ability.Properties.Icon.texture;
+            VisualElement stats = option.Q<VisualElement>("Stats");
+            stats.style.borderBottomColor = Utility.GetAffinityColor(advancement.Affinity);
+            stats.style.borderTopColor = Utility.GetAffinityColor(advancement.Affinity);
+            stats.style.borderLeftColor = Utility.GetAffinityColor(advancement.Affinity);
+            stats.style.borderRightColor = Utility.GetAffinityColor(advancement.Affinity);
 
-                abilities.Add(ab);
-            }
+            if (advancement.MaxHp > 0) statsContainer.Add(new Label($"+{advancement.MaxHp} Max HP"));
+            if (advancement.HpRegenRate > 0) statsContainer.Add(new Label($"+{advancement.HpRegenRate} HP Regeneration"));
+            if (advancement.MaxMana > 0) statsContainer.Add(new Label($"+{advancement.MaxMana} Max Mana"));
+            if (advancement.ManaRegenRate > 0) statsContainer.Add(new Label($"+{advancement.ManaRegenRate} Mana Regeneration"));
+            if (advancement.MovementSpeed > 0) statsContainer.Add(new Label($"+{advancement.MovementSpeed} Movement Speed"));
+            if (advancement.Attack > 0) statsContainer.Add(new Label($"+{advancement.Attack} Attack"));
+            if (advancement.AttackSpeed > 0) statsContainer.Add(new Label($"+{advancement.AttackSpeed} Attack Speed"));
+            if (advancement.Defense > 0) statsContainer.Add(new Label($"+{advancement.Defense} Defense"));
+            if (advancement.FireMultiplier > 0) statsContainer.Add(new Label($"+{advancement.FireMultiplier * 100}% Fire Damage"));
+            if (advancement.WaterMultiplier > 0) statsContainer.Add(new Label($"+{advancement.WaterMultiplier * 100}% Water Damage"));
+            if (advancement.AirMultiplier > 0) statsContainer.Add(new Label($"+{advancement.AirMultiplier * 100}% Air Damage"));
+            if (advancement.EarthMultiplier > 0) statsContainer.Add(new Label($"+{advancement.EarthMultiplier * 100}% Earth Damage"));
+            if (advancement.DarkMultiplier > 0) statsContainer.Add(new Label($"+{advancement.DarkMultiplier * 100}% Dark Damage"));
+            if (advancement.LightMultiplier > 0) statsContainer.Add(new Label($"+{advancement.LightMultiplier * 100}% Light Damage"));
 
+            //foreach (Ability ability in advancement.Abilities)
+            //{
+            //    Image ab = new Image();
+            //    ab.image = ability.Properties.Icon.texture;
+
+            //    abilities.Add(ab);
+            //}
+
+            choose.style.backgroundColor = Utility.GetAffinityColor(advancement.Affinity);
+            choose.RegisterCallback<ClickEvent>(ChooseAdvancement);
             _characterAdvancements.Add(option);
         }
 
@@ -236,7 +267,6 @@ public class ProgressionUIController : MonoBehaviour
         else
             _selectedIndex--;
 
-        ResetStyle();
         _selectedAdvancement = _characterAdvancements[_selectedIndex];
         _optionContainer.Clear();
         _optionContainer.Add(_selectedAdvancement);
@@ -250,7 +280,6 @@ public class ProgressionUIController : MonoBehaviour
         else
             _selectedIndex++;
 
-        ResetStyle();
         _selectedAdvancement = _characterAdvancements[_selectedIndex];
         _optionContainer.Clear();
         _optionContainer.Add(_selectedAdvancement);
@@ -263,28 +292,12 @@ public class ProgressionUIController : MonoBehaviour
         _advancementBg.scaleMode = ScaleMode.ScaleAndCrop;
     }
 
-    private void ShowDetails(ClickEvent evt)
-    {
-        VisualElement _detailsContainer = _selectedAdvancement.Q<VisualElement>("DetailsContainer");
-        VisualElement _imageContainer = _selectedAdvancement.Q<VisualElement>("ImageContainer");
-
-        if (_detailsContainer.style.display == DisplayStyle.Flex)
-        {
-            _detailsButton.text = "Show Details";
-            _detailsContainer.style.display = DisplayStyle.None;
-            _imageContainer.style.display = DisplayStyle.Flex;
-        }
-        else
-        {
-            _detailsButton.text = "Hide Details";
-            _detailsContainer.style.display = DisplayStyle.Flex;
-            _imageContainer.style.display = DisplayStyle.None;
-        }
-    }
-
     private void ChooseAdvancement(ClickEvent evt)
     {
+        Button button = evt.currentTarget as Button;
         _playerObj.SelectAdvancement(_selectedAdvancement.dataSource as CharacterAdvancement);
+
+        button.UnregisterCallback<ClickEvent>(ChooseAdvancement);
         _characterAdvancements.Clear();
         _selectedAdvancement.Clear();
         _optionContainer.Clear();
@@ -303,8 +316,9 @@ public class ProgressionUIController : MonoBehaviour
         button.UnregisterCallback<ClickEvent>(UnlockAbility);
         _abilityHelper.RemoveAbility(ability);
 
-        _abilityUnlockElement.Clear();
+        _abilityUnlockContainer.Clear();
         _abilityUnlockElement.style.display = DisplayStyle.None;
+        _dimmer.style.display = DisplayStyle.None;
 
         Utility.ReleasePause();
     }
@@ -318,20 +332,10 @@ public class ProgressionUIController : MonoBehaviour
 
         button.UnregisterCallback<ClickEvent>(UnlockUpgrade);
 
-        _abilityUpgradeElement.Clear();
+        _abilityUpgradeContainer.Clear();
         _abilityUpgradeElement.style.display = DisplayStyle.None;
+        _dimmer.style.display = DisplayStyle.None;
 
         Utility.ReleasePause();
-    }
-
-    private void ResetStyle()
-    {
-        VisualElement _detailsContainer = _selectedAdvancement.Q<VisualElement>("DetailsContainer");
-        VisualElement _imageContainer = _selectedAdvancement.Q<VisualElement>("ImageContainer");
-
-        _detailsContainer.style.display = DisplayStyle.None;
-        _imageContainer.style.display = DisplayStyle.Flex;
-
-        _detailsButton.text = "Show Details";
     }
 }

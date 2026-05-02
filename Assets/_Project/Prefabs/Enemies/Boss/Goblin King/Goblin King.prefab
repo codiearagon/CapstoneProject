@@ -95,8 +95,8 @@ GameObject:
   - component: {fileID: 4150612127160297832}
   - component: {fileID: 1785213722731947224}
   - component: {fileID: 4352915952331059390}
-  - component: {fileID: 688085004380488068}
   - component: {fileID: 2592182079421456240}
+  - component: {fileID: -986682440620193157}
   - component: {fileID: 6551654142710582375}
   m_Layer: 7
   m_Name: Goblin King
@@ -147,7 +147,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 2f8a78c4c5649ff43ae1a665adad3cfb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -290,18 +290,6 @@ MonoBehaviour:
     ExpOnKill: 500
     BuffDropChance: 0
     BuffDropAmount: 0
---- !u!114 &688085004380488068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2614719710841126021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 993233fbf0dbbae41b9bdacc238dc695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CommonEnemyBrain
 --- !u!114 &2592182079421456240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +302,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bd3d6df335c7d41b26f219c3a4a498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+--- !u!114 &-986682440620193157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614719710841126021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b66734417cde9e4bb279ef5379d5444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoblinKingBrain
 --- !u!114 &6551654142710582375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,9 +326,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8401ef9a442264b9538aaacc7f9b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoblinBossAttack
-  _abilities:
+  _defaultAbilities:
   - {fileID: 3050894501572034644, guid: 3c04523885e67114e88d8b6d3d0fb9bc, type: 3}
+  _phase2Abilities:
   - {fileID: 3050894501572034644, guid: 2be41f510e5077c49bf8636f188b1a4e, type: 3}
+  _phase3Abilities:
   - {fileID: 3050894501572034644, guid: 3de49c6375021714691db7dd6dccc12c, type: 3}
   _abilityBurst: 2
 --- !u!1 &4511407439010370331

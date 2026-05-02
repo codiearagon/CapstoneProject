@@ -43,6 +43,7 @@ public class EnemyMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         _isKnockedback = false;
+        _rb.linearVelocity = Vector3.zero;
     }
 
     public void StartMoving()

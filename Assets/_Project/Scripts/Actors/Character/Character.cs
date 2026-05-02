@@ -142,7 +142,7 @@ public class Character : MonoBehaviour, IActor
         if (_stats.Level >= _stats.NextAbilityUnlockLevel)
             TriggerAbilityUnlock();
 
-        if (_stats.Level >= _stats.NextAbilityUpgradeLevel)
+        if (_stats.Level >= _stats.NextAbilityUpgradeLevel && _abilities.GetList().Count > 0)
             TriggerAbilityUpgrade();
 
         // Recursive call if exp is more than the new cap

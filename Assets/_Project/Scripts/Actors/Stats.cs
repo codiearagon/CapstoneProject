@@ -47,7 +47,13 @@ public class Stats
 
     private List<StatModifier> _modifiers = new List<StatModifier>();
 
-    private ref float GetStat(StatType type)
+    private float GetBaseValue(StatType type)
+    {
+        float value = GetStat(type);
+        return value;
+    }
+
+    public ref float GetStat(StatType type)
     {
         switch (type)
         {
@@ -67,12 +73,6 @@ public class Stats
             case StatType.LightMultiplier: return ref LightMultiplier;
             default: return ref MaxHp;
         }
-    }
-
-    private float GetBaseValue(StatType type)
-    {
-        float value = GetStat(type);
-        return value;
     }
 
     public void PermanentBuff(StatType type, float multiplier)

@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="Container" style="flex-grow: 1; align-self: auto; justify-content: flex-start; align-items: flex-end; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;">
-        <ui:Label text="Boss spawns in:" name="Timer" style="-unity-font-definition: url(&quot;project://database/Assets/_Project/Font/novem___.ttf?fileID=12800000&amp;guid=5959b81331a03b048aa33fbb46d88234&amp;type=3#novem___&quot;); font-size: 35px; color: rgb(255, 255, 255); -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 0.5px; text-shadow: 5px 5px 0 rgb(0, 0, 0);"/>
+        <ui:Label text="Boss spawns in:" name="Timer" style="-unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Bold.ttf?fileID=12800000&amp;guid=10739b3ced1e9694fbb8740a0164a9d5&amp;type=3#Cinzel-Bold&quot;); font-size: 35px; color: rgb(255, 255, 255); -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 0.5px; text-shadow: 2px 2px 0 rgb(0, 0, 0);"/>
     </ui:VisualElement>
 </ui:UXML>

@@ -33,4 +33,9 @@
     border-right-color: rgb(0, 0, 0);
     border-top-color: rgb(0, 0, 0);
     border-bottom-color: rgb(0, 0, 0);
+    transition-duration: 0.3s;
+}
+
+.button-style:hover {
+    scale: 1.2 1.2;
 }

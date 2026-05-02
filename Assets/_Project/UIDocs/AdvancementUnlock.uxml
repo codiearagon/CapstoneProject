@@ -1,19 +1,25 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UIDocs/AdvancementUnlock.uss?fileID=7433441132597879392&amp;guid=8652fdf55642ccb4f8f93d1f60025abc&amp;type=3#AdvancementUnlock"/>
-    <ui:VisualElement name="Option" style="flex-grow: 1; color: rgb(255, 255, 255);">
-        <ui:VisualElement name="ImageContainer" style="flex-grow: 1; display: flex; position: relative; width: 100%; height: 100%;">
-            <ui:Image name="SplashImage"/>
-        </ui:VisualElement>
-        <ui:VisualElement name="DetailsContainer" style="flex-grow: 1; display: none; justify-content: flex-start; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/novem___.ttf?fileID=12800000&amp;guid=5959b81331a03b048aa33fbb46d88234&amp;type=3#novem___&quot;);">
-            <ui:VisualElement name="Container" style="flex-grow: 1; font-size: 20px; margin-top: 30px; width: 50%;">
-                <ui:Label text="Fire path" name="Name" style="font-size: 40px;"/>
-                <ui:Label text="Fire&#10;" name="Affinity" style="font-size: 30px; margin-top: 20px; margin-bottom: 20px;"/>
-                <ui:Label text="the fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire paththe fire path" name="Description" class="wrap"/>
-                <ui:Label text="blablablalblablabla" name="StatSummary" class="wrap"/>
+    <ui:VisualElement name="Option" style="flex-grow: 1; color: rgb(255, 255, 255); display: flex; position: absolute; left: 15%; bottom: 3%; width: 70%; height: 35%;">
+        <ui:VisualElement name="DetailsContainer" style="display: flex; justify-content: flex-start; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; flex-direction: row; background-color: rgba(15, 15, 15, 0.98); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; border-left-color: rgba(80, 80, 80, 0.78); border-right-color: rgba(80, 80, 80, 0.78); border-top-color: rgba(80, 80, 80, 0.78); border-bottom-color: rgba(80, 80, 80, 0.78); padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; flex-grow: 1;">
+            <ui:VisualElement name="LeftContainer" style="flex-grow: 1; width: 50%; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;">
+                <ui:VisualElement name="Container" style="flex-grow: 1; font-size: 20px; margin-top: 0;">
+                    <ui:Label text="Lamenting Wave" name="Name" style="font-size: 25px; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/CinzelDecorative-Bold.otf?fileID=12800000&amp;guid=ce2bb40f4757494408ced83f20fb5d94&amp;type=3#CinzelDecorative-Bold&quot;);"/>
+                    <ui:Label text="Water" name="Affinity" style="font-size: 20px; margin-top: 0; margin-bottom: 10px; margin-right: 2px; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Regular.ttf?fileID=12800000&amp;guid=ea8e45eb864f0e2449902a45d8ebc54c&amp;type=3#Cinzel-Regular&quot;);"/>
+                    <ui:Label text="Her long grievance in silence, no longer suppressed.&#10;Her tears become the waves that drown her sorrows." name="Description" class="wrap" style="-unity-font-definition: url(&quot;project://database/Assets/_Project/Font/SourceSans3-VariableFont_wght.ttf?fileID=12800000&amp;guid=ec9dfedcc95ec924e9584ba5af5265c5&amp;type=3#SourceSans3-VariableFont_wght&quot;); -unity-font-style: normal; font-size: 15px;"/>
+                    <ui:Label text="Higher damage for water abilities.&#10;Overall better HP and Mana." name="StatSummary" class="wrap" style="-unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Regular.ttf?fileID=12800000&amp;guid=ea8e45eb864f0e2449902a45d8ebc54c&amp;type=3#Cinzel-Regular&quot;); font-size: 15px;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="SpecialContainer" style="flex-grow: 1; justify-content: space-around;">
+                    <ui:Label text="Special Abilities" name="SpecialAbilities" style="-unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Bold.ttf?fileID=12800000&amp;guid=10739b3ced1e9694fbb8740a0164a9d5&amp;type=3#Cinzel-Bold&quot;);"/>
+                    <ui:VisualElement name="AbilitiesContainer" style="flex-grow: 1; flex-direction: row;"/>
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="SpecialContainer" style="flex-grow: 1; justify-content: space-around;">
-                <ui:Label text="Special Abilities" name="SpecialAbilities"/>
-                <ui:VisualElement name="AbilitiesContainer" style="flex-grow: 1; flex-direction: row;"/>
+            <ui:VisualElement name="RightContainer" style="flex-grow: 1; border-right-width: 15px; border-top-width: 15px; border-bottom-width: 15px; border-left-width: 15px;">
+                <ui:VisualElement name="Stats" style="flex-grow: 1; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; background-color: rgba(20, 20, 20, 0.67); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+                    <ui:Label text="Stats" name="Label" style="align-self: center; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Regular.ttf?fileID=12800000&amp;guid=ea8e45eb864f0e2449902a45d8ebc54c&amp;type=3#Cinzel-Regular&quot;); font-size: 20px;"/>
+                    <ui:VisualElement name="StatsContainer" style="flex-grow: 1; flex-wrap: wrap; flex-direction: column; align-self: stretch; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/SourceSans3-VariableFont_wght.ttf?fileID=12800000&amp;guid=ec9dfedcc95ec924e9584ba5af5265c5&amp;type=3#SourceSans3-VariableFont_wght&quot;); font-size: 15px; align-items: center; align-content: stretch; justify-content: flex-start;"/>
+                </ui:VisualElement>
+                <ui:Button text="Choose" name="Choose" class="choose-button" style="font-size: 15px;"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

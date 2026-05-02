@@ -38,7 +38,6 @@ public class SlowEffect : IStatusEffect
         target.GetComponent<IStatEffectable>().AddStatModifier(slow);
         while (_currentDuration > 0)
         {
-            Debug.Log(_currentDuration);
             yield return new WaitForSeconds(_interval);
             _currentDuration -= _interval;
         }

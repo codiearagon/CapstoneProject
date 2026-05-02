@@ -1,19 +1,19 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UIDocs/AbilityUnlockOption.uss?fileID=7433441132597879392&amp;guid=349983a17a274054d966f359ae0cf132&amp;type=3#AbilityUnlockOption"/>
-    <ui:VisualElement name="Option" class="option-container" style="justify-content: flex-start; flex-grow: 1; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;">
-        <ui:VisualElement name="ImageContainer" style="flex-grow: 1; width: 100%; height: 20%; margin-bottom: 15px;">
+    <ui:VisualElement name="Option" class="option-container" style="justify-content: flex-start; flex-grow: 1; padding-top: 0; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; background-color: rgba(0, 0, 0, 0); border-right-width: 1px; border-left-width: 1px; border-left-color: rgba(80, 80, 80, 0.47); border-right-color: rgba(80, 80, 80, 0.47); border-top-color: rgba(80, 80, 80, 0.47); border-bottom-color: rgba(80, 80, 80, 0.47);">
+        <ui:VisualElement name="ImageContainer" style="flex-grow: 0; width: 100%; height: 30%; margin-bottom: 15px; flex-shrink: 0;">
             <ui:Image name="Image" source="project://database/Assets/_Project/Sprites/Abilities/Fireball.png?fileID=2800000&amp;guid=389d848c2ace85b4781fda60f38041a9&amp;type=3#Fireball" style="width: 100%; height: 100%;"/>
         </ui:VisualElement>
-        <ui:VisualElement name="Container" style="flex-grow: 1;">
-            <ui:Label text="Label" name="Name" style="align-self: center; font-size: 25px;"/>
-            <ui:Label text="Label" name="Affinity" style="align-self: center; font-size: 20px;"/>
+        <ui:VisualElement name="Container" style="flex-grow: 1; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/SourceSans3-VariableFont_wght.ttf?fileID=12800000&amp;guid=ec9dfedcc95ec924e9584ba5af5265c5&amp;type=3#SourceSans3-VariableFont_wght&quot;); flex-shrink: 0;">
+            <ui:Label text="Fireball" name="Name" style="align-self: center; font-size: 25px; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Black.ttf?fileID=12800000&amp;guid=d77b662db23855444b6d7d91bd0ccab3&amp;type=3#Cinzel-Black&quot;);"/>
+            <ui:Label text="Label" name="Affinity" style="align-self: center; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Regular.otf?fileID=12800000&amp;guid=e7b98e106fc411a4a880a9afee31f07e&amp;type=3#Cinzel-Regular&quot;);"/>
             <ui:Label text="Label" name="Multiplier" style="align-self: center; font-size: 14px;"/>
             <ui:VisualElement name="Container" style="flex-grow: 0; flex-direction: row; justify-content: space-around;">
                 <ui:Label text="Label" name="Cost"/>
                 <ui:Label text="Label" name="Cooldown"/>
             </ui:VisualElement>
-            <ui:Label text="Label" name="Description" class="wrap"/>
+            <ui:Label text="Label" name="Description" class="wrap" style="color: rgb(180, 180, 180);"/>
         </ui:VisualElement>
-        <ui:Button text="Choose" name="Choose" style="flex-shrink: 1; color: rgb(0, 0, 0); font-size: 20px;"/>
+        <ui:Button text="Choose" name="Choose" class="choose-button"/>
     </ui:VisualElement>
 </ui:UXML>

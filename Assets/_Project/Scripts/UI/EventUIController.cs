@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class EventUIController : MonoBehaviour
 {
@@ -13,10 +14,13 @@ public class EventUIController : MonoBehaviour
     private EnemyManager _enemyManager;
 
     private Queue<(string, Color)> _eventTitleQueue;
+    private Color _goodColor = new Color32(255, 215, 80, 255);
+    private Color _badColor = new Color32(220, 50, 50, 255);
 
     private VisualElement _root;
     private Label _eventTitle;
     private VisualElement _eventDetailsContainer;
+    private BossBrain _bossBrain;
 
     private Character _playerObj;
     private bool _titleRunning;
@@ -49,6 +53,7 @@ public class EventUIController : MonoBehaviour
         _playerObj.OnLevelUp -= HandleOnLevelUp;
         _playerObj.OnLevelUpBuff -= HandleOnLevelUpBuff;
         _enemyManager.OnBossSpawned -= HandleBossSpawned;
+        _bossBrain.OnPhaseChange -= HandlePhaseChange;
     }
 
     private void HandlePlayerSpawned(GameObject player)
@@ -61,7 +66,7 @@ public class EventUIController : MonoBehaviour
 
     private void HandleOnLevelUp(int level, float currentExp, float nextExpToLevel)
     {
-        _eventTitleQueue.Enqueue(("Leveled up!", Color.green));
+        _eventTitleQueue.Enqueue(("Leveled up!", _goodColor));
 
         
         
@@ -82,7 +87,7 @@ public class EventUIController : MonoBehaviour
 
     private void HandleScaleUp()
     {
-        _eventTitleQueue.Enqueue(("Enemies have gotten stronger!", Color.red));
+        _eventTitleQueue.Enqueue(("Enemies have gotten stronger!", _badColor));
 
         if (!_titleRunning)
             StartCoroutine(ShowTitle());
@@ -90,7 +95,7 @@ public class EventUIController : MonoBehaviour
 
     private void HandleEliteSpawn()
     {
-        _eventTitleQueue.Enqueue(("Elite enemy spawned!", Color.red));
+        _eventTitleQueue.Enqueue(("Elite enemy spawned!", _badColor));
 
         if (!_titleRunning)
             StartCoroutine(ShowTitle());
@@ -98,7 +103,19 @@ public class EventUIController : MonoBehaviour
 
     private void HandleBossSpawned(Enemy enemy)
     {
-        _eventTitleQueue.Enqueue(("Boss spawned!", Color.red));
+        _eventTitleQueue.Enqueue(("Boss spawned!", _badColor));
+        _bossBrain = enemy.GetComponent<BossBrain>();
+
+        _bossBrain.OnPhaseChange += HandlePhaseChange;
+
+        if (!_titleRunning)
+            StartCoroutine(ShowTitle());
+    }
+
+    private void HandlePhaseChange(int phase)
+    {
+        _eventTitleQueue.Enqueue(($"Phase {phase}!", _badColor));
+        Debug.Log("Phase changed");
 
         if (!_titleRunning)
             StartCoroutine(ShowTitle());

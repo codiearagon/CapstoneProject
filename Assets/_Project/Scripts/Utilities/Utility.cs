@@ -66,19 +66,19 @@ public static class Utility
         switch (affinity)
         {
             case Affinity.Fire:
-                return Color.red;
+                return new Color32(255, 80, 40, 255);
             case Affinity.Water:
-                return Color.blue;
+                return new Color32(0, 110, 255, 255);
             case Affinity.Air:
-                return Color.white;
+                return new Color32(0, 255, 200, 255);
             case Affinity.Earth:
-                return Color.green;
+                return new Color32(40, 180, 90, 255);
             case Affinity.Dark:
-                return Color.violet;
+                return new Color32(140, 40, 180, 255);
             case Affinity.Light:
-                return Color.yellow;
+                return new Color32(255, 210, 60, 255);
             default:
-                return Color.black;
+                return new Color32(90, 90, 90, 255);
         }
     }
 

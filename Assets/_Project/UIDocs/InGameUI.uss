@@ -2,6 +2,7 @@
 }
 
 #CharHealthBar .unity-progress-bar__container {
+    flex-shrink: 1;
     flex-grow: 1;
 }
 
@@ -12,12 +13,14 @@
 
 #CharHealthBar .unity-progress-bar__progress {
     margin: 0;
+    flex-shrink: 1;
     flex-grow: 1;
     width: 80%;
     background-color: lightgreen;
 }
 
 #CharManaBar .unity-progress-bar__container {
+    flex-shrink: 1;
     flex-grow: 1;
 }
 
@@ -28,6 +31,7 @@
 
 #CharManaBar .unity-progress-bar__progress {
     margin: 0;
+    flex-shrink: 1;
     flex-grow: 1;
     width: 80%;
     background-color: lightblue;
