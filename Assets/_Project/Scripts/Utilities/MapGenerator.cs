@@ -2,31 +2,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[System.Serializable]
+public class NoiseTileRule
+{
+    [Range(0f, 1f)] public float MaxNoise;
+    public TileBase[] Tiles;
+}
+
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerRoot _playerRoot;
+    // References
+    [SerializeField] private PlayerRoot _playerRoot;
+    [SerializeField] private Tilemap _tilemap;
+    [SerializeField] private List<NoiseTileRule> _tileRules; 
 
-    [SerializeField]
-    private Tilemap _tilemap;
+    // Shrine Settings
+    [SerializeField] private List<GameObject> _shrinePrefabs;
+    [SerializeField] private float _shrineChance = 30f;
 
-    [SerializeField]
-    private List<TileBase> _tiles;
-
-    [SerializeField]
-    private List<GameObject> _shrinePrefabs;
-
-    [SerializeField]
-    private float _shrineChance = 30f;
-
-    [SerializeField]
-    private int _chunkSize = 16;
-
-    [SerializeField]
-    private int _renderDistance = 3;
-
-    [SerializeField]
-    private float _scale = 20f;
+    // Generation Settings
+    [SerializeField] private int _chunkSize = 16;
+    [SerializeField] private int _renderDistance = 3;
+    [SerializeField] private float _scale = 20f;
 
     private Vector2 _offset;
     private HashSet<Vector2Int> _generatedChunks = new HashSet<Vector2Int>();
@@ -101,7 +98,7 @@ public class MapGenerator : MonoBehaviour
                     (tilePos.y + _offset.y) / _scale
                 );
 
-                _tilemap.SetTile(tilePos, GetTileFromNoise(noise));
+                _tilemap.SetTile(tilePos, GetTileFromNoise(noise, tilePos));
             }
         }
 
@@ -157,14 +154,26 @@ public class MapGenerator : MonoBehaviour
         _shrineChunks.Remove(chunk);
     }
 
-    private TileBase GetTileFromNoise(float noise)
+    private TileBase GetTileFromNoise(float noise, Vector3Int cell)
     {
-        if (noise < 0.4f) return _tiles[0];
-        if (noise < 0.43f) return _tiles[1];
-        if (noise < 0.46) return _tiles[2];
-        if (noise < 0.85f) return _tiles[3];
-        if (noise < 0.90f) return _tiles[4];
-        return _tiles[3];
+        foreach (NoiseTileRule rule in _tileRules)
+        {
+            if (noise <= rule.MaxNoise)
+                return PickDeterministic(rule.Tiles, cell);
+        }
+
+        return PickDeterministic(_tileRules[^1].Tiles, cell);
+    }
+
+    private TileBase PickDeterministic(TileBase[] tiles, Vector3Int cell)
+    {
+        if (tiles == null || tiles.Length == 0)
+            return null;
+
+        int hash = cell.x * 73856093 ^ cell.y * 19349663;
+        int index = Mathf.Abs(hash) % tiles.Length;
+
+        return tiles[index];
     }
 
     private GameObject GetRandomShrine()

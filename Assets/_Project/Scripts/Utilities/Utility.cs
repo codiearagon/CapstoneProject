@@ -24,6 +24,9 @@ public static class Utility
         [StatType.LightMultiplier] = 1f,
     };
 
+    public static Color GetGoodEventColor() => new Color32(255, 215, 80, 255);
+    public static Color GetBadEventColor() => new Color32(220, 50, 50, 255);
+
     public static float GetMultiplier(Stats stats, Affinity affinity)
     {
         float multiplier = 0f;

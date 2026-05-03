@@ -58,6 +58,9 @@ public class Ability : MonoBehaviour
             return;
 
         _caster.GetComponent<IManaUser>().UseMana(Properties.ManaCost);
+
+        if(Properties.CastSound != null)
+            AudioSource.PlayClipAtPoint(Properties.CastSound, _caster.transform.position);
         
         _execution = CreateAbilityExecution();
         _execution.Execute(caster, this, _layer);

@@ -50,6 +50,9 @@ public abstract class BossBrain : EnemyBrain
 
         _phase = 2;
         OnPhaseChange?.Invoke(_phase);
+        GameEvents.Raise(new GameEventMessage(GameEventType.BossPhaseChanged,
+                                    $"{_enemy.Stats.Name} has entered phase {_phase}!", Utility.GetBadEventColor()));
+
         RecalculateActions();
     }
 
@@ -60,6 +63,9 @@ public abstract class BossBrain : EnemyBrain
 
         _phase = 3;
         OnPhaseChange?.Invoke(_phase);
+        GameEvents.Raise(new GameEventMessage(GameEventType.BossPhaseChanged,
+                                    $"{_enemy.Stats.Name} has entered phase {_phase}!", Utility.GetBadEventColor()));
+
         RecalculateActions();
     }
 
@@ -70,6 +76,9 @@ public abstract class BossBrain : EnemyBrain
 
         _phase = 4;
         OnPhaseChange?.Invoke(_phase);
+        GameEvents.Raise(new GameEventMessage(GameEventType.BossPhaseChanged,
+                                    $"{_enemy.Stats.Name} has entered phase {_phase}!", Utility.GetBadEventColor()));
+
         RecalculateActions();
     }
 }

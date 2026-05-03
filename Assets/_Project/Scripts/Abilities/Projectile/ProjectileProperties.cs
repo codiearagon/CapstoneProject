@@ -12,6 +12,8 @@ public class ProjectileProperties
     public ProjectileHitBehaviour HitBehaviour;
 
     [Header("Properties")]
+    public AudioClip DurationSound;
+    public AudioClip HitSound;
     public bool Rotating;
     public float XSize;
     public float YSize;

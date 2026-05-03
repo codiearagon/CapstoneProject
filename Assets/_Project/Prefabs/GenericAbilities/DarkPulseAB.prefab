@@ -52,6 +52,7 @@ MonoBehaviour:
     Description: Release a continuous pulse of dark magic around you that damages
       everything within. Toggable, continuously drains mana.
     UpgradeDescription: 
+    CastSound: {fileID: 0}
     Affinity: 5
     AttackMultiplier: 1.05
     ManaCost: 10
@@ -62,6 +63,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 1
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       Rotating: 0
       XSize: 0
       YSize: 0
@@ -73,6 +76,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 2774732550181386862, guid: 473e5e1a4ec5705438dcc12882042541, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 8300000, guid: 87393d9f13f446c4cb471835d30a470a, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       XSize: 10
       YSize: 10
       AttackInterval: 1
@@ -86,6 +91,7 @@ MonoBehaviour:
       everything within. \n\nSlows enemies within.\n\nToggable, continuously drains
       mana."
     UpgradeDescription: Bigger. Applies 30% slow within. Increased mana cost.
+    CastSound: {fileID: 0}
     Affinity: 5
     AttackMultiplier: 1.05
     ManaCost: 12
@@ -96,6 +102,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       Rotating: 0
       XSize: 0
       YSize: 0
@@ -107,6 +115,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 2774732550181386862, guid: 473e5e1a4ec5705438dcc12882042541, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 8300000, guid: 87393d9f13f446c4cb471835d30a470a, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       XSize: 15
       YSize: 15
       AttackInterval: 1
@@ -125,6 +135,7 @@ MonoBehaviour:
       everything within. \n\nSlows enemies within.\n\nToggable, continuously drains
       mana."
     UpgradeDescription: Bigger and stronger. Applies 60% slow within. Uses more mana.
+    CastSound: {fileID: 0}
     Affinity: 5
     AttackMultiplier: 1.1
     ManaCost: 17
@@ -135,6 +146,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       Rotating: 0
       XSize: 0
       YSize: 0
@@ -146,6 +159,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 2774732550181386862, guid: 473e5e1a4ec5705438dcc12882042541, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 8300000, guid: 87393d9f13f446c4cb471835d30a470a, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       XSize: 20
       YSize: 20
       AttackInterval: 1

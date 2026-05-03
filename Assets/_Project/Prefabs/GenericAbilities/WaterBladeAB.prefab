@@ -52,6 +52,7 @@ MonoBehaviour:
     Description: Shoots out a blade of water that slices everything in its path.
       Slows enemies by 10%.
     UpgradeDescription: 
+    CastSound: {fileID: 8300000, guid: 3bd8573d6bac39648ace6a06a13cab27, type: 3}
     Affinity: 2
     AttackMultiplier: 1.4
     ManaCost: 15
@@ -62,6 +63,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: 71413f3ae5a5cc347b53502d2cd6d5e8, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 1
+      DurationSound: {fileID: 8300000, guid: 423b015f5e72cc5488e1d917d516c56a, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       Rotating: 1
       XSize: 1
       YSize: 1
@@ -79,6 +82,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       XSize: 0
       YSize: 0
       AttackInterval: 0
@@ -92,6 +97,7 @@ MonoBehaviour:
       Slows enemies by 30%.
     UpgradeDescription: Faster, stronger, bigger. Slows enemies on hit by 30%. Increase
       mana cost.
+    CastSound: {fileID: 8300000, guid: 3bd8573d6bac39648ace6a06a13cab27, type: 3}
     Affinity: 2
     AttackMultiplier: 1.6
     ManaCost: 20
@@ -102,6 +108,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: 71413f3ae5a5cc347b53502d2cd6d5e8, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 1
+      DurationSound: {fileID: 8300000, guid: 423b015f5e72cc5488e1d917d516c56a, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       Rotating: 1
       XSize: 1.5
       YSize: 1.5
@@ -119,6 +127,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       XSize: 0
       YSize: 0
       AttackInterval: 0
@@ -131,6 +141,7 @@ MonoBehaviour:
       Slows enemies by 60%.
     UpgradeDescription: Faster and stronger. Slows enemies on hit by 60%. Uses more
       mana.
+    CastSound: {fileID: 8300000, guid: 3bd8573d6bac39648ace6a06a13cab27, type: 3}
     Affinity: 2
     AttackMultiplier: 2
     ManaCost: 25
@@ -141,6 +152,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: 71413f3ae5a5cc347b53502d2cd6d5e8, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 1
+      DurationSound: {fileID: 8300000, guid: 423b015f5e72cc5488e1d917d516c56a, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       Rotating: 1
       XSize: 1.5
       YSize: 1.5
@@ -158,6 +171,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       XSize: 0
       YSize: 0
       AttackInterval: 0

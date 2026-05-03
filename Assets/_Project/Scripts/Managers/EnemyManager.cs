@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public event System.Action OnEliteSpawn;
-    public event System.Action OnScaleUp;
     public event System.Action<float> OnBossTimeLimit;
     public event System.Action<float> OnBossTimerSpawn;
     public event System.Action<Enemy> OnBossSpawned;
@@ -82,19 +80,23 @@ public class EnemyManager : MonoBehaviour
             _expScaling *= 2f;
             _spawner.ChangeScaling(_statScaling, _expScaling);
 
-            OnScaleUp?.Invoke();
+            GameEvents.Raise(new GameEventMessage(GameEventType.EnemiesStronger,
+                                    "Enemies have gotten stronger!", Utility.GetBadEventColor()));
         }
 
         if (level % 5 == 0)
         {
             // spawn elite enemy, num depends on scaling
 
+            List<string> eliteNames = new List<string>();
+
             for(int i = 0; i < Mathf.Floor(_statScaling + 0.5f); i++)
             {
-                _spawner.SpawnElite();
+                eliteNames.Add(_spawner.SpawnElite().Stats.Name);
             }
 
-            OnEliteSpawn?.Invoke();
+            GameEvents.Raise(new GameEventMessage(GameEventType.EliteSpawned,
+                                    "Elite enemies have spawned!", Utility.GetBadEventColor(), eliteNames));
         }
     }
 
@@ -110,7 +112,10 @@ public class EnemyManager : MonoBehaviour
 
         _spawner.TriggerSpawning(false);
         StartCoroutine(BossTimeLimit());
+
         OnBossSpawned?.Invoke(_bossObject);
+        GameEvents.Raise(new GameEventMessage(GameEventType.BossSpawned,
+                                    $"The {_bossObject.Stats.Name} has spawned!", Utility.GetBadEventColor()));
     }
 
     private IEnumerator BossSpawnTimer()

@@ -13,7 +13,16 @@ public class AOE : MonoBehaviour
     private float _attackInterval;
     private float _timeToLive;
 
+    private AudioSource _audioSource;    
+    private AudioClip _durationSound;
+    private AudioClip _hitSound;
+
     private List<Collider2D> _enemiesInRange = new List<Collider2D>();
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void FixedUpdate()
     {
@@ -45,6 +54,9 @@ public class AOE : MonoBehaviour
             {
                 if (enemy.GetComponent<ILiving>().IsDead()) continue;
 
+                if (_hitSound != null)
+                    AudioSource.PlayClipAtPoint(_hitSound, transform.position);
+
                 _hitBehaviour.OnHit(this, enemy);
             }
 
@@ -62,13 +74,23 @@ public class AOE : MonoBehaviour
     {
         _movementBehaviour = movement;
         _hitBehaviour = hit;
+        _durationSound = properties.DurationSound;
+        _hitSound = properties.HitSound;
         _manaUser = properties.ManaUser;
         _manaCost = properties.ManaCost;
         _attackInterval = properties.AttackInterval;
         _timeToLive = properties.TimeToLive;
         gameObject.layer = layer;
 
-        transform.localScale = new Vector3(properties.XSize, properties.YSize, 0);
+        transform.localScale = new Vector3(properties.XSize, properties.YSize, 1f);
+
+        if (_durationSound != null)
+        {
+            Debug.Log("playing aoe sound");
+            _audioSource.clip = _durationSound;
+            _audioSource.volume = 0.5f;
+            _audioSource.Play();
+        }
 
         // less than 0 is just infinite
         if (_timeToLive >= 0)

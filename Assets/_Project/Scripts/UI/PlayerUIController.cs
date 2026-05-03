@@ -6,13 +6,10 @@ using UnityEngine.UIElements;
 
 public class PlayerUIController : MonoBehaviour
 {
-    [SerializeField]
-    private InputActionReference _openStats;
-
-    [SerializeField]
-    private PlayerRoot _playerRoot;
-
-    private Character _playerObj;
+    [SerializeField] private InputActionReference _openStats;
+    [SerializeField] private PlayerRoot _playerRoot;
+    [SerializeField] private Character _playerObj;
+    [SerializeField] private IconReferencesSO _iconReferences;
 
     private VisualElement _root;
     private VisualElement _mainElement;
@@ -21,6 +18,7 @@ public class PlayerUIController : MonoBehaviour
 
     private VisualElement _characterStatsElement;
     private Label _affinityLabel;
+    private Image _affinityIcon;
     private Label _maxHpLabel;
     private Label _hpRegenLabel;
     private Label _maxManaLabel;
@@ -68,6 +66,7 @@ public class PlayerUIController : MonoBehaviour
 
         _characterStatsElement = _root.Q<VisualElement>("CharacterStats");
         _affinityLabel = _characterStatsElement.Q<Label>("AffinityLabel");
+        _affinityIcon = _characterStatsElement.Q<Image>("AffinityIcon");
         _maxHpLabel = _characterStatsElement.Q<Label>("MaxHpLabel");
         _hpRegenLabel = _characterStatsElement.Q<Label>("HpRegenLabel");
         _maxManaLabel = _characterStatsElement.Q<Label>("MaxManaLabel");
@@ -159,6 +158,7 @@ public class PlayerUIController : MonoBehaviour
         _manaBar.value = stats.CurrentMana;
         _manaBar.title = _manaBar.value.ToString("N0") + "/" + _manaBar.highValue.ToString("N0");
 
+        _affinityIcon.image = _iconReferences.GetIcon(stats.Affinity)?.texture;
         _affinityLabel.text = "Affinity: " + stats.Affinity.ToString();
         _maxHpLabel.text = "Max HP: " + stats.MaxHp.ToString("F2");
         _hpRegenLabel.text = "HP Regen: " + stats.HpRegenRate.ToString("F2");

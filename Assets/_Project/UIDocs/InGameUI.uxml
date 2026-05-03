@@ -75,24 +75,71 @@
             <ui:ProgressBar value="0" title="" name="ExpBar" picking-mode="Ignore" low-value="0" high-value="100" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="CharacterStats" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 15%; top: 233px; left: 22px; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/SourceSans3-VariableFont_wght.ttf?fileID=12800000&amp;guid=ec9dfedcc95ec924e9584ba5af5265c5&amp;type=3#SourceSans3-VariableFont_wght&quot;);">
+    <ui:VisualElement name="CharacterStats" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 15%; top: 233px; left: 22px; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/SourceSans3-VariableFont_wght.ttf?fileID=12800000&amp;guid=ec9dfedcc95ec924e9584ba5af5265c5&amp;type=3#SourceSans3-VariableFont_wght&quot;); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgba(80, 80, 80, 0.71); border-right-color: rgba(80, 80, 80, 0.71); border-top-color: rgba(80, 80, 80, 0.71); border-bottom-color: rgba(80, 80, 80, 0.71); background-color: rgba(20, 20, 20, 0.71); border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
         <ui:VisualElement name="Background" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.57); position: absolute; width: 100%; height: 100%;"/>
         <ui:VisualElement name="StatsElement" picking-mode="Ignore" style="flex-grow: 1; color: rgb(255, 255, 255); font-size: 18px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;">
-            <ui:Label text="Label" name="AffinityLabel"/>
-            <ui:Label text="Label" name="MaxHpLabel"/>
-            <ui:Label text="Label" name="HpRegenLabel"/>
-            <ui:Label text="Label" name="MaxManaLabel"/>
-            <ui:Label text="Label" name="ManaRegenLabel"/>
-            <ui:Label text="Label" name="MoveSpeedLabel"/>
-            <ui:Label text="Label" name="AttackLabel"/>
-            <ui:Label text="Label" name="AttackSpeedLabel"/>
-            <ui:Label text="Label" name="DefenseLabel"/>
-            <ui:Label text="Label" name="FireMultiplierLabel"/>
-            <ui:Label text="Label" name="WaterMultiplierLabel"/>
-            <ui:Label text="Label" name="AirMultiplierLabel"/>
-            <ui:Label text="Label" name="EarthMultiplierLabel"/>
-            <ui:Label text="Label" name="DarkMultiplierLabel"/>
-            <ui:Label text="Label" name="LightMultiplierLabel"/>
+            <ui:Label text="General" name="General" style="-unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Regular.ttf?fileID=12800000&amp;guid=ea8e45eb864f0e2449902a45d8ebc54c&amp;type=3#Cinzel-Regular&quot;);"/>
+            <ui:VisualElement name="AffinityContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="AffinityIcon" class="stats-icon"/>
+                <ui:Label text="Label" name="AffinityLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="MaxHpContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="MaxHpIcon" source="project://database/Assets/_Project/Sprites/Icons/MaxHp.png?fileID=2800000&amp;guid=06b9c4eb6f908924eb681236cb19db6d&amp;type=3#MaxHp" class="stats-icon"/>
+                <ui:Label text="Label" name="MaxHpLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="HpRegenContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="HpRegenIcon" source="project://database/Assets/_Project/Sprites/Icons/HpRegen.png?fileID=2800000&amp;guid=9cf52c49acf00744db9cc1881562ff8f&amp;type=3#HpRegen" class="stats-icon"/>
+                <ui:Label text="Label" name="HpRegenLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="MaxManaContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="MaxManaIcon" source="project://database/Assets/_Project/Sprites/Icons/MaxMana.png?fileID=2800000&amp;guid=ecddbdb36e7ad534b9cc2f4afa4b7d40&amp;type=3#MaxMana" class="stats-icon"/>
+                <ui:Label text="Label" name="MaxManaLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="ManaRegenContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="ManaRegenIcon" source="project://database/Assets/_Project/Sprites/Icons/ManaRegen.png?fileID=2800000&amp;guid=6dc4250c40549f24c941e35206887a78&amp;type=3#ManaRegen" class="stats-icon"/>
+                <ui:Label text="Label" name="ManaRegenLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="MoveSpeedContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="MoveSpeedIcon" source="project://database/Assets/_Project/Sprites/Icons/MovementSpeed.png?fileID=2800000&amp;guid=d6c57e1c1f6149b48a2da589d7458b7f&amp;type=3#MovementSpeed" class="stats-icon"/>
+                <ui:Label text="Label" name="MoveSpeedLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="AttackContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="AttackIcon" source="project://database/Assets/_Project/Sprites/Icons/Attack.png?fileID=2800000&amp;guid=695d4d1ac2a987940a588f7e0c7ccca0&amp;type=3#Attack" class="stats-icon"/>
+                <ui:Label text="Label" name="AttackLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="AttackSpeedContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="AttackSpeedIcon" source="project://database/Assets/_Project/Sprites/Icons/AttackSpeed.png?fileID=2800000&amp;guid=d4de923ec66d6b3498b34dec390a7574&amp;type=3#AttackSpeed" class="stats-icon"/>
+                <ui:Label text="Label" name="AttackSpeedLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="DefenseContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="DefenseIcon" source="project://database/Assets/_Project/Sprites/Icons/Defense.png?fileID=2800000&amp;guid=5cd17e2b64a403f468ba6fc1d2504c85&amp;type=3#Defense" class="stats-icon"/>
+                <ui:Label text="Label" name="DefenseLabel"/>
+            </ui:VisualElement>
+            <ui:Label text="Elements" name="Elements" style="-unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/_Project/Font/Cinzel-Regular.ttf?fileID=12800000&amp;guid=ea8e45eb864f0e2449902a45d8ebc54c&amp;type=3#Cinzel-Regular&quot;); margin-top: 10px;"/>
+            <ui:VisualElement name="FireContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="FireIcon" source="project://database/Assets/_Project/Sprites/Icons/Fire.png?fileID=2800000&amp;guid=328faac879603f74e9b54dc204b86ef7&amp;type=3#Fire" class="stats-icon"/>
+                <ui:Label text="Label" name="FireMultiplierLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="WaterContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="WaterIcon" source="project://database/Assets/_Project/Sprites/Icons/Water.png?fileID=2800000&amp;guid=0eb29d7639a1cd948a5da89ce7482f12&amp;type=3#Water" class="stats-icon"/>
+                <ui:Label text="Label" name="WaterMultiplierLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="AirContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="AirIcon" source="project://database/Assets/_Project/Sprites/Icons/Air.png?fileID=2800000&amp;guid=975efeec009e8d24fb954f34faaad75e&amp;type=3#Air" class="stats-icon"/>
+                <ui:Label text="Label" name="AirMultiplierLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="EarthContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="EarthIcon" source="project://database/Assets/_Project/Sprites/Icons/Earth.png?fileID=2800000&amp;guid=a1ff415bc10a4c847ac0997d5a118525&amp;type=3#Earth" class="stats-icon"/>
+                <ui:Label text="Label" name="EarthMultiplierLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="DarkContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="DarkIcon" source="project://database/Assets/_Project/Sprites/Icons/Dark.png?fileID=2800000&amp;guid=019e674b46b5ee54b8fdc97d744a8cdd&amp;type=3#Dark" class="stats-icon"/>
+                <ui:Label text="Label" name="DarkMultiplierLabel"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="LightContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="LightIcon" source="project://database/Assets/_Project/Sprites/Icons/Light.png?fileID=2800000&amp;guid=0f380a272845e374aa87c71afbe47eb5&amp;type=3#Light" class="stats-icon"/>
+                <ui:Label text="Label" name="LightMultiplierLabel"/>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

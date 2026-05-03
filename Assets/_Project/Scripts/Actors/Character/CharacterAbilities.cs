@@ -82,6 +82,17 @@ public class CharacterAbilities : MonoBehaviour
         a.Level++;
     }
 
+    public bool HasUpgradeable()
+    {
+        foreach (Ability ability in _abilities)
+        {
+            if ((ability.Upgrades.Count + 1) > ability.Level)
+                return true;
+        }
+
+        return false;
+    }
+
     public List<Ability> GetList()
     {
         return _abilities;

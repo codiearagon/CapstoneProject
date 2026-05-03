@@ -51,6 +51,7 @@ MonoBehaviour:
     Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
     Description: Conjures a tornado that pushes all enemies in its path.
     UpgradeDescription: 
+    CastSound: {fileID: 8300000, guid: cf46cb9cb0007be4d8123213fa065ffa, type: 3}
     Affinity: 3
     AttackMultiplier: 1.2
     ManaCost: 15
@@ -61,6 +62,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: c377baeb1f1405e40922ed1decac44e9, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 2
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       Rotating: 0
       XSize: 2
       YSize: 2
@@ -72,6 +75,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       XSize: 0
       YSize: 0
       AttackInterval: 0
@@ -83,6 +88,7 @@ MonoBehaviour:
     Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
     Description: Conjures a tornado that pushes all enemies in its path.
     UpgradeDescription: Bigger and stronger. Increased manacost.
+    CastSound: {fileID: 8300000, guid: cf46cb9cb0007be4d8123213fa065ffa, type: 3}
     Affinity: 3
     AttackMultiplier: 1.4
     ManaCost: 20
@@ -93,6 +99,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: c377baeb1f1405e40922ed1decac44e9, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 2
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       Rotating: 0
       XSize: 3
       YSize: 3
@@ -104,6 +112,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       XSize: 0
       YSize: 0
       AttackInterval: 0
@@ -114,6 +124,7 @@ MonoBehaviour:
     Icon: {fileID: -2105305842262875611, guid: 9f95ec184fba0174e8b5277550b4b5f8, type: 3}
     Description: Conjures a tornado that pushes all enemies in its path.
     UpgradeDescription: Bigger, faster, and stronger. Uses more mana.
+    CastSound: {fileID: 8300000, guid: cf46cb9cb0007be4d8123213fa065ffa, type: 3}
     Affinity: 3
     AttackMultiplier: 1.6
     ManaCost: 25
@@ -124,6 +135,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 6525881876598589149, guid: c377baeb1f1405e40922ed1decac44e9, type: 3}
       MovementBehaviour: 0
       HitBehaviour: 2
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       Rotating: 0
       XSize: 4
       YSize: 4
@@ -135,6 +148,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 0
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       XSize: 0
       YSize: 0
       AttackInterval: 0

@@ -85,3 +85,7 @@
 .wrap {
     white-space: normal;
 }
+
+.stats-icon {
+    margin-right: 5px;
+}

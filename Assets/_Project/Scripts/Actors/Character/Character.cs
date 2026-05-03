@@ -21,7 +21,6 @@ public class Character : MonoBehaviour, IActor
     // Progression events
     public event Action<float> OnExperienceReceived;
     public event Action<int, float, float> OnLevelUp;
-    public event Action<StatType, float> OnLevelUpBuff;
     public event Action<List<CharacterAdvancement>> OnAdvancementTriggered;
     public event Action<CharacterAdvancement> OnAdvancementChosen;
 
@@ -32,6 +31,7 @@ public class Character : MonoBehaviour, IActor
     [SerializeField]
     private List<CharacterAdvancement> _advancements;
 
+    private SpriteRenderer _spriteRenderer;
     private PlayerInput _input;
     private Rigidbody2D _rb;
     private CharacterAbilities _abilities;
@@ -49,6 +49,7 @@ public class Character : MonoBehaviour, IActor
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _input = new PlayerInput();
         _abilities = GetComponentInChildren<CharacterAbilities>();
         _activeStatusEffects = new List<IStatusEffect>();
@@ -133,8 +134,16 @@ public class Character : MonoBehaviour, IActor
         _stats.CurrentExp -= _stats.ExpToLevelUp;
         _stats.ExpToLevelUp = _stats.ExpToLevelUp * 1.2f;
 
-        GainRandomStats(4, 1, 3);
+        // create event messages for buffs
+        List<(StatType, float)> buffs = GainRandomStats(4, 1, 3);
+        List<string> buffMessage = new List<string>();
+        foreach((StatType stat, float value) in buffs)
+            buffMessage.Add("+" + (value * 100).ToString("F1") + "% " + stat);
+
+        // invoke events for player UI and level up announcement
         OnLevelUp?.Invoke(_stats.Level, _stats.CurrentExp, _stats.ExpToLevelUp);
+        GameEvents.Raise(new GameEventMessage(GameEventType.LevelUp,
+                            "Leveled Up!", Utility.GetGoodEventColor(), buffMessage));
 
         if (_stats.Level >= _stats.NextAdvancementLevel)
             TriggerAdvancement();
@@ -142,7 +151,7 @@ public class Character : MonoBehaviour, IActor
         if (_stats.Level >= _stats.NextAbilityUnlockLevel)
             TriggerAbilityUnlock();
 
-        if (_stats.Level >= _stats.NextAbilityUpgradeLevel && _abilities.GetList().Count > 0)
+        if (_stats.Level >= _stats.NextAbilityUpgradeLevel && _abilities.GetList().Count > 0 && _abilities.HasUpgradeable())
             TriggerAbilityUpgrade();
 
         // Recursive call if exp is more than the new cap
@@ -202,6 +211,22 @@ public class Character : MonoBehaviour, IActor
         _rb.linearVelocity = Vector3.zero;
     }
 
+    private IEnumerator HitFlash(Affinity affinity)
+    {
+        _spriteRenderer.material.SetColor("_FlashColor", Utility.GetAffinityColor(affinity));
+
+        float currentFlashAmount = 0f;
+        float elapsedTime = 0f;
+        while (elapsedTime < 0.2f)
+        {
+            elapsedTime += Time.deltaTime;
+            currentFlashAmount = Mathf.Lerp(1f, 0f, (elapsedTime / 0.2f));
+            _spriteRenderer.material.SetFloat("_FlashAmount", currentFlashAmount);
+
+            yield return null;
+        }
+    }
+
     // stats get scaled but move speed is capped
     public void SelectAdvancement(CharacterAdvancement advancement)
     {
@@ -232,22 +257,27 @@ public class Character : MonoBehaviour, IActor
         OnStatsChanged?.Invoke(_stats);
     }
 
-    public void GainRandomStats(int amount, float minStat, float maxStat)
+    public List<(StatType, float)> GainRandomStats(int amount, float minStat, float maxStat)
     {
+        List<(StatType, float)> final = new List<(StatType, float)>();
+
         for (int i = 0; i < amount; i++)
         {
             StatType stat = Utility.RollRandomStat();
             float percent = Utility.RollRandomPercentage(minStat, maxStat);
             BuffStat(stat, percent);
 
-            OnLevelUpBuff?.Invoke(stat, percent);
+            final.Add((stat, percent));
         }
+
+        return final;
     }
 
     public bool IsDead() => _stats.CurrentHp <= 0;
 
     public void TakeDamage(float amount, Affinity damageAffinity) 
     {
+        StartCoroutine(HitFlash(damageAffinity));
         float affinityMultiplier = AffinityLookup.GetMultiplier(damageAffinity, _stats.Affinity);
         float defenseMultiplier = 1 - (_stats.Defense / (_stats.Defense + 1000));
         float finalDamage = amount * affinityMultiplier * defenseMultiplier;

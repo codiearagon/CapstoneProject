@@ -51,6 +51,7 @@ MonoBehaviour:
     Icon: {fileID: -1527885550625387242, guid: 8fa999d11755e40418c50675280edc2d, type: 3}
     Description: Release a ray of light that damages everything in its sight. Toggable.
     UpgradeDescription: 
+    CastSound: {fileID: 0}
     Affinity: 6
     AttackMultiplier: 0.3
     ManaCost: 3
@@ -61,6 +62,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 1
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       Rotating: 0
       XSize: 0
       YSize: 0
@@ -72,6 +75,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 6525881876598589149, guid: c4b2ff5ba3599fe4b8e38696f418a79e, type: 3}
       MovementBehaviour: 1
       HitBehaviour: 0
+      DurationSound: {fileID: 8300000, guid: 8e164defba1212d4aabe1b5f618b0b47, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       XSize: 7
       YSize: 1
       AttackInterval: 0.5
@@ -83,6 +88,7 @@ MonoBehaviour:
     Icon: {fileID: -1527885550625387242, guid: 8fa999d11755e40418c50675280edc2d, type: 3}
     Description: Release a ray of light that damages everything in its sight. Toggable.
     UpgradeDescription: Increased range and damage. Increased mana cost
+    CastSound: {fileID: 0}
     Affinity: 6
     AttackMultiplier: 0.5
     ManaCost: 5
@@ -93,6 +99,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 1
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       Rotating: 0
       XSize: 0
       YSize: 0
@@ -104,6 +112,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 6525881876598589149, guid: c4b2ff5ba3599fe4b8e38696f418a79e, type: 3}
       MovementBehaviour: 1
       HitBehaviour: 0
+      DurationSound: {fileID: 8300000, guid: 8e164defba1212d4aabe1b5f618b0b47, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       XSize: 9
       YSize: 1
       AttackInterval: 0.5
@@ -114,6 +124,7 @@ MonoBehaviour:
     Icon: {fileID: -1527885550625387242, guid: 8fa999d11755e40418c50675280edc2d, type: 3}
     Description: Release a ray of light that damages everything in its sight. Toggable.
     UpgradeDescription: Increased range and damage. Uses more mana.
+    CastSound: {fileID: 0}
     Affinity: 6
     AttackMultiplier: 0.7
     ManaCost: 10
@@ -124,6 +135,8 @@ MonoBehaviour:
       ProjectilePrefab: {fileID: 0}
       MovementBehaviour: 0
       HitBehaviour: 1
+      DurationSound: {fileID: 0}
+      HitSound: {fileID: 0}
       Rotating: 0
       XSize: 0
       YSize: 0
@@ -135,6 +148,8 @@ MonoBehaviour:
       AoePrefab: {fileID: 6525881876598589149, guid: c4b2ff5ba3599fe4b8e38696f418a79e, type: 3}
       MovementBehaviour: 1
       HitBehaviour: 0
+      DurationSound: {fileID: 8300000, guid: 8e164defba1212d4aabe1b5f618b0b47, type: 3}
+      HitSound: {fileID: 8300000, guid: a9116ac9ed7a9314b864825dfdae9cd8, type: 3}
       XSize: 11
       YSize: 2
       AttackInterval: 0.5

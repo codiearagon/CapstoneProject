@@ -10,6 +10,7 @@ public class AbilityProperties
     public Sprite Icon;
     [TextArea] public string Description;
     [TextArea] public string UpgradeDescription;
+    public AudioClip CastSound;
 
     [Header("Basic Properties")]
     public Affinity Affinity;

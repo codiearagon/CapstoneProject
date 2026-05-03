@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74193401843be0c47bf42f6827a35da7, type: 3}
+  m_Name: IconReferences
+  m_EditorClassIdentifier: Assembly-CSharp::IconReferencesSO
+  MaxHp: {fileID: 21300000, guid: 06b9c4eb6f908924eb681236cb19db6d, type: 3}
+  HpRegen: {fileID: 21300000, guid: 9cf52c49acf00744db9cc1881562ff8f, type: 3}
+  MaxMana: {fileID: 21300000, guid: ecddbdb36e7ad534b9cc2f4afa4b7d40, type: 3}
+  ManaRegen: {fileID: 21300000, guid: 6dc4250c40549f24c941e35206887a78, type: 3}
+  MovementSpeed: {fileID: 21300000, guid: d6c57e1c1f6149b48a2da589d7458b7f, type: 3}
+  Attack: {fileID: 21300000, guid: 695d4d1ac2a987940a588f7e0c7ccca0, type: 3}
+  AttackSpeed: {fileID: 21300000, guid: d4de923ec66d6b3498b34dec390a7574, type: 3}
+  Defense: {fileID: 21300000, guid: 5cd17e2b64a403f468ba6fc1d2504c85, type: 3}
+  Fire: {fileID: 21300000, guid: 328faac879603f74e9b54dc204b86ef7, type: 3}
+  Water: {fileID: 21300000, guid: 0eb29d7639a1cd948a5da89ce7482f12, type: 3}
+  Air: {fileID: 21300000, guid: 975efeec009e8d24fb954f34faaad75e, type: 3}
+  Earth: {fileID: 21300000, guid: a1ff415bc10a4c847ac0997d5a118525, type: 3}
+  Dark: {fileID: 21300000, guid: 019e674b46b5ee54b8fdc97d744a8cdd, type: 3}
+  Light: {fileID: 21300000, guid: 0f380a272845e374aa87c71afbe47eb5, type: 3}

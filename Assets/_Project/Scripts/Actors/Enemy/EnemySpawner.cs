@@ -101,7 +101,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.GetComponent<Enemy>().MultiplyStats(_statScaling, _expScaling, _commonScaling);
     }
     
-    public void SpawnElite()
+    public Enemy SpawnElite()
     {
         int idx = Random.Range(0, _enemies.Count);
         GameObject prefab = _enemies[idx];
@@ -109,6 +109,8 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
         enemy.GetComponent<Enemy>().MakeElite(_statScaling, _expScaling, _eliteScaling);
+
+        return enemy.GetComponent<Enemy>();
     }
 
     public Enemy SpawnBoss()

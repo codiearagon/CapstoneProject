@@ -11,6 +11,8 @@ public class AOEProperties
     public AOEHitBehaviour HitBehaviour;
 
     [Header("Properties")]
+    public AudioClip DurationSound;
+    public AudioClip HitSound;
     public float XSize;
     public float YSize;
     public float AttackInterval;
